@@ -1,26 +1,49 @@
 clear; close all;
 addpath('gammasyn');  
 startup;
-%% Settings
 SixDOFModel;
-C_tilde = zeros(8,20);
-C_tilde(1:3, 1:3) = eye(3);
-C_tilde(4,10) = 1;
-C_tilde(5,1) = 1;
-C_tilde(5,11) = -1;
-C_tilde(6,2) = 1;
-C_tilde(6,12) = -1;
-C_tilde(7,3) = 1;
-C_tilde(7,13) = -1;
-C_tilde(8,10) = 1;
-C_tilde(8,20) = -1;
-polen = eig(A);
-polen(find(eig(A) >= 0)) = -0.2*ones(length(find(eig(A) >= 0)),1);
-polen = real(polen);
-R_0 = place(A,B,polen);
+%% Settings
+% resort
+resort = zeros(8,8);
+resort(1,1) = 1;
+resort(2,3) = 1;
+resort(3,7) = 1;
+resort(4,5) = 1;
+resort(5,2) = 1;
+resort(6,4) = 1;
+resort(7,8) = 1;
+resort(8,6) = 1;
+C_resort = resort*C;
+T = [eye(4), zeros(4,4)];
+T21 = [1 0 0 0;...
+       0 1 0 0;...
+       0 0 1 0;...
+       0 0 0 1];
+   
+T22 = [-1 0 0 0;...
+       0 -1 0 0;...
+       0 0 -1 0;...
+       0 0 0 -1];
+T = [T; T21 T22];
+C_tilde = T*C_resort;
+
+%Riccatti
+Q = eye(n,n);
+Q(10,10) = 100; % Bestrafung Höhe
+Q(20,20) = 100;
+Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
+Q(13,13) = 100;
+
+R = 1000000*eye(8,8);
+R(2,2) = 400000;
+R(5,5) = 200000;
+R(6,6) = 900000;
+K = lqr(sys_ol,Q,R);
+Ak = A -B*K;
+eigenvalues_controlled = eig(Ak);
+F = -inv(C*(Ak\B));
 K_0 = [];
-F_0 = eye(8);
-RKF_0 = {R_0, K_0, F_0};
+RKF_0 = {K, K_0, F};
 
 system = struct('A', A, 'B', B, 'C', eye(size(A,1)), 'C_ref', C_tilde);
 system_properties = struct(...
@@ -43,14 +66,13 @@ control_design_type = GammaCouplingStrategy.APPROXIMATE;
 tolerance_NUMERIC_NONLINEAR_INEQUALITY = 0.001;
 
 %% pole area parameters
-a = 0.01;
-b = 0.01;
+a = 0.001;
+b = 0.001;
 r = 5;
 
 %% gammasyn options
 solver = optimization.solver.Optimizer.FMINCON; %FMINCON;% solver to use
 options = optimization.options.OptionFactory.instance.options(solver,...
-    'ProblemType',                  optimization.options.ProblemType.UNCONSTRAINED,...
 	'Retries',						1,...											% number of retries
 	'Algorithm',					solver.getDefaultAlgorithm(),...				% algorithm of solver, for not builtin solvers name of the solver, e.g. 'snopt' for SNOPT
 	'FunctionTolerance',			1E-5,...
