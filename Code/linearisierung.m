@@ -1,23 +1,16 @@
-function [dX] = nonlinear_6DOF(X,U)
-%--------------States------------%
-u = X(1);
-v = X(2);
-w = X(3);
-p = X(4);
-q = X(5);
-r = X(6);
-phi = X(7);
-theta = X(8);
-psi = X(9);
-h = X(10);
+X_ap = 1.0e+03*[0.0907;0.0000;0.0005;0.0000;0.0000;0.0000;0.0000;0.0000;0.0000;1.0000];
+u = X_ap(1);
+v = X_ap(2);
+w = X_ap(3);
+p = X_ap(4);
+q = X_ap(5);
+r = X_ap(6);
+phi = X_ap(7);
+theta = X_ap(8);
+psi = X_ap(9);
+h = X_ap(10);
+syms eta sigmaf xi zita 
 
-%--------------Control------------%
-eta = U(1);
-sigmaf = U(2);
-xi = U(3);
-zita = U(4);
-
-%--------------Constants------------%
 [globalParameters,m,g,~,I_inv] = initializeParameters();
 [~,~,~, rho] = atmosisa(h);
 Omega_e_tilde = globalParameters.Omega_e_tilde ;
@@ -56,12 +49,12 @@ beta = asin(v/vA);
 %--------------Aerodynamical Coefficients------------%
 %Forces Coefficients
 
-if alpha <=14.5*pi/180
+% if alpha <=14.5*pi/180
      
-     CA_F = grad_alpha*(alpha -alpha_L0);
-else
-     CA_F = a3*alpha^.3+a2*alpha^.2+a1*alpha +a0;% Lift Coefficient without the Control Aereas
-end
+CA_F = grad_alpha*(alpha -alpha_L0);
+% else
+%      CA_F = a3*alpha^.3+a2*alpha^.2+a1*alpha +a0;% Lift Coefficient without the Control Aereas
+% end
 epsolon = gradient_alpha_epsolon*(alpha - alpha_L0); %Downwash [rad]
 alpha_t = alpha - epsolon + eta +1.3*q*lt/vA; %Angle of Attack of the Tail [rad]
 CA_H = 3.1*(St/S)*alpha_t; %Lift Coefficient of the Control Aereas (Elevator-Tail)
@@ -85,13 +78,13 @@ CN = C_torque(3);
 
 %-------------- Forces and Moments ------------%
 %Aerodynamics
-A = q_d*S*CA; %Lift Force [N]
+Af = q_d*S*CA; %Lift Force [N]
 W = q_d*S*CW; %Air Resistance [N]
 Q = q_d*S*CQ; %Transverse Force [N]
 
 Tfa = coordTransfMatrix(alpha,2)*coordTransfMatrix(-beta,3); %Transformation Matrix Aerodynamics -> Körperfest
 
-RA_a =[-W;Q;-A]; %Aerodynamical Force in Aerdodynamical Reference Frame
+RA_a =[-W;Q;-Af]; %Aerodynamical Force in Aerdodynamical Reference Frame
 RA = Tfa*RA_a; %Aerodynamical Force in Body Reference Frame
 QA_aerodynCenter = q_d*S*[0.5*b*CL;c*CM;0.5*b*CN]; %Torque on the aerodynamical Center
 QA = QA_aerodynCenter + vecToMat(P_centerGravity- P_aerodynCenter)*RA; %Aerodynamical Force in Body Reference Frame
@@ -122,7 +115,18 @@ dh = - dP_e(3); %Derivative of z-position (earth Reference Frame)
 J = 1/cos(theta)*[cos(theta) sin(phi)*sin(theta) cos(phi)*sin(theta) ;0 cos(phi)*cos(theta) -sin(phi)*cos(theta);0 sin(phi) cos(phi)]; %Rotation rate matrix
 dPhi = J*Omega; %Derivative of Euler Angles
 dX = [dV; dOmega;dPhi;dh];
-end
 
-
-
+% U_ap =
+% 
+%    -0.1435
+%     0.1644
+%     0.0000
+%    -0.0000
+eq_2_solve = [dX(1:4)];
+S = solve(eq_2_solve == zeros(4,1), [eta, sigmaf, xi, zita]);
+double(S.eta)
+double(S.sigmaf)
+double(S.xi)
+double(S.zita)
+dX_ap = double(subs(dX, [eta, sigmaf, xi, zita], ...
+    [double(S.eta), double(S.sigmaf), double(S.xi), double(S.zita)]))

@@ -4,16 +4,10 @@ function [globalParameters,m,g,he,I_inv] = initializeParameters()
 g = 9.81; %Gravity [m/s^2]
 m = 120000; %Mass [kg]
 
-%Refuel
-m_fuel = 28000; %Mass of the fuel
-time_refuel = 20; % Time to refuel in sec
-start_time_refuel = 10; 
-refuel = 0; %Without refuel = 1, with refuel = 0
-
 % Modelling the atmosphere 
 rho_const = 1.225; %Airdensity (simplification)
-omega_e = 7.29211510*10^(-5); %Rotation Speed of earth [rad/s]
-%omega_e = 0;
+%omega_e = 7.29211510*10^(-5); %Rotation Speed of earth [rad/s]
+omega_e = 0;
 he = 6356752; %Earth radius [m]
 Omega_e_tilde = vecToMat([0;0;omega_e]);
 
@@ -63,9 +57,5 @@ globalParameters.P_centerGravity = P_centerGravity;
 globalParameters.P_aerodynCenter = P_aerodynCenter;
 globalParameters.i_f =i_f;
 globalParameters.Fmax = F_max;
-globalParameters.m_fuel = m_fuel;
-globalParameters.time_refuel = time_refuel;
-globalParameters.start_time_refuel = start_time_refuel;
-globalParameters.refuel = refuel;
 end
 
