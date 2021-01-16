@@ -110,11 +110,11 @@ end
   ew_ricati = eig(Ak);
   sys_ricati = ss(Ak,B,C,zeros(8,8));
   F = -inv(C*(Ak\B));
-  %% Coupling Control (manual) Cascade
-  l = 4; %coupling conditions
-  C1_tilde = C_tilde(1:l,:);
-  C2_tilde = C_tilde(l+1:end,1:end);
-  [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l);
-
+%   %% Coupling Control (manual) Cascade
+%   l = 4; %coupling conditions
+%   C1_tilde = C_tilde(1:l,:);
+%   C2_tilde = C_tilde(l+1:end,1:end);
+%   [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l);
+% 
 
 
