@@ -5,9 +5,9 @@ close all
 % Get Model Parameters 
 [globalParameters,m,g,he,I_inv] = initializeParameters();
 %Initial Values
-h_init_1 = 1000;
+h_init_1 = 8000;
 P_e_init_1 = [0;0;-h_init_1];
-V_init_1 = [70;0;0];
+V_init_1 = [130;0;0];
 %latlon_init = [40.712776;-74.005974]; %New York
 latlon_init = [0;0];
 Omega_init_1 = [0;0;0];
@@ -15,11 +15,11 @@ Phi_init_1 = [0;0;0];
 X_init_1 = [V_init_1;Omega_init_1;Phi_init_1;h_init_1];
 
 %Plain 2
-h_init_2 = 1010;
+h_init_2 = 8010;
 P_e_init_2 = [0;0;-h_init_2];
-V_init_2 = [70;0;-10];
+V_init_2 = [130;0;0];
 Omega_init_2 = [0;0;0];
-Phi_init_2 = [0;0.2;0];
+Phi_init_2 = [0;0;0];
 X_init_2 = [V_init_2;Omega_init_2;Phi_init_2;h_init_2];
 U_test = [-0.12;1;0;0;-0.1;1;0;0];
 X_init = [X_init_1;X_init_2];
@@ -69,23 +69,28 @@ for i = 1:n
         disp(['Eigenvalue ',num2str(eig_i),' is not obsarvable ']);
     end
 end
-%% % Test Controller
-  ew_contr = eigenvalues;
-  ew_contr(1) = -0.2;
-  ew_contr(2) = -0.1;
-  ew_contr(10) = -0.09;
-  ew_contr(20) = -0.1;
-  ew_contr = 5*real(ew_contr);
-  K = place(A,B,ew_contr);
-  Ak = A -B*K;
-  eigenvalues_controlled = 5*eig(Ak);
-  F = -inv(C*(Ak\B));
+
+%% Transfer Function Open Loop
+sys_ol = ss(A,B, C,zeros(8,8));
+
+Q = eye(n,n);
+Q(8,8) = 1; %Bestrafung theta
+Q(18,18) = 1; 
+Q(9,9) = 100; %Bestrafung psi
+Q(19,19) = 100; 
+Q(10,10) = 1000; % Bestrafung Höhe
+Q(20,20) = 1000;
+Q(3,3) = 1000; %Bestrafung Geschw. z-Komoponente
+Q(13,13) = 1000;
   
-  %% Transfer Function Open Loop
-  sys_ol = ss(A,B, C,zeros(8,8));
-  tf_ol = tf(sys_ol); %Transfer Function
-  H = [A B; -C zeros(8,8)];
-  E = [eye(n,n) zeros(n,8);zeros(8,n) zeros(8,8)];
-  inv_nullpoints = eig(H,E);
-  
-  
+R = 1000*eye(8,8);
+R(2,2) = 4000;
+R(5,5) = 2000;
+R(6,6) = 9000;
+K = lqr(sys_ol,Q,R);
+Ak = A -B*K;
+ew_ricati = eig(Ak);
+F = -inv(C*(Ak\B));
+sys_ricati = ss(Ak,B*F,C,zeros(8,8));
+W_ap = C*X_ap;
+   
