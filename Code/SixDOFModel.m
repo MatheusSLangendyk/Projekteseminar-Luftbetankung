@@ -114,7 +114,8 @@ end
   l = 4; %coupling conditions
   C1_tilde = C_tilde(1:l,:);
   C2_tilde = C_tilde(l+1:end,1:end);
-  [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l);
-
+  ew_coupling = real(ew_ricati)+imag(ew_ricati)/100;
+  clc
+  [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,conj(ew_ricati),l);
 
 
