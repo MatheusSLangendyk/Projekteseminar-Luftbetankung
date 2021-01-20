@@ -13,7 +13,7 @@ V_init_1 = [200;0;0];
 %latlon_init = [40.712776;-74.005974]; %New York
 latlon_init = [0;0];
 Omega_init_1 = [0;0;0];
-Phi_init_1 = [0;0.2;0];
+Phi_init_1 = [0;0;0];
 X_init_1 = [V_init_1;Omega_init_1;Phi_init_1;h_init_1];
 
 %Plain 2
@@ -38,7 +38,7 @@ U_ap = [U_ap_1;U_ap_2];
 
 [A_1,B_1] = implicit_linmod(@model_implicit,X_ap_1,U_ap_1,1);
 [A_2,B_2] = implicit_linmod(@model_implicit,X_ap_2,U_ap_2,2);
-[A,B,C,n,C_tilde] = defineABC(A_1,A_2,B_1,B_2);
+[A,B,C,n] = defineABC(A_1,A_2,B_1,B_2);
 % W_ap = C*X_ap;
 W_ap = [X_ap_1(1); X_ap_2(1); 0; 0; X_ap_1(10); X_ap_2(10); 0; 0];
 
@@ -106,7 +106,7 @@ end
   R(5,5) = 2000;
   R(6,6) = 9000;
   K = lqr(sys_ol,Q,R);
-  Ak = A -B*K;
+  Ak = A-B*K;
   ew_ricati = eig(Ak);
   sys_ricati = ss(Ak,B,C,zeros(8,8));
   F = -inv(C*(Ak\B));
@@ -116,5 +116,11 @@ end
 %   C2_tilde = C_tilde(l+1:end,1:end);
 %   [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l);
 % 
+% -warum AP nicht symbolisch --> berechnung von anderen AP
+% -warum nicht alpha und beat im zustand?
+% -lage der inavianten Nullstellen ist wichtig für entkoppelbarkeit --> würde das System verkoppelbar machen
+% - ein zustnad zu viel für entkopplebarkeit wegen nz != n-delta --> zustand reduzieren psi?
+% -Srpungantworten ergeben keinen sinn, auch nicht für riccati
+% --> entwurf wie in praktikum, dann mit gammasyn
 
 
