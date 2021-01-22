@@ -4,16 +4,22 @@ function [F0] = cost_straight_flight(Z)
 X = Z(1:10);
 U = Z(11:14);
 plain_selector = evalin('base','plain_selector');
+u_init =  evalin('base','u_init');
+phi_init =  evalin('base','phi_init');
+psi_init =  evalin('base','psi_init');
 h_init =  evalin('base','h_init');
 [dX] = nonlinear_6DOF(X,U,plain_selector);
 
-v = X(2);
+u = X(1);
 phi = X(7);
 psi = X(9);
 h = X(10);
 
-Q = [dX;v;phi;psi;h-h_init];
-H = diag(ones(1,14));
+Q = [dX;u-u_init;phi-phi_init;psi-psi_init;h-h_init];
+H = eye(14);
+H(4:6,4:6) = 100*eye(3);
+H(7,7) = 100;
+H(9,9) = 100;
 F0 = Q'*H*Q;
 end
 

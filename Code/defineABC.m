@@ -10,23 +10,14 @@ B = [B_1, zeros(n/2,m/2);zeros(n/2,m/2), B_2];
 A((abs(A)<100*eps)) = 0;
 
 C = zeros(m,n);
-C(1,1) = 1; %u-Spped
-C(2,11)= 1;
-C(3,2) = 1;
-C(4,12) = 1;
-C(5,10) = 1;%height
-C(6,20) = 1;
-C(7,9) = 1; %psi 1
-C(8,19) = 1; %psi 2 
-resort = zeros(8,8);
-resort(1,1) = 1;
-resort(2,3) = 1;
-resort(3,7) = 1;
-resort(4,5) = 1;
-resort(5,2) = 1;
-resort(6,4) = 1;
-resort(7,8) = 1;
-resort(8,6) = 1;
-C = resort*C
+C(1,1) = 1; %u1-Speed
+C(2,7)= 1; %phi1
+C(3,8) = 1; %theta1
+C(4,9) = 1; %height1
+C(5,10) = 1; %u2-speed
+C(6,16) = 1; %phi2
+C(7,17) = 1; %theta2
+C(8,18) = 1; %height2
+
 end
 

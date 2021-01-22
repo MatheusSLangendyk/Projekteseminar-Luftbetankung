@@ -4,44 +4,56 @@ startup;
 SixDOFModel;
 % [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
 %% Settings
-T = [eye(4), zeros(4,4)];
-T21 = [1 0 0 0;...
-       0 1 0 0;...
-       0 0 1 0;...
-       0 0 0 1];
-   
-T22 = [-1 0 0 0;...
-       0 -1 0 0;...
-       0 0 -1 0;...
-       0 0 0 -1];
-T = [T; T21 T22];
-C_tilde = T*C;
+% T = [eye(4), zeros(4,4)];
+% T21 = [1 0 0 0;...
+%        0 1 0 0;...
+%        0 0 1 0;...
+%        0 0 0 1];
+%    
+% T22 = [-1 0 0 0;...
+%        0 -1 0 0;...
+%        0 0 -1 0;...
+%        0 0 0 -1];
+% T = [T; T21 T22];
+% C_tilde = T*C;
 % C_tilde(5, :) = [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0];
 % C_tilde(6, :) = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0];
 % C_tilde(7, :) = [1 0 0 0 0 0 0 0 0 0 -1 0 0 0 0 0 0 0 0 0];
-X_init = [160 0 0 0 0 0 0 0 0 8000 160 0 0 0 0 0 0 0 0 8010]';
+C_tilde = zeros(size(C,1), size(A,1));
+C_tilde(1:4,:) = C(1:4,:);
+C_tilde(5:8,:) = C(1:4,:);
+C_tilde(5,10) = -1;
+C_tilde(6,16) = -1;
+C_tilde(7,17) = -1;
+C_tilde(8,18) = -1;
+
+X_init = [150 0 0 0 0 0 0 0 5000 150 0 0 0 0 0 0 0 5010]';
 
 %Riccatti
 Q = eye(n,n);
-% Q(10,10) = 100; % Bestrafung Höhe
+% Q(2,2) = 100; % Bestrafung v-speed
+% Q(11,11) = 100;
+% Q(7,7) = 100;
+% Q(16,16)=100;
 % Q(20,20) = 100;
 % Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
 % Q(13,13) = 100;
 
-R = eye(8,8);
+R = eye(size(B,2), size(B,2));
 % R = 1000*R;
-% R(2,2) = 400000;
+% R(3,3) = 100;
+% R(4,4) = 100;
 % R(5,5) = 200000;
 % R(6,6) = 900000;
 
 K = lqr(ss(A, B, C, 0),Q,R);
+K = place(A, B, [-4 -4 -4 -3.5 -3.5 -3.5 -3.2 -3.2 -3.2 -3 -3 -3 -2 -1 -1 -0.5 -0.5 -0.5]);
 K((abs(K)<1e-9)) = 0;
 Ak = A-B*K;
 eigenvalues_controlled = eig(Ak);
 F = -inv(C*(Ak\B));
 F((abs(F)<1e-9)) = 0;
-F_coupling = F;
-K_coupling = K;
+sys_ricatti = ss(Ak, B*F, C, 0);
 
 K_0 = [];
 RKF_0 = {K, K_0, F};
@@ -54,7 +66,7 @@ number_references = size(C_tilde, 1);
 system = struct('E', eye(n, n), 'A', A, 'B', B, 'C', eye(size(A,1)), 'C_ref', C_tilde);
 system_properties = struct(...
 		'number_states',				n,...
-		'number_controls',				8,...
+		'number_controls',				size(B,2),...
 		'number_references',			number_references,...
 		'number_models',				1,...
         'tf_structure',                 [NaN*ones(4,4) NaN*ones(4,4); zeros(4,4) NaN*ones(4,4)],...        
@@ -77,14 +89,14 @@ control_design_type = GammaDecouplingStrategy.APPROXIMATE;
 % control_design_type = GammaDecouplingStrategy.NUMERIC_NONLINEAR_INEQUALITY;
 
 %% pole area parameters
-a = 0.001;
-b = 0.002;
-r = 10;
+a = 0.5;
+b = 0.5;
+r = 20;
 
 %% Pole area
 weight = [10];
-% polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
-polearea = control.design.gamma.area.Imag(1,-5);
+polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
+% polearea = control.design.gamma.area.Imag(1,-5);
 % polearea = [control.design.gamma.area.Hyperbola(a, b), control.design.gamma.area.Imag(1,0)];
 %% gammasyn options
 solver = optimization.solver.Optimizer.FMINCON; % solver to use
@@ -140,7 +152,6 @@ sys_riccati = ss(A-B*K, B*F, C, 0);
 sys_1_riccati = ss(A_1-B_1*K(1:4, 1:10), B_1*F(1:4, 1:4), C(1:4, 1:10), 0); 
 sys_coupling = ss(A-B*K_coupling, B*F_coupling, C_tilde, 0);
 pzmap(sys_coupling, 'r', sys_riccati, 'g');
-[num_tf_coupling, denum_tf_coupling] = ss2tf(A-B*K_coupling, B*F_coupling, C_tilde, zeros(8,8), 1);
 
 %%
 C_1=C(1:4, 1:10);

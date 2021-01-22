@@ -2,14 +2,18 @@
 clc
 clear
 close all
+
+% symbolische nicht-lineare DGL mit psi
+symbolic_equations;
+
 system_norm = false;
 deltah_offset = 10;
 % Get Model Parameters 
 [globalParameters,m,g,he,I_inv] = initializeParameters();
 %Initial Values
-h_init_1 = 8000;
+h_init_1 = 5000;
 P_e_init_1 = [0;0;-h_init_1];
-V_init_1 = [200;0;0];
+V_init_1 = [150;0;0];
 %latlon_init = [40.712776;-74.005974]; %New York
 latlon_init = [0;0];
 Omega_init_1 = [0;0;0];
@@ -19,26 +23,100 @@ X_init_1 = [V_init_1;Omega_init_1;Phi_init_1;h_init_1];
 %Plain 2
 h_init_2 = h_init_1+deltah_offset;
 P_e_init_2 = [0;0;-h_init_2];
-V_init_2 = [220;0;0];
+V_init_2 = [150;0;0];
 Omega_init_2 = [0;0;0];
 Phi_init_2 = [0;0;0];
 X_init_2 = [V_init_2;Omega_init_2;Phi_init_2;h_init_2];
-U_test = [-0.12;1;0;0;-0.1;1;0;0];
 X_init = [X_init_1;X_init_2];
-%Trim and Lienarisation
-[X_ap_1,U_ap_1,f0_1] = trimValues(V_init_1(1),h_init_1,1);
-[X_ap_2,U_ap_2,f0_2] = trimValues(V_init_2(1),h_init_2,2);
+
+% AP mit fsolve
+[X_ap_1, U_ap_1] = fsolve_trim([X_init_1;zeros(4,1)]); % mit [u, phi, psi, h] = [150, 0, 0, 5000]
+[X_ap_2, U_ap_2] = fsolve_trim([X_init_2;zeros(4,1)]); % mit [u, phi, psi, h] = [150, 0, 0, 5000]
+
+% AP mit trimValues
+% [X_ap_1_t,U_ap_1_t,f0_1_t] = trimValues(V_init_1,Omega_init_1,Phi_init_1,h_init_1,1);
+% [X_ap_2_t,U_ap_2_t,f0_2_t] = trimValues(V_init_2,Omega_init_2,Phi_init_2,h_init_2,2);
+% x_ap_comp = [[X_ap_1;U_ap_1] [X_ap_1_t;U_ap_1_t]];
 X_ap = [X_ap_1;X_ap_2];
 U_ap = [U_ap_1;U_ap_2];
-% X_init = X_ap;
-% % X_init(3)=0;
-% % X_init(13)=0;
-% U_test = U_ap;
-% %Linearisation
+X_ap_simulink = [X_ap(1:8);X_ap(10:18);X_ap(20)];
 
-[A_1,B_1] = implicit_linmod(@model_implicit,X_ap_1,U_ap_1,1);
-[A_2,B_2] = implicit_linmod(@model_implicit,X_ap_2,U_ap_2,2);
-[A,B,C,n] = defineABC(A_1,A_2,B_1,B_2);
+
+% Zustands-DGL ohne psi
+f = [du;dv;dw;dp;dq;dr;dphi;dtheta;dh];
+
+% Ausgangsgleichung
+h = [u phi theta h];
+
+% 1. Linearisierung durch bilden der Jacoby-Matrizen
+A_sym = jacobian(f, x_red_9);   % A = d f(x,u) / dx
+B_sym = jacobian(f, u_stell);   % B = d f(x,u) / du
+C_sym = jacobian(h, x_red_9);   % C = d y(x,u) / dx
+D_sym = jacobian(h, u_stell);   % D = d y(x,u) / du
+
+% 2. Einsetzten der Anfangswerte
+A1 = double(subs(A_sym, [x10,u_stell], [X_ap_1; U_ap_1]'));
+B1 = double(subs(B_sym, [x10,u_stell], [X_ap_1; U_ap_1]'));
+C1 = double(subs(C_sym, [x10,u_stell], [X_ap_1; U_ap_1]'));
+D1 = double(subs(D_sym, [x10,u_stell], [X_ap_1; U_ap_1]'));
+
+A2 = double(subs(A_sym, [x10,u_stell], [X_ap_2; U_ap_2]'));
+B2 = double(subs(B_sym, [x10,u_stell], [X_ap_2; U_ap_2]'));
+C2 = double(subs(C_sym, [x10,u_stell], [X_ap_2; U_ap_2]'));
+D2 = double(subs(D_sym, [x10,u_stell], [X_ap_2; U_ap_2]'));
+
+%% System ein Flugzeug
+% Steuerbarkeit des einzelnen Flugzeugs
+rank(ctrb(A1,B1));
+% Beobachtbarkeit des einzelnen Flugzeugs
+rank(obsv(A1,C1));
+
+sys1 = ss(A1, B1, C1, D1);
+K = lqr(sys1, eye(9), eye(4));
+sys1_cl = ss(A1-B1*K, B1, C1, D1);
+
+anz_io = size(C1,1);
+delta_k = zeros(1, anz_io);
+
+% Berechnung der Differenzordnungen der Ausgänge
+% Nutzen Sie dabei eine for-Schleife, um alle Ausgänge zu durchlaufen
+% und eine while-Schleife zur Berechnung der jeweiligen Matrizen ci*(A^j)*B
+for k = 1:anz_io     % alle Ausgänge nacheinander
+  j=1;
+  while C1(k,:)*A1^(j-1)*B1 == zeros(1,anz_io)
+    j=j+1;
+  end
+  delta_k(k)=j;      % Differenzordnung des Ausgangs k
+end
+
+% Differenzordnung des Gesamtsystems
+delta = sum(delta_k);
+
+%% Zwei Flugzeug Modell
+[A,B,C,n] = defineABC(A1,A2,B1,B2);
+% Steuerbarkeit
+rank(ctrb(A,B))
+% Beobachtbarkeit 
+rank(obsv(A,C))
+
+sys_2plane = ss(A, B, C, zeros(8,8));
+
+anz_io = size(C,1);
+delta_k = zeros(1, anz_io);
+
+% Berechnung der Differenzordnungen der Ausgänge
+% Nutzen Sie dabei eine for-Schleife, um alle Ausgänge zu durchlaufen
+% und eine while-Schleife zur Berechnung der jeweiligen Matrizen ci*(A^j)*B
+for k = 1:anz_io     % alle Ausgänge nacheinander
+  j=1;
+  while C(k,:)*A^(j-1)*B == zeros(1,anz_io)
+    j=j+1;
+  end
+  delta_k(k)=j;      % Differenzordnung des Ausgangs k
+end
+
+% Differenzordnung des Gesamtsystems
+delta = sum(delta_k);
 % W_ap = C*X_ap;
 W_ap = [X_ap_1(1); X_ap_2(1); 0; 0; X_ap_1(10); X_ap_2(10); 0; 0];
 
@@ -76,51 +154,7 @@ for i = 1:n
         disp(['Eigenvalue ',num2str(eig_i),' is not obsarvable ']);
     end
 end
-%% % Test Controller
+%% Normieren
  if system_norm == true
     [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
-  end
-  
-  
-  %% Transfer Function Open Loop
-   sys_ol = ss(A,B, C,zeros(8,8));
-% 
-%   tf_ol = tf(sys_ol); %Transfer Function
-%   H = [A B; -C zeros(8,8)];
-%   E = [eye(n,n) zeros(n,8);zeros(8,n) zeros(8,8)];
-%   inv_nullpoints = eig(H,E);
-  
-  %%Riccatti
-  Q = eye(n,n);
-  Q(8,8) = 100000; %Bestrafung theta
-  Q(18,18) = 100000; 
-  Q(9,9) = 10000; %Bestrafung psi
-  Q(19,19) = 10000; 
-  Q(10,10) = 1; % Bestrafung Höhe
-  Q(20,20) = 1;
-  Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
-  Q(13,13) = 100;
-  
-  R = 1000*eye(8,8);
-  R(2,2) = 4000;
-  R(5,5) = 2000;
-  R(6,6) = 9000;
-  K = lqr(sys_ol,Q,R);
-  Ak = A-B*K;
-  ew_ricati = eig(Ak);
-  sys_ricati = ss(Ak,B,C,zeros(8,8));
-  F = -inv(C*(Ak\B));
-%   %% Coupling Control (manual) Cascade
-%   l = 4; %coupling conditions
-%   C1_tilde = C_tilde(1:l,:);
-%   C2_tilde = C_tilde(l+1:end,1:end);
-%   [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l);
-% 
-% -warum AP nicht symbolisch --> berechnung von anderen AP
-% -warum nicht alpha und beat im zustand?
-% -lage der inavianten Nullstellen ist wichtig für entkoppelbarkeit --> würde das System verkoppelbar machen
-% - ein zustnad zu viel für entkopplebarkeit wegen nz != n-delta --> zustand reduzieren psi?
-% -Srpungantworten ergeben keinen sinn, auch nicht für riccati
-% --> entwurf wie in praktikum, dann mit gammasyn
-
-
+ end
