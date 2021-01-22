@@ -1,8 +1,8 @@
-function [A,B] = implicit_linmod(fun,X_ap,U_ap,plain_selector)
+function [A,B] = implicit_linmod(fun,X_ap,U_ap,plane_selector)
 %Number of States and Control
 n = length(X_ap); 
 m = length(U_ap);
-assignin('base','plain_selector',plain_selector)
+assignin('base','plane_selector',plane_selector)
 %Definitiion of Perturbation for the Calculation of the Derivative
 dX_ap = zeros(n,1);
 perturbation = 10e-12;

@@ -106,16 +106,32 @@ end
   R(5,5) = 2000;
   R(6,6) = 9000;
   K = lqr(sys_ol,Q,R);
+  K((abs(K)<10^-9)) = 0;
   Ak = A -B*K;
-  ew_ricati = eig(Ak);
-  sys_ricati = ss(Ak,B,C,zeros(8,8));
   F = -inv(C*(Ak\B));
+  ew_ricati = eig(Ak);
+  sys_ricati = ss(Ak,B*F,C,zeros(8,8));
+  %step(sys_ricati)
+
+  
   %% Coupling Control (manual) Cascade
   l = 4; %coupling conditions
   C1_tilde = C_tilde(1:l,:);
   C2_tilde = C_tilde(l+1:end,1:end);
-  ew_coupling = real(ew_ricati)+imag(ew_ricati)/100;
-  clc
-  [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,conj(ew_ricati),l);
-
-
+  %ew_coupling = real(ew_ricati)+imag(ew_ricati)/100;
+  [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l);
+  
+  %%
+%   A = [0 1;-1 -2];
+%   B = [1 0; 0 1];
+%   C_1 = [1 0];
+%   C_2 = [1 -1];
+%   sys = ss(A,B,[C_1;C_2], zeros(2,2));
+%   ew = [1+1i; 1-1i];
+%   [R, ~] = verkopplung(sys,C_2,ew);
+%   eig(A-B*R)
+%   t = 1:0.1:20;
+%   w = [ones(1,length(t));zeros(1,length(t))];
+%   sys = ss(A-B*R,B,[C_1;C_2], zeros(2,2));
+%   x0 = [0;0];
+%   y = lsim(sys,w,t,x0);

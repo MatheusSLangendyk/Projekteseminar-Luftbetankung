@@ -1,13 +1,17 @@
-
-
-- Ausgänge definieren
-
-
-- Störung aufschalten
-
-
-
-
-
+        for j =1:l %Try every possible dimension of the core and pick the one with the smaller error f0
+            M_j = real(M(:,j));
+            [M_real, f0] = fminsearch('cost_core_deviance',real(M_j)+imag(M_j),optimset('TolX',1e-10,'MaxFunEvals',1000000,'MaxIter',1000000));
+            if rank([M_previous_i, M_real])< 2 %whenn the found M_real does not correspond to an linear independent vector to M_previous, it should be avoided to choose this among the possiböes M_real. Optimization error is set high 
+                f0 = 10;
+            end
+            F0(j,1) = f0;
+            M_real_possibilities(:,j) = M_real;
+            
+        end
+        % Pick the M_real with the smaller error
+        [~,opt_dimension] = min(F0);
+        M_real = M_real_possibilities(:,opt_dimension);
+        M_previous_i = M_real; %M_real für den nächsten Schritt abspeichern
+       % [M_real, f0] = fminsearch('cost_core_deviance',real(M(:,1)),optimset('TolX',1e-10,'MaxFunEvals',1000000,'MaxIter',1000000));
 
 
