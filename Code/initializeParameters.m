@@ -36,14 +36,13 @@ c = 6.6; % Wing Chord [m]
 
 %Aerodynamical Positions
 P_centerGravity = [0.23*c;0;0.1*c];
-P_aerodynCenter = [0.12*c;0;0];
-
-
-
+% P_aerodynCenter = [0.12*c;0;0];
+P_aerodynCenter = P_centerGravity;
 
 %Motor and Thrust
 %P_thrust = [0.23*c;0;0.1*c+1.9]; %Position of the motor [m] 
-P_thrust = [0.1*c;0;-1.9]; %Position of the motor [m] 
+% P_thrust = [0.1*c;0;-1.9]; %Position of the motor [m] 
+P_thrust = P_centerGravity;
 i_f = 0 ; %Direction of Thrus [rad];
 F_max = m*g; %Warning - This is obviusly not the max thrust produced by the turbines. The max Turbine Force is considered on the maximum value of sigmaf
 

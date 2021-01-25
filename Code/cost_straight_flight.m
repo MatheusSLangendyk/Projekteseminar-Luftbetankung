@@ -17,9 +17,9 @@ h = X(10);
 
 Q = [dX;u-u_init;phi-phi_init;psi-psi_init;h-h_init];
 H = eye(14);
-H(4:6,4:6) = 100*eye(3);
-H(7,7) = 100;
-H(9,9) = 100;
+% H(4:6,4:6) = 100*eye(3);
+% H(7,7) = 100;
+% H(9,9) = 100;
 F0 = Q'*H*Q;
 end
 

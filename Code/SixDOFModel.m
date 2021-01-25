@@ -29,18 +29,22 @@ Phi_init_2 = [0;0;0];
 X_init_2 = [V_init_2;Omega_init_2;Phi_init_2;h_init_2];
 X_init = [X_init_1;X_init_2];
 
-% AP mit fsolve
-[X_ap_1, U_ap_1] = fsolve_trim([X_init_1;zeros(4,1)]); % mit [u, phi, psi, h] = [150, 0, 0, 5000]
-[X_ap_2, U_ap_2] = fsolve_trim([X_init_2;zeros(4,1)]); % mit [u, phi, psi, h] = [150, 0, 0, 5000]
-
-% AP mit trimValues
-% [X_ap_1_t,U_ap_1_t,f0_1_t] = trimValues(V_init_1,Omega_init_1,Phi_init_1,h_init_1,1);
-% [X_ap_2_t,U_ap_2_t,f0_2_t] = trimValues(V_init_2,Omega_init_2,Phi_init_2,h_init_2,2);
+ap_solver =  1;
+if ap_solver == 0
+    % AP mit fsolve
+    [X_ap_1, U_ap_1] = fsolve_trim([X_init_1;zeros(4,1)]); % mit [u, phi, psi, h] = [150, 0, 0, 5000]
+    [X_ap_2, U_ap_2] = fsolve_trim([X_init_2;zeros(4,1)]); % mit [u, phi, psi, h] = [150, 0, 0, 5000]
+elseif ap_solver == 1
+    % AP mit trimValues
+    [X_ap_1,U_ap_1,f0_1] = trimValues(V_init_1,Omega_init_1,Phi_init_1,h_init_1,1);
+    [X_ap_2,U_ap_2,f0_2] = trimValues(V_init_2,Omega_init_2,Phi_init_2,h_init_2,2);
+end
 % x_ap_comp = [[X_ap_1;U_ap_1] [X_ap_1_t;U_ap_1_t]];
 X_ap = [X_ap_1;X_ap_2];
 U_ap = [U_ap_1;U_ap_2];
 X_ap_simulink = [X_ap(1:8);X_ap(10:18);X_ap(20)];
-
+X_ap_simulink((abs(X_ap_simulink)<1e-6)) = 0;
+U_ap((abs(U_ap)<1e-6)) = 0;
 
 % Zustands-DGL ohne psi
 f = [du;dv;dw;dp;dq;dr;dphi;dtheta;dh];

@@ -72,13 +72,13 @@ alpha = atan(w/u);
 beta = asin(v/vA);
 %--------------Aerodynamical Coefficients------------%
 %Forces Coefficients
-
-if alpha <=14.5*pi/180
-     
-     CA_F = grad_alpha*(alpha -alpha_L0);
-else
-     CA_F = a3*alpha^.3+a2*alpha^.2+a1*alpha +a0;% Lift Coefficient without the Control Aereas
-end
+CA_F = grad_alpha*(alpha -alpha_L0);
+% if alpha <=14.5*pi/180
+%      
+%      CA_F = grad_alpha*(alpha -alpha_L0);
+% else
+%      CA_F = a3*alpha^.3+a2*alpha^.2+a1*alpha +a0;% Lift Coefficient without the Control Aereas
+% end
 epsolon = gradient_alpha_epsolon*(alpha - alpha_L0); %Downwash [rad]
 alpha_t = alpha - epsolon + eta +1.3*q*lt/vA; %Angle of Attack of the Tail [rad]
 CA_H = 3.1*(St/S)*alpha_t; %Lift Coefficient of the Control Aereas (Elevator-Tail)
@@ -124,18 +124,25 @@ R_total = RA + Rf; %Sum of external Forces in Body reference Frame [N]
 
 %-------------- Equations of Motion ------------%
 %Dynamic
-Tfg =  coordTransfMatrix(phi,1)*coordTransfMatrix(theta,2)*coordTransfMatrix(psi,3); % Transformation Matrix goedetic --> body reference Frame
-Tgf = Tfg';%Transformation to North East Down
+Tfg = coordTransfMatrix(phi,1)*coordTransfMatrix(theta,2)*coordTransfMatrix(psi,3); % Transformation Matrix goedetic --> body reference Frame
+Tgf = Tfg';%Transformation to North East Down STIMMT DAS???
 Omega_tilde = vecToMat(Omega);
 dOmega = I_inv*(Q_total - Omega_tilde*I*Omega); %Derivative of Rotation Rate (body Reference Frame)
-dV = R_total/m + Tfg*[0;0;g] - (Omega_tilde + Omega_e_tilde)*V; %Derivatitive of the Speed (body Reference Frame)
+
+% ACHTUNG: Omega_e_tilde wurde in DGL für dV entfernt, da flache ERde
+dV = R_total/m + Tfg*[0;0;g] - (Omega_tilde)*V; %Derivatitive of the Speed (body Reference Frame)
+
 % dvA = (u*dV(1) + v*dV(2) +w*dV(3))/sqrt(u^2+v^2+w^2); %Derivative of the Approach Speed
 % dalpha = (dV(3)*u-dV(1)*w)/(u^2+u*w); %Derivative of Angle of Attack
 % dbeta = (dV(2)*vA -dvA*V(2))/(vA*sqrt(vA^2-V(2)^2)); %Derivative of Sideslip Angle
 
 %Kinematics
-dP_e = Tgf*V;
+dP_e = Tgf*V; % gilt nur für die z-Komponente
+
+% ACHTUNG: dh anders als im Buch ... Teg fehlt, sollte für dh keinen
+% Unterschied machen
 dh = - dP_e(3); %Derivative of z-position (earth Reference Frame)
+
 J = 1/cos(theta)*[cos(theta) sin(phi)*sin(theta) cos(phi)*sin(theta) ;0 cos(phi)*cos(theta) -sin(phi)*cos(theta);0 sin(phi) cos(phi)]; %Rotation rate matrix
 dPhi = J*Omega; %Derivative of Euler Angles
 dX = double([dV;dOmega;dPhi;dh]);

@@ -32,7 +32,7 @@ X_init = [150 0 0 0 0 0 0 0 5000 150 0 0 0 0 0 0 0 5010]';
 %Riccatti
 Q = eye(n,n);
 % Q(2,2) = 100; % Bestrafung v-speed
-% Q(11,11) = 100;
+% Q(11,11) = 0.001;
 % Q(7,7) = 100;
 % Q(16,16)=100;
 % Q(20,20) = 100;
@@ -40,6 +40,10 @@ Q = eye(n,n);
 % Q(13,13) = 100;
 
 R = eye(size(B,2), size(B,2));
+% R(1,1) = 1000;
+% R(5,5) = 10000;
+% R(2,2) = 100;
+% R(6,6) = 100;
 % R = 1000*R;
 % R(3,3) = 100;
 % R(4,4) = 100;
@@ -47,7 +51,7 @@ R = eye(size(B,2), size(B,2));
 % R(6,6) = 900000;
 
 K = lqr(ss(A, B, C, 0),Q,R);
-K = place(A, B, [-4 -4 -4 -3.5 -3.5 -3.5 -3.2 -3.2 -3.2 -3 -3 -3 -2 -1 -1 -0.5 -0.5 -0.5]);
+% K = place(A, B, [-4 -4 -4 -3.5 -3.5 -3.5 -3.2 -3.2 -3.2 -3 -3 -3 -2 -1 -1 -0.5 -0.5 -0.5]);
 K((abs(K)<1e-9)) = 0;
 Ak = A-B*K;
 eigenvalues_controlled = eig(Ak);
@@ -149,7 +153,6 @@ F_coupling = Kopt{end}
 information
 W_ap = [135 0 0 8000 0 0 0 0]';
 sys_riccati = ss(A-B*K, B*F, C, 0);
-sys_1_riccati = ss(A_1-B_1*K(1:4, 1:10), B_1*F(1:4, 1:4), C(1:4, 1:10), 0); 
 sys_coupling = ss(A-B*K_coupling, B*F_coupling, C_tilde, 0);
 pzmap(sys_coupling, 'r', sys_riccati, 'g');
 
