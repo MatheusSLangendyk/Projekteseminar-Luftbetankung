@@ -23,7 +23,7 @@ h_init_2 = h_init_1+deltah_offset;
 P_e_init_2 = [0;0;-h_init_2];
 V_init_2 = [150;0;0];
 Omega_init_2 = [0;0;0];
-Phi_init_2 = [0;0;0];
+Phi_init_2 = [0.2;0;0];
 X_init_2 = [V_init_2;Omega_init_2;Phi_init_2;h_init_2];
 U_test = [-0.12;1;0;0;-0.1;1;0;0];
 X_init = [X_init_1;X_init_2];
@@ -141,11 +141,18 @@ end
 %   gamma_sum = sum(Gamma);
 %   zero(sys_ol)
   
-  %% Coupling Control (manual) Cascade
+  %% Coupling Control (manual) 
   l = 4; %coupling conditions
   C1_tilde = C_tilde(1:l,:);
   C2_tilde = C_tilde(l+1:end,1:end);
   ew_coupling = real(ew_ricati)+imag(ew_ricati)/100;
-  [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l);
-  
+  struct_cond.sys_ol = sys_ol ;
+  struct_cond.C_tilde = C_tilde;
+  struct_cond.ew_ricati = ew_ricati;
+  struct_cond.l =l;
+  assignin('base','struct_cond',struct_cond)
+  P = ones(8,n);
+  %P = fminsearch('cost_condition_number',P,optimset('TolX',1e-10,'MaxFunEvals',10000,'MaxIter',10000));
+  [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l,P);
+  %P_opt = P;
 

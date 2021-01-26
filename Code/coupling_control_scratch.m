@@ -1,4 +1,4 @@
-function [R, F] = coupling_control_scratch(sys,C_tilde,ew,l)
+function [R, F] = coupling_control_scratch(sys,C_tilde,ew,l,P)
 % [R, F] = verkopplung(sys,Cvk,ew,P)
 %  berechnet eine Zustandsrückführung u=-Rx+Fw für das System sys, welche die
 %  Eigenwerte ew im geschlossenen Regelkreis erzeugt und das System
@@ -28,7 +28,7 @@ end
 m = n;
 % Matrix der Eigenvektoren
 V = zeros(n,n);
-P = ones(p,n);
+%P = ones(p,n);
 
 for i = 1:n
         if i<=m 
@@ -42,13 +42,13 @@ for i = 1:n
                 % ausgangsseitige Verkopplungsbedingung kann nicht weiter
                 % angewandt werden
                 m = i-1;
-                H_red = [ew(i)*eye(n,n)-A, -B];
-                M_red = null(H_red);
-                v_i = M_red(1:n,k);
-                p_i = M_red(n+1:end,k);
-                V(:,i) = v_i;
-                P(:,i) = p_i;
-                  %V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
+%                 H_red = [ew(i)*eye(n,n)-A, -B];
+%                 M_red = null(H_red);
+%                 v_i = M_red(1:n,k);
+%                 p_i = M_red(n+1:end,k);
+%                 V(:,i) = v_i;
+%                 P(:,i) = p_i;
+                V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
             else
                P(:,i) = p_i; 
             end
@@ -56,13 +56,13 @@ for i = 1:n
         else
             
              %Eingsngsseitigeverkopplungsbedingung
-             H_red = [ew(i)*eye(n,n)-A, -B];
-             M_red = null(H_red);
-             v_i = M_red(1:n,k);
-             p_i = M_red(n+1:end,k);
-             V(:,i) = v_i;
-             P(:,i) = p_i;
-               %V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
+%              H_red = [ew(i)*eye(n,n)-A, -B];
+%              M_red = null(H_red);
+%              v_i = M_red(1:n,k);
+%              p_i = M_red(n+1:end,k);
+%              V(:,i) = v_i;
+%              P(:,i) = p_i;
+             V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
              if rank(V,10^-9) < i
                  %If V does not have full rank, place vector v_i
                  %orthogonally to v_(i-1)
@@ -72,7 +72,7 @@ for i = 1:n
                  P(:,i) = M(n+1:end,k);  
                  
              end
-              %    V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
+             
         end
     
 end
