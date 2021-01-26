@@ -1,6 +1,6 @@
 function [X_ap, U_ap] = fsolve_trim(x0)
 fun = @nonlin;
-assignin('base','u_init',x0(1))
+assignin('base','vA_init',x0(1))
 assignin('base','phi_init',x0(7))
 assignin('base','psi_init',x0(9))
 assignin('base','h_init',x0(10))

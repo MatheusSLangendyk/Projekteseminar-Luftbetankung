@@ -4,19 +4,16 @@ m = size(B_1,2) + size(B_2,2);
 A = [A_1 zeros(n/2,n/2);zeros(n/2,n/2) A_2];
 B = [B_1, zeros(n/2,m/2);zeros(n/2,m/2), B_2];
 
-%Set values under 10e-13 = 0
-
-
-A((abs(A)<100*eps)) = 0;
+A((abs(A)<1e-9)) = 0;
 
 C = zeros(m,n);
-C(1,1) = 1; %u1-Speed
-C(2,7)= 1; %phi1
-C(3,8) = 1; %theta1
+C(1,1) = 1; %vA1
+C(2,3) = 1; %beta1
+C(3,7)= 1; %phi1
 C(4,9) = 1; %height1
-C(5,10) = 1; %u2-speed
-C(6,16) = 1; %phi2
-C(7,17) = 1; %theta2
+C(5,10) = 1; %vA2
+C(6,12) = 1; %beta2
+C(7,16) = 1; %phi2
 C(8,18) = 1; %height2
 
 end

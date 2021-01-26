@@ -3,56 +3,46 @@ addpath('gammasyn');
 startup;
 SixDOFModel;
 % [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
+W_ap = (C*X_ap_simulink)';
 %% Settings
-% T = [eye(4), zeros(4,4)];
-% T21 = [1 0 0 0;...
-%        0 1 0 0;...
-%        0 0 1 0;...
-%        0 0 0 1];
-%    
-% T22 = [-1 0 0 0;...
-%        0 -1 0 0;...
-%        0 0 -1 0;...
-%        0 0 0 -1];
-% T = [T; T21 T22];
-% C_tilde = T*C;
-% C_tilde(5, :) = [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0];
-% C_tilde(6, :) = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0];
-% C_tilde(7, :) = [1 0 0 0 0 0 0 0 0 0 -1 0 0 0 0 0 0 0 0 0];
 C_tilde = zeros(size(C,1), size(A,1));
 C_tilde(1:4,:) = C(1:4,:);
-C_tilde(5:8,:) = C(1:4,:);
-C_tilde(5,10) = -1;
-C_tilde(6,16) = -1;
-C_tilde(7,17) = -1;
-C_tilde(8,18) = -1;
+C_tilde(5:8,:) = C(1:4,:) - C(5:8,:);
 
-X_init = [150 0 0 0 0 0 0 0 5000 150 0 0 0 0 0 0 0 5010]';
+X_init = [152 0 0 0 0 0 0 0 5000 150 0 0 0 0 0 0 0 5010]';
 
 %Riccatti
-Q = eye(n,n);
-% Q(2,2) = 100; % Bestrafung v-speed
-% Q(11,11) = 0.001;
-% Q(7,7) = 100;
-% Q(16,16)=100;
-% Q(20,20) = 100;
-% Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
-% Q(13,13) = 100;
+Q = 0.00001*eye(n,n);
+% Q(3,3) = 1; 
+% Q(12,12) = 1; 
+% Q(4,4) = 100; 
+% Q(6,6) = 100; 
+% Q(13,13) = 100; 
+% Q(15,15) = 100;
+% Q(7,7) = 100; 
+% Q(16,16) = 100; 
 
 R = eye(size(B,2), size(B,2));
-% R(1,1) = 1000;
-% R(5,5) = 10000;
-% R(2,2) = 100;
-% R(6,6) = 100;
-% R = 1000*R;
-% R(3,3) = 100;
-% R(4,4) = 100;
-% R(5,5) = 200000;
-% R(6,6) = 900000;
+R(3,3) = 0.00001;
+R(4,4) = 0.001;
+R(7,7) = 0.00001;
+R(8,8) = 0.001;
+
+% eig_1 = eig(A1);
+% eig_2 = eig(A2);
+% eig_1(8) = -0.01;
+% eig_1 = 0.2*real(eig_1);
+% eig_2(8) = -0.01;
+% eig_2 = 0.2*real(eig_2);
+% 
+% K_1 = place(A1, B1, eig_1);
+% K_2 = place(A2, B2, eig_2);
+% K = zeros(8,18);
+% K(1:4, 1:9) = K_1;
+% K(5:8, 10:18) = K_2;
 
 K = lqr(ss(A, B, C, 0),Q,R);
-% K = place(A, B, [-4 -4 -4 -3.5 -3.5 -3.5 -3.2 -3.2 -3.2 -3 -3 -3 -2 -1 -1 -0.5 -0.5 -0.5]);
-K((abs(K)<1e-9)) = 0;
+K((abs(K)<1e-11)) = 0;
 Ak = A-B*K;
 eigenvalues_controlled = eig(Ak);
 F = -inv(C*(Ak\B));
@@ -87,10 +77,11 @@ system_properties = struct(...
 % NUMERIC_NONLINEAR_INEQUALITY		fully numeric design with non-linear inequality constraints
 
 % control_design_type = GammaDecouplingStrategy.EXACT;
-control_design_type = GammaDecouplingStrategy.APPROXIMATE;
+% control_design_type = GammaDecouplingStrategy.APPROXIMATE;
 % control_design_type = GammaDecouplingStrategy.APPROXIMATE_INEQUALITY
 % control_design_type = GammaDecouplingStrategy.NUMERIC_NONLINEAR_EQUALITY;
 % control_design_type = GammaDecouplingStrategy.NUMERIC_NONLINEAR_INEQUALITY;
+control_design_type = GammaDecouplingStrategy.MERIT_FUNCTION;
 
 %% pole area parameters
 a = 0.5;
@@ -98,10 +89,11 @@ b = 0.5;
 r = 20;
 
 %% Pole area
-weight = [10];
-polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
-% polearea = control.design.gamma.area.Imag(1,-5);
-% polearea = [control.design.gamma.area.Hyperbola(a, b), control.design.gamma.area.Imag(1,0)];
+weight = [1];
+% polearea = control.design.gamma.area.Hyperbola(a, b);
+% polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
+polearea = control.design.gamma.area.Imag(1,a);
+% polearea = [control.design.gamma.area.Hyperbola(a, b), control.design.gamma.area.Imag(1,a)];
 %% gammasyn options
 solver = optimization.solver.Optimizer.FMINCON; % solver to use
 options = optimization.options.OptionFactory.instance.options(solver,...
@@ -124,7 +116,7 @@ options = optimization.options.OptionFactory.instance.options(solver,...
 );
 objectiveoptions = struct(...
 	'usecompiled',				false,...											% indicator, if compiled functions should be used
-	'type',						GammaJType.LINEAR,...								% type of pole area weighting in objective function
+	'type',						GammaJType.DECOUPLING,...								% type of pole area weighting in objective function
 	'allowvarorder',			false,...											% allow variable state number for different multi models
 	'eigenvaluederivative',		GammaEigenvalueDerivativeType.VANDERAA,...
 	'errorhandler',				GammaErrorHandler.ERROR,...
@@ -151,10 +143,9 @@ end
 K_coupling = Kopt{1} %#ok<*NOPTS>
 F_coupling = Kopt{end}
 information
-W_ap = [135 0 0 8000 0 0 0 0]';
 sys_riccati = ss(A-B*K, B*F, C, 0);
 sys_coupling = ss(A-B*K_coupling, B*F_coupling, C_tilde, 0);
-pzmap(sys_coupling, 'r', sys_riccati, 'g');
+pzmap(sys_coupling, 'r');
 
 %%
 C_1=C(1:4, 1:10);
@@ -174,11 +165,3 @@ end
 
 % Differenzordnung des Gesamtsystems
 delta = sum(delta_k);
-
-
-% %% Analysis
-% if ~any(any(isnan(R)))
-% 	[gain_ratio, ~, poles_all, F] = test.develop.analyze_results(system, Kopt, polearea, system_properties.tf_structure);
-% 	Kopt{end} = F;
-% 	minimal_deviation = 100/min(abs(gain_ratio))
-% end

@@ -1,14 +1,14 @@
-syms u v w p q r phi theta psi h eta sigmaf xi zita 
+syms vA alpha beta p q r phi theta psi h eta sigmaf xi zita 
 
 % ab hier ist alles gleich wie in nonlinear_6DOF
-plain_selector = 1;
+plain_selector = evalin('base','plain_selector');
 [globalParameters,m,g,~,I_inv] = initializeParameters();
 T   = 288.15 - 0.0065*h;                    % Temperatur bei H
 ps  = 101325*(T/288.15)^(g/1.86584);        % Statischer Luftdruck
 rho = ps/(287.053*T);                       % Luftdichte = ps/(R*T)
 
 Omega_e_tilde = globalParameters.Omega_e_tilde ;
-if plain_selector ==1
+if plain_selector == 1
     I = globalParameters.I ;
     S = globalParameters.S ;
     St = globalParameters.St ;
@@ -20,7 +20,7 @@ if plain_selector ==1
     P_aerodynCenter = globalParameters.P_aerodynCenter ;
     i_f = globalParameters.i_f ;
     F_max = globalParameters.Fmax;
-else
+elseif plain_selector == 2
     I = globalParameters.I ;
     S = globalParameters.S ;
     St = globalParameters.St ;
@@ -49,12 +49,17 @@ a1 = -155.2;
 a0 = 15.212;
 
 %--------------Variables------------%
-vA = sqrt(u^2+v^2+w^2);
+u = sqrt(vA^2*(1-sin(beta)^2)/(1+tan(alpha)^2));
+v = sin(beta)*vA;
+w = u*tan(alpha);
+V = [u;v;w];
+
 q_d = 0.5*rho*vA^2; %Dynamic Preassure
 Omega = [p;q;r];
-V = [u;v;w];
-alpha = atan(w/u);
-beta = asin(v/vA);
+
+% vA = sqrt(u^2+v^2+w^2);
+% alpha = atan(w/u);
+% beta = asin(v/vA);
 %--------------Aerodynamical Coefficients------------%
 %Forces Coefficients
 CA_F = grad_alpha*(alpha -alpha_L0);
@@ -111,10 +116,9 @@ dOmega = I_inv*(Q_total - Omega_tilde*I*Omega); %Derivative of Rotation Rate (bo
 
 % ACHTUNG: Omega_e_tilde wurde in DGL für dV entfernt, da flache ERde
 dV = R_total/m + Tfg*[0;0;g] - (Omega_tilde)*V; %Derivatitive of the Speed (body Reference Frame)
-
-% dvA = (u*dV(1) + v*dV(2) +w*dV(3))/sqrt(u^2+v^2+w^2); %Derivative of the Approach Speed
-% dalpha = (dV(3)*u-dV(1)*w)/(u^2+u*w); %Derivative of Angle of Attack
-% dbeta = (dV(2)*vA -dvA*V(2))/(vA*sqrt(vA^2-V(2)^2)); %Derivative of Sideslip Angle
+dvA = (u*dV(1) + v*dV(2) + w*dV(3))/sqrt(u^2 + v^2 + w^2); %Derivative of the Approach Speed
+dalpha = (dV(3)*u - dV(1)*w)/(u^2 + u*w); %Derivative of Angle of Attack
+dbeta = (dV(2)*vA - dvA*V(2))/(vA*sqrt(vA^2 - V(2)^2)); %Derivative of Sideslip Angle
 
 %Kinematics
 dP_e = Tgf*V; % gilt nur für z-Komponente
@@ -127,15 +131,15 @@ J = 1/cos(theta)*[cos(theta) sin(phi)*sin(theta) cos(phi)*sin(theta) ;0 cos(phi)
 dPhi = J*Omega; %Derivative of Euler Angles
 % bis hier ist alles gleich wie in nonlinear_6DOF
 
-du = dV(1);
-dv = dV(2);
-dw = dV(3);
+% du = dV(1);
+% dv = dV(2);
+% dw = dV(3);
 dp = dOmega(1);
 dq = dOmega(2);
 dr = dOmega(3);
 dphi = dPhi(1);
 dtheta = dPhi(2);
 dpsi = dPhi(3);
-x10 = [u v w p q r phi theta psi h];
-x_red_9 = [u v w p q r phi theta h];
+x10 = [vA alpha beta p q r phi theta psi h];
+x_red_9 = [vA alpha beta p q r phi theta h];
 u_stell = [eta sigmaf xi zita];
