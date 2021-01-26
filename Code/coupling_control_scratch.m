@@ -19,7 +19,7 @@ C2_tilde = C_tilde(l+1:end,1:end);
 n = size(A,1);
 % Eingangsdimension
 p = size(B,2);
-k = 1; %Dimension of the core 
+k = 4; %Dimension of the core 
 if ctb1+ctb2~=2
     error('System ist nicht steuerbar!')
 end
@@ -37,7 +37,7 @@ for i = 1:n
             H = [ew(i)*eye(n,n)-A, -B;C2_tilde, zeros(l,p)];
             M = null(H);
             V(:,i) = M(1:n,k);
-            P(:,i) = M(n+1:end,k);   
+            p_i = M(n+1:end,k);   
             if rank(V,10^-9)<i
                 % ausgangsseitige Verkopplungsbedingung kann nicht weiter
                 % angewandt werden
@@ -48,10 +48,13 @@ for i = 1:n
                 p_i = M_red(n+1:end,k);
                 V(:,i) = v_i;
                 P(:,i) = p_i;
-                 
-                
+                  %V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
+            else
+               P(:,i) = p_i; 
             end
+            
         else
+            
              %Eingsngsseitigeverkopplungsbedingung
              H_red = [ew(i)*eye(n,n)-A, -B];
              M_red = null(H_red);
@@ -59,8 +62,10 @@ for i = 1:n
              p_i = M_red(n+1:end,k);
              V(:,i) = v_i;
              P(:,i) = p_i;
-             
+               %V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
              if rank(V,10^-9) < i
+                 %If V does not have full rank, place vector v_i
+                 %orthogonally to v_(i-1)
                  H = [ew(i)*eye(n,n)-A, -B;V(:,i-1)' zeros(1,p)];
                  M = null(H);
                  V(:,i) = M(1:n,k);
@@ -74,7 +79,7 @@ end
 
 R = -P*V^-1;
 R = real(R);
-%disp(eig(A-B*R))
+disp(eig(A-B*R))
 % Vorfilterentwurf
 FM = null([B V(:,1:m)]);
 F1 = FM(1:p,:);
