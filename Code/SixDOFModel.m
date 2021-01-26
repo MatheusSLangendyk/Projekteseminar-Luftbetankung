@@ -15,7 +15,7 @@ V_init_1 = [150;0;0];
 %latlon_init = [40.712776;-74.005974]; %New York
 latlon_init = [0;0];
 Omega_init_1 = [0;0;0];
-Phi_init_1 = [0;0.2;0];
+Phi_init_1 = [0;0;0];
 X_init_1 = [V_init_1;Omega_init_1;Phi_init_1;h_init_1];
 
 %Plain 2
@@ -66,7 +66,13 @@ D2 = double(subs(D_sym, [x10,u_stell], [X_ap_2; U_ap_2]'));
 % [A_2,B_2] = implicit_linmod(@model_implicit,X_ap_2,U_ap_2,2);
 [A,B,C,n,C_tilde] = defineABC(A1,A2,B1,B2);
 % W_ap = C*X_ap;
-W_ap = [X_ap_1(1); X_ap_2(1); 0; 0; X_ap_1(10); X_ap_2(10); 0; 0];
+X_ap_1(9) = [];
+X_ap_2(9) = [];
+X_init_1(9) = [];
+X_init_2(9) = [];
+X_ap = [X_ap_1; X_ap_2];
+X_init = [X_init_1;X_init_2];
+%W_ap = [X_ap_1(1); X_ap_2(1); 0; 0; X_ap_1(10); X_ap_2(10); 0; 0];
 
 
 %Saturations
@@ -110,11 +116,6 @@ end
   
   %% Transfer Function Open Loop
    sys_ol = ss(A,B, C,zeros(8,8));
-% 
-%   tf_ol = tf(sys_ol); %Transfer Function
-%   H = [A B; -C zeros(8,8)];
-%   E = [eye(n,n) zeros(n,8);zeros(8,n) zeros(8,8)];
-%   inv_nullpoints = eig(H,E);
   
   %%Riccatti
   Q = eye(n,n);
