@@ -1,4 +1,4 @@
-function [R, F] = coupling_control(sys,C_tilde,ew,l)
+function [R, F] = coupling_control_scratch(sys,C_tilde,ew,l,P)
 % [R, F] = verkopplung(sys,Cvk,ew,P)
 %  berechnet eine Zustandsrückführung u=-Rx+Fw für das System sys, welche die
 %  Eigenwerte ew im geschlossenen Regelkreis erzeugt und das System
@@ -19,8 +19,7 @@ C2_tilde = C_tilde(l+1:end,1:end);
 n = size(A,1);
 % Eingangsdimension
 p = size(B,2);
-
-
+k = 4; %Dimension of the core 
 if ctb1+ctb2~=2
     error('System ist nicht steuerbar!')
 end
@@ -29,28 +28,54 @@ end
 m = n;
 % Matrix der Eigenvektoren
 V = zeros(n,n);
-P = ones(p,n);
+%P = ones(p,n);
 
 for i = 1:n
-    if i<=m
-        M = null([ew(i)*eye(n,n)-A, -B;C2_tilde, zeros(l,p)]);
-        M = M(:,1);
-        V(:,i) = M(1:n,:);
-        par = M(n+1:end,:);
-        if rank(V)<i
-            % ausgangsseitige Verkopplungsbedingung kann nicht weiter
-            % angewandt werden
-            m = i-1;
-            V(:,i)=((ew(i)*eye(n)-A)^-1*B)*P(:,i); %Freiheitsgrad
+        if i<=m 
+            %EW(i) = ew(i);
+            %Ausgangsseitigeverkopplungsbedingung
+            H = [ew(i)*eye(n,n)-A, -B;C2_tilde, zeros(l,p)];
+            M = null(H);
+            V(:,i) = M(1:n,k);
+            p_i = M(n+1:end,k);   
+            if rank(V,10^-9)<i
+                % ausgangsseitige Verkopplungsbedingung kann nicht weiter
+                % angewandt werden
+                m = i-1;
+%                 H_red = [ew(i)*eye(n,n)-A, -B];
+%                 M_red = null(H_red);
+%                 v_i = M_red(1:n,k);
+%                 p_i = M_red(n+1:end,k);
+%                 V(:,i) = v_i;
+%                 P(:,i) = p_i;
+                V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
+            else
+               P(:,i) = p_i; 
+            end
+            
         else
-            P(:,i) = par;
+            
+             %Eingsngsseitigeverkopplungsbedingung
+%              H_red = [ew(i)*eye(n,n)-A, -B];
+%              M_red = null(H_red);
+%              v_i = M_red(1:n,k);
+%              p_i = M_red(n+1:end,k);
+%              V(:,i) = v_i;
+%              P(:,i) = p_i;
+             V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
+             if rank(V,10^-9) < i
+                 %If V does not have full rank, place vector v_i
+                 %orthogonally to v_(i-1)
+                 H = [ew(i)*eye(n,n)-A, -B;V(:,i-1)' zeros(1,p)];
+                 M = null(H);
+                 V(:,i) = M(1:n,k);
+                 P(:,i) = M(n+1:end,k);  
+                 
+             end
+             
         end
-    else
-        V(:,i)=((ew(i)*eye(n)-A)^-1*B)*P(:,i); %Freiheitsgrad
-    end
+    
 end
-
-% Regler Matrix R berechenen
 
 R = -P*V^-1;
 R = real(R);

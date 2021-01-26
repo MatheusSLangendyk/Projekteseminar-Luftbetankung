@@ -31,6 +31,7 @@ while f0 > 10e-5
      Z_guess = Z_ap;
          
 end
+Z_ap((abs(Z_ap)<10^-9)) = 0;
 X_ap = Z_ap(1:10);
 U_ap = Z_ap(11:14);
 
