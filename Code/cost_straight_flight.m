@@ -3,12 +3,12 @@ function [F0] = cost_straight_flight(Z)
 %   Detailed explanation goes here
 X = Z(1:10);
 U = Z(11:14);
-plain_selector = evalin('base','plain_selector');
+plane_selector = evalin('base','plane_selector');
 vA_init =  evalin('base','vA_init');
 phi_init =  evalin('base','phi_init');
 psi_init =  evalin('base','psi_init');
 h_init =  evalin('base','h_init');
-[dX] = nonlinear_6DOF(X,U,plain_selector);
+[dX] = nonlinear_6DOF(X,U,plane_selector);
 
 vA = X(1);
 phi = X(7);

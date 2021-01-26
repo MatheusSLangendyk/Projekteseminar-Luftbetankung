@@ -17,7 +17,7 @@ omega_e = 7.29211510*10^(-5); %Rotation Speed of earth [rad/s]
 he = 6356752; %Earth radius [m]
 Omega_e_tilde = vecToMat([0;0;omega_e]);
 
-% Inertia and Paramethers of the Plain
+% Inertia and Paramethers of the plane
 S = 260; % Flugfläche (wing platform area)
 St = 64; %Aerea of the Tail [m^2] 
 lt = 24.8; %Length to tail [m] (estimation)

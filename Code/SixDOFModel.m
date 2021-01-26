@@ -21,7 +21,7 @@ P_e_init_1 = [0;0;-h_init_1];
 latlon_init = [0;0];
 X_init_1 = [vA_init_1;alpha_init_1;beta_init_1;Omega_init_1;Phi_init_1;h_init_1];
 
-%Plain 2
+%plane 2
 vA_init_2 = 150;
 alpha_init_2 = 0;
 beta_init_2 = 0;
@@ -34,8 +34,8 @@ X_init_2 = [vA_init_2;alpha_init_2;beta_init_2;Omega_init_2;Phi_init_2;h_init_2]
 ap_solver = 0;
 if ap_solver == 0
     % AP mit fsolve
-    [X_ap_1, U_ap_1] = fsolve_trim([X_init_1;zeros(4,1)], 1); % mit [vA, phi, psi, h] = [150, 0, 0, 5000]
-    [X_ap_2, U_ap_2] = fsolve_trim([X_init_2;zeros(4,1)], 2); % mit [vA, phi, psi, h] = [150, 0, 0, 5010]
+    [X_ap_1, U_ap_1] = fsolve_trim([X_init_1;zeros(4,1)]); % mit [vA, phi, psi, h] = [150, 0, 0, 5000]
+    [X_ap_2, U_ap_2] = fsolve_trim([X_init_2;zeros(4,1)]); % mit [vA, phi, psi, h] = [150, 0, 0, 5010]
 elseif ap_solver == 1
     % AP mit trimValues
     [X_ap_1,U_ap_1,f0_1] = trimValues(vA_init_1,alpha_init_1,beta_init_1,Omega_init_1,Phi_init_1,h_init_1,1);
@@ -50,8 +50,8 @@ X_ap_simulink = [X_ap(1:8);X_ap(10:18);X_ap(20)];
 
 %% DGL Flugzeug 1
 % symbolische nicht-lineare DGL mit psi
-plain_selector = 1;
-assignin('base','plain_selector',plain_selector)
+plane_selector = 1;
+assignin('base','plane_selector',plane_selector)
 symbolic_equations;
 % Zustands-DGL ohne psi
 f = [dvA;dalpha;dbeta;dp;dq;dr;dphi;dtheta;dh];
@@ -73,8 +73,8 @@ D1 = double(subs(D_sym, [x10,u_stell], [X_ap_1; U_ap_1]'));
 
 %% DGL Flugzeug 2
 % symbolische nicht-lineare DGL mit psi
-plain_selector = 2;
-assignin('base','plain_selector',plain_selector)
+plane_selector = 2;
+assignin('base','plane_selector',plane_selector)
 symbolic_equations;
 % Zustands-DGL ohne psi
 f = [dvA;dalpha;dbeta;dp;dq;dr;dphi;dtheta;dh];

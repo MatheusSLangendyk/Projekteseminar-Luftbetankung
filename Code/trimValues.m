@@ -1,4 +1,4 @@
-function [X_ap,U_ap,f0] = trimValues(vA_init,alpha_init,beta_init,Omega_init,Phi_init,h_init,plain_selector)
+function [X_ap,U_ap,f0] = trimValues(vA_init,alpha_init,beta_init,Omega_init,Phi_init,h_init,plane_selector)
 %Find the Trim Point under given Conditions
 %AP (equilibrium Points of the System)
 %Initialize z_guess: 0 wheather start from Initial guess. 1 wheather use
@@ -13,7 +13,7 @@ Z_guess(7:9) = Phi_init;
 Z_guess(10) = h_init;
 f_prev = inf;
 f0 = inf;
-assignin('base','plain_selector',plain_selector)
+assignin('base','plane_selector',plane_selector)
 assignin('base','vA_init',vA_init)
 assignin('base','phi_init',Phi_init(1))
 assignin('base','psi_init',Phi_init(3))

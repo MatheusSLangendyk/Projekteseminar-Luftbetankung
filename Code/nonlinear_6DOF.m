@@ -1,4 +1,4 @@
-function [dX] = nonlinear_6DOF(X,U,plain_selector)
+function [dX] = nonlinear_6DOF(X,U,plane_selector)
 %--------------States------------%
 vA = X(1);
 alpha = X(2);
@@ -23,7 +23,7 @@ T   = 288.15 - 0.0065*h;                    % Temperatur bei H
 ps  = 101325*(T/288.15)^(g/1.86584);        % Statischer Luftdruck
 rho = ps/(287.053*T);
 Omega_e_tilde = globalParameters.Omega_e_tilde ;
-if plain_selector == 1
+if plane_selector == 1
     I = globalParameters.I ;
     S = globalParameters.S ;
     St = globalParameters.St ;
@@ -35,7 +35,7 @@ if plain_selector == 1
     P_aerodynCenter = globalParameters.P_aerodynCenter ;
     i_f = globalParameters.i_f ;
     F_max = globalParameters.Fmax;
-elseif plain_selector == 2
+elseif plane_selector == 2
     I = globalParameters.I ;
     S = globalParameters.S ;
     St = globalParameters.St ;
