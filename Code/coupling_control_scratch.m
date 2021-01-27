@@ -8,7 +8,8 @@ function [R, F] = coupling_control_scratch(sys,C_tilde,ew,l,P)
 % Vorlesung "Mehrgroessenreglerentwurf im Zustandsraum"
 % Institut fuer Automatisierungstechnik
 % TU Darmstadt
-
+% ew(9) = real(ew(9));
+% ew(10) = real(ew(10));
 ctb1 = steuerbarKalman(sys);
 ctb2 = steuerbarHautus(sys);
 A = sys.A;
@@ -19,7 +20,7 @@ C2_tilde = C_tilde(l+1:end,1:end);
 n = size(A,1);
 % Eingangsdimension
 p = size(B,2);
-k = 4; %Dimension of the core 
+k = 1; %Dimension of the core 
 if ctb1+ctb2~=2
     error('System ist nicht steuerbar!')
 end
@@ -38,32 +39,29 @@ for i = 1:n
             M = null(H);
             V(:,i) = M(1:n,k);
             p_i = M(n+1:end,k);   
-            if rank(V,10^-9)<i
-                % ausgangsseitige Verkopplungsbedingung kann nicht weiter
-                % angewandt werden
+            if rank(V,10^-4)<i
+                % ausgangsseitige Verkopplungsbedingung 
+                
                 m = i-1;
-%                 H_red = [ew(i)*eye(n,n)-A, -B];
-%                 M_red = null(H_red);
-%                 v_i = M_red(1:n,k);
-%                 p_i = M_red(n+1:end,k);
-%                 V(:,i) = v_i;
-%                 P(:,i) = p_i;
-                V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
+                if ew(i) ~= conj(ew(i-1))
+                   V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
+                else 
+                   P(:,i) = P(:,i-1);
+                   V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i); 
+                end
             else
-               P(:,i) = p_i; 
+               P(:,i) = p_i; %Ausgangsseitigeverkopplungsbedingung bestätigen
             end
             
         else
-            
              %Eingsngsseitigeverkopplungsbedingung
-%              H_red = [ew(i)*eye(n,n)-A, -B];
-%              M_red = null(H_red);
-%              v_i = M_red(1:n,k);
-%              p_i = M_red(n+1:end,k);
-%              V(:,i) = v_i;
-%              P(:,i) = p_i;
-             V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
-             if rank(V,10^-9) < i
+             if ew(i) ~= conj(ew(i-1))
+                   V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
+              else 
+                   P(:,i) = P(:,i-1);
+                   V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i); 
+             end
+             if rank(V,10^-9) < i && imag(ew(i))== 0
                  %If V does not have full rank, place vector v_i
                  %orthogonally to v_(i-1)
                  H = [ew(i)*eye(n,n)-A, -B;V(:,i-1)' zeros(1,p)];
@@ -76,7 +74,7 @@ for i = 1:n
         end
     
 end
-
+det(V)
 R = -P*V^-1;
 R = real(R);
 disp(eig(A-B*R))
