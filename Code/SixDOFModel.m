@@ -211,6 +211,7 @@ end
 %   zero(sys_ol)
   
   %% Coupling Control (manual) 
+  C_tilde 
   l = 4; %coupling conditions
   C1_tilde = C_tilde(1:l,:);
   C2_tilde = C_tilde(l+1:end,1:end);
