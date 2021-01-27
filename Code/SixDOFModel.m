@@ -184,44 +184,77 @@ end
     [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
  end
   
-  %% Transfer Function Open Loop
-   sys_ol = ss(A,B, C,zeros(8,8));
-  
-  %%Riccatti
-  Q = eye(n,n);
-  Q(17,17) = 100000; 
-  Q(9,9) = 1; % Bestrafung Höhe
-  Q(18,18) = 1;
-  Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
-  Q(13,13) = 100;
-  
-  R = 1000*eye(8,8);
-  R(2,2) = 4000;
-  R(5,5) = 2000;
-  R(6,6) = 9000;
-  K = lqr(sys_ol,Q,R);
-  K((abs(K)<10^-9)) = 0;
-  Ak = A -B*K;
-  F = -inv(C*(Ak\B));
-  ew_ricati = eig(Ak);
-  sys_ricati = ss(Ak,B*F,C,zeros(8,8));
-  %step(sys_ricati)
-%   Gamma = getgamma(A,B,C);
-%   gamma_sum = sum(Gamma);
-%   zero(sys_ol)
-  
-  %% Coupling Control (manual) 
-  C_tilde 
-  l = 4; %coupling conditions
-  C1_tilde = C_tilde(1:l,:);
-  C2_tilde = C_tilde(l+1:end,1:end);
-  ew_coupling = real(ew_ricati)+imag(ew_ricati)/100;
-  struct_cond.sys_ol = sys_ol ;
-  struct_cond.C_tilde = C_tilde;
-  struct_cond.ew_ricati = ew_ricati;
-  struct_cond.l =l;
-  assignin('base','struct_cond',struct_cond)
-  P = ones(8,n);
-  %P = fminsearch('cost_condition_number',P,optimset('TolX',1e-10,'MaxFunEvals',10000,'MaxIter',10000));
-  [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l,P);
-  %P_opt = P;
+%   %% Transfer Function Open Loop
+%    sys_ol = ss(A,B, C,zeros(8,8));
+%   
+%   %%Riccatti
+%   Q = eye(n,n);
+%   Q(17,17) = 100000; 
+%   Q(9,9) = 1; % Bestrafung Höhe
+%   Q(18,18) = 1;
+%   Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
+%   Q(13,13) = 100;
+%   
+%   R = 1000*eye(8,8);
+%   R(2,2) = 4000;
+%   R(5,5) = 2000;
+%   R(6,6) = 9000;
+%   K = lqr(sys_ol,Q,R);
+%   K((abs(K)<10^-9)) = 0;
+%   Ak = A -B*K;
+%   F = -inv(C*(Ak\B));
+%   ew_ricati = eig(Ak);
+%   sys_ricati = ss(Ak,B*F,C,zeros(8,8));
+%   %step(sys_ricati)
+% %   Gamma = getgamma(A,B,C);
+% %   gamma_sum = sum(Gamma);
+% %   zero(sys_ol)
+%   
+%   %% Coupling Control (manual) 
+%   l = 4; %coupling conditions
+%   C_tilde = zeros(size(C,1), size(A,1));
+%   C_tilde(1:4,:) = C(1:4,:);
+%   C_tilde(5:8,:) = C(1:4,:) - C(5:8,:);
+% 
+%   C1_tilde = C_tilde(1:l,:);
+%   C2_tilde = C_tilde(l+1:end,1:end);
+%   struct_cond.sys_ol = sys_ol ;
+%   struct_cond.C_tilde = C_tilde;
+%   struct_cond.ew_ricati = ew_ricati;
+%   struct_cond.l =l;
+%   assignin('base','struct_cond',struct_cond)
+%   P = ones(8,n);
+%   %P = fminsearch('cost_condition_number',P,optimset('TolX',1e-10,'MaxFunEvals',10000,'MaxIter',10000));
+%   [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l,P);
+%   %P_opt = P;
+%   sys_coupling = ss(A-B*K_coupling, B*F_coupling, C_tilde, 0);
+%   figure;
+%   step(sys_coupling);
+%   plt = step(sys_coupling);
+%   figure;
+%   pzmap(sys_coupling);
+%   
+%   figure;
+%   kk = 0;
+%   for i = 1:4
+%       for j = 1:4
+%           data = plt(:,i,j);
+%           subplot(4,4,kk+1);
+%           plot(data);
+%           title(['In(',num2str(j),') to Out(',num2str(i),')']);
+%           kk=kk+1;
+%       end
+%   end
+%   
+%   figure;
+%   kk = 0;
+%   for i = 1:4
+%       for j = 1:4
+%           data = plt(:,i+4,j);
+%           subplot(4,4,kk+1);
+%           plot(data);
+%           title(['In(',num2str(j),') to Out(',num2str(i+4),')']);
+%           kk=kk+1;
+%       end
+%   end
+

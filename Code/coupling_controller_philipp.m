@@ -4,14 +4,17 @@ startup;
 SixDOFModel;
 % [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
 W_ap = (C*X_ap_simulink)';
+% TODO: - test mit anderen solvern -- SNOPT läuft nicht
+% TODO: - unterlagerung mit entkopplungsregelung??
+% TODO: - test mit Matheus regler als startwert
 %% Settings
 C_tilde = zeros(size(C,1), size(A,1));
 C_tilde(1:4,:) = C(1:4,:);
 C_tilde(5:8,:) = C(1:4,:) - C(5:8,:);
 
-X_init = [152 0 0 0 0 0 0 0 5000 150 0 0 0 0 0 0 0 5010]';
+X_init = [150 0 0 0 0 0 0 0 5000 150 0 0 0 0 0 0 0 5010]';
 
-%Riccatti
+%% Riccatti als Startwert
 Q = 0.00001*eye(n,n);
 % Q(3,3) = 1; 
 % Q(12,12) = 1; 
@@ -21,7 +24,7 @@ Q = 0.00001*eye(n,n);
 % Q(15,15) = 100;
 % Q(7,7) = 100; 
 % Q(16,16) = 100; 
-
+% 
 R = eye(size(B,2), size(B,2));
 R(3,3) = 0.00001;
 R(4,4) = 0.001;
@@ -49,6 +52,16 @@ F = -inv(C*(Ak\B));
 F((abs(F)<1e-9)) = 0;
 sys_ricatti = ss(Ak, B*F, C, 0);
 
+%% Verkopplungsregler scratch als Startwert
+P = ones(8,n);
+l = 4; %coupling conditions
+% P = fminsearch('cost_condition_number',P,optimset('TolX',1e-10,'MaxFunEvals',10000,'MaxIter',10000));
+[K_coupling_scratch, F_coupling_scratch] = coupling_control_scratch(ss(A,B,C,0),C_tilde,eigenvalues_controlled,l,P);
+% F_coupling_scratch = F_coupling_scratch(:,1:4);
+sys_coupling_scratch = ss(A-B*K_coupling_scratch, B*F_coupling_scratch, C_tilde, 0);
+step(sys_coupling_scratch);
+  
+%% Werte für gammasyn 
 K_0 = [];
 RKF_0 = {K, K_0, F};
 bounds = {[] [] []};
@@ -68,7 +81,6 @@ system_properties = struct(...
         'R_bounds',                     {bounds},...
         'R_fixed',                      []...
 	);
-%         'tf_structure',                 [NaN*ones(6,6) NaN*ones(6,2); zeros(2,6) NaN*ones(2,2)],...
 
 % EXACT								structurally constrained controller only EXAKT solution
 % APPROXIMATE						structurally constrained controller also approximate solution
@@ -77,22 +89,22 @@ system_properties = struct(...
 % NUMERIC_NONLINEAR_INEQUALITY		fully numeric design with non-linear inequality constraints
 
 % control_design_type = GammaDecouplingStrategy.EXACT;
-% control_design_type = GammaDecouplingStrategy.APPROXIMATE;
+control_design_type = GammaDecouplingStrategy.APPROXIMATE;
 % control_design_type = GammaDecouplingStrategy.APPROXIMATE_INEQUALITY
 % control_design_type = GammaDecouplingStrategy.NUMERIC_NONLINEAR_EQUALITY;
 % control_design_type = GammaDecouplingStrategy.NUMERIC_NONLINEAR_INEQUALITY;
-control_design_type = GammaDecouplingStrategy.MERIT_FUNCTION;
+% control_design_type = GammaDecouplingStrategy.MERIT_FUNCTION;
 
 %% pole area parameters
-a = 0.5;
-b = 0.5;
-r = 20;
+a = 2;
+b = 1.5;
+r = 5;
 
 %% Pole area
-weight = [1];
+weight = [100 1];
 % polearea = control.design.gamma.area.Hyperbola(a, b);
-% polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
-polearea = control.design.gamma.area.Imag(1,a);
+polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
+% polearea = control.design.gamma.area.Imag(1,a);
 % polearea = [control.design.gamma.area.Hyperbola(a, b), control.design.gamma.area.Imag(1,a)];
 %% gammasyn options
 solver = optimization.solver.Optimizer.FMINCON; % solver to use
@@ -106,7 +118,9 @@ options = optimization.options.OptionFactory.instance.options(solver,...
 	'MaxIterations',				5E3,...
 	'MaxSQPIter',					5E3,...
 	'SpecifyObjectiveGradient',		true,...
-	'SpecifyConstraintGradient',	false,...
+	'SpecifyConstraintGradient',	true,...
+    'SpecifyObjectiveHessian',      true,...
+    'SpecifyConstraintHessian',     true,...
 	'CheckGradients',				false,...
 	'FunValCheck',					false,...
 	'FiniteDifferenceType',			'forward',...
@@ -116,7 +130,7 @@ options = optimization.options.OptionFactory.instance.options(solver,...
 );
 objectiveoptions = struct(...
 	'usecompiled',				false,...											% indicator, if compiled functions should be used
-	'type',						GammaJType.DECOUPLING,...								% type of pole area weighting in objective function
+	'type',						[],...								% type of pole area weighting in objective function
 	'allowvarorder',			false,...											% allow variable state number for different multi models
 	'eigenvaluederivative',		GammaEigenvalueDerivativeType.VANDERAA,...
 	'errorhandler',				GammaErrorHandler.ERROR,...
@@ -142,10 +156,45 @@ end
 
 K_coupling = Kopt{1} %#ok<*NOPTS>
 F_coupling = Kopt{end}
+% modifiziertes Vorfilter
+Ak_coupling = A-B*K_coupling;
+F1 = F_coupling(:,1:4);
+C_tilde_1 = C_tilde(1:4,:);
+Q_mod = -inv(C_tilde_1*(Ak_coupling\(B*F1)));
+F_mod = F1*Q_mod;
+
 information
 sys_riccati = ss(A-B*K, B*F, C, 0);
-sys_coupling = ss(A-B*K_coupling, B*F_coupling, C_tilde, 0);
-pzmap(sys_coupling, 'r');
+sys_coupling = ss(A-B*K_coupling, B*F_mod, C_tilde, 0);
+sys_uncontrolled = ss(A,B,C_tilde,0);
+% pzmap(sys_uncontrolled);
+step(sys_coupling);
+figure;
+pzmap(sys_coupling);
+  
+% figure;
+% kk = 0;
+% for i = 1:4
+%     for j = 1:4
+%         data = plt(:,i,j);
+%         subplot(4,4,kk+1);
+%         plot(data);
+%         title(['In(',num2str(j),') to Out(',num2str(i),')']);
+%         kk=kk+1;
+%     end
+% end
+%   
+% figure;
+% kk = 0;
+% for i = 1:4
+%     for j = 1:4
+%         data = plt(:,i+4,j);
+%         subplot(4,4,kk+1);
+%         plot(data);
+%         title(['In(',num2str(j),') to Out(',num2str(i+4),')']);
+%         kk=kk+1;
+%     end
+% end
 
 %%
 C_1=C(1:4, 1:10);
