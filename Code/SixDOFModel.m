@@ -10,7 +10,7 @@ deltah_offset = 10;
 [globalParameters,m,g,he,I_inv] = initializeParameters();
 
 %% Initial Values both planes
-vA_init_1 = 150;
+vA_init_1 = 140;
 alpha_init_1 = 0;
 beta_init_1 = 0;
 Omega_init_1 = [0;0;0];
@@ -23,7 +23,7 @@ X_init_1 = [vA_init_1;alpha_init_1;beta_init_1;Omega_init_1;Phi_init_1;h_init_1]
 
 %plane 2
 vA_init_2 = 150;
-alpha_init_2 = 0.3;
+alpha_init_2 = 0;
 beta_init_2 = 0;
 Omega_init_2 = [0;0;0];
 Phi_init_2 = [0;0;0];
@@ -212,7 +212,7 @@ end
   %step(sys_ricati)
 %   Gamma = getgamma(A,B,C);
 %   gamma_sum = sum(Gamma);
-%   zero(sys_ol)
+  ew_strecke = pole(sys_ol);
   
   %% Coupling Control (manual) 
   C_tilde = zeros(8,n);
@@ -232,7 +232,6 @@ end
   opt_modus = 2; %0-conditional number 1- Values o K_coupling 2-control variable
   C1_tilde = C_tilde(1:l,:);
   C2_tilde = C_tilde(l+1:end,1:end);
-  ew_coupling = real(ew_ricati)+imag(ew_ricati)/100;
   struct_cond.sys_ol = sys_ol ;
   struct_cond.C_tilde = C_tilde;
   struct_cond.ew_ricati = ew_ricati;

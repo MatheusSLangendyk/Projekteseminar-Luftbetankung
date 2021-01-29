@@ -8,8 +8,8 @@ function [R, F] = coupling_control_scratch(sys,C_tilde,ew,l,P)
 % Vorlesung "Mehrgroessenreglerentwurf im Zustandsraum"
 % Institut fuer Automatisierungstechnik
 % TU Darmstadt
-% ew(9) = real(ew(9));
-% ew(10) = real(ew(10));
+%  ew(6) = real(ew(9));
+%  ew(7) = real(ew(10));
 ctb1 = steuerbarKalman(sys);
 ctb2 = steuerbarHautus(sys);
 A = sys.A;
@@ -29,17 +29,17 @@ end
 m = n;
 % Matrix der Eigenvektoren
 V = zeros(n,n);
-%P = ones(p,n);
 
 for i = 1:n
         if i<=m 
-            %EW(i) = ew(i);
+            
             %Ausgangsseitigeverkopplungsbedingung
             H = [ew(i)*eye(n,n)-A, -B;C2_tilde, zeros(l,p)];
             M = null(H);
             V(:,i) = M(1:n,k);
             p_i = M(n+1:end,k);   
-            if rank(V,10^-4)<i
+           if rank(V,10^-4)<i
+          
                 % ausgangsseitige Verkopplungsbedingung 
                 
                 m = i-1;
@@ -74,15 +74,26 @@ for i = 1:n
         end
     
 end
-det(V)
+
+W = inv(V);
+Wr1 =  W(1:m,:);
+%Wr2 = W(m+1:end,:);
 R = -P*V^-1;
 R = real(R);
 disp(eig(A-B*R))
-% Vorfilterentwurf
-FM = null([B V(:,1:m)]);
-F1 = FM(1:p,:);
+
+Pseudo = pinv(Wr1*B);
+Mt = conj(Pseudo)';
+M = Mt(:,1:p-l);
+F1 = (W*B)\[M;zeros(m,p-l)];
+%Vorfilterentwurf
+% H_vorfilter = [B ,V(:,1:m)];
+% FM = null(H_vorfilter);
+% F1 = FM(1:p,:);
 F = inv(C_tilde*((B*R - A)\B));
-Q_tilde = C1_tilde*((B*R - A)\B*F1);
-F1_tilde = F1/Q_tilde;
+Q = C1_tilde*(inv(B*R - A))*B*F1;
+F1_tilde = F1*Q;
 F(:,1:p-l) = F1_tilde;
 F = real(F);
+
+%%
