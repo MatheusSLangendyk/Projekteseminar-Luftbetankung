@@ -1,4 +1,4 @@
-syms vA alpha beta p q r phi theta psi h eta sigmaf xi zita 
+syms u v w p q r phi theta psi h eta sigmaf xi zita 
 
 % ab hier ist alles gleich wie in nonlinear_6DOF
 plane_selector = evalin('base','plane_selector');
@@ -47,17 +47,17 @@ CW0 = 0.13;
 kappa = 0.07;
 
 %--------------Variables------------%
-u = sqrt(vA^2*(1-sin(beta)^2)/(1+tan(alpha)^2));
-v = sin(beta)*vA;
-w = u*tan(alpha);
+% u = sqrt(vA^2*(1-sin(beta)^2)/(1+tan(alpha)^2));
+% v = sin(beta)*vA;
+% w = u*tan(alpha);
 V = [u;v;w];
+vA = sqrt(u^2+v^2+w^2);
+alpha = atan(w/u);
+beta = asin(v/vA);
 
 q_d = 0.5*rho*vA^2; %Dynamic Preassure
 Omega = [p;q;r];
 
-% vA = sqrt(u^2+v^2+w^2);
-% alpha = atan(w/u);
-% beta = asin(v/vA);
 %--------------Aerodynamical Coefficients------------%
 %Forces Coefficients
 CA_F = grad_alpha*(alpha - alpha_L0);
@@ -116,9 +116,9 @@ dOmega = I_inv*(Q_total - Omega_tilde*I*Omega); %Derivative of Rotation Rate (bo
 
 % ACHTUNG: Omega_e_tilde wurde in DGL für dV entfernt, da flache ERde
 dV = R_total/m + Tfg*[0;0;g] - (Omega_tilde)*V; %Derivatitive of the Speed (body Reference Frame)
-dvA = (u*dV(1) + v*dV(2) + w*dV(3))/sqrt(u^2 + v^2 + w^2); %Derivative of the Approach Speed
-dalpha = (dV(3)*u - dV(1)*w)/(u^2 + u*w); %Derivative of Angle of Attack
-dbeta = (dV(2)*vA - dvA*V(2))/(vA*sqrt(vA^2 - V(2)^2)); %Derivative of Sideslip Angle
+% dvA = (u*dV(1) + v*dV(2) + w*dV(3))/sqrt(u^2 + v^2 + w^2); %Derivative of the Approach Speed
+% dalpha = (dV(3)*u - dV(1)*w)/(u^2 + u*w); %Derivative of Angle of Attack
+% dbeta = (dV(2)*vA - dvA*V(2))/(vA*sqrt(vA^2 - V(2)^2)); %Derivative of Sideslip Angle
 
 %Kinematics
 dP_e = Tgf*V; % gilt nur für z-Komponente
@@ -131,15 +131,15 @@ J = 1/cos(theta)*[cos(theta) sin(phi)*sin(theta) cos(phi)*sin(theta) ;0 cos(phi)
 dPhi = J*Omega; %Derivative of Euler Angles
 % bis hier ist alles gleich wie in nonlinear_6DOF
 
-% du = dV(1);
-% dv = dV(2);
-% dw = dV(3);
+du = dV(1);
+dv = dV(2);
+dw = dV(3);
 dp = dOmega(1);
 dq = dOmega(2);
 dr = dOmega(3);
 dphi = dPhi(1);
 dtheta = dPhi(2);
 dpsi = dPhi(3);
-x10 = [vA alpha beta p q r phi theta psi h];
-x_red_9 = [vA alpha beta p q r phi theta h];
+x10 = [u v w p q r phi theta psi h];
+x_red_9 = [u v w p q r phi theta h];
 u_stell = [eta sigmaf xi zita];

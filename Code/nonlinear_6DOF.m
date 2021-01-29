@@ -1,14 +1,14 @@
 function [dX] = nonlinear_6DOF(X)
-vA_init =  evalin('base','vA_init');
+u_init =  evalin('base','u_init');
 phi_init =  evalin('base','phi_init');
 psi_init =  evalin('base','psi_init');
 h_init =  evalin('base','h_init');
 plane_selector =  evalin('base','plane_selector');
 
 %--------------States------------%
-vA = X(1);
-alpha = X(2);
-beta = X(3);
+u = X(1);
+v = X(2);
+w = X(3);
 p = X(4);
 q = X(5);
 r = X(6);
@@ -68,18 +68,18 @@ gradientCQ_Czita = 0.24;
 CW0 = 0.13;
 kappa = 0.07;
 
-%--------------Variables------------%
-u = sqrt(vA^2*(1-sin(beta)^2)/(1+tan(alpha)^2));
-v = sin(beta)*vA;
-w = u*tan(alpha);
+% %--------------Variables------------%
+% u = sqrt(vA^2*(1-sin(beta)^2)/(1+tan(alpha)^2));
+% v = sin(beta)*vA;
+% w = u*tan(alpha);
 V = [u;v;w];
+vA = sqrt(u^2+v^2+w^2);
+alpha = atan(w/u);
+beta = asin(v/vA);
 
 q_d = 0.5*rho*vA^2; %Dynamic Preassure
 Omega = [p;q;r];
 
-% vA = sqrt(u^2+v^2+w^2);
-% alpha = atan(w/u);
-% beta = asin(v/vA);
 %--------------Aerodynamical Coefficients------------%
 %Forces Coefficients
 CA_F = grad_alpha*(alpha - alpha_L0);
@@ -138,9 +138,9 @@ dOmega = I_inv*(Q_total - Omega_tilde*I*Omega); %Derivative of Rotation Rate (bo
 
 % ACHTUNG: Omega_e_tilde wurde in DGL für dV entfernt, da flache ERde
 dV = R_total/m + Tfg*[0;0;g] - (Omega_tilde)*V; %Derivatitive of the Speed (body Reference Frame)
-dvA = (u*dV(1) + v*dV(2) + w*dV(3))/sqrt(u^2 + v^2 + w^2); %Derivative of the Approach Speed
-dalpha = (dV(3)*u - dV(1)*w)/(u^2 + u*w); %Derivative of Angle of Attack
-dbeta = (dV(2)*vA - dvA*V(2))/(vA*sqrt(vA^2 - V(2)^2)); %Derivative of Sideslip Angle
+% dvA = (u*dV(1) + v*dV(2) + w*dV(3))/sqrt(u^2 + v^2 + w^2); %Derivative of the Approach Speed
+% dalpha = (dV(3)*u - dV(1)*w)/(u^2 + u*w); %Derivative of Angle of Attack
+% dbeta = (dV(2)*vA - dvA*V(2))/(vA*sqrt(vA^2 - V(2)^2)); %Derivative of Sideslip Angle
 
 %Kinematics
 dP_e = Tgf*V; % gilt nur für z-Komponente
@@ -151,5 +151,5 @@ dh = - dP_e(3); %Derivative of z-position (earth Reference Frame)
 
 J = 1/cos(theta)*[cos(theta) sin(phi)*sin(theta) cos(phi)*sin(theta) ;0 cos(phi)*cos(theta) -sin(phi)*cos(theta);0 sin(phi) cos(phi)]; %Rotation rate matrix
 dPhi = J*Omega; %Derivative of Euler Angles
-dX = [dvA;dalpha;dbeta;dOmega;dPhi;dh;vA-vA_init;phi-phi_init;psi-psi_init;h-h_init];
+dX = [dV;dOmega;dPhi;dh;u-u_init;phi-phi_init;psi-psi_init;h-h_init];
 end

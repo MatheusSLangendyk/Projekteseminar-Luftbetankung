@@ -1,7 +1,7 @@
 %Simualtion of a complete 6 Degrees of Freedom Model
 clc
 clear
-close all
+% close all
 
 system_norm = false;
 deltah_offset = 10;
@@ -10,26 +10,28 @@ deltah_offset = 10;
 [globalParameters,m,g,he,I_inv] = initializeParameters();
 
 %% Initial Values both planes
-vA_init_1 = 150;
-alpha_init_1 = 0;
-beta_init_1 = 0;
+u_init_1 = 150;
+v_init_1 = 0;
+w_init_1 = 0;
+V_init_1 = [u_init_1; v_init_1; w_init_1];
 Omega_init_1 = [0;0;0];
 Phi_init_1 = [0;0;0];
 h_init_1 = 5000;
 P_e_init_1 = [0;0;-h_init_1];
 %latlon_init = [40.712776;-74.005974]; %New York
 latlon_init = [0;0];
-X_init_1 = [vA_init_1;alpha_init_1;beta_init_1;Omega_init_1;Phi_init_1;h_init_1];
+X_init_1 = [V_init_1;Omega_init_1;Phi_init_1;h_init_1];
 
 %plane 2
-vA_init_2 = 150;
-alpha_init_2 = 0;
-beta_init_2 = 0;
+u_init_2 = 150;
+v_init_2 = 0;
+w_init_2 = 0;
+V_init_2 = [u_init_2; v_init_2; w_init_2];
 Omega_init_2 = [0;0;0];
 Phi_init_2 = [0;0;0];
 h_init_2 = h_init_1 + deltah_offset;
 P_e_init_2 = [0;0;-h_init_2];
-X_init_2 = [vA_init_2;alpha_init_2;beta_init_2;Omega_init_2;Phi_init_2;h_init_2];
+X_init_2 = [V_init_2;Omega_init_2;Phi_init_2;h_init_2];
 %% calculate trim points
 ap_solver = 0;
 if ap_solver == 0
@@ -54,10 +56,10 @@ plane_selector = 1;
 assignin('base','plane_selector',plane_selector)
 symbolic_equations;
 % Zustands-DGL ohne psi
-f = [dvA;dalpha;dbeta;dp;dq;dr;dphi;dtheta;dh];
+f = [du;dv;dw;dp;dq;dr;dphi;dtheta;dh];
 
 % Ausgangsgleichung
-h = [vA beta phi h];
+h = [u v phi h];
 
 % 1. Linearisierung durch bilden der Jacoby-Matrizen
 A_sym = jacobian(f, x_red_9);   % A = d f(x,u) / dx
@@ -77,10 +79,10 @@ plane_selector = 2;
 assignin('base','plane_selector',plane_selector)
 symbolic_equations;
 % Zustands-DGL ohne psi
-f = [dvA;dalpha;dbeta;dp;dq;dr;dphi;dtheta;dh];
+f = [du;dv;dw;dp;dq;dr;dphi;dtheta;dh];
 
 % Ausgangsgleichung
-h = [vA beta phi h];
+h = [u v phi h];
 
 % 1. Linearisierung durch bilden der Jacoby-Matrizen
 A_sym = jacobian(f, x_red_9);   % A = d f(x,u) / dx
@@ -121,7 +123,7 @@ end
 delta = sum(delta_k);
 
 %% Zwei Flugzeug Modell
-[A,B,C,n] = defineABC(A1,A2,B1,B2);
+[A,B,C,n] = defineABC(A1,A2,B1,B2,C1,C2);
 
 % Steuerbarkeit
 eigenvalues = eig(A);

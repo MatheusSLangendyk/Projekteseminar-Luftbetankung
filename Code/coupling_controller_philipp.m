@@ -1,4 +1,4 @@
-clear; close all;
+% clear; close all;
 addpath('gammasyn');  
 startup;
 SixDOFModel;
@@ -96,9 +96,9 @@ control_design_type = GammaDecouplingStrategy.APPROXIMATE;
 % control_design_type = GammaDecouplingStrategy.MERIT_FUNCTION;
 
 %% pole area parameters
-a = 2;
-b = 3;
-r = 5;
+a = 0.5;
+b = 0.8;
+r = 50;
 
 %% Pole area
 weight = [1];
