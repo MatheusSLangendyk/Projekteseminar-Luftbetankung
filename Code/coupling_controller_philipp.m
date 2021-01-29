@@ -97,13 +97,13 @@ control_design_type = GammaDecouplingStrategy.APPROXIMATE;
 
 %% pole area parameters
 a = 2;
-b = 1.5;
+b = 3;
 r = 5;
 
 %% Pole area
-weight = [100 1];
-% polearea = control.design.gamma.area.Hyperbola(a, b);
-polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
+weight = [1];
+polearea = control.design.gamma.area.Hyperbola(a, b);
+% polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
 % polearea = control.design.gamma.area.Imag(1,a);
 % polearea = [control.design.gamma.area.Hyperbola(a, b), control.design.gamma.area.Imag(1,a)];
 %% gammasyn options
@@ -126,10 +126,10 @@ options = optimization.options.OptionFactory.instance.options(solver,...
 	'FiniteDifferenceType',			'forward',...
 	'Diagnostics',					false,...
 	'Display',						'iter-detailed',...
-	'UseParallel',					true...
+	'UseParallel',					false...
 );
 objectiveoptions = struct(...
-	'usecompiled',				false,...											% indicator, if compiled functions should be used
+	'usecompiled',				true,...											% indicator, if compiled functions should be used
 	'type',						[],...								% type of pole area weighting in objective function
 	'allowvarorder',			false,...											% allow variable state number for different multi models
 	'eigenvaluederivative',		GammaEigenvalueDerivativeType.VANDERAA,...

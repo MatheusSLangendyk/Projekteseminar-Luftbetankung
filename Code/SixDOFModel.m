@@ -34,8 +34,8 @@ X_init_2 = [vA_init_2;alpha_init_2;beta_init_2;Omega_init_2;Phi_init_2;h_init_2]
 ap_solver = 0;
 if ap_solver == 0
     % AP mit fsolve
-    [X_ap_1, U_ap_1] = fsolve_trim([X_init_1;zeros(4,1)]); % mit [vA, phi, psi, h] = [150, 0, 0, 5000]
-    [X_ap_2, U_ap_2] = fsolve_trim([X_init_2;zeros(4,1)]); % mit [vA, phi, psi, h] = [150, 0, 0, 5010]
+    [X_ap_1, U_ap_1] = fsolve_trim([X_init_1;zeros(4,1)], 1); % mit [vA, phi, psi, h] = [150, 0, 0, 5000]
+    [X_ap_2, U_ap_2] = fsolve_trim([X_init_2;zeros(4,1)], 2); % mit [vA, phi, psi, h] = [150, 0, 0, 5010]
 elseif ap_solver == 1
     % AP mit trimValues
     [X_ap_1,U_ap_1,f0_1] = trimValues(vA_init_1,alpha_init_1,beta_init_1,Omega_init_1,Phi_init_1,h_init_1,1);
@@ -122,10 +122,28 @@ delta = sum(delta_k);
 
 %% Zwei Flugzeug Modell
 [A,B,C,n] = defineABC(A1,A2,B1,B2);
+
 % Steuerbarkeit
-rank(ctrb(A,B));
+eigenvalues = eig(A);
+%Hautus
+for i = 1:n
+    eig_i = eigenvalues(i);
+    if rank([eig_i*eye(n,n)-A, B]) ~=n
+        disp(['Eigenvalue ',num2str(eig_i),' of Gesamt-System is not controllable ']);
+    end
+end
+[ctb, ewS, ewNS] = steuerbarHautus(ss(A,B,C,0));
+
 % Beobachtbarkeit 
-rank(obsv(A,C));
+eigenvalues = eig(A);
+% Hautus
+for i = 1:n
+    eig_i = eigenvalues(i);
+    if rank([eig_i*eye(n,n)-A;C]) ~=n
+        disp(['Eigenvalue ',num2str(eig_i),' of Gesamt-System is not obsarvable ']);
+    end
+end
+[obs, ewS, ewNS] = steuerbarHautus(ss(A',C',B',0));
 
 sys_2plane = ss(A, B, C, zeros(8,8));
 
@@ -155,30 +173,7 @@ xi_max = 25*pi/180; %Airlon
 xi_min = - xi_max;
 zita_max = 30*pi/180; %Rudder
 zita_min = - zita_max;
-% %Contolable/ Obsarvable
-Ms = ctrb(A,B);
-Mb = obsv(A,C);
-if rank(Ms) ~= min(size(Ms,1),size(Ms,2))
-    disp('System is not Kalman Controllable')
-else
-    disp('System is Kalman Controllable')
-end
-if rank(Mb) ~= min(size(Mb,1),size(Mb,2))
-    disp('System is not Kalman Obsarvable')
-else
-    disp('System is Kalman Obsarvable')
-end
 
-eigenvalues = eig(A);
-
-%Hautus
-for i = 1:n
-    eig_i = eigenvalues(i);
-    if rank([eig_i*eye(n,n)-A;C]) ~=n
-        
-        disp(['Eigenvalue ',num2str(eig_i),' is not obsarvable ']);
-    end
-end
 %% Normieren
  if system_norm == true
     [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
