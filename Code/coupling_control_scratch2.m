@@ -1,4 +1,4 @@
-function [R, F] = coupling_control_scratch(sys,C_tilde,ew,l,P)
+function [R, F] = coupling_control_scratch2(sys,C_tilde,ew,l,P)
 % [R, F] = verkopplung(sys,Cvk,ew,P)
 %  berechnet eine Zustandsrückführung u=-Rx+Fw für das System sys, welche die
 %  Eigenwerte ew im geschlossenen Regelkreis erzeugt und das System
@@ -35,34 +35,27 @@ for i = 1:n
         if i<=m 
             
             %Ausgangsseitigeverkopplungsbedingung
-            H = [ew(i)*eye(n,n)-A, -B;C2_tilde, zeros(l,p)];
+            H = C2_tilde/(ew(i)*eye(n)-A)*B;
             M = null(H);
-            V(:,i) = M(1:n,k);
-            p_i = M(n+1:end,k);   
+            p_i = M(:,k);   
+            V(:,i) = (ew(i)*eye(n)-A)\B*p_i;
            if rank(V,10^-4)<i
           
                 % ausgangsseitige Verkopplungsbedingung 
                 
                 m = i-1;
-                if ew(i) ~= conj(ew(i-1))
-                   V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
-                else 
-                   P(:,i) = P(:,i-1);
-                   V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i); 
-                end
+                V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i); 
+               
             else
                P(:,i) = p_i; %Ausgangsseitigeverkopplungsbedingung bestätigen
             end
             
         else
              %Eingsngsseitigeverkopplungsbedingung
-             if ew(i) ~= conj(ew(i-1))
-                   V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i);
-              else 
-                   P(:,i) = P(:,i-1);
-                   V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i); 
-             end
-             if rank(V,10^-9) < i && imag(ew(i))== 0
+             
+                V(:,i) = (ew(i)*eye(n)-A)\B*P(:,i); 
+              
+             if rank(V,10^-9) < i 
                  %If V does not have full rank, place vector v_i
                  %orthogonally to v_(i-1)
                  H = [ew(i)*eye(n,n)-A, -B;V(:,i-1)' zeros(1,p)];
@@ -75,9 +68,9 @@ for i = 1:n
         end
     
 end
-
+det(V)
 W = inv(V);
-
+Wr1 =  W(1:m,:);
 %Wr2 = W(m+1:end,:);
 R = -P*V^-1;
 R = real(R);
@@ -96,4 +89,4 @@ F = -inv(C*((A-B*R)\B));
  F(:,1:p-l) = F1_tilde;
 F = real(F);
 
-%%
+

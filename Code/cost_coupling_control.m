@@ -12,7 +12,7 @@ function [F0] = cost_coupling_control(P)
  B = sys_ol.B;
  p = size(B,2);
  n = size(A,1);
- [K_coupling, F_coupling] = coupling_control_scratch(sys_ol,C_tilde,ew_ricati,l,P);
+ [K_coupling, F_coupling] = coupling_control_scratch2(sys_ol,C_tilde,ew_ricati,l,P);
  Ar = A- B*K_coupling;
  if opt_modus == 0 %Conditional Number optimization
     F0 = cond(Ar);
