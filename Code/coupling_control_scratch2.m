@@ -1,4 +1,4 @@
-function [R, F] = coupling_control_scratch2(sys,C_tilde,ew,l,P)
+function [R, F] = coupling_control_scratch2(sys,C_tilde,ew,l,P,FM)
 % [R, F] = verkopplung(sys,Cvk,ew,P)
 %  berechnet eine Zustandsrückführung u=-Rx+Fw für das System sys, welche die
 %  Eigenwerte ew im geschlossenen Regelkreis erzeugt und das System
@@ -70,14 +70,13 @@ for i = 1:n
 end
 det(V)
 W = inv(V);
-Wr1 =  W(1:m,:);
 %Wr2 = W(m+1:end,:);
 R = -P*V^-1;
 R = real(R);
 disp(eig(A-B*R))
 
 % Vorfilterentwurf
-FM = randn(m,p-l);
+%FM = randn(m,p-l);
 F1 = (W*B)\[FM;zeros(n-m,p-l)];
 
     % stationäre Genauigkeit nur bei quadratischem System
