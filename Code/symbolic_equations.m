@@ -54,6 +54,8 @@ V = [u;v;w];
 vA = sqrt(u^2+v^2+w^2);
 alpha = atan(w/u);
 beta = asin(v/vA);
+gamma = theta - alpha;
+dh = vA*sin(gamma);
 
 q_d = 0.5*rho*vA^2; %Dynamic Preassure
 Omega = [p;q;r];
@@ -125,7 +127,7 @@ dP_e = Tgf*V; % gilt nur für z-Komponente
 
 % ACHTUNG: dh anders als im Buch ... Teg fehlt, sollte für dh keinen
 % Unterschied machen
-dh = - dP_e(3); %Derivative of z-position (earth Reference Frame)
+% dh = - dP_e(3); %Derivative of z-position (earth Reference Frame)
 
 J = 1/cos(theta)*[cos(theta) sin(phi)*sin(theta) cos(phi)*sin(theta) ;0 cos(phi)*cos(theta) -sin(phi)*cos(theta);0 sin(phi) cos(phi)]; %Rotation rate matrix
 dPhi = J*Omega; %Derivative of Euler Angles
@@ -141,5 +143,5 @@ dphi = dPhi(1);
 dtheta = dPhi(2);
 dpsi = dPhi(3);
 x10 = [u v w p q r phi theta psi h];
-x_red_9 = [u v w p q r phi theta h];
+x_red_9 = [u v w p q r phi theta];
 u_stell = [eta sigmaf xi zita];

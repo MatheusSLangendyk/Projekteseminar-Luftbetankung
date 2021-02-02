@@ -48,7 +48,7 @@ X_ap = [X_ap_1;X_ap_2];
 U_ap = [U_ap_1;U_ap_2];
 U_ap((abs(U_ap)<1e-9)) = 0;
 X_ap((abs(X_ap)<1e-9)) = 0;
-X_ap_simulink = [X_ap(1:8);X_ap(10:18);X_ap(20)];
+X_ap_simulink = [X_ap(1:8);X_ap(11:18)];
 
 %% DGL Flugzeug 1
 % symbolische nicht-lineare DGL mit psi
@@ -56,16 +56,16 @@ plane_selector = 1;
 assignin('base','plane_selector',plane_selector)
 symbolic_equations;
 % Zustands-DGL ohne psi
-f = [du;dv;dw;dp;dq;dr;dphi;dtheta;dh];
+f = [du;dv;dw;dp;dq;dr;dphi;dtheta];
 
 % Ausgangsgleichung
-h = [u v phi h];
+out_eq = [u v phi theta];
 
 % 1. Linearisierung durch bilden der Jacoby-Matrizen
 A_sym = jacobian(f, x_red_9);   % A = d f(x,u) / dx
 B_sym = jacobian(f, u_stell);   % B = d f(x,u) / du
-C_sym = jacobian(h, x_red_9);   % C = d y(x,u) / dx
-D_sym = jacobian(h, u_stell);   % D = d y(x,u) / du
+C_sym = jacobian(out_eq, x_red_9);   % C = d y(x,u) / dx
+D_sym = jacobian(out_eq, u_stell);   % D = d y(x,u) / du
 
 % 2. Einsetzten der Anfangswerte
 A1 = double(subs(A_sym, [x10,u_stell], [X_ap_1; U_ap_1]'));
@@ -73,27 +73,54 @@ B1 = double(subs(B_sym, [x10,u_stell], [X_ap_1; U_ap_1]'));
 C1 = double(subs(C_sym, [x10,u_stell], [X_ap_1; U_ap_1]'));
 D1 = double(subs(D_sym, [x10,u_stell], [X_ap_1; U_ap_1]'));
 
+% A1((abs(A1)<1e-9)) = 0;
+% B1((abs(B1)<1e-9)) = 0;
+
+% %% Übertragungsverhalten von Eingängen auf h
+% x_h = [u w h];
+% dx_h = [du;dw;dh];
+% u_h = [u_stell(1:2) u_stell(4);];
+% u_h_ap = [U_ap_1(1:2); U_ap_1(4)];
+% x_ap_h = [X_ap_1(1:3);X_ap_1(8);X_ap_1(10)];
+% out_h = h;
+% A_h_sym = jacobian(dx_h, x_h);   % A = d f(x,u) / dx
+% B_h_sym = jacobian(dx_h, u_h);   % B = d f(x,u) / du
+% C_h_sym = jacobian(out_h, x_h);   % C = d y(x,u) / dx
+% D_h_sym = jacobian(out_h, u_h);   % D = d y(x,u) / du
+% 
+% A_h = double(subs(A_h_sym, [x10,u_h], [X_ap_1; u_h_ap]'));
+% B_h = double(subs(B_h_sym, [x10,u_h], [X_ap_1; u_h_ap]'));
+% C_h = double(subs(C_h_sym, [x10,u_h], [X_ap_1; u_h_ap]'));
+% D_h = double(subs(D_h_sym, [x10,u_h], [X_ap_1; u_h_ap]'));
+% 
+% K_h = place(A_h, B_h, [-0.7712 -0.05 -0.2]);
+% % step(ss(A_h,B_h,C_h,D_h));
+
+
 %% DGL Flugzeug 2
 % symbolische nicht-lineare DGL mit psi
 plane_selector = 2;
 assignin('base','plane_selector',plane_selector)
 symbolic_equations;
 % Zustands-DGL ohne psi
-f = [du;dv;dw;dp;dq;dr;dphi;dtheta;dh];
+f = [du;dv;dw;dp;dq;dr;dphi;dtheta];
 
 % Ausgangsgleichung
-h = [u v phi h];
+out_eq = [u v phi theta];
 
 % 1. Linearisierung durch bilden der Jacoby-Matrizen
 A_sym = jacobian(f, x_red_9);   % A = d f(x,u) / dx
 B_sym = jacobian(f, u_stell);   % B = d f(x,u) / du
-C_sym = jacobian(h, x_red_9);   % C = d y(x,u) / dx
-D_sym = jacobian(h, u_stell);   % D = d y(x,u) / du
+C_sym = jacobian(out_eq, x_red_9);   % C = d y(x,u) / dx
+D_sym = jacobian(out_eq, u_stell);   % D = d y(x,u) / du
 
 A2 = double(subs(A_sym, [x10,u_stell], [X_ap_2; U_ap_2]'));
 B2 = double(subs(B_sym, [x10,u_stell], [X_ap_2; U_ap_2]'));
 C2 = double(subs(C_sym, [x10,u_stell], [X_ap_2; U_ap_2]'));
 D2 = double(subs(D_sym, [x10,u_stell], [X_ap_2; U_ap_2]'));
+
+% A2((abs(A2)<1e-9)) = 0;
+% B2((abs(B2)<1e-9)) = 0;
 
 %% System ein Flugzeug
 % Steuerbarkeit des einzelnen Flugzeugs
@@ -102,10 +129,11 @@ rank(ctrb(A1,B1));
 rank(obsv(A1,C1));
 
 sys1 = ss(A1, B1, C1, D1);
-K = lqr(sys1, eye(9), eye(4));
-sys1_cl = ss(A1-B1*K, B1, C1, D1);
+% K = lqr(sys1, eye(8), eye(4));
+% sys1_cl = ss(A1-B1*K, B1, C1, D1);
 
 anz_io = size(C1,1);
+p = size(B1,2);
 delta_k = zeros(1, anz_io);
 
 % Berechnung der Differenzordnungen der Ausgänge
@@ -122,8 +150,100 @@ end
 % Differenzordnung des Gesamtsystems
 delta = sum(delta_k);
 
+Dstar = [];
+for k = 1:anz_io
+    Dstar(k,:) = C1(k,:) * A1^(delta_k(k)-1) * B1;
+end
+
+% Prüfung auf Minimalphasigkeit
+NST = zero(sys1);
+minphas = 1;
+for k = 1:length(NST)
+    % Wenn eine Nullstelle mit positivem Realteil, 
+    % System nicht minimalphasig.
+    if real(NST) >= 0
+       minphas = 0;
+    end
+end
+
+% Prüfung auf stabile Entkoppelbarkeit
+% abs(det(Dstar))<1e-8 besser, anstatt det(Dstar)==0 zur Umgehung von 
+% Fehlern mit numerischen Ungenauigkeiten 
+if (det(Dstar) == 0) || (minphas == 0)
+  disp('System ist NICHT stabil entkoppelbar!')
+else
+  disp('System ist stabil entkoppelbar!')
+end 
+
+% Entkopplungsregelung 
+ew_u     = [-0.2];
+ew_v  = [-1.5];
+ew_phi   = [-0.5,  -0.9];
+ew_theta = [-0.8,  -1.6];
+
+wpole.ew_u = ew_u;
+wpole.ew_v = ew_v;
+wpole.ew_phi = ew_phi;
+wpole.ew_theta = ew_theta;
+wpole_cell = struct2cell(wpole);
+
+% Bestimmung der Koeffizienten qij und ki
+for i=1:p
+    denom = poly(wpole_cell{i,1});
+    q_coeff{i} = denom ; % Koeffizienten q(i,j)
+    k_coeff(i) = q_coeff{i}(end); % Koeffizienten k(i)
+end
+
+% Berechnungvorschrift des Vorfilteres F an:
+F_ent = inv(Dstar)*diag(k_coeff);
+    
+% Berechnung der Reglermatrix R
+compR = []; % Hilfsmatrix, R = inv_D_star*compR
+for i=1:p
+    compR(i,:) = C1(i,:)*A1^delta_k(i); % Anteil von C_star
+        for j=0:delta_k(i)-1 % Summe ueber j
+            compR(i,:) = compR(i,:) + q_coeff{i}(end-j)*C1(i,:)*A1^j;
+        end
+end
+R_ent = inv(Dstar)*compR;
+
+% Geschlossener Regelkreis
+A_ent = A1-B1*R_ent; 
+B_ent = B1*F_ent;
+C_ent = C1;
+D_ent = D1;
+
+A_ent((abs(A_ent)<1e-9)) = 0;
+B_ent((abs(B_ent)<1e-9)) = 0;
+
+% Geschlossener Regelkreis
+sys5_ent = ss(A_ent, B_ent, C_ent, D_ent, ...
+          'StateName',{'u';'v';'w';'p';'q';'r';'phi';'theta'}, ...
+          'InputName',{'w_{u}';'w_{v}';'w_{\Phi}';'w_{\Theta}'}, ...
+          'OutputName',{'u','v','\Phi','\Theta'}, ...
+          'Name','ENTKOPPELTES SYSTEM');
+
+sys5e1 = ss(sys5_ent.a,sys5_ent.b(:,1),sys5_ent.c(1,:),sys5_ent.d(1,1));
+sys5e2 = ss(sys5_ent.a,sys5_ent.b(:,2),sys5_ent.c(2,:),sys5_ent.d(2,2));
+sys5e3 = ss(sys5_ent.a,sys5_ent.b(:,3),sys5_ent.c(3,:),sys5_ent.d(3,3));
+sys5e4 = ss(sys5_ent.a,sys5_ent.b(:,4),sys5_ent.c(4,:),sys5_ent.d(4,4));
+
+% Sprungantworten der 4 geregelten Regelgrößen (einzeln)
+% (Theoretische Betrachtung ohne Stellgrößenbeschränkungen)
+figure('Name','Sprungantworten der vier entkoppelten Strecken')
+step(sys5e1,sys5e2,sys5e3,sys5e4); grid
+legend('Geschwindigkeit u [m/s]','Geschwindigkeit v [m/s]',...
+       'Hängewinkel \Phi [rad]', 'Längsneigung \theta [rad]', 'Location','Best')
+
+% Plot der Sprungantworten
+figure('Name','Sprungantworten nach Entkopplung')
+step(sys5_ent); grid
+
 %% Zwei Flugzeug Modell
 [A,B,C,n] = defineABC(A1,A2,B1,B2,C1,C2);
+C_tilde = zeros(size(C,1), size(A,1));
+C_tilde(1:4,:) = C(1:4,:);
+C_tilde(5:8,:) = C(1:4,:) - C(5:8,:);
 
 % Steuerbarkeit
 eigenvalues = eig(A);
@@ -134,22 +254,23 @@ for i = 1:n
         disp(['Eigenvalue ',num2str(eig_i),' of Gesamt-System is not controllable ']);
     end
 end
-[ctb, ewS, ewNS] = steuerbarHautus(ss(A,B,C,0));
+[ctb, ewS, ewNS] = steuerbarHautus(ss(A,B,C_tilde,0));
 
 % Beobachtbarkeit 
 eigenvalues = eig(A);
 % Hautus
 for i = 1:n
     eig_i = eigenvalues(i);
-    if rank([eig_i*eye(n,n)-A;C]) ~=n
+    if rank([eig_i*eye(n,n)-A;C_tilde]) ~=n
         disp(['Eigenvalue ',num2str(eig_i),' of Gesamt-System is not obsarvable ']);
     end
 end
-[obs, ewS, ewNS] = steuerbarHautus(ss(A',C',B',0));
+[obs, ewS, ewNS] = steuerbarHautus(ss(A',C_tilde',B',0));
 
-sys_2plane = ss(A, B, C, zeros(8,8));
+sys_2plane = ss(A, B, C_tilde, zeros(8,8));
 
-anz_io = size(C,1);
+p = size(B,2);
+anz_io = size(C_tilde,1);
 delta_k = zeros(1, anz_io);
 
 % Berechnung der Differenzordnungen der Ausgänge
@@ -157,7 +278,7 @@ delta_k = zeros(1, anz_io);
 % und eine while-Schleife zur Berechnung der jeweiligen Matrizen ci*(A^j)*B
 for k = 1:anz_io     % alle Ausgänge nacheinander
   j=1;
-  while C(k,:)*A^(j-1)*B == zeros(1,anz_io)
+  while C_tilde(k,:)*A^(j-1)*B == zeros(1,anz_io)
     j=j+1;
   end
   delta_k(k)=j;      % Differenzordnung des Ausgangs k
@@ -165,6 +286,98 @@ end
 
 % Differenzordnung des Gesamtsystems
 delta = sum(delta_k);
+
+Dstar = [];
+for k = 1:anz_io
+    Dstar(k,:) = C_tilde(k,:) * A^(delta_k(k)-1) * B;
+end
+
+% Prüfung auf Minimalphasigkeit
+NST = zero(sys_2plane);
+minphas = 1;
+for k = 1:length(NST)
+    % Wenn eine Nullstelle mit positivem Realteil, 
+    % System nicht minimalphasig.
+    if real(NST) >= 0
+       minphas = 0;
+    end
+end
+
+% Prüfung auf stabile Entkoppelbarkeit
+% abs(det(Dstar))<1e-8 besser, anstatt det(Dstar)==0 zur Umgehung von 
+% Fehlern mit numerischen Ungenauigkeiten 
+if (det(Dstar) == 0) || (minphas == 0)
+  disp('System ist NICHT stabil entkoppelbar!')
+else
+  disp('System ist stabil entkoppelbar!')
+end 
+
+% Entkopplungsregelung 
+ew_u1     = [-0.2];
+ew_v1  = [-1.5];
+ew_phi1   = [-0.5,  -0.9];
+ew_theta1 = [-5,  -6];
+ew_u2     = [-0.2];
+ew_v2  = [-1.5];
+ew_phi2   = [-0.5,  -0.9];
+ew_theta2 = [-5,  -6];
+
+wpole.ew_u1 = ew_u1;
+wpole.ew_v1 = ew_v1;
+wpole.ew_phi1 = ew_phi1;
+wpole.ew_theta1 = ew_theta1;
+wpole.ew_u2 = ew_u2;
+wpole.ew_v2 = ew_v2;
+wpole.ew_phi2 = ew_phi2;
+wpole.ew_theta2 = ew_theta2;
+wpole_cell = struct2cell(wpole);
+
+% Bestimmung der Koeffizienten qij und ki
+for i=1:p
+    denom = poly(wpole_cell{i,1});
+    q_coeff{i} = denom ; % Koeffizienten q(i,j)
+    k_coeff(i) = q_coeff{i}(end); % Koeffizienten k(i)
+end
+
+% Berechnungvorschrift des Vorfilteres F an:
+F_ent = inv(Dstar)*diag(k_coeff);
+% modifiertes Vorfilter da die Koeffizienten für w2 nicht benötigt werden
+F_mod = F_ent(:,1:p/2);
+    
+% Berechnung der Reglermatrix R
+compR = []; % Hilfsmatrix, R = inv_D_star*compR
+for i=1:p
+    compR(i,:) = C_tilde(i,:)*A^delta_k(i); % Anteil von C_star
+        for j=0:delta_k(i)-1 % Summe ueber j
+            compR(i,:) = compR(i,:) + q_coeff{i}(end-j)*C_tilde(i,:)*A^j;
+        end
+end
+K_coupling = inv(Dstar)*compR;
+
+K_coupling((abs(K_coupling)<1e-9)) = 0;
+F_mod((abs(F_mod)<1e-9)) = 0;
+
+% Geschlossener Regelkreis
+A_ent = A-B*K_coupling; 
+B_ent = B*F_mod;
+C_ent = C_tilde;
+D_ent = zeros(size(C_tilde,1), size(B,2)/2);
+
+A_ent((abs(A_ent)<1e-9)) = 0;
+B_ent((abs(B_ent)<1e-9)) = 0;
+
+% Geschlossener Regelkreis
+sys5_ent = ss(A_ent, B_ent, C_ent, D_ent, ...
+          'StateName',{'u1';'v1';'w1';'p1';'q1';'r1';'phi1';'theta1';...
+          'u2';'v2';'w2';'p2';'q2';'r2';'phi2';'theta2'}, ...
+          'InputName',{'w_{u1}';'w_{v1}';'w_{\Phi1}';'w_{\Theta1}'}, ...
+          'OutputName',{'u1','v1','\Phi_1','\Theta_1',...
+          'u2','v2','\Phi_2','\Theta_2'}, ...
+          'Name','VERKOPPELTES SYSTEM');
+
+% Plot der Sprungantworten
+figure('Name','Sprungantworten nach Verkopplung')
+step(sys5_ent); grid
 
 %Saturations
 eta_max = 10*pi/180; %Elevator
@@ -176,6 +389,9 @@ xi_min = - xi_max;
 zita_max = 30*pi/180; %Rudder
 zita_min = - zita_max;
 
+noise_weight = [10 10 10 1 1 1 1 1 10 10 10 1 1 1 1 1]';
+W_ap = C_tilde*X_ap_simulink;
+W_ap = W_ap(1:4);
 %% Normieren
  if system_norm == true
     [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
