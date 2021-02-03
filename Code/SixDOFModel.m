@@ -397,32 +397,32 @@ W_ap = W_ap(1:4);
     [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
  end
   
-%   %% Transfer Function Open Loop
-%    sys_ol = ss(A,B, C,zeros(8,8));
-%   
-%   %%Riccatti
-%   Q = eye(n,n);
-%   Q(17,17) = 100000; 
-%   Q(9,9) = 1; % Bestrafung Höhe
-%   Q(18,18) = 1;
-%   Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
-%   Q(13,13) = 100;
-%   
-%   R = 1000*eye(8,8);
-%   R(2,2) = 4000;
-%   R(5,5) = 2000;
-%   R(6,6) = 9000;
-%   K = lqr(sys_ol,Q,R);
-%   K((abs(K)<10^-9)) = 0;
-%   Ak = A -B*K;
-%   F = -inv(C*(Ak\B));
-%   ew_ricati = eig(Ak);
-%   sys_ricati = ss(Ak,B*F,C,zeros(8,8));
-%   %step(sys_ricati)
-% %   Gamma = getgamma(A,B,C);
-% %   gamma_sum = sum(Gamma);
-% %   zero(sys_ol)
-%   
+  %% Transfer Function Open Loop
+   sys_ol = ss(A,B, C,zeros(8,8));
+  
+  %%Riccatti
+  Q = eye(n,n);
+  Q(17,17) = 100000; 
+  Q(9,9) = 1; % Bestrafung Höhe
+  Q(18,18) = 1;
+  Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
+  Q(13,13) = 100;
+  
+  R = 1000*eye(8,8);
+  R(2,2) = 4000;
+  R(5,5) = 2000;
+  R(6,6) = 9000;
+  K = lqr(sys_ol,Q,R);
+  K((abs(K)<10^-9)) = 0;
+  Ak = A -B*K;
+  F = -inv(C*(Ak\B));
+  ew_ricati = eig(Ak);
+  sys_ricati = ss(Ak,B*F,C,zeros(8,8));
+  %step(sys_ricati)
+%   Gamma = getgamma(A,B,C);
+%   gamma_sum = sum(Gamma);
+%   zero(sys_ol)
+  
 %   %% Coupling Control (manual) 
 %   l = 4; %coupling conditions
 %   C_tilde = zeros(size(C,1), size(A,1));
