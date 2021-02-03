@@ -36,7 +36,7 @@ b = 44.8; %Span [m]
 c = 6.6; % Wing Chord [m]
 
 %Aerodynamical Positions
-P_centerGravity = [0.23*c;0;0];
+P_centerGravity = [0;0;0];
 % P_aerodynCenter = [0.12*c;0;0];
 P_aerodynCenter = P_centerGravity;
 

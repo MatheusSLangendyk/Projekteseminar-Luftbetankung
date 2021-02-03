@@ -39,7 +39,7 @@ end
 % Airdynamical Coefficients
 %CA0 = 1.104;
 grad_alpha = 5.5;
-alpha_L0 = 11.5*pi/180;
+alpha_L0 = -11.5*pi/180;
 gradient_alpha_epsolon = 0.25;
 gradient_CQ_Cbeta = -1.6;
 gradientCQ_Czita = 0.24;
