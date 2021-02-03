@@ -143,5 +143,5 @@ dphi = dPhi(1);
 dtheta = dPhi(2);
 dpsi = dPhi(3);
 x10 = [u v w p q r phi theta psi h];
-x_red_9 = [u v w p q r phi theta];
+x_red_9 = [u v w p q r phi theta h];
 u_stell = [eta sigmaf xi zita];

@@ -48,7 +48,7 @@ X_ap = [X_ap_1;X_ap_2];
 U_ap = [U_ap_1;U_ap_2];
 U_ap((abs(U_ap)<1e-9)) = 0;
 X_ap((abs(X_ap)<1e-9)) = 0;
-X_ap_simulink = [X_ap(1:8);X_ap(11:18)];
+X_ap_simulink = [X_ap(1:8);X_ap(10);X_ap(11:18);X_ap(20)];
 
 %% DGL Flugzeug 1
 % symbolische nicht-lineare DGL mit psi
@@ -56,10 +56,10 @@ plane_selector = 1;
 assignin('base','plane_selector',plane_selector)
 symbolic_equations;
 % Zustands-DGL ohne psi
-f = [du;dv;dw;dp;dq;dr;dphi;dtheta];
+f = [du;dv;dw;dp;dq;dr;dphi;dtheta;dh];
 
 % Ausgangsgleichung
-out_eq = [u v phi theta];
+out_eq = [v phi theta h];
 
 % 1. Linearisierung durch bilden der Jacoby-Matrizen
 A_sym = jacobian(f, x_red_9);   % A = d f(x,u) / dx
@@ -103,10 +103,10 @@ plane_selector = 2;
 assignin('base','plane_selector',plane_selector)
 symbolic_equations;
 % Zustands-DGL ohne psi
-f = [du;dv;dw;dp;dq;dr;dphi;dtheta];
+f = [du;dv;dw;dp;dq;dr;dphi;dtheta;dh];
 
 % Ausgangsgleichung
-out_eq = [u v phi theta];
+out_eq = [v phi theta h];
 
 % 1. Linearisierung durch bilden der Jacoby-Matrizen
 A_sym = jacobian(f, x_red_9);   % A = d f(x,u) / dx
@@ -176,15 +176,17 @@ else
 end 
 
 % Entkopplungsregelung 
-ew_u     = [-0.2];
+% ew_u     = [-0.2];
 ew_v  = [-1.5];
 ew_phi   = [-0.5,  -0.9];
 ew_theta = [-0.8,  -1.6];
+ew_h = [-0.6 -1.4];
 
-wpole.ew_u = ew_u;
+% wpole.ew_u = ew_u;
 wpole.ew_v = ew_v;
 wpole.ew_phi = ew_phi;
 wpole.ew_theta = ew_theta;
+wpole.ew_h = ew_h;
 wpole_cell = struct2cell(wpole);
 
 % Bestimmung der Koeffizienten qij und ki
@@ -218,9 +220,9 @@ B_ent((abs(B_ent)<1e-9)) = 0;
 
 % Geschlossener Regelkreis
 sys5_ent = ss(A_ent, B_ent, C_ent, D_ent, ...
-          'StateName',{'u';'v';'w';'p';'q';'r';'phi';'theta'}, ...
-          'InputName',{'w_{u}';'w_{v}';'w_{\Phi}';'w_{\Theta}'}, ...
-          'OutputName',{'u','v','\Phi','\Theta'}, ...
+          'StateName',{'u';'v';'w';'p';'q';'r';'phi';'theta';'h'}, ...
+          'InputName',{'w_{v}';'w_{\Phi}';'w_{\Theta}';'w_{h}'}, ...
+          'OutputName',{'v','\Phi','\Theta','h'}, ...
           'Name','ENTKOPPELTES SYSTEM');
 
 sys5e1 = ss(sys5_ent.a,sys5_ent.b(:,1),sys5_ent.c(1,:),sys5_ent.d(1,1));
@@ -232,8 +234,8 @@ sys5e4 = ss(sys5_ent.a,sys5_ent.b(:,4),sys5_ent.c(4,:),sys5_ent.d(4,4));
 % (Theoretische Betrachtung ohne Stellgrößenbeschränkungen)
 figure('Name','Sprungantworten der vier entkoppelten Strecken')
 step(sys5e1,sys5e2,sys5e3,sys5e4); grid
-legend('Geschwindigkeit u [m/s]','Geschwindigkeit v [m/s]',...
-       'Hängewinkel \Phi [rad]', 'Längsneigung \theta [rad]', 'Location','Best')
+legend('Geschwindigkeit v [m/s]', 'Hängewinkel \Phi [rad]',...
+    'Längsneigung \theta [rad]', 'Höhe h [m]', 'Location','Best')
 
 % Plot der Sprungantworten
 figure('Name','Sprungantworten nach Entkopplung')
@@ -313,28 +315,34 @@ else
 end 
 
 % Entkopplungsregelung 
-ew_u1     = [-0.2];
-ew_v1  = [-1.5];
-ew_phi1   = [-0.5,  -0.9];
-ew_theta1 = [-5,  -6];
-ew_u2     = [-0.2];
-ew_v2  = [-1.5];
-ew_phi2   = [-0.5,  -0.9];
-ew_theta2 = [-5,  -6];
+% ew_u1     = [-0.2];
+ew_v1  = [-0.4];
+ew_phi1   = [-0.5 -0.6];
+ew_theta1 = [-0.5 -0.6];
+ew_h1 = [-0.3 -0.35];
 
-wpole.ew_u1 = ew_u1;
-wpole.ew_v1 = ew_v1;
-wpole.ew_phi1 = ew_phi1;
-wpole.ew_theta1 = ew_theta1;
-wpole.ew_u2 = ew_u2;
-wpole.ew_v2 = ew_v2;
-wpole.ew_phi2 = ew_phi2;
-wpole.ew_theta2 = ew_theta2;
-wpole_cell = struct2cell(wpole);
+% ew_u2     = [-0.2];
+ew_v2  = [-1];
+ew_phi2   = [-0.5 -0.6];
+ew_theta2 = [-0.5 -0.6];
+ew_h2 = [-0.7 -0.75];
+
+% wpole.ew_u1 = ew_u1;
+wpole_g.ew_v1 = ew_v1;
+wpole_g.ew_phi1 = ew_phi1;
+wpole_g.ew_theta1 = ew_theta1;
+wpole_g.ew_h1 = ew_h1;
+
+% wpole.ew_u2 = ew_u2;
+wpole_g.ew_v2 = ew_v2;
+wpole_g.ew_phi2 = ew_phi2;
+wpole_g.ew_theta2 = ew_theta2;
+wpole_g.ew_h2 = ew_h2;
+wpole_cell_g = struct2cell(wpole_g);
 
 % Bestimmung der Koeffizienten qij und ki
 for i=1:p
-    denom = poly(wpole_cell{i,1});
+    denom = poly(wpole_cell_g{i,1});
     q_coeff{i} = denom ; % Koeffizienten q(i,j)
     k_coeff(i) = q_coeff{i}(end); % Koeffizienten k(i)
 end
@@ -368,11 +376,11 @@ B_ent((abs(B_ent)<1e-9)) = 0;
 
 % Geschlossener Regelkreis
 sys5_ent = ss(A_ent, B_ent, C_ent, D_ent, ...
-          'StateName',{'u1';'v1';'w1';'p1';'q1';'r1';'phi1';'theta1';...
-          'u2';'v2';'w2';'p2';'q2';'r2';'phi2';'theta2'}, ...
-          'InputName',{'w_{u1}';'w_{v1}';'w_{\Phi1}';'w_{\Theta1}'}, ...
-          'OutputName',{'u1','v1','\Phi_1','\Theta_1',...
-          'u2','v2','\Phi_2','\Theta_2'}, ...
+          'StateName',{'u1';'v1';'w1';'p1';'q1';'r1';'phi1';'theta1';'h1';...
+          'u2';'v2';'w2';'p2';'q2';'r2';'phi2';'theta2';'h2'}, ...
+          'InputName',{'w_{v1}';'w_{\Phi1}';'w_{\Theta1}';'w_{h1}'}, ...
+          'OutputName',{'v1','\Phi_1','\Theta_1','h1',...
+          'deltav','deltaphi','deltatheta','deltah'}, ...
           'Name','VERKOPPELTES SYSTEM');
 
 % Plot der Sprungantworten
@@ -380,8 +388,8 @@ figure('Name','Sprungantworten nach Verkopplung')
 step(sys5_ent); grid
 
 %Saturations
-eta_max = 10*pi/180; %Elevator
-eta_min = - 25*pi/180; 
+eta_max = 15*pi/180; %Elevator
+eta_min = - 30*pi/180; 
 sigmaf_max = 20*pi/180; %Throttl
 sigmaf_min = 0.5*pi/180;
 xi_max = 25*pi/180; %Airlon
@@ -389,36 +397,40 @@ xi_min = - xi_max;
 zita_max = 30*pi/180; %Rudder
 zita_min = - zita_max;
 
-noise_weight = [10 10 10 1 1 1 1 1 10 10 10 1 1 1 1 1]';
+noise_weight = [10 10 10 1 1 1 1 1 10 10 10 10 1 1 1 1 1 10]';
 W_ap = C_tilde*X_ap_simulink;
 W_ap = W_ap(1:4);
+X_init = X_ap_simulink;
+% deltaX_init = [5 0.5 -2 0 0 0 0 0 -4 -3 0 0 0 0 0 0 0 7]';
+% deltaX_init = 0.01*X_ap_simulink;
+% X_init = X_init + deltaX_init;
 %% Normieren
  if system_norm == true
     [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
  end
   
-%   %% Transfer Function Open Loop
-%    sys_ol = ss(A,B, C,zeros(8,8));
-%   
-%   %%Riccatti
-%   Q = eye(n,n);
+  %% Transfer Function Open Loop
+   sys_ol = ss(A,B, C,zeros(8,8));
+  
+  %%Riccatti
+  Q = 0.00001*eye(n,n);
 %   Q(17,17) = 100000; 
 %   Q(9,9) = 1; % Bestrafung Höhe
 %   Q(18,18) = 1;
 %   Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
 %   Q(13,13) = 100;
-%   
-%   R = 1000*eye(8,8);
+  
+  R = eye(8,8);
 %   R(2,2) = 4000;
 %   R(5,5) = 2000;
 %   R(6,6) = 9000;
-%   K = lqr(sys_ol,Q,R);
-%   K((abs(K)<10^-9)) = 0;
-%   Ak = A -B*K;
-%   F = -inv(C*(Ak\B));
-%   ew_ricati = eig(Ak);
-%   sys_ricati = ss(Ak,B*F,C,zeros(8,8));
-%   %step(sys_ricati)
+  K = lqr(sys_ol,Q,R);
+  K((abs(K)<10^-9)) = 0;
+  Ak = A -B*K;
+  F = -inv(C*(Ak\B));
+  ew_ricati = eig(Ak);
+  sys_ricati = ss(Ak,B*F,C,zeros(8,8));
+  step(sys_ricati)
 % %   Gamma = getgamma(A,B,C);
 % %   gamma_sum = sum(Gamma);
 % %   zero(sys_ol)
