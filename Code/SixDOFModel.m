@@ -230,14 +230,14 @@ sys5e4 = ss(sys5_ent.a,sys5_ent.b(:,4),sys5_ent.c(4,:),sys5_ent.d(4,4));
 
 % Sprungantworten der 4 geregelten Regelgrößen (einzeln)
 % (Theoretische Betrachtung ohne Stellgrößenbeschränkungen)
-figure('Name','Sprungantworten der vier entkoppelten Strecken')
-step(sys5e1,sys5e2,sys5e3,sys5e4); grid
-legend('Geschwindigkeit u [m/s]','Geschwindigkeit v [m/s]',...
-       'Hängewinkel \Phi [rad]', 'Längsneigung \theta [rad]', 'Location','Best')
+% figure('Name','Sprungantworten der vier entkoppelten Strecken')
+% step(sys5e1,sys5e2,sys5e3,sys5e4); grid
+% legend('Geschwindigkeit u [m/s]','Geschwindigkeit v [m/s]',...
+%        'Hängewinkel \Phi [rad]', 'Längsneigung \theta [rad]', 'Location','Best')
 
 % Plot der Sprungantworten
-figure('Name','Sprungantworten nach Entkopplung')
-step(sys5_ent); grid
+% figure('Name','Sprungantworten nach Entkopplung')
+% step(sys5_ent); grid
 
 %% Zwei Flugzeug Modell
 [A,B,C,n] = defineABC(A1,A2,B1,B2,C1,C2);
@@ -398,26 +398,26 @@ W_ap = W_ap(1:4);
  end
   
   %% Transfer Function Open Loop
-   sys_ol = ss(A,B, C,zeros(8,8));
-  
-  %%Riccatti
-  Q = eye(n,n);
-  Q(17,17) = 100000; 
-  Q(9,9) = 1; % Bestrafung Höhe
-  Q(18,18) = 1;
-  Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
-  Q(13,13) = 100;
-  
-  R = 1000*eye(8,8);
-  R(2,2) = 4000;
-  R(5,5) = 2000;
-  R(6,6) = 9000;
-  K = lqr(sys_ol,Q,R);
-  K((abs(K)<10^-9)) = 0;
-  Ak = A -B*K;
-  F = -inv(C*(Ak\B));
-  ew_ricati = eig(Ak);
-  sys_ricati = ss(Ak,B*F,C,zeros(8,8));
+%    sys_ol = ss(A,B, C,zeros(8,8));
+%   
+%   %%Riccatti
+%   Q = eye(n,n);
+%   Q(17,17) = 100000; 
+%   Q(9,9) = 1; % Bestrafung Höhe
+%   Q(18,18) = 1;
+%   Q(3,3) = 100; %Bestrafung Geschw. z-Komoponente
+%   Q(13,13) = 100;
+%   
+%   R = 1000*eye(8,8);
+%   R(2,2) = 4000;
+%   R(5,5) = 2000;
+%   R(6,6) = 9000;
+%   K = lqr(sys_ol,Q,R);
+%   K((abs(K)<10^-9)) = 0;
+%   Ak = A -B*K;
+%   F = -inv(C*(Ak\B));
+%   ew_ricati = eig(Ak);
+%   sys_ricati = ss(Ak,B*F,C,zeros(8,8));
   %step(sys_ricati)
 %   Gamma = getgamma(A,B,C);
 %   gamma_sum = sum(Gamma);
