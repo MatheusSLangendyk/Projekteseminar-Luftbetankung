@@ -52,14 +52,14 @@ F = -inv(C*(Ak\B));
 F((abs(F)<1e-9)) = 0;
 sys_ricatti = ss(Ak, B*F, C, 0);
 
-%% Verkopplungsregler scratch als Startwert
-P = ones(8,n);
-l = 4; %coupling conditions
-% P = fminsearch('cost_condition_number',P,optimset('TolX',1e-10,'MaxFunEvals',10000,'MaxIter',10000));
-[K_coupling_scratch, F_coupling_scratch] = coupling_control_scratch(ss(A,B,C,0),C_tilde,eigenvalues_controlled,l,P);
-% F_coupling_scratch = F_coupling_scratch(:,1:4);
-sys_coupling_scratch = ss(A-B*K_coupling_scratch, B*F_coupling_scratch, C_tilde, 0);
-step(sys_coupling_scratch);
+% %% Verkopplungsregler scratch als Startwert
+% P = ones(8,n);
+% l = 4; %coupling conditions
+% % P = fminsearch('cost_condition_number',P,optimset('TolX',1e-10,'MaxFunEvals',10000,'MaxIter',10000));
+% [K_coupling_scratch, F_coupling_scratch] = coupling_control_scratch(ss(A,B,C,0),C_tilde,eigenvalues_controlled,l,P);
+% % F_coupling_scratch = F_coupling_scratch(:,1:4);
+% sys_coupling_scratch = ss(A-B*K_coupling_scratch, B*F_coupling_scratch, C_tilde, 0);
+% step(sys_coupling_scratch);
   
 %% Werte für gammasyn 
 K_0 = [];
@@ -76,7 +76,7 @@ system_properties = struct(...
 		'number_controls',				size(B,2),...
 		'number_references',			number_references,...
 		'number_models',				1,...
-        'tf_structure',                 [NaN*ones(4,4) NaN*ones(4,4); zeros(4,4) NaN*ones(4,4)],...        
+        'tf_structure',                 [[[[NaN 0; 0 NaN] zeros(2,2); zeros(2,2) NaN*ones(2,2)] NaN*ones(4,4)];[zeros(4,4) NaN*ones(4,4)]],...        
         'RKF_0',						{RKF_0},...
         'R_bounds',                     {bounds},...
         'R_fixed',                      []...
@@ -97,7 +97,7 @@ control_design_type = GammaDecouplingStrategy.APPROXIMATE;
 
 %% pole area parameters
 a = 0.5;
-b = 0.8;
+b = 0.5;
 r = 50;
 
 %% Pole area
