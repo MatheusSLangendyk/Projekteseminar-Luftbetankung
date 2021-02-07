@@ -7,12 +7,12 @@ W_ap = (C*X_ap_simulink)';
 % TODO: - test mit anderen solvern -- SNOPT läuft nicht
 % TODO: - unterlagerung mit entkopplungsregelung??
 % TODO: - test mit Matheus regler als startwert
-%% Settings
-C_tilde = zeros(size(C,1), size(A,1));
-C_tilde(1:4,:) = C(1:4,:);
-C_tilde(5:8,:) = C(1:4,:) - C(5:8,:);
-
-X_init = [150 0 0 0 0 0 0 0 5000 150 0 0 0 0 0 0 0 5010]';
+% %% Settings
+% C_tilde = zeros(size(C,1), size(A,1));
+% C_tilde(1:4,:) = C(1:4,:);
+% C_tilde(5:8,:) = C(1:4,:) - C(5:8,:);
+% 
+% X_init = [150 0 0 0 0 0 0 0 5000 150 0 0 0 0 0 0 0 5010]';
 
 %% Riccatti als Startwert
 Q = 0.00001*eye(n,n);
@@ -96,14 +96,14 @@ control_design_type = GammaDecouplingStrategy.APPROXIMATE;
 % control_design_type = GammaDecouplingStrategy.MERIT_FUNCTION;
 
 %% pole area parameters
-a = 0.5;
-b = 0.5;
-r = 50;
+a = 0.3;
+b = 0.2;
+r = 200;
 
 %% Pole area
 weight = [1];
-polearea = control.design.gamma.area.Hyperbola(a, b);
-% polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
+% polearea = control.design.gamma.area.Hyperbola(a, b);
+polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
 % polearea = control.design.gamma.area.Imag(1,a);
 % polearea = [control.design.gamma.area.Hyperbola(a, b), control.design.gamma.area.Imag(1,a)];
 %% gammasyn options

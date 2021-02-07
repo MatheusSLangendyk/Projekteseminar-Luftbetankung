@@ -119,7 +119,7 @@ Tfa = coordTransfMatrix(alpha,2)*coordTransfMatrix(-beta,3); %Transformation Mat
 
 RA_a =[-W;Q;-A]; %Aerodynamical Force in Aerdodynamical Reference Frame
 RA = Tfa*RA_a; %Aerodynamical Force in Body Reference Frame
-QA_aerodynCenter = q_d*S*[b*CL;c*CM;b*CN]; %Torque on the aerodynamical Center
+QA_aerodynCenter = q_d*S*[b*CL*0.5;c*CM;b*CN*0.5]; %Torque on the aerodynamical Center
 QA = QA_aerodynCenter + vecToMat(P_centerGravity- P_aerodynCenter)*RA; %Aerodynamical Force in Body Reference Frame
 
 

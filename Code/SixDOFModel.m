@@ -247,6 +247,26 @@ C_tilde = zeros(size(C,1), size(A,1));
 C_tilde(1:4,:) = C(1:4,:);
 C_tilde(5:8,:) = C(1:4,:) - C(5:8,:);
 
+%Saturations
+eta_max = 15*pi/180; %Elevator
+eta_min = - 30*pi/180; 
+sigmaf_max = 20*pi/180; %Throttl
+sigmaf_min = 0.5*pi/180;
+xi_max = 25*pi/180; %Airlon
+xi_min = - xi_max;
+zita_max = 30*pi/180; %Rudder
+zita_min = - zita_max;
+
+%% Normieren
+ if system_norm == true
+    [A,B,C_tilde,Tx,Tu,Ty] = normieren(A,B,C_tilde,eta_max,sigmaf_max,xi_max,zita_max);
+ elseif system_norm == false
+     Tx = eye(n);
+     Tu = eye(size(B,2));
+     Ty = eye(size(C,1));
+ end
+
+
 % Steuerbarkeit
 eigenvalues = eig(A);
 %Hautus
@@ -318,14 +338,14 @@ end
 % ew_u1     = [-0.2];
 ew_v1  = [-0.4];
 ew_phi1   = [-0.5 -0.6];
-ew_theta1 = [-0.5 -0.6];
-ew_h1 = [-0.3 -0.35];
+ew_theta1 = [-0.09 -0.08];
+ew_h1 = [-0.05 -0.06];
 
 % ew_u2     = [-0.2];
-ew_v2  = [-1];
+ew_v2  = [-0.4];
 ew_phi2   = [-0.5 -0.6];
-ew_theta2 = [-0.5 -0.6];
-ew_h2 = [-0.7 -0.75];
+ew_theta2 = [-0.09 -0.08];
+ew_h2 = [-0.05 -0.06];
 
 % wpole.ew_u1 = ew_u1;
 wpole_g.ew_v1 = ew_v1;
@@ -387,27 +407,20 @@ sys5_ent = ss(A_ent, B_ent, C_ent, D_ent, ...
 figure('Name','Sprungantworten nach Verkopplung')
 step(sys5_ent); grid
 
-%Saturations
-eta_max = 15*pi/180; %Elevator
-eta_min = - 30*pi/180; 
-sigmaf_max = 20*pi/180; %Throttl
-sigmaf_min = 0.5*pi/180;
-xi_max = 25*pi/180; %Airlon
-xi_min = - xi_max;
-zita_max = 30*pi/180; %Rudder
-zita_min = - zita_max;
-
 noise_weight = [10 10 10 1 1 1 1 1 10 10 10 10 1 1 1 1 1 10]';
+X_init = X_ap_simulink;
+deltaX_init = X_init-X_ap_simulink;
+if system_norm == true
+    U_ap = Tu\U_ap;
+    X_ap_simulink = Tx\X_ap_simulink;
+    X_init = Tx\X_init;
+    deltaX_init = Tx\deltaX_init;
+end
 W_ap = C_tilde*X_ap_simulink;
 W_ap = W_ap(1:4);
-X_init = X_ap_simulink;
 % deltaX_init = [5 0.5 -2 0 0 0 0 0 -4 -3 0 0 0 0 0 0 0 7]';
 % deltaX_init = 0.01*X_ap_simulink;
 % X_init = X_init + deltaX_init;
-%% Normieren
- if system_norm == true
-    [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
- end
   
   %% Transfer Function Open Loop
 %    sys_ol = ss(A,B, C,zeros(8,8));
