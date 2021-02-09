@@ -188,26 +188,50 @@ sys_coupling_4 = ss(sys_coupling.a,sys_coupling.b(:,4),sys_coupling.c(4,:),sys_c
 %% PID-Regler
 % Auslegung der Regler für ein K_coupling mit a = 0.3; b = 0.2; r = 100;
 % Circle und Hyperbola, und tf_structure in der sich theta und h
-% beeinflussen
+% beeinflussen, sodass die Eigenwerte des äußeren geschlossenen
+% Reglekreises denen des innere entsprechen
 %PI-Regler für G11
-Z11 = 1.342*[0.7 1];
+Z11 = 1.4266*[1/1.4266 1];
 N11 = [1 0];
 G_PI_11 = tf(Z11,N11);
 
 %PI-Regler für G22
-Z22 = 1.9618*[1.4 1];
-N22 = [1 0];
+Z22 = 0.63*[1/(7.847*0.6966) 1/(7.847)+1/(0.6966) 1];
+N22 = [1/8.5436 1 0];
 G_PI_22 = tf(Z22,N22);
 
 %PIDT1-Regler für G33
-Z33 = 0.2041*[0.38^2 0.65 1];
-N33 = [2 1 0];
+Z33 = 0.161*[1.3877 7.1273 13.7194 6.7500 1.0000];
+N33 = [17.2476 22.0200 8.6033 1.0000 0];
 G_PIDT1_33 = tf(Z33,N33); 
 
 %PIDT1-Regler für G44
-Z44 = 0.4428*[3.1^2 6.1 1];
-N44 = [0.16 1 0];
+Z44 = 0.16104*[1.3877 7.1273 13.7194 6.7500 1.0000];
+N44 = [0.1299 1.1121 1.9754 1.0000 0];
 G_PIDT1_44 = tf(Z44,N44); 
+
+% Auslegung der Regler für ein K_coupling mit a = 0.3; b = 0.2; r = 100;
+% Circle und Hyperbola, und tf_structure in der sich theta und h
+% beeinflussen
+%PI-Regler für G11
+% Z11 = 1.342*[0.7 1];
+% N11 = [1 0];
+% G_PI_11 = tf(Z11,N11);
+% 
+% %PI-Regler für G22
+% Z22 = 1.9618*[1.4 1];
+% N22 = [1 0];
+% G_PI_22 = tf(Z22,N22);
+% 
+% %PIDT1-Regler für G33
+% Z33 = 0.2041*[0.38^2 0.65 1];
+% N33 = [2 1 0];
+% G_PIDT1_33 = tf(Z33,N33); 
+% 
+% %PIDT1-Regler für G44
+% Z44 = 0.4428*[3.1^2 6.1 1];
+% N44 = [0.16 1 0];
+% G_PIDT1_44 = tf(Z44,N44); 
 
 % Auslegung der Regler für ein K_coupling mit a = 0.3; b = 0.3; r = 100;
 % Circle und Hyperbola, und tf_structure in der h --> theta aber nicht
