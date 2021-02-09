@@ -76,11 +76,12 @@ system_properties = struct(...
 		'number_controls',				size(B,2),...
 		'number_references',			number_references,...
 		'number_models',				1,...
-        'tf_structure',                 [[[[NaN 0; 0 NaN] zeros(2,2); zeros(2,2) NaN*ones(2,2)] NaN*ones(4,4)];[zeros(4,4) NaN*ones(4,4)]],...        
+        'tf_structure',                 [[[[NaN 0; 0 NaN] zeros(2,2); zeros(2,2) [NaN NaN; NaN NaN]] NaN*ones(4,4)];[zeros(4,4) NaN*ones(4,4)]],...        
         'RKF_0',						{RKF_0},...
         'R_bounds',                     {bounds},...
         'R_fixed',                      []...
 	);
+%         'tf_structure',                 [[[[NaN 0; 0 NaN] zeros(2,2); zeros(2,2) NaN*ones(2,2)] NaN*ones(4,4)];[zeros(4,4) NaN*ones(4,4)]],...        
 
 % EXACT								structurally constrained controller only EXAKT solution
 % APPROXIMATE						structurally constrained controller also approximate solution
@@ -98,7 +99,7 @@ control_design_type = GammaDecouplingStrategy.APPROXIMATE;
 %% pole area parameters
 a = 0.3;
 b = 0.2;
-r = 200;
+r = 100;
 
 %% Pole area
 weight = [1];
@@ -165,52 +166,70 @@ F_mod = F1*Q_mod;
 
 information
 sys_riccati = ss(A-B*K, B*F, C, 0);
-sys_coupling = ss(A-B*K_coupling, B*F_mod, C_tilde, 0);
+sys_coupling = ss(A-B*K_coupling, B*F_mod, C_tilde, 0, ...
+          'StateName',{'u1';'v1';'w1';'p1';'q1';'r1';'phi1';'theta1';'h1';...
+          'u2';'v2';'w2';'p2';'q2';'r2';'phi2';'theta2';'h2'}, ...
+          'InputName',{'w_{v1}';'w_{\Phi1}';'w_{\Theta1}';'w_{h1}'}, ...
+          'OutputName',{'v1','\Phi_1','\Theta_1','h1',...
+          'deltav','deltaphi','deltatheta','deltah'}, ...
+          'Name','VERKOPPELTES SYSTEM');
 sys_uncontrolled = ss(A,B,C_tilde,0);
 % pzmap(sys_uncontrolled);
 step(sys_coupling);
 figure;
 pzmap(sys_coupling);
-  
-% figure;
-% kk = 0;
-% for i = 1:4
-%     for j = 1:4
-%         data = plt(:,i,j);
-%         subplot(4,4,kk+1);
-%         plot(data);
-%         title(['In(',num2str(j),') to Out(',num2str(i),')']);
-%         kk=kk+1;
-%     end
-% end
-%   
-% figure;
-% kk = 0;
-% for i = 1:4
-%     for j = 1:4
-%         data = plt(:,i+4,j);
-%         subplot(4,4,kk+1);
-%         plot(data);
-%         title(['In(',num2str(j),') to Out(',num2str(i+4),')']);
-%         kk=kk+1;
-%     end
-% end
 
-%%
-C_1=C(1:4, 1:10);
-anz_io = size(C_1,1);
-delta_k = zeros(1, anz_io);
+%% einzelne Systeme
+sys_coupling_1 = ss(sys_coupling.a,sys_coupling.b(:,1),sys_coupling.c(1,:),sys_coupling.d(1,1));
+sys_coupling_2 = ss(sys_coupling.a,sys_coupling.b(:,2),sys_coupling.c(2,:),sys_coupling.d(2,2));
+sys_coupling_3 = ss(sys_coupling.a,sys_coupling.b(:,3),sys_coupling.c(3,:),sys_coupling.d(3,3));
+sys_coupling_4 = ss(sys_coupling.a,sys_coupling.b(:,4),sys_coupling.c(4,:),sys_coupling.d(4,4));
 
-% Berechnung der Differenzordnungen der Ausgänge
-% Nutzen Sie dabei eine for-Schleife, um alle Ausgänge zu durchlaufen
-% und eine while-Schleife zur Berechnung der jeweiligen Matrizen ci*(A^j)*B
-for k = 1:anz_io     % alle Ausgänge nacheinander
-  j=1;
-  while C_1(k,:)*A_1^(j-1)*B_1 == zeros(1,anz_io)
-    j=j+1;
-  end
-  delta_k(k)=j;      % Differenzordnung des Ausgangs k
-end
+%% PID-Regler
+% Auslegung der Regler für ein K_coupling mit a = 0.3; b = 0.2; r = 100;
+% Circle und Hyperbola, und tf_structure in der sich theta und h
+% beeinflussen
+%PI-Regler für G11
+Z11 = 1.342*[0.7 1];
+N11 = [1 0];
+G_PI_11 = tf(Z11,N11);
 
-% Differenzordnung des Gesamtsystems
-delta = sum(delta_k);
+%PI-Regler für G22
+Z22 = 1.9618*[1.4 1];
+N22 = [1 0];
+G_PI_22 = tf(Z22,N22);
+
+%PIDT1-Regler für G33
+Z33 = 0.2041*[0.38^2 0.65 1];
+N33 = [2 1 0];
+G_PIDT1_33 = tf(Z33,N33); 
+
+%PIDT1-Regler für G44
+Z44 = 0.4428*[3.1^2 6.1 1];
+N44 = [0.16 1 0];
+G_PIDT1_44 = tf(Z44,N44); 
+
+% Auslegung der Regler für ein K_coupling mit a = 0.3; b = 0.3; r = 100;
+% Circle und Hyperbola, und tf_structure in der h --> theta aber nicht
+% theta --> h beeinflusst
+%PI-Regler für G11
+% Z11 = 0.77739*[1.2 1];
+% N11 = [1 0];
+% G_PI_11 = tf(Z11,N11);
+% 
+% %PI-Regler für G22
+% Z22 = 0.5*[0.182 1.53 1];
+% N22 = [0.5 1 0];
+% G_PI_22 = tf(Z22,N22);
+% 
+% %PIDT1-Regler für G33
+% Z33 = 0.25046*[1.6^2 3 1];
+% N33 = [1 1 0];
+% G_PIDT1_33 = tf(Z33,N33); 
+% 
+% %PIDT1-Regler für G44
+% Z44 = 0.12501*[2.1^2 4.2 1];
+% N44 = [0.2 1 0];
+% G_PIDT1_44 = tf(Z44,N44); 
+
+

@@ -248,8 +248,8 @@ C_tilde(1:4,:) = C(1:4,:);
 C_tilde(5:8,:) = C(1:4,:) - C(5:8,:);
 
 %Saturations
-eta_max = 15*pi/180; %Elevator
-eta_min = - 30*pi/180; 
+eta_max = 10*pi/180; %Elevator
+eta_min = - 25*pi/180; 
 sigmaf_max = 20*pi/180; %Throttl
 sigmaf_min = 0.5*pi/180;
 xi_max = 25*pi/180; %Airlon
@@ -336,16 +336,16 @@ end
 
 % Entkopplungsregelung 
 % ew_u1     = [-0.2];
-ew_v1  = [-0.4];
-ew_phi1   = [-0.5 -0.6];
-ew_theta1 = [-0.09 -0.08];
-ew_h1 = [-0.05 -0.06];
+ew_v1  = [-2];
+ew_phi1   = [-3 -3];
+ew_theta1 = [-4 -4];
+ew_h1 = [-2.5 -2.5];
 
 % ew_u2     = [-0.2];
-ew_v2  = [-0.4];
-ew_phi2   = [-0.5 -0.6];
-ew_theta2 = [-0.09 -0.08];
-ew_h2 = [-0.05 -0.06];
+ew_v2  = [-2];
+ew_phi2   = [-3 -3];
+ew_theta2 = [-4 -4];
+ew_h2 = [-2.5 -2.5];
 
 % wpole.ew_u1 = ew_u1;
 wpole_g.ew_v1 = ew_v1;
@@ -402,6 +402,10 @@ sys5_ent = ss(A_ent, B_ent, C_ent, D_ent, ...
           'OutputName',{'v1','\Phi_1','\Theta_1','h1',...
           'deltav','deltaphi','deltatheta','deltah'}, ...
           'Name','VERKOPPELTES SYSTEM');
+sys5_ent_1 = ss(sys5_ent.a,sys5_ent.b(:,1),sys5_ent.c(1,:),sys5_ent.d(1,1));
+sys5_ent_2 = ss(sys5_ent.a,sys5_ent.b(:,2),sys5_ent.c(2,:),sys5_ent.d(2,2));
+sys5_ent_3 = ss(sys5_ent.a,sys5_ent.b(:,3),sys5_ent.c(3,:),sys5_ent.d(3,3));
+sys5_ent_4 = ss(sys5_ent.a,sys5_ent.b(:,4),sys5_ent.c(4,:),sys5_ent.d(4,4));
 
 % Plot der Sprungantworten
 figure('Name','Sprungantworten nach Verkopplung')
@@ -421,7 +425,49 @@ W_ap = W_ap(1:4);
 % deltaX_init = [5 0.5 -2 0 0 0 0 0 -4 -3 0 0 0 0 0 0 0 7]';
 % deltaX_init = 0.01*X_ap_simulink;
 % X_init = X_init + deltaX_init;
-  
+%% PID-Regler
+% Auslegung der Regler für einen Falbvich mit relativ langsamen Polen
+% %PI-Regler für G11
+% Z11 = 4*[2.5 1];
+% N11 = [1 0];
+% G_PI_11 = tf(Z11,N11);
+% 
+% %PI-Regler für G22
+% Z22 = [3.4 3.7 1];
+% N22 = [0.25 1 0];
+% G_PI_22 = tf(Z22,N22);
+% 
+% %PIDT1-Regler für G33
+% Z33 = [143 24 1];
+% N33 = [0.25 1 0];
+% G_PIDT1_33 = tf(Z33,N33); 
+% 
+% %PIDT1-Regler für G44
+% Z44 = [340 37 1];
+% N44 = [0.25 1 0];
+% G_PIDT1_44 = tf(Z44,N44); 
+
+% Auslegung der Regler für einen Falbvich mit schnelleren Polen
+%PI-Regler für G11
+Z11 = [0.5 1];
+N11 = [1 0];
+G_PI_11 = tf(Z11,N11);
+
+%PI-Regler für G22
+Z22 = 0.5*[0.333^2 0.666 1];
+N22 = [0.5 1 0];
+G_PI_22 = tf(Z22,N22);
+
+%PIDT1-Regler für G33
+Z33 = 0.5*[0.25^2 0.5 1];
+N33 = [0.5 1 0];
+G_PIDT1_33 = tf(Z33,N33); 
+
+%PIDT1-Regler für G44
+Z44 = 0.5*[0.4^2 0.8 1];
+N44 = [0.5 1 0];
+G_PIDT1_44 = tf(Z44,N44); 
+
   %% Transfer Function Open Loop
 %    sys_ol = ss(A,B, C,zeros(8,8));
   
