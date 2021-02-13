@@ -15,7 +15,8 @@ W_ap = (C*X_ap_simulink)';
 % X_init = [150 0 0 0 0 0 0 0 5000 150 0 0 0 0 0 0 0 5010]';
 
 %% Riccatti als Startwert
-Q = 0.00001*eye(n,n);
+Q = eye(n,n);
+Q = Q/100000;
 % Q(3,3) = 1; 
 % Q(12,12) = 1; 
 % Q(4,4) = 100; 
@@ -30,7 +31,7 @@ R(3,3) = 0.00001;
 R(4,4) = 0.001;
 R(7,7) = 0.00001;
 R(8,8) = 0.001;
-
+% R = R*100000;
 % eig_1 = eig(A1);
 % eig_2 = eig(A2);
 % eig_1(8) = -0.01;
@@ -165,7 +166,6 @@ Q_mod = -inv(C_tilde_1*(Ak_coupling\(B*F1)));
 F_mod = F1*Q_mod;
 
 information
-sys_riccati = ss(A-B*K, B*F, C, 0);
 sys_coupling = ss(A-B*K_coupling, B*F_mod, C_tilde, 0, ...
           'StateName',{'u1';'v1';'w1';'p1';'q1';'r1';'phi1';'theta1';'h1';...
           'u2';'v2';'w2';'p2';'q2';'r2';'phi2';'theta2';'h2'}, ...
@@ -186,6 +186,56 @@ sys_coupling_3 = ss(sys_coupling.a,sys_coupling.b(:,3),sys_coupling.c(3,:),sys_c
 sys_coupling_4 = ss(sys_coupling.a,sys_coupling.b(:,4),sys_coupling.c(4,:),sys_coupling.d(4,4));
 
 %% PID-Regler
+% Auslegung der Regler für ein K_coupling mit a = 0.3; b = 0.2; r = 80;
+% beim AP von 6000m u=120m/s und delta_h = 15m
+% Circle und Hyperbola, und tf_structure in der sich theta und h
+% beeinflussen, sodass die Eigenwerte des äußeren geschlossenen
+% Reglekreises möglichst denen des innere entsprechen
+%PI-Regler für G11
+% Z11 = 0.65133*[1/0.65133 1];
+% N11 = [1 0];
+% G_PI_11 = tf(Z11,N11);
+% 
+% %PI-Regler für G22
+% Z22 = 0.19*[1/(46.68*0.4133) 1/(46.68)+1/(0.4133) 1];
+% N22 = [1/0.68 1 0];
+% G_PI_22 = tf(Z22,N22);
+% 
+% %PIDT1-Regler für G33
+% Z33 = 0.17525*[3.0199 13.0791 16.0310 6.8203 1];
+% N33 = [0.4273 1.7521 2.3248 1 0];
+% G_PIDT1_33 = tf(Z33,N33); 
+% 
+% %PIDT1-Regler für G44
+% Z44 = 0.18111*[3.0199 13.0791 16.0310 6.8203 1];
+% N44 = [22.7015 25.3593 8.2925 1 0];
+% G_PIDT1_44 = tf(Z44,N44); 
+
+% Auslegung der Regler für ein K_coupling mit a = 0.3; b = 0.2; r = 100;
+% beim AP von 6000m u=150m/s und delta_h = 15m
+% Circle und Hyperbola, und tf_structure in der sich theta und h
+% beeinflussen, sodass die Eigenwerte des äußeren geschlossenen
+% Reglekreises denen des innere entsprechen
+%PI-Regler für G11
+% Z11 = 1.2066*[1/1.2066 1];
+% N11 = [1 0];
+% G_PI_11 = tf(Z11,N11);
+% 
+% %PI-Regler für G22
+% Z22 = 0.69*[1/(7.28*0.765) 1/(7.28)+1/(0.765) 1];
+% N22 = [1/8.045 1 0];
+% G_PI_22 = tf(Z22,N22);
+% 
+% %PIDT1-Regler für G33
+% Z33 = 0.19*[1.5178 6.7493 11.9026 6.0300 1];
+% N33 = [11.7837 16.8059 7.4187 1 0];
+% G_PIDT1_33 = tf(Z33,N33); 
+% 
+% %PIDT1-Regler für G44
+% Z44 = 0.165*[1.5178 6.7493 11.9026 6.0300 1];
+% N44 = [0.1375 1.1290 1.9846 1 0];
+% G_PIDT1_44 = tf(Z44,N44); 
+
 % Auslegung der Regler für ein K_coupling mit a = 0.3; b = 0.2; r = 100;
 % Circle und Hyperbola, und tf_structure in der sich theta und h
 % beeinflussen, sodass die Eigenwerte des äußeren geschlossenen

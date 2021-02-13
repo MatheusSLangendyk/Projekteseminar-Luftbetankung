@@ -6,7 +6,7 @@ m = 120000; %Mass [kg]
 
 %Refuel
 m_fuel = 28000; %Mass of the fuel
-time_refuel = 20; % Time to refuel in sec
+time_refuel = 20*60; % Time to refuel in sec
 start_time_refuel = 10; 
 refuel = 0; %Without refuel = 1, with refuel = 0
 
