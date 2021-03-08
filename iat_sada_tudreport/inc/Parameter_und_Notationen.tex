@@ -1,0 +1,227 @@
+\chapter{Notation und Parameter}\label{cha:Notation}
+\label{PN}
+Dieses Kapitel beschäftigt sich mit der Festlegung aller Notationen, die im Laufe des Berichtes angewandt werden. Außerdem werden anschließend alle Koordinatensystemen vorgestellt, welche die Modellbildung ermöglichen.
+
+\section{Notationen}
+\begin{itemize}
+\item \textbf{Matrizen}: Als Matrizen werden alle $\mathbb{R}^{a\times b}$ Räume bezeichnet, $\forall a,b \in \mathbb{N}$ und $b>1$. Die Variablen werden groß und fett geschrieben, zum Beispiel $\textbf{M} = \begin{bmatrix} 
+1 & 0\\
+0 & 1
+\end{bmatrix}$
+\item \textbf{Vektoren}: Vektoren sind alle $\mathbb{R}^{a\times 1}$ Räume (stehender Vektor), wobei $a \in \mathbb{N}$ und $a>1$. Die Variablen werden klein und unterstrichen gekennzeichnet. Beispiel dafür wäre: $\underline{v} = [1,0]^T = \begin{bmatrix} 
+1 \\
+0 
+\end{bmatrix}$
+\item \textbf{Skalare}: Skalare können sowohl klein als auch groß geschrieben werden. Der Index unter der Variablen dient einer spezifischen Beschreibung. Zum Beispiel $S_\mathrm{a} = 1$ oder auch $s_\mathrm{b} = 2$
+\item \textbf{Koordinaten}: Im Rahmen des Projektseminars werden gelegentlich unterschiedliche Koordinatenbezugssysteme verwendet. Die Unterscheidung erfolgt über einen kaligraphischen Index. Der Vektor $\underline{v}_\mathrm{a}^\mathcal{F}$ würde zum Beispiel dem körperfesten Koordinatensystem $\mathcal{F}$ gehören. Die Beschreibung aller relevanten Bezugssysteme wird am Ende dieses Kapitel vorgestellt.
+\end{itemize}
+\section{Zeitlich konstante Parameter}
+Die Modellierung des Flugzeugs bezieht sich auf die Eigenschaften eines \textit{Boeing 757-200}. Die im Modell verwendeten konstante Parameter sind von \cite{B7571}, \cite{B7572} und \cite{RAMPaper} hergeleitet worden. Tabelle \ref{tab:Parameter} stellt die zeitlich invarianten Konstanten bezüglich der Geometrie der Maschine dar. Die Schwerkraft wird ebenso als konstant mit dem Wert $g = 9,81 m/s$ angenommen.
+
+\begin{table}[h]
+ \begin{tabular}{||c c c c ||} 
+ 
+ \hline
+ Parameter & Symbol & Einheit & Wert \\ [0.5ex] 
+ \hline\hline
+ Masse & $m$& $\mathrm{[kg]}$& 120000\\ 
+ \hline
+ Flügelfläche & $S$& $\mathrm{[m^2]}$& 260\\ 
+ \hline
+ Fläche des Höhenruders  & $S_\mathrm{t}$& $\mathrm{[m^2]}$& 54\\ 
+ \hline
+ Generalisierte Länge & $l$& $\mathrm{[m]}$&6.6\\ 
+ \hline
+ Abstand SP und aerodyn. SP des Höhenruders & $l_\mathrm{t}$ & $\mathrm{[m]}$& 24.8\\ 
+ \hline
+ Spannweite & $b$& $\mathrm{[m]}$& 44.8\\ 
+ \hline
+Flügeltiefe & $c$& $\mathrm{[m]}$&6.6\\ 
+ \hline
+Trägheitstensor & $\textbf{I}$& $[kg m^2$]&$\dfrac{m}{ \mathrm{[kg]}}\begin{bmatrix} 
+40.7 & 0& 2.09\\
+0 & 64 & 0\\
+2.09& 0& 99.2
+\end{bmatrix}$\\ 
+ \hline
+ Position des Massenschwerpunktes & $\underline{p}_\mathrm{sp}^\mathcal{F}$& $\mathrm{[m]}$& $[0,0,0]^T$\\ 
+  \hline
+ Position des aerodynamischen Schwerpunktes & $\underline{p}_\mathrm{ac}^\mathcal{F}$& $\mathrm{[m]}$& $[0,0,0]^T$\\
+  \hline
+  Position des Triebwerks & $\underline{p}_\mathrm{schub}^\mathcal{F}$& $\mathrm{[m]}$& $[0,0,1.9]^T$ \\ 
+  \hline
+Einbauwinkel des Triebwerks bzgl. Längsachse & $i_\mathrm{f}$& $\mathrm{[rad]}$& 0\\ 
+ \hline
+ Maximale Schubkraft &$F_\mathrm{max}$ & $\mathrm{[N]}$& 412020\\  [1ex] 
+ \hline
+\end{tabular}
+\caption{Zeitlich-invariante Geometrieparameter des \textit{Boeing 757-200}. SP steht für Schwerpunkt.}
+\label{tab:Parameter}
+\end{table}
+Bild \ref{fig:Parameter}  veranschaulicht die Konstanten bezüglich der Geometrie eines Flugzeugs.
+
+\begin{figure}[h]
+%\centering
+\begin{subfigure}{0.49\textwidth}
+  \centering
+  \begin{overpic}[width=0.8\linewidth]{./Bilder/ParameterGeomFlieger.png}
+		\put(35,75){$\dfrac{S}{2}$}
+		\put(35,20){$\dfrac{S}{2}$}
+		\put(75,60){$\dfrac{S_\mathrm{t}}{2}$}
+		\put(75,30){$\dfrac{S_\mathrm{t}}{2}$}
+		\put(38,45){$\underline{p}_\mathrm{sp}^\mathcal{F}$}
+		\put(70,50){$l_\mathrm{t}$}
+		\put(65,70){$b$}
+	
+	\end{overpic}
+  \caption{Flugzeug von oben}
+  %\label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{0.49\textwidth}
+  \centering
+   \begin{overpic}[width=0.8\linewidth]{./Bilder/FluegelSegment.png}
+		\put(35,33){$c$}
+		\put(35,13){$l$}
+		
+	
+	\end{overpic}
+  \caption{Aerodynamisches Segment eines Flügels}
+  %\label{fig:sub2}
+\end{subfigure}
+\caption{Darstellung der geometrischen Parametern}
+\label{fig:Parameter}
+\end{figure}
+ 
+%
+\section{Koordinatensysteme}
+Im Rahmen dieses Projekts werden verschiedene Koordinatensysteme (KS) angewandt, mit dem Ziel einige Zusammenhänge bei der Modellbildung zu vereinfachen. Dabei wählt man das geeignete Koordinatensystem für unterschiedliche Anwendungen. Tabelle \ref{tab:KoordSystem} fasst die relevanten KS und deren Anwendungen zusammen, die von den Autoren \cite{FlugmechanikBuch} vorgeschlagen worden sind. Die Zeile \textit{Anwendung} erläutert welche Kräfte und Zustände bei dem gegebenen Bezugssystem am einfachste beschrieben werden.
+\begin{table}[h]
+ \begin{tabular}{||c c c c ||} 
+ \hline
+ &Geodätisches KS  & Aerodynamisches KS & Körperfestes KS\\ [0.5ex] 
+\hline
+Index&$\mathcal{G}$  & $\mathcal{A}$ & $\mathcal{F}$\\
+\hline
+Anwendung&  \makecell{Schwerkraft und \\Lage des Fliegers} &  \makecell{Aerodynamische\\ Kräfte} &  \makecell{Schubkraft und \\Geschwindigkeiten} \\
+\hline
+Mittelpunkt& \makecell{Massenschwerpunkt\\ des Körpers} &  \makecell{Aerodynamischer \\Schwerpunkt} &  \makecell{Massenschwerpunkt\\ des Körpers}\\
+\hline
+Lage &$[x_\mathrm{g},y_\mathrm{g},z_\mathrm{g}]^T$  & $[x_\mathrm{a},y_\mathrm{a},z_\mathrm{a}]^T$ &$[x_\mathrm{f},y_\mathrm{f},z_\mathrm{f}]^T$\\
+\hline
+x-Richtung& Nach Norden    & Anströmungsgeschwindigkeit &  \makecell{Richtung der\\ Flugzeuglängsachse}\\
+\hline
+y-Richtung& Nach Osten  &  \makecell{Senkrecht auf $x_\mathrm{a}$\\ nach rechts}  &  \makecell{Senkrecht auf $x_\mathrm{f}$\\ nach rechts}\\
+\hline
+z-Richtung & \makecell{Senkrecht auf $x_\mathrm{g}$\\ zum Erdmittelpunkt}& \makecell{Senkrecht auf $x_\mathrm{a}$ \\nach unten}&  \makecell{Senkrecht auf $x_\mathrm{f}$\\ nach unten}\\ [1ex] 
+ \hline
+\end{tabular}
+\caption{Darstellung von den angewandten Koordinatensystemen (KS).}
+\label{tab:KoordSystem}
+\end{table}
+Im Weiteren wird angenommen, dass das körperfeste KS das \textit{Hauptbezugssystem} repräsentiert. Zur Vereinfachung werden daher die Variablen für dieses KS nicht immer mit dem Index $\mathcal{F}$ gekennzeichnet. Bsp: $\underline{v} = \underline{v}^\mathcal{F}.$ Bild \ref{fig:KoordSyst} veranschaulicht die drei genannte Koordinatensystem anhand der Richtung eines Flugzeugs.
+
+\begin{figure}[h]
+%\centering
+\begin{subfigure}{0.4\textwidth}
+  \centering
+  \begin{overpic}[width=1\linewidth]{./Bilder/KSFliegerSeitlich.png}
+		\put(47,30){$\underline{p}_\mathrm{sp}^\mathcal{F}$}
+		\put(25,33){$\theta$}
+		\put(31,31){$\alpha$}
+		\put(-1,46){$x_\mathrm{f}$}
+		\put(-4,34){$x_\mathrm{a}$}
+		\put(-4,28){$x_\mathrm{g}$}
+		\put(46,1){$z_\mathrm{g}$}
+		\put(41,1){$z_\mathrm{a}$}
+		\put(34,2){$z_\mathrm{f}$}
+	\end{overpic}
+  \caption{Neigungswinkel ($\theta$) und Anstellwinkel($\alpha$). Seitliche Sicht.}
+  %\label{fig:sub1}
+\end{subfigure}%
+\hspace{3cm}
+\begin{subfigure}{0.4\textwidth}
+  \centering
+   \begin{overpic}[width=1\linewidth]{./Bilder/KSFliegerOben.png}
+	    \put(41,30){$\underline{p}_\mathrm{sp}^\mathcal{F}$}
+		\put(20,20){$\psi$}
+		\put(26,26){$\beta$}
+		\put(-2,6){$x_\mathrm{f}$}
+		\put(-4.5,18){$x_\mathrm{a}$}
+		\put(-3,27){$x_\mathrm{g}$}
+		\put(37,53){$y_\mathrm{g}$}
+		\put(28,51){$y_\mathrm{a}$}
+		\put(23,46){$y_\mathrm{f}$}
+	\end{overpic}
+  \caption{Gierwinkel ($\psi$) und Schiebewinkel($\beta$).Sicht von oben.}
+  %\label{fig:sub2}
+\end{subfigure}\\
+\begin{subfigure}{0.5\textwidth}
+  \begin{center}
+  
+   \begin{overpic}[width=1\linewidth]{./Bilder/KSFliegerVorne.png}
+		\put(52,25){$\underline{p}_\mathrm{sp}^\mathcal{F}$}
+		\put(35,22){$\phi$}
+		\put(20,4.5){$y_\mathrm{f}$}
+		\put(18,13.5){$y_\mathrm{a}$}
+		\put(17,21.5){$y_\mathrm{g}$}
+		\put(50,6){$z_\mathrm{g}$}
+		\put(54,6.5){$z_\mathrm{a}$}
+		\put(58,7){$z_\mathrm{f}$}
+		
+	
+	\end{overpic}
+  \caption{Rollwinkel ($\phi$). Frontale Sicht.}
+  %\label{fig:sub2}
+  \end{center}
+\end{subfigure}
+\caption{Darstellung der drei behandelten Koordinatensystemen und deren Anwinklung}
+\label{fig:KoordSyst}
+\end{figure}
+ 
+\subsection{Koordinatentransformationen}
+Damit die Modellbildung einheitlich über ein bestimmtes Koordinatensystem erfolgt, muss man über die Werkzeuge verfügen, die das Bezugssystem transformieren können. Die Autoren von \cite{FlugmechanikBuch} und \cite{Fichter2020} empfehlen folgende Darstellung.\\
+
+\begin{itemize}
+\item Transformation von aerodynamischem zu körperfestem Bezugssystem. 
+\begin{equation}
+\textbf{T}_\mathrm{fa} = \begin{bmatrix} 
+\cos(\alpha) & 0& -\sin(\alpha)\\
+0 & 1 & 0\\
+\sin(\alpha)&  0& \cos(\alpha)
+\end{bmatrix}\begin{bmatrix} 
+\cos(\beta) & -\sin(\beta)& 0\\
+\sin(\beta) & \cos(\beta) & 0\\
+0&  0& 1
+\end{bmatrix}
+\end{equation}
+\item Transformation von körperfestem zu aerodynamischem Bezugssystem. 
+\begin{equation}
+\textbf{T}_\mathrm{af} = \textbf{T}_\mathrm{fa}^T
+\end{equation}
+\item Transformation von geodätischem zu körperfestem Bezugssystem. 
+\begin{equation}
+\textbf{T}_\mathrm{fg} =\begin{bmatrix} 
+1 & 0& 0\\
+0 & \cos(\phi) & \sin(\phi)\\
+0&  -\sin(\phi)& \cos(\phi)
+\end{bmatrix} \begin{bmatrix} 
+\cos(\theta) & 0& -\sin(\theta)\\
+0 & 1 & 0\\
+\sin(\theta)&  0& \cos(\theta)
+\end{bmatrix}\begin{bmatrix} 
+\cos(\psi) & \sin(\psi)& 0\\
+-\sin(\psi) & \cos(\psi) & 0\\
+0&  0& 1
+\end{bmatrix}
+\end{equation}
+\item Transformation von körperfestem zu geodätischem Bezugssystem. 
+\begin{equation}
+\textbf{T}_\mathrm{gf} = \textbf{T}_\mathrm{fg}^T
+\end{equation}
+\end{itemize}
+
+Folgendes Beispiel zeigt wie einer Geschwindigkeitsvektor in körperfestem Koordinatensystem auf ein geodätisches Bezugssystem gebracht werden kann.\\
+\begin{equation*}
+\underline{v}^\mathcal{G} = \textbf{T}_\mathrm{gf}\underline{v}^\mathcal{F} = \textbf{T}_\mathrm{gf}\underline{v}
+\end{equation*}
+Für die Herleitung der Bewegungsgleichungen wird noch das \textit{erdfeste} Bezugssystem (Index $\mathcal{E}$) angewandt. Der Unterschied zwischen dem erdfesten und geodätischen KS liegt an dem Mittelpunkt, welcher sich bei dem erdfesten KS  auf der Erdoberfläche befindet. Das erdfeste KS wird außerdem für die Berechnung der Flugzeugposition bezüglich der Erdoberfläche verwendet. Die Matrix $\textbf{T}_\mathrm{fe} = \textbf{T}_\mathrm{fg}\textbf{T}_\mathrm{ge} $ repräsentiert die Transformation von erdfesten zu körperfesten Koordinaten. 

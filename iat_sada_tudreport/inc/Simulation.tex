@@ -1,0 +1,191 @@
+\chapter{Reglersynthese und Evaluation}\label{cha:Simulation}
+Nachdem ein theoretisches Modell aufgestellt wurde und einige Vereinfachungen getroffen werden konnten, ist es wichtig, das Modell und die getroffenen Annahmen simulativ und in der Praxis zu verifizieren. In diesem Kapitel soll die in Kapitel \ref{cha:Modell} hergeleitete Modellbildung anhand von Simulationen und der Regelung des realen Systems evaluiert werden. Es sei an dieser Stelle darauf hingewiesen, dass die Optimierung des Regelvektors $\w{k}^\transp$ in Matlab durchgeführt wird und dabei auf der Implementierung des Beispiels der Verladebrücke von Lenz basiert \cite{Lenz.2018}. Dabei wird der Code dem hier verwendeten Versuchsaufbau angepasst. Dieser ist in der Datei \texttt{Polbereichsplatzierung\_script} enthalten. Zudem werden die Terme der Straffunktion entsprechend der Ausführungen in Kapitel \ref{cha:Polbereichsplatzierung} verändert. Bevor die Reglersynthese erklärt wird, wird zu Beginn dieses Kapitels das aus der Zustandsraumdarstellung resultierende Strukturbild erläutert.
+
+\section{Geschlossener Regelkreis}
+Zunächst soll das Verhalten eines statischen Zustandsreglers untersucht werden. Dieser besitzt die beiden Parameter $k_1$ und $k_2$, die während des Optimierungsvorgangs variiert werden können. Der Zustandsregler hat die Struktur
+\[
+\w{k}^\transp = 
+\begin{bmatrix}
+k_1 & k_2 \\
+\end{bmatrix} \, .
+\]
+Abbildung \ref{fig:Regelkreis} zeigt das Blockschaltbild des geschlossenen Regelkreises mit der Zustandsrückführung über den Zustandsregler $\w{k}^\transp$.
+\tikzstyle{block} = [draw, rectangle, minimum height=2em, minimum width=2em]
+\tikzstyle{sum} = [draw, circle, minimum size = 0.3cm, node distance=2cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+\tikzstyle{gain} = [draw, thick, isosceles triangle, minimum height = 2em, minimum width = 2em, isosceles triangle apex angle=70]
+\tikzstyle{gain2} = [draw, shape border rotate = 180, thick, isosceles triangle, minimum height = 2em, minimum width = 2em, isosceles triangle apex angle=70]
+\tikzstyle{block1} = [draw, rectangle, minimum height=2em, minimum width=3em]
+\tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position 1 with {\arrow[semithick]{open triangle 60}}},
+double distance=1.4pt, shorten >= 5.5pt, preaction = {decorate}, postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
+\tikzstyle{innerWhite} = [semithick, white,line width=1.4pt, shorten >= 4.5pt]
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[auto, node distance = 1.7cm, >=latex']
+	\node[input, name=input1]{};
+	\node[block1, right of=input1] (v) {$v$};
+	\node[sum, right of=v] (sum1) {$+$};
+	\node[block1, right of=sum1, node distance = 2cm] (B) {$\w{b}$};
+	\node[sum, right of=B] (sum2) {$+$};
+	\node[block1, right of=sum2, node distance = 2cm] (I) {$\frac{1}{s}\M{I}$};
+	\node[inner sep=0,minimum size=0,right of=I] (inv) {};
+	\node[block1, above of=sum2] (e) {$\w{e}$};
+	\node[inner sep=0,minimum size=0,above of=e] (inv2) {};
+	\node[block1, right of=inv] (C) {$\w{c}^\transp$};
+	\node[block1, below of=I] (A) {$\M{A}$};
+	\node[block1, below of=A] (k) {$\w{k}^\transp$};
+	\node[output, right of=C, node distance = 2cm] (output) {};
+	
+	\draw[->] (inv2) to node[pos=0.5,left](help) {$\dot{x}_\tn{L}$} (e) ;
+	\draw[vecArrow] (e) to (sum2);
+	\draw[vecArrow] (B) to (sum2);
+	\draw[vecArrow] (sum2) to node[pos=0.5] {$\dot{\w{x}}$} (I) ;
+	\draw[vecArrow] (I) to node[pos=0.5] {\w{x}} (C);
+	\draw[vecArrow] (A) -| (sum2) ;
+	\draw[vecArrow] (inv) |- (A);
+	\draw[vecArrow] (inv) |- (k);
+	\draw [->] (input) -- node[pos=0.5] {$w$} (v);
+	\draw [->] (v) -- node[pos=0.5] {} (sum1);
+	\draw [->] (k) -| node[pos=0.99, right] {-} node [near end] {} (sum1);
+	\draw [->] (v) -- (sum1);
+	\draw[->] (sum1) -- node[pos=0.5] {$u$} (B);
+	\draw[->] (C) -- node[pos=0.5] {$y$} (output);
+
+	\draw[innerWhite] (e) to (sum2);
+	\draw[innerWhite] (B) to (sum2);
+	\draw[vecArrow] (sum2) to node[pos=0.5] {$\dot{\w{x}}$} (I) ;
+	\draw[vecArrow] (I) to node[pos=0.5] {\w{x}} (C);
+	\draw[innerWhite] (I) -- node[pos=0.5] {} (A);
+	\draw[innerWhite] (A) -| (sum2) ;
+	\draw[innerWhite] (inv) |- (A);
+	\draw[innerWhite] (inv) |- (k);
+	\draw[->] (sum1) -- node[pos=0.5] {$u$} (B);
+	\end{tikzpicture}
+	\caption{Blockschaltbild des geschlossenen Regelkreises in Zustandsraumdarstellung}
+	\label{fig:Regelkreis}
+\end{figure}
+Da das System bezüglich des Führungsverhaltens ausschließlich im unbewegten Zustand betrachtet wird, wird der Störeingang $\dot{x}_\tn{L}$ im Folgenden bis Abschnitt \ref{sec:störung}, in dem explizit auf das Störverhalten eingegangen wird, vernachlässigt.
+Das charakteristische Polynom $P(s)$ des geschlossenen Regelkreises, aus dem sich die Eigenwerte des System berechnen lassen, ergibt sich zu
+\begin{equation}\label{eq:charakteristisches polynom}
+P(s) = \tn{det}(s\M{I} - \M{A} + \w{b} \w{k}^\transp) = s^2 + s(\frac{d+k_2\cmot}{J}) + \frac{kr}{Ji}(\frac{r}{i} + k_1\cmot)) \, .
+\end{equation}
+Die Eigenwerte des geschlossenen Regelkreises lauten dann
+\begin{equation}\label{eq:eigenwerte}
+s_{1,2} = -\frac{d+k_2\cmot}{2J} \pm \sqrt{(\frac{d+k_2\cmot}{2J})^2-\frac{kr}{Ji}(\frac{r}{i}+k_1\cmot)} \, .
+\end{equation}
+
+\subsection{Auslegung des Vorfilters}
+Der Block $v$ stellt ein statisches Vorfilter dar, welches dafür sorgen soll, dass die im Allgemeinen entstehende, bleibende Regelabweichung 
+\begin{equation}\label{eq:stationärer endwert}
+e_\tn{$\infty$} = w_\tn{soll} - y_\tn{$\infty$}
+\end{equation}
+gleich null wird. Nach der Herleitung aus \cite{Adamy.2016} ergibt sich die Berechnung des Vorfilters für konstante Eingangsgrößen zu
+\begin{equation}\label{eq:vorfilter}
+\frac{1}{v} = -\w{c}^\transp (\M{A} - \w{b} \w{k}^\transp)^{-1} \w{b} \, .
+\end{equation}
+Neben der stationären Genauigkeit, die durch das Vorfilter erreicht wird, bietet dieses die Möglichkeit, statt Strömen auch Sollkräfte vorzugeben. Durch Einsetzen der in Gleichung (\ref{eq:matrizenwerte}) dargestellten Matrizen und Vektoren in Gleichung (\ref{eq:vorfilter}) lässt sich herausfinden, dass der einzige Eintrag der Matrix $\M{A}$, der den Wert des Vorfilters beeinflusst, $a_{21} = -\frac{r}{Ji}$ ist. Da $a_{21}$ nicht von den veränderlichen Parametern $d$ und $k$ abhängt, lässt sich für alle Systemmodelle das gleiche stationäre Vorfilter 
+\begin{equation}\label{eq:wert vorfilter}
+v = \frac{\frac{\cmot}{J} k_1 + \frac{r}{Ji}}{\frac{\cmot}{J}} = \frac{\cmot k_1 + \frac{r}{i}}{\cmot}
+\end{equation} 
+auslegen. Damit lässt sich feststellen, dass der Wert des Vorfilters lediglich vom veränderlichen Reglerparameter $k_1$ und den konstanten Parametern $\cmot$, $r$ und $i$ abhängt.
+
+\section{Regelung in der Simulation}\label{sec:simulation}
+Bevor das Verhalten des realen Systems getestet wird, soll das Verhalten zuerst simulativ überprüft werden. Dazu wird zunächst auf die für die Optimierung benötigte Wahl der Polbereichsparameter eingegangen.
+\subsection{Wahl der Polbereichsparameter}
+Durch die Festlegung der Polbereichsparameter, also der Parameter $a_1, b_1, a_2, b_2 \, \tn{und} \,\, R$ \, können Anforderungen formuliert werden, die die Regelung nach der Optimierung für alle Systeme erfüllen soll. Um das Polgebiet, wie es in Abbildung \ref{fig:Polgebietsgrenzen} dargestellt ist, möglichst gut approximieren zu können, sollte Kurve 2 einen großen Öffnungswinkel besitzen. Dazu wird für alle Optimierungen das Verhältnis $\frac{b_2}{a_2} = \frac{0.9}{0.01}$ gewählt, sodass sich ein Öffnungswinkel von $89,36$\textdegree \, ergibt. Der Auswahlprozess der anderen Parameter ist ein iterativer Prozess, der mit viel Testen und ``try-and-error" \, verbunden ist. Es lässt sich keine allgemeingültige Parameterkonstellation feststellen, sodass ein System 2. Ordnung, wie es hier vorhanden ist, zufriedenstellende Regelungsergebnisse liefert, da sich die optimale Pollage je nach Anforderungen und Systemmatrizen unterscheidet. Es lässt sich jedoch feststellen, dass es grundsätzlich sinnvoll ist, zunächst mit einem großen Polgebiet zu beginnen und dieses schrittweise zu verkleinern. Ebenso gilt für die Gewichtungsparameter $p_\rho$, dass diese zu Beginn nicht zu groß gewählt werden sollten, um zu große Werte der Straffunktion $J(\w{k})$ zu vermeiden. Bei der Wahl von $R$ muss zum einen darauf geachtet werden, dass die Pole nicht zu weit links liegen. Sehr weit links liegende Pole bedeuten für die Regelung sehr hohe Stellgrößen, die aufgebracht werden müssen. Um aber weiterhin Linearität gewährleisten zu können, ist es sinnvoll, die Stellgrößenbeschränkung einzuhalten. Zum anderen bedeuten schnelle, also weit links liegende Pole, große Verstärkungen, welche unerwünschte Rauscheinflüsse ebenfalls verstärken, was sich negativ auf die Stabilität des Systems auswirken kann. Daher sollte $R$ nicht zu groß gewählt werden. Der Parameter $a_1$, also der Abstand von Kurve 1 zum Ursprung, mit dem die Mindestgeschwindigkeit vorgegeben werden kann, sollte bei initialen Polgebieten nicht zu groß gewählt werden, um zu vermeiden, dass die Pole, die mit dem Initialregler $\w{k}_0^\transp = \begin{bmatrix}	0 & 0 \\ \end{bmatrix} \, $anfangs nah am Ursprung liegen, zu große Werte in der Straffunktion bewirken und nach der Optimierung womöglich in lokalen Minima außerhalb des gewünschten Bereichs liegen. Während der Optimierung des Reglers fiel bei den in dieser Arbeit betrachteten Systemmodellen auf, dass jeweils zwei Modelle im geregelten Zustand ähnliche Pollagen aufweisen, da die Pole maßgeblich vom Wert der Steifigkeit $k$ beeinflusst werden. Dabei ist erkennbar, dass dominante Pole auftreten. Es kann festgestellt werden, dass sich diese dominanten Pole nur unwesentlich verschieben lassen und die Systeme dadurch nur unwesentlich schneller geregelt werden können. Die Polgebiete, die zu den verwendeten Reglern führen, können in der Matlab-Datei \texttt{Polbereichsplatzierung\_script} nachgelesen werden.
+
+\subsection{Optimierung}\label{sec:optimierung}
+Zu Beginn wird ein konstantes Polgebiet für alle Modelle gewählt, wobei die Gewichtung der Kurven über $p_1$ und $p_2$ iterativ angehoben wird. Der Radius und damit die Grenze der Maximalgeschwindigkeit wird zu $R=140$ gewählt, während der Öffnungswinkel von Kurve 2 $\phi_2=89,36$\textdegree \, beträgt. Die Grenze der Minimalgeschwindigkeit wird zu $a_1 = 10$ gewählt. Der Öffnungswinkel von Kurve 1 beträgt $\phi_1=45$\textdegree. Dies entspricht bei Systemen 2. Ordnung oder bei Systemen, bei denen aufgrund von dominanten Pollagen PT2-Verhalten angenähert werden kann, einer maximalen Überschwingweite von $\Delta h=\frac{h_\tn{max}-h_\infty}{h_\infty}\approx5\%$ \cite{Adamy.2016}.
+Als Startregler wird bei den Optimierungen immer der aus dem jeweils vorherigen Durchlauf erhaltene optimierte Regler benutzt. Als Startregler für den allerersten Durchlauf wird dabei $\w{k}_0^\transp = \begin{bmatrix}	0 & 0 \\ \end{bmatrix} \, $ gewählt, um als Ausgangslage die ungeregelten Systeme zu erhalten. Es kann gezeigt werden, dass auch die Wahl beliebiger Initialregler bei den selben Polbereichskonstellationen zum gleichen optimierten Regler führt. Voraussetzung dafür ist allerdings, dass die Reglereinträge ungefähr in der Größenordnung des optimierten Reglers liegen - also $k_1 \approx 0,1$ und $k_2 \approx 0,01$. Andernfalls können beliebige Reglereinträge dazu führen, dass der Wert der Straffunktion mit dem Initialregler zu groß wird und die Optimierung abbricht. Die Optimierung mit dem oben beschriebenen Polgebiet liefert den optimierten Regelvektor $\w{k}_\tn{opt}^\transp = \begin{bmatrix} 0,4099 & 0,0712 \\ \end{bmatrix} \, $ mit dem dazugehörigen Vorfilter $v = 0,4621$. Abbildung \ref{fig:pollage04099} zeigt die Pollagen aller geregelten Systemmodelle vor und nach der Optimierung. 
+\begin{figure}[H]
+	\centering
+	\inputtikz[path=./Bilder/]{pollage04099}
+	\caption[pollage04099]{Pollagen der ungeregelten (oben) und geregelten (unten) Systemmodelle mit $\w{k}_\tn{opt}^\transp = \begin{bmatrix}	0,4099 & 0,0712 \\ \end{bmatrix} $.}
+	\label{fig:pollage04099}
+\end{figure}
+Es lässt sich erkennen, dass trotz der Grenze der Mindestgeschwindigkeit nicht alle Pole innerhalb des Polgebiets liegen. Idealerweise würden sich alle Pole ungefähr in der Mitte des Polgebiets befinden und ähnliche Pollagen aufweisen, was allerdings nicht der Fall ist, da sie eher nah am Rand liegen. Außerdem ist erkennbar, dass jeweils die Modelle 1 und 3 bzw. 2 und 4 fast identische Systempole besitzen und damit auch sehr ähnliches Sprungverhalten aufweisen. Dabei besitzen die Modelle 1 und 3 zwei reelle, weit auseinander liegende Pole, bei denen der Pol nahe zum Ursprung dominant ist und die Modelle 2 und 4 jeweils zwei schwingungsfähige Pole, die so liegen, dass sie gerade so auf dem Rand oder ganz leicht außerhalb des Polgebiets liegen. 
+\begin{figure}[H]
+	\centering
+	\inputtikz[path=./Bilder/]{sprungantwort_simulink_ohneFilter_04099}
+	\caption[sprungantwort_simulink]{Sprungantworten bei gebeugtem und gestrecktem Bein in der Simulation mit $\w{k}_\tn{opt}^\transp = \begin{bmatrix} 0,4099 & 0,0712\end{bmatrix}$}
+	\label{fig:sprungantwort_simulink}
+\end{figure}
+Abbildung \ref{fig:sprungantwort_simulink} zeigt das Verhalten der mit $\w{k}_\tn{opt}^\transp$ geregelten Systeme in der Simulation. Das Modell, welches der Simulation zu Grunde liegt, beinhaltet die Strecke, die in Abbildung \ref{fig:Blockschaltbild} dargestellt ist. Die Abbildungen \ref{fig:simulink_foreground} und \ref{fig:simulink_background} im Anhang zeigen das Strukturbild in Simulink. Die unsicheren Parameter $d$ und $k$ werden dabei mithilfe von Kennlinien ermittelt. Für die Dämpfung wird die Kennlinie der Motorreibung aus Abbildung \ref{fig:reibmoment_motor} benutzt, aus der durch Differentiation $d$ in Abhängigkeit der Motordrehzahl berechnet wird. Für die Steifigkeit liegen zwei Kennlinien zu Grunde. Dies sind die beiden Kennlinien der Steifigkeit, die bei Proband 1 im gestreckten und gebeugten Zustand ermittelt wurden. In Abhängigkeit der Motorposition und damit der Auslenkung des Beins wird ebenfalls durch Differentiation die Steifigkeit ermittelt. Da hier nur die Kennlinien eines einzelnen Probanden verwendet werden, ist zu erwarten, dass das Verhalten nicht ganz der Pollage der geregelten Systemmodelle in Abbildung \ref{fig:pollage04099} entspricht, da hier die Extremwerte der Steifigkeit eingesetzt werden. Die Extremwerte $k_\tn{max}$ und $k_\tn{min}$ werden bei Proband 1 jedoch nicht erreicht, daher sollte das Überschwingen geringer als $5\%$ sein. Die Simulation zeigt, dass die Regelung den stationären Endwert $F_\infty$ bei gestrecktem Bein deutlich schneller annimmt als bei gebeugtem Bein. Dafür ist leichtes Überschwingen erkennbar, welches durch die insgesamt größere Steifigkeit des gestreckten Beins verursacht wird. Im Laufe der Arbeit konnte durch das Testen verschiedener Polgebiete herausgefunden werden, dass bei der Optimierung die Pole von jeweils zwei Systemen immer an den Rand des Polgebiets gelegt werden. Dabei lassen sich die dominanten Pole von Modell 1 und 3 nur sehr schwer vom Ursprung entfernen. Daraus folgt, dass die Systemdynamik immer durch die Lage der dominanten Pole bestimmt wird.
+%Daher wird die Optimierung des Regelvektors erneut durchgeführt. Diesmal wird das Polgebiet jedoch so gewählt, dass der Fokus auf der Minimierung des Überschwingens liegt. Dazu wird $a_1=0.1$ gewählt und das Polgebiet sehr nah an den Ursprung gelegt, wodurch auch sehr langsame Pole zugelassen werden. Der Öffnungswinkel $\phi_1$ wird während der Optimierung von $45$ \textdegree \, auf $11,31$ \textdegree \, verringert. Es ergibt sich der neue optimierte Regelvektor $\w{k}_0^\transp = \begin{bmatrix}	0,1624 & 0,0667 \\ \end{bmatrix}$. Abbildung \ref{fig:pollage_01624} zeigt die Pollage der Systemmodelle mit dem neuen optimierten Regler bei kleinerem Polgebiet.
+%\begin{figure}[H]
+%	\centering
+%	\inputtikz[path=./Bilder/]{pollage01624}
+%	\caption[pollage04245]{Pollagen der ungeregelten und geregelten Systemmodelle mit $\w{k}_\tn{opt}^\transp = \begin{bmatrix} 0,1624 & 0,0667\end{bmatrix}$.}
+%	\label{fig:pollage_01624}
+%\end{figure}
+%Um den Unterschied in der Pollage und damit auch im Sprungverhalten zu verringern, ist es sinnvoll die Pole der langsamen Systeme 1 und 3 näher zusammenzubringen und ggf. leichtes Schwingen zuzulassen. Ein Regler, der diese Forderung erfüllt, kann mithilfe von Gleichung (\ref{eq:eigenwerte}), die die Lage der Eigenwerte des geschlossenen Regelkreises beschreibt, gefunden werden. Für schwingungsfähige Systempole gilt:
+%\begin{align}\label{eq:realundimag}
+%	s &= \tn{Re}(s) + j\tn{Im}(s), && \, \\ \nonumber
+%	\tn{Re}(s) &= -\frac{d+k_2\cmot}{2J}, && \tn{Im}(s) = \pm \sqrt{(\frac{d+k_2\cmot}{2J})^2-\frac{kr}{Ji}(\frac{r}{i}+k_1\cmot)} \, .
+%\end{align}
+
+\section{Regelung am Menschen}\label{sec:regelung_am_menschen}
+Zur Regelung am Menschen sollen die zwei in Abbildung \ref{fig:messpositionen} dargestellten Messpositionen betrachtet werden. Es wird der in der Optimierung gefundene Regler $\w{k}_\tn{opt}^\transp = \begin{bmatrix} 0,4099 & 0,0712 \\ \end{bmatrix} \, $ zur Regelung am Bein genutzt. In Abbildung \ref{fig:sprungantwort_bein} sind die Sprungantworten unter den gleichen Voraussetzungen wie in der Simulation dargestellt. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{./Bilder/sprung_100N_gebeugt_gestreckt_04099.eps}
+	\caption[sprungantwort_bein]{Sprungantworten bei gestrecktem und gebeugtem Bein bei $\w{k}_\tn{opt}^\transp = \begin{bmatrix} 0,4099 & 0,0712\end{bmatrix}$}
+	\label{fig:sprungantwort_bein}
+\end{figure}
+Wie bereits bei der Simulation wird bei der Regelung am Menschen das Verhalten anhand von Proband 1 untersucht. Vergleicht man das aus der Simulation erhaltene Verhalten mit dem Verhalten des realen Versuchsaufbaus, lässt sich feststellen, dass die Verläufe nicht ganz übereinstimmen. Dabei fallen vor allem zwei Aspekte auf. Zum einen wird in keinem der beiden Fälle der stationäre Sollwert erreicht. Der stationäre Endwert beträgt in beiden Fällen $\valunit{90}{N}$ und weicht damit um 18,18\% vom Sollwert ab. Eine mögliche Ursache für dieses Verhalten ist, dass die Coulombreibung den Motor mit steigender Kraft zunehmend dämpft, sodass bei großen Kräften die Stellgröße nicht ausreicht, um die Haftung zu überwinden und die fehlenden $\valunit{20}{N}$ zu stellen. Das Vorfilter, welches die stationäre Genauigkeit erzeugen soll, hängt von den konstanten Parametern $\cmot$, $r$ und $i$ ab. Abweichungen der realen Parameter von den Werten, die zur Berechnung von $v$ herangezogen werden, können ebenfalls zu Abweichungen vom stationären Endwert führen. Zum anderen fällt auf, dass das System bei gestrecktem Bein wider Erwarten nicht überschwingt. Grund dafür ist vermutlich ebenfalls der Einfluss der Coulombreibung, da durch ihre Wirkung der stationäre Sollwert nicht erreicht werden kann. Das hat zur Folge, dass die höchsten Werte der Steifigkeit nicht erreicht werden können, wodurch der Imaginärteil der Pole des geregelten Systems kleiner ausfällt und das System somit weniger stark überschwingt. Zudem ist deutlich erkennbar, dass das System bei gebeugtem Bein am realen Versuchsaufbau den stationären Endwert schneller erreicht als in der Simulation. Dies liegt daran, dass die Dämpfung bei der Messung insgesamt von den Werten der Simulation abweicht und somit andere Werte annimmt als in der Simulation. Da sich das System in beiden Fällen sehr ähnlich verhält und nicht überschwingt, kann ein neuer Regler ausgelegt werden, bei dem das Polgebiet weiter geöffnet wird und dadurch mehr Überschwingen zulässt, aber die Pole insgesamt schneller platziert.
+\\ \\
+\textbf{Verbesserung des Reglers} \\ 
+Um einen neuen Regler zu finden, der die zuvor formulierten Anforderungen erfüllt, wird das Polgebiet neu ausgelegt. Das neue Polgebiet wird nun nicht mehr während der Optimierung konstant gehalten. Ausgehend von dem Polgebiet aus Abbildung \ref{fig:pollage04099} wird das neue Polgebiet nun dahingehend verändert, dass die Grenze der Minimalgeschwindigkeit iterativ auf $a_1 = 30$ und gleichzeitig der Öffnungswinkel $\phi_1$ auf 53,1\textdegree \, erhöht wird, was einer maximal zulässigen Überschwingweite von ca. $10\%$ entspricht. Bei der Wahl von $a_1$ kann nicht erwartet werden, dass die Pole nach der Optimierung wirklich links von $a_1$ liegen. Im Wesentlichen soll sie dazu dienen, die Regelung insgesamt schneller auszulegen. Als Initialwert für den Startregler wird wieder $\w{k}_\tn{opt}^\transp = \begin{bmatrix}	0 & 0 \\ \end{bmatrix} $ gewählt und während der Optimierung der optimierte Regler des vorherigen Durchlaufs jeweils als Startwert für den folgenden Durchlauf gewählt. Abbildung \ref{fig:pollage0554} zeigt die Pollage der Systemmodelle bei der Optimierung mit dem zuvor beschriebenen Polgebiet.
+\begin{figure}[h]
+	\centering
+	\inputtikz[path=./Bilder/]{pollage0554}
+	\caption[pollage0554]{Pollagen der ungeregelten (oben) und geregelten (unten) Systemmodelle mit $\w{k}_\tn{opt}^\transp = \begin{bmatrix}	0,554 & 0,0613 \\ \end{bmatrix} $.}
+	\label{fig:pollage0554}
+\end{figure}
+Abbildung \ref{fig:pollage0554} zeigt, dass die Pole immer noch außerhalb des am strengsten parametrierten Polgebiets liegen, besonders die dominanten Pole der Modelle 1 und 3 erfüllen die Forderung nach der Mindestgeschwindigkeit nicht. Anhand dieser Abbildung lässt sich gut erkennen, dass die dominanten Pole nur wenig bewegt werden. Während die schnellen Pole, welche zuvor am linken Rand des Polgebiets bei ungefähr $s = -140$ lagen, ungefähr auf den Punkt $s = -120$ geschoben werden, werden die dominanten Pole, welche nah am Ursprung liegen, von ungefähr $s=-4,7$ auf $s=-7,34$ geschoben. Diese Änderung mag zwar gering erscheinen, dennoch liefert sie einen Beitrag zu einer insgesamt schnelleren Systemdynamik. Da das Einhalten der Mindestgeschwindigkeit von $a_1 = 30$ bei der Neuauslegung des Reglers zudem gar nicht erforderlich ist, sondern die Neuauslegung lediglich dazu dienen soll, das System im Vergleich zur vorherigen Pollage in Abbildung \ref{fig:pollage04099} schneller zu gestalten, lässt sich feststellen, dass das Ziel, die Pole schneller auszulegen, mit diesem Regler im Vergleich zu vorher erreicht wird. Es lässt sich erkennen, dass durch das Zulassen des Überschwingens die Pole insgesamt näher zusammengerückt werden können. Die schwingungsfähigen Pole der Modelle 2 und 4 liegen außerhalb des am strengsten parametrierten Polgebiets. Daher ist auch in diesem Fall weiterhin Überschwingen zu erwarten. Die Sprungantworten des Beines im gestreckten und gebeugten Zustand mit der neuen Zustandsrückführung $\w{k}_\tn{opt}^\transp = \begin{bmatrix}	0,554 & 0,0613 \\ \end{bmatrix} $ sind in Abbildung \ref{fig:sprungantwort_bein_neu} dargestellt.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1]{./Bilder/sprung_100N_gebeugt_gestreckt_0554.eps}
+	\caption[sprungantwort_bein]{Sprungantwort bei gestrecktem und gebeugtem Bein bei $\w{k}_\tn{opt}^\transp = \begin{bmatrix} 0,554 & 0,0613\end{bmatrix}$}
+	\label{fig:sprungantwort_bein_neu}
+\end{figure}
+Verglichen mit den Ergebnissen, die der ursprüngliche Regler $\w{k}_\tn{opt}^\transp = \begin{bmatrix} 0,4099 & 0,0712\end{bmatrix}$ liefert (siehe Abbildung \ref{fig:sprungantwort_bein}), lässt sich feststellen, dass mit dem neuen Regler tatsächlich bessere Ergebnisse erzielt werden. Hinsichtlich der Schnelligkeit reagiert das System sowohl im gestreckten als auch im gebeugten Zustand schneller als zuvor, was verdeutlicht, dass sich die leichte Verschiebung der dominanten Pole durchaus positiv auf die Systemdynamik auswirkt. Bei gestrecktem Bein tritt leichtes Überschwingen auf, das aus der Vergrößerung des Polgebiets und damit der zulässigen Überschwingweite resultiert. Da wie bereits bei der Simulation und auch bei der Regelung mit der vorherigen Zustandsrückführung die Extremwerte der Steifigkeit nicht erreicht werden, liegt das Überschwingen erwartungsgemäß unterhalb der $10\%$-Marke, die durch den Öffnungswinkel $\phi_1$ des neuen Polgebiets zugelassen wird. Es ist so gering, dass es keinen negativen Einfluss auf das Regelungsergebnis hat und somit akzeptiert werden kann. Bezüglich des stationären Verhaltens lässt sich feststellen, dass der stationäre Sollwert zwar in beiden Fällen immer noch nicht erreicht wird, allerdings kommt die Regelung des gestreckten Beins näher an den Sollwert heran, als die Regelung zuvor, da durch die härtere Auslegung des Reglers und damit der Verbesserung der Schnelligkeit der Einfluss der Coulombreibung erst später zum Tragen kommt. Der stationäre Endwert, der bei der Regelung des gebeugten Beins erreicht wird, liegt weiterhin deutlich unterhalb der Sollwerts. Mit dem Aufbau der Orthese ist es möglich, bei gebeugtem Bein Kräfte von bis zu \valunit{100}{N} auf den Nutzer aufzubringen, ohne dass die Seilklemme und das Führungsteil des Bowdenzugseils aneinander anschlagen. Auf diese Problematik wird im Anhang in Abschnitt \ref{sec:problem_gebeugt} näher eingegangen. Da die Regelung mit gebeugtem Bein langsamer ist als die Regelung mit gestrecktem Bein, kommt bei gebeugtem Bein der Einfluss der Coulombreibung eher zum Tragen und verhindert, dass größere Kräfte aufgebracht werden können. Unter Berücksichtigung der Sprungantworten, die sich mit den jeweiligen Reglerparametern ergeben, lässt sich sagen, dass die Rückführung $\w{k}_\tn{opt}^\transp = \begin{bmatrix} 0,554 & 0,0613\end{bmatrix}$ die besseren Ergebnisse liefert und daher im folgenden Abschnitt zur Regelung genutzt wird. Prinzipiell lässt sich der Regler durch weitere Öffnung des Polgebiets noch schneller auslegen, allerdings hat dies zur Folge, dass durch die schnellen Pole, die sehr weit links liegen, Rauscheffekte deutlich stärker spürbar werden. Zudem sind schnellere Regler im Falle einer transparenten Regelung, bei der keine Kraft gestellt wird, deutlich stärker für den Nutzer spürbar. Zusätzlich wird bei schnelleren Reglern das Überschwingen sowohl im Führungsverhalten als auch im Störverhalten deutlich sichtbar und auch spürbar. 
+\subsection{Regelgüte bei rampenförmigen Führungsgrößen}
+Sprungförmige Führungsgrößen eignen sich besonders, um das System hinsichtlich seiner dynamischen Eigenschaften zu untersuchen und zu überprüfen, ob es sich in der Realität wie erwartet verhält. Allerdings treten sprungförmige Eingangsgrößen in der Natur bzw. während des Gangzyklus nicht auf. Daher sollte das System zusätzlich noch hinsichtlich seines Verhaltens bei Führungsgrößen, die den Bewegungen des Menschen entsprechen, untersucht werden. Mit der biartikulären Unterschenkelprothese sollen in Zukunft das Knie- sowie das Sprunggelenk aktuiert werden. Das Moment, welches während des Gangzyklus eines gesunden Menschen im Sprunggelenk auftritt, wird dabei von SOL wie auch von GAS erzeugt. Daher muss der Verlauf der Momententrajektorie im GAS eine ähnliche Form haben wie der Verlauf im Sprunggelenk. Bei der Regelung realer Momente soll daher ein Verlauf gewählt werden, der dem Moment im Sprunggelenk ähnlich ist. Abbildung \ref{fig:rampe} zeigt den Verlauf des Moments im Sprunggelenk. Die Messdaten dazu entstammen der Arbeit \cite{Lipfert.2010} von Lipfert.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{./Bilder/rampe_100N_gebeugt_gestreckt_0554.eps}
+	\caption[rampe]{Verlauf des Moments im Sprunggelenk beim Gehen mit einer Geschwindigkeit von $\valunit{5,58}{\frac{\tn{km}}{\tn{h}}}$ \cite{Lipfert.2010}. Dazu ist das Verhalten der Regelung bei rampenförmiger Anregung mit $\w{k}_\tn{opt}^\transp = \begin{bmatrix} 0,554 & 0,0613\end{bmatrix}$ dargestellt. Es muss beachtet werden, dass der Verlauf des Moments im Sprunggelenk in \unit{Nm} und die Kraftverläufe in \unit{N} angegeben sind. }
+	\label{fig:rampe}
+\end{figure}
+In einfacher Näherung entspricht dieser Verlauf einer Rampe. Der Hebelarm, mit dem das Sprunggelenk in zukünftigen Versuchsaufbauten durch die Kraft am Bowdenzug aktuiert wird, beträgt $r_\tn{A} \approx \valunit{10}{cm}$. 
+Das aus der verwendeten Kraftrampe erhaltene Drehmoment ist also um den Faktor 0,1 kleiner als die Kraftrampe selbst. Somit lassen sich etwas weniger als 10\% des Maximalmoments im Sprunggelenk erzeugen. Dies soll an dieser Stelle ausreichen, da einerseits nie das gesamte Moment des Sprunggelenks über den zusätzlichen Aktor erzeugt werden soll und andererseits in späteren Aufbauten größere Ströme durch einen anderen Motorcontroller gestellt werden können, welche es ermöglichen, ein größeres Moment zu erzeugen. Dass der Maximalwert der Kraftrampe nie erreicht wird, liegt dabei an der verzögerten Reaktion des Reglers. Da dieser nicht beliebig schnell auf eine Anregung reagieren kann, hat die Rampe schon die fallende Flanke erreicht, bevor der Regler der steigenden Flanke folgen kann. Die Schnelligkeit des ausgelegten Reglers reicht somit nicht aus, um einer Anregung, die ungefähr dem realen Bewegungsablauf entspricht, zu folgen. Um den Verlauf des Sollmoments besser abbilden und den Regler schneller auslegen zu können, sollten strukturelle Verbesserungen vorgenommen werden. Eine Möglichkeit liegt darin, durch den Entwurf einer dynamischen Vorsteuerung einen zusätzlichen Freiheitsgrad in den Regelkreis einzubauen und so die Stellgröße zu steuern und damit das Führungsverhalten zu verbessern \cite{Follinger.2016}. Da dies den Umfang dieser Arbeit übersteigen würde, sei darauf verwiesen diese strukturelle Änderung in zukünftigen Arbeiten mit den Versuchsaufbau zu berücksichtigen.
+
+\subsection{Störverhalten bei Einfluss durch den Nutzer}\label{sec:störung}
+Die bisherigen Messungen wurden alle mit unbewegtem Bein durchgeführt. Es lag also kein Störeinfluss vor. Letzten Endes soll die Orthese den Nutzer allerdings beim Gehen unterstützen. Das bedeutet, dass die Bewegung des Nutzers und damit die Bewegung des Federfußpunktes, an dem der Kraftsensor befestigt ist, in regelungstechnischem Sinne eine Störung bedeutet. Das Verhalten der Regelung bei einer Störeingangsgröße soll in diesem Abschnitt evaluiert werden. 
+Aus Gleichung (\ref{eq:zustandsraum}) und Einsetzen der Führungsgröße und der Zustandsrückführung in die Stellgröße erhält man 
+\begin{equation}\label{eq:zustandsraum2}
+	\dot{\w{x}} = \M{A}  \w{x} + \w{b}  wv - \w{b} \w{k}^\transp \w{x} + \w{e} \dot{x}_\tn{L}\, .
+\end{equation}
+Wird diese Gleichung mithilfe der Laplace-Transformation nach $\w{x}$ aufgelöst und in die Ausgangsgleichung in (\ref{eq:zustandsraum}) eingesetzt, ergibt sich die Gesamtausgangsgleichung der Zustandsraumdarstellung, aus der die Führungs- und Störübertragungsfunktion abgelesen werden können, zu 
+\begin{equation}\label{eq:ausgangsgleichung_zustandsraum}
+	y = \underbrace{\w{c}^\transp(s\M{I}-\M{A} + \w{b}\w{k}^\transp)^{-1}\w{b}v}_\tn{$G_\tn{w,cl}(s)$}w + \underbrace{(\w{c}^\transp(s\M{I}-\M{A} + \w{b}\w{k}^\transp)^{-1}\w{e})}_\tn{$G_\tn{d,cl}(s)$}\dot{x}_\tn{L} \, .
+\end{equation} 
+Werden in diese Gleichung die Werte der Matrizen und Vektoren eingesetzt, erhält man die Störübertragungsfunktion des geschlossenen Regelkreises. Diese lautet
+\begin{equation}\label{eq:störübertragungsfunktion,closed}
+	G_\tn{d,cl} = \frac{-s^2\frac{Ji}{r}-s(\frac{di}{r} + \frac{\cmot i k_2}{r})}{s^2\frac{Ji}{kr} + s(\frac{di}{kr} + \frac{\cmot i k_2}{rk}) + \frac{r}{i} + \cmot k_1} \, .
+\end{equation}
+Anhand dieser Gleichung lässt sich bereits feststellen, dass auf Störungen durch den Nutzer nicht angemessen reagiert werden kann. Da Nennerpolynom und Zählerpolynom beide den gleichen Grad besitzen, ist das System sprungfähig bezüglich Störeingangsgrößen - es besitzt einen Durchgriff. Das bedeutet, dass Störgrößen immer direkt auch am Ausgang wirken. Auf sprungförmige Störgrößen oder Störgrößen geringer Frequenz wird das System reagieren und versuchen diese auszuregeln, wohingegen dies für Störungen höherer Frequenz nicht möglich ist. In Abbildung \ref{fig:störung} ist das Verhalten bei Störeingangsgrößen dargestellt.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{./Bilder/stoerung.eps}
+	\caption[störung]{Störverhalten des Systems bei Anregung durch den Nutzer}
+	\label{fig:störung}
+\end{figure}
+Dabei wird der Sollwert konstant auf $\valunit{10}{N}$ gehalten, während das Bein im Wechsel gebeugt und gestreckt wird. Aus der Abbildung lässt sich der Einfluss der Bewegung des Nutzers erkennen. Ebenso lässt sich ablesen, dass die Regelung nicht in der Lage ist, die Störung aufgrund des Durchgriffs zu kompensieren. Da die Bewegung des Beins beim Gehen allerdings unumgänglich ist, sollte die Regelung für spätere Versuche, bei denen die Orthese während des Gehens getragen wird, dahingehend erweitert werden, dass auf die Störung eingegangen werden kann. Dies ist mit Hilfe einer unterlagerten Positionsregelung möglich, mit der die Position des Kraftsensors stationär genau geregelt werden kann. Allerdings ist dazu die Messung der Position des Beins erforderlich. Ähnlich wird dazu in \cite{Ding.31.05.201407.06.2014} vorgegangen. 
+
+\subsection{Verhalten im kraftfreien Fall}
+Während einer Gangphase ist es neben der Unterstützung durch das Stellen von Kräften ebenso wichtig das Bein des Nutzers zu gewissen Zeitpunkten nicht zu aktuieren (siehe dazu das Moment im Sprunggelenk in Abbildung \ref{fig:rampe}). Es soll also möglich sein, dass sich der Nutzer ohne Einwirkung der Prothese frei bewegen kann. Um diese Transparenz zu erreichen, ist es nötig, Kräfte um \valunit{0}{N} herum regeln zu können. Um allerdings zu verhindern, dass bei negativen Stellgrößen der Motor das komplette Seil abwickelt, da das System versucht, Druckkräfte zu erzeugen, sollte immer eine gewisse Vorspannung anliegen. Dies ist der Grund dafür, dass bei den vorherigen Messungen immer mit einer Vorspannung gearbeitet wurde. Betrachtet man in Abbildung \ref{fig:störung} das Intervall $t \in [\valunit{15}{s}, \valunit{20}{s}]$, lässt sich feststellen, dass dies bei Bewegungen, die in etwa dem menschlichen Gang entsprechen, gut möglich ist. Das Bein lässt sich ohne große Einschränkung durch den Regler bewegen.
+

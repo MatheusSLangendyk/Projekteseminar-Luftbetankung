@@ -1,0 +1,319 @@
+\chapter{Verzeichnisstruktur und vordefinierte Befehle der IAT-Vorlage}
+\label{cha:Verzeichnisstruktur}
+Es handelt sich bei diesem \LaTeX-Dokument um ein für studentische Arbeiten am Institut für Automatisierungstechnik vorbereitetes Dokument auf Basis der Klasse \verb|tudreport|, \dah die Schriftarten, Pakete und Klassen des TU Designs, wie es vom Fachgebiet Festkörperphysik oder dem Referat Kommunikation angeboten wird, müssen installiert sein, damit ein Dokument mit der Vorlage erstellt werden kann.
+Es ist keine neue, abgeleitete Klasse definiert!
+Eine Liste von nützlichen Befehlen, die das Paket \texttt{iatsada} zur Verfügung stellt, findet sich in der Dokumentation des Paketes.
+Die Dokumentation lässt sich durch Kompilierung der Datei \texttt{iatsada.dtx} erzeugen.
+
+Die Klasse \verb|tudreport| ist aus der Standard-Klasse \verb|scrreprt| abgeleitet und stellt nur wenige neue Befehle zur Verfügung; weitere Funktionen können bei
+Bedarf durch Zusatzpakete eingebunden oder selbst definiert werden.
+Die Klasse ist daher auch so aufgebaut, dass sie mit möglichst vielen Paketen zusammen arbeitet.
+Im Wesentlichen wird das Layout angepasst, wie es in \cite{Richtlinien} festgelegt ist und sich für solche Arbeiten bewährt hat, \zB:
+\begin{itemize}
+	\item Es wird doppelseitig auf DIN-A4-Papier geschrieben.
+	In die zu erstellende PDF-Version werden Bookmarks und Hyperlinks (nicht farbig!) integriert.
+	\item Der Abstand der Zeilen beträgt das 1,25-fache des Standard-Abstands von \LaTeX.
+	Da technische Arbeiten viele Formeln und Bilder enthalten, werden Absätze durch einen zusätzlichen vertikalen Zwischenraum statt durch einen Einzug getrennt.
+	\item Kapitel beginnen immer auf einer neuen Seite.
+	\item Die Titelseite hat ein festes Layout mit dem Logo der TU~Darmstadt.
+	\item Durch Verwendung der Paketoption \texttt{onlycolorfront=true} des Paketes \texttt{iatsada} werden die Identitätsleisten auf allen Seiten nach dem Deckblatt in Graustufen aufgeführt um Farbe zu sparen.
+\end{itemize}
+%
+%
+\section{Verzeichnisse}
+Die Vorlage ist in die in \figref{fig:Verzeichnisse} dargestellte Verzeichnisstruktur gegliedert.
+\begin{figure}
+	\centering
+	\small
+	\begin{forest}
+		for tree={
+			font=\ttfamily,
+			grow'=0,
+			child anchor=west,
+			parent anchor=south,
+			anchor=west,
+			calign=first,
+			inner xsep=7pt,
+			inner ysep=1pt,
+			if n children={0}{
+				edge path={
+					\noexpand\path [draw, \forestoption{edge}]
+					(!u.south west) +(7.5pt,0) |- (.child anchor) \forestoption{edge label};
+				},
+			}{
+				edge path={
+					\noexpand\path [draw, \forestoption{edge}]
+					(!u.south west) +(7.5pt,0) |- (.child anchor) pic {folder} \forestoption{edge label};
+				},
+			},
+			before typesetting nodes={
+				if n=1
+				{insert before={[,phantom]}}
+				{}
+			},
+			fit=band,
+			before computing xy={l=15pt},
+		}  
+		[iat\_sada\_tudreport
+			[bib
+				[literature.bib]
+			]
+			[Bilder
+				[BSB\_Beispiel.tikz]
+				[BSB\_Beispiel-ext.eps]
+				[BSB\_Beispiel-ext.pdf]
+				[Firmenlogo.eps]
+				[Firmenlogo.pdf]
+			]
+			[common
+				[macros
+					[commonmacros.tex]
+					[mymacros.tex]
+					[TikZ\_BSBnormal.tex]
+				]
+				[setup
+					[includes.tex]
+					[pgfplotssetup.tex]
+					[pgfsetup.tex]
+				]
+				[header\_includes.tex]
+				[preface.tex]
+				[SADA\_Abstract.tex]
+				[SADA\_Aufgabenstellung.tex]
+			]
+			[inc
+				[Anhang.tex]
+				[commonmacros\_desc.tex]
+				[Einfuehrung.tex]
+				[Hinweise\_LaTex.tex]
+				[Tipps.tex]
+				[Verzeichnisstruktur.tex]
+				[Zusammenfassung.tex]
+			]
+			[Glossar
+				[Acronyme.tex]
+				[Acronymverzeichnis.tex]
+				[Symbole.tex]
+				[Symbolverzeichnis.tex]
+				[Verzeichnisse.tex]
+			]
+			[prog]
+			[Final Build.bat]
+			[sada\_tudreport.pdf]
+			[sada\_tudreport.tcp]
+			[sada\_tudreport.tex]
+		]
+	\end{forest}
+	\caption{Dateien der Vorlage}
+	\label{fig:Verzeichnisse}
+\end{figure}
+\begin{itemize}
+	\item \verb|bib|\\Hier wird standardmäßig die Datei \verb|literature.bib| mit den Bibtex-Einträgen erwartet.
+	\item \verb|Bilder|\\Vorgesehen für Bilder
+	\item \verb|common|\\Allgemeinere Dateien, in die Teile der Definitionen ausgelagert sind, damit die Hauptdatei nicht überfrachtet wird.
+	\item \verb|Glossar|\\Vorgesehen für eigene Symbole und Akronyme, die im Symbol- und Abkürzungsverzeichnis auftauchen sollen
+	\item \verb|inc|\\Vorgesehen für tex-Dateien mit eigentlichem Inhalt
+\end{itemize}
+
+
+\subsection{Verzeichnis \texttt{common}}
+Damit das Hauptdokument nicht überfrachtet wird, sind die folgenden längeren \glqq{}Abschnitte\grqq{} in die angegebenen Dateien im Unterverzeichnis \verb|common| ausgelagert:
+\begin{itemize}
+	\item \verb|commonmacros.tex|\\
+		Definiert einige nützliche Befehle
+	\item \verb|header_includes.tex|
+		Einbinden der Konfigurationsdateien in der Präambel
+	\item \verb|includes.tex|\\
+		Beinhaltet alle \verb|\usepackage|-Befehle
+	\item \verb|mymacros.tex|
+		Definiert eigenen Makros
+	\item \verb|pgfplotssetup.tex|
+		Definiert Einstellungen und Makros für \texttt{pgfplots}
+	\item \verb|pgfsetup.tex|
+		Läd alle benötigten \texttt{tikz}-Bibliotheken
+	\item \verb|preface.tex|\\
+		Generiert die ersten Seiten der Arbeit (Aufgabenstellung, Erklärung, Inhaltsverzeichnis, \etc)
+	\item \verb|SADA_Abstract.tex|\\
+		Kurzfassung der Arbeit in deutscher und englischer Sprache.
+	\item \verb|SADA_Aufgabenstellung.tex|\\
+		Aufgabenstellung bei einer studentischen Arbeit. Achtung: für den FB16 muss für das offizielle Exemplar die im Original unterschriebene Aufgabenstellung an dieser Stelle mit gebunden werden.
+	\item \verb|TikZ_BSBnormal.tex|
+		Definiert einige Makros für Blockschaltbilder
+\end{itemize}
+
+
+\subsection{Verzeichnis \texttt{Glossar}}
+Damit das Hauptdokument nicht überfrachtet wird, sind die Definitionen von Symbolen und Akronymen in die angegebenen Dateien im Unterverzeichnis \verb|Glossar| ausgelagert:
+\begin{itemize}
+	\item \verb|Symbolverzeichnis.tex|\\
+	Definition des Symbolverzeichnisses als Tabelle
+	\item \verb|Acronymverzeichnis.tex|\\
+	Definition von Akronymverzeichnisses als Tabelle
+	\item \verb|Symbole.tex|\\
+	Definition von Symbolen für \texttt{glossaries}
+	\item \verb|Acronyme.tex|\\
+	Definition von Akronymen für \texttt{glossaries}
+	\item \verb|Verzeichnisse.tex|\\
+	Definition von Verzeichnissen für \texttt{glossaries}.
+\end{itemize}
+
+\section{Anpassung der \texttt{tuddesign}-Klassen}
+Damit eine \texttt{beamer} Präsentation zusammen mit \texttt{biblatex} verwendet werden kann, muss die Datei \texttt{tudbeamer.cls} mit der in der \texttt{zip}-Datei enthaltenen Datei \texttt{tudbeamer.patch} gepatcht werden, indem entweder die entsprechenden Änderungen von Hand vorgenommen werden, oder ein Diff-Werkzeug, wie \bspw \texttt{k3diff} oder \texttt{WinMerge} verwendet wird.
+
+Da die neusten Änderungen des Corporate Designs der TU Darmstadt noch nicht in der Vorlage vom Fachgebiet Festkörperphysik enthalten sind, kann durch Anwenden des Patches \texttt{tudheading.patch} auf die Datei \texttt{base/tudheading.sty} die Einrückung von Abschnitten auf die neue Vorgabe (keine Einrückung) geändert werden.
+
+Damit ein zusätzliches Logo eines Kooperationspartners auf der Titelseite platziert werden kann, ist schließlich der Patch \texttt{tudreprt\textunderscore{}title.patch} auf die Datei \texttt{report/tudreprt\textunderscore{}title.sty} anzuwenden.
+Damit steht der neue Befehl
+\begin{verbatim}
+	\setcooperationlogo[height]{Bilddatei}
+\end{verbatim}
+zur Verfügung, mit dem das Logo gesetzt werden kann.
+Soll keine Bilddatei verwendet werden, sondern beliebiger Text, so ist dies durch \verb|\cooperation{Text}| möglich.
+
+\section{Installation des Paketes \texttt{iatsada}}
+Zur Installation des Paketes \texttt{iatsada} muss der in \figref{fig:TDSiatsada} dargestellte Ordner \texttt{texmf}, der eine \TeX{} Standard Dateistruktur (TDS) abbildet, an einen Ort kopiert werden, der von der lokalen \TeX-Distribution, wie \textsc{Mik}\TeX{} oder \textsc{texlive}, berücksichtigt wird, und anschließend die Dateidatenbank mit \texttt{initexmf}/\texttt{texhash} aktualisiert werden, wie in \secref{sec:Distribution} beschrieben.
+\begin{figure}
+	\centering
+	\small
+	\begin{forest}
+		for tree={
+			font=\ttfamily,
+			grow'=0,
+			child anchor=west,
+			parent anchor=south,
+			anchor=west,
+			calign=first,
+			inner xsep=7pt,
+			inner ysep=1pt,
+			outer ysep=-0.5pt,
+			if n children={0}{
+				edge path={
+					\noexpand\path [draw, \forestoption{edge}]
+					(!u.south west) +(7.5pt,0) |- (.child anchor) \forestoption{edge label};
+				},
+			}{
+				edge path={
+					\noexpand\path [draw, \forestoption{edge}]
+					(!u.south west) +(7.5pt,0) |- (.child anchor) pic {folder} \forestoption{edge label};
+				},
+			},
+			before typesetting nodes={
+				if n=1
+				{insert before={[,phantom]}}
+				{}
+			},
+			fit=band,
+			before computing xy={l=15pt},
+		}  
+		[texmf
+			[scripts
+				[iatsada
+					[compiletex.bat~~~~~~~~~fcopyuntil.bat]
+					[fcopyuntil.exe~~~~~~~~~iatsadaTikZGenerator.tex]
+					[makealltikz.bat~~~~~~~~makealltikzlist.bat]
+					[makeandshowtikz.bat~~~~maketikz.bat]
+					[maketikz.bmp~~~~~~~~~~~maketikz.png]
+					[maketikz2arg.bat~~~~~~~maketikzclean.bat]
+					[maketikzparseargs.bat~~maketikzprepare.bat]
+					[maketikzTC.bat~~~~~~~~~UserImages.bmp]
+					[viewtikz.bmp~~~~~~~~~~~viewtikz.png]
+				]
+			]
+			[tex
+				[latex
+					[abk
+						[abk.sty]
+						[abk-de.def]
+						[abk-en.def]
+					]
+					[biblatex-iatsada
+						[bbx
+							[iatsada-alphabetic.bbx]
+							[iatsada-authoryear.bbx]
+							[iatsada-numeric.bbx]
+						]
+						[cbx
+							[iatsada-alphabetic.cbx]
+							[iatsada-athoryear.cbx]
+							[iatsada-numeric.cbx]
+						]
+					]
+					[iatsada
+						[common
+							[logos
+								[IAT\_rtm.eps~~~~~~~~~~~IAT\_rtm.pdf]
+								[IAT\_rtp.eps~~~~~~~~~~~IAT\_rtp.pdf]
+								[rtm\_mit\_schrift.eps~~~rtm\_mit\_schrift.pdf]
+								[rtp\_mit\_schrift.eps~~~rtp\_mit\_schrift.pdf]
+								[rtplogo.eps~~~~~~~~~~~rtplogo.pdf]
+							]
+						]
+						[iatsada.pdf]
+						[iatsada.sty]
+						[iatsada\_CiteAndRef.tex]
+						[iatsada\_Postface.tex]
+						[iatsada\_tikzexternal.tex]
+					]
+					[ifclass
+						[ifclass.sty]
+					]
+					[uniinput
+						[uniinput.sty]
+					]
+				]
+			]
+		]
+	\end{forest}
+	\caption{\TeX{} Standard Dateistruktur des Paketes \texttt{iatsada}}
+	\label{fig:TDSiatsada}
+\end{figure}
+
+\section{Angaben über die Arbeit}
+Im Hauptdokument können über die Paketoptionen des Paketes \texttt{iatsada} die grundsätzlichen Daten der Arbeit eingegeben werden.
+
+Mit \texttt{fachgebiet} kann das Fachgebiet bestimmt werden, bei dem die Arbeit geschrieben wird, wobei entweder RTM oder RTP möglich ist.
+
+Mit \texttt{fachbereich} kann der Fachbereich, dem der Autor der Arbeit angehört angegeben werden.
+Je nach verwendetem Fachbereich im Wertebereich $1$ bis $20$ wird die vom jeweiligen Fachbereich geforderte Selbständigkeitserklärung eingebunden.
+
+Mit \texttt{typ} kann die Art der Arbeit angegeben werden, wobei die Möglichkeiten
+\begin{itemize}
+	\item[SA] Studienarbeit
+	\item[BA] Bachelorarbeit
+	\item[PR] Proseminar
+	\item[DA] Diplomarbeit
+	\item[MA] Masterarbeit
+	\item[PS] Projektseminar
+	\item[USER] benutzerdefinierte Art der Arbeit
+\end{itemize}
+verwendet werden können.
+Wird \texttt{typ=user} verwendet, so muss über das Makro \verb|\SADATyp| die Art der Arbeit definiert werden.
+
+Mit \texttt{titel} kann der Titel der Arbeit angegeben werden.
+
+Mit \texttt{stadt} kann der Ort, an dem die Arbeit angefertigt wurde, angegebene werden.
+
+Mit \texttt{autor} kann ein Autor oder eine kommagetrennte Liste von Autoren angegeben werden.
+
+Mit \texttt{betreueri} kann der Hauptbetreuer der Arbeit angegeben werden.
+Mit \texttt{betreuerii} kann der zweite Betreuer der Arbeit angegeben werden.
+Mit \texttt{betreuerii} kann der dritte Betreuer der Arbeit angegeben werden.
+
+Mit \texttt{beginn} kann der Beginn, mit \texttt{abgabe} die Abgabe und mit \texttt{seminar} der Termin des Seminars der Arbeit angegeben werden.
+
+Die verwendeten Optionen können durch Definition eines oder mehrerer der Makros
+\begin{verbatimtab}
+	\newcommand{\SADATyp}{Diplomarbeit}
+	\newcommand{\SADATitel}{Eine \LaTeX-Vorlage für schriftliche (Abschluss-)Arbeiten am IAT}
+	\newcommand{\SADAStadt}{Darmstadt}
+	\newcommand{\SADAAutor}{Martin Mustermann, Erika Musterfrau, John Doe}
+	\newcommand{\SADABetreuerI}{Dipl.-Ing. Rudi Ratlos}
+	\newcommand{\SADABetreuerII}{Dipl.-Ing. Hans Hilflos}
+	\newcommand{\SADABetreuerIII}{}
+	\newcommand{\SADABegin}{01. Oktober 2016}
+	\newcommand{\SADAAbgabe}{01. April 2017}
+	\newcommand{\SADASeminar}{01. Mai 2017}
+\end{verbatimtab}
+überschrieben werden.
+
+

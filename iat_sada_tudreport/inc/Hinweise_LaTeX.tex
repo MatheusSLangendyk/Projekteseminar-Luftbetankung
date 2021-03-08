@@ -1,0 +1,631 @@
+\chapter{Allgemeine Hinweise und Informationen zum Erstellen einer schriftlichen Arbeit mit \LaTeX}
+\label{cha:Hinweise-Latex}
+
+%Dieses Kapitel gibt allgemeine Hinweise zur Erstellung einer wissenschaftlichen Arbeit mit dem Textsatzprogramm \LaTeX. Es ist inhaltlich identisch mit dem vorherigen Kapitel und enthält zusätzlich die \LaTeX-spezifischen Befehle, die bei der Umsetzung der Hinweise hilfreich sein könnten.
+
+%Wird die Arbeit \emph{nicht} mit \LaTeX\ erstellt, sollte das vorherige Kapitel gelesen werden.
+
+%Besonderes Augenmerk sollte auf Abschnitt~\ref{sec:Latex-Zitieren}, \textbf{Zitate und korrekte Zitierweisen} gelegt werden.
+
+Dieses Kapitel gibt allgemeine Hinweise zur Erstellung einer wissenschaftlichen Arbeit mit dem Textsatzprogramm \LaTeX. Das Kapitel sollte auch von Studierenden gelesen werden, die sich gegen eine Erstellung der Arbeit mit \LaTeX\ entschieden haben. Da das Layout der Arbeit in diesem Fall gemäß den TUD Designvorgaben zusätzlich selbst erstellt werden muss, dient die vorliegende Anleitung auch als Vorlage.
+
+%Wird die Arbeit \emph{nicht} mit \LaTeX\ erstellt, sollte das vorherige Kapitel gelesen werden.
+
+%Besonderes Augenmerk sollte auf Abschnitt~\ref{sec:Latex-Zitieren}, \textbf{Zitate und korrekte Zitierweisen} gelegt werden.
+
+\section{\LaTeX-Distribution}
+\label{sec:Distribution}
+Welche Distribution verwendet wird, hängt vom persönlichen Geschmack des Anwenders ab und es besteht grundsätzlich die Wahl zwischen \Miktex{}, das vor allem unter Windows weit verbreitet ist und \texlive{}, das eher unter Linux und Mac Anwendung findet.
+Im Folgenden wird nur das Vorgehen für \Miktex{} unter Windows beschrieben, für \texlive{} sind die Abläufe ähnlich.
+
+Zuerst ist die Distribution herunterzuladen und zu installieren, wobei im Allgemeinen die Standardeinstellungen ausreichend sind.
+
+Falls eigene Pakete installiert werden sollen oder die mit der Vorlage mitgelieferten Pakete installiert werden sollen und auch, wenn die Schriften, Klassen und Pakete des TU Designs installiert werden, bietet es sich an, einen eigenen Speicherort dafür festzulegen und dort einen sog. \emph{Tex-Directory-Structure-Verzeichnisbaum} anzulegen.
+Er ist wie in \figref{fig:TDS} aufgebaut.
+Dazu ist \zitat{\Miktex{} Settings} zu starten und im Reiter \zitat{Roots} unter \zitat{Add} das gewünschte Wurzelverzeichnis hinzuzufügen.
+Anschließend sollte im Reiter \zitat{General} \zitat{Refresh FNDB} und \zitat{Update Formats} ausgewählt werden, um die Dateilisten von \Miktex{} zu aktualisieren, wenn dies nicht automatisch geschehen sein sollte.
+
+Wenn noch kein TDS-Baum existiert, kann der Einfachheit halber auch der Ordner \texttt{iat\textunderscore{}sada\textunderscore{}com\-mon/texmf} an den gewünschten Ort kopiert werden und zu \Miktex{} hinzugefügt werden, womit dann auch die mitgelieferten Pakete installiert sind.
+\begin{figure}
+	\begin{forest}
+		for tree={
+			font=\ttfamily,
+			grow'=0,
+			child anchor=west,
+			parent anchor=south,
+			anchor=west,
+			calign=first,
+			inner xsep=7pt,
+			inner ysep=1pt,
+			if n children={0}{
+				edge path={
+					\noexpand\path [draw, \forestoption{edge}]
+					(!u.south west) +(7.5pt,0) |- (.child anchor) \forestoption{edge label};
+				},
+			}{
+				edge path={
+					\noexpand\path [draw, \forestoption{edge}]
+					(!u.south west) +(7.5pt,0) |- (.child anchor) pic {folder} \forestoption{edge label};
+				},
+			},
+			before typesetting nodes={
+				if n=1
+				{insert before={[,phantom]}}
+				{}
+			},
+			fit=band,
+			before computing xy={l=15pt},
+		}  
+		[tds
+			[fonts
+				[afm]
+				[enc]
+				[map
+					[dvipfm]
+					[dvips]
+					[fontname]
+					[pdftex]
+				]
+				[source]
+				[type]
+				[tfm]
+				[truetype]
+				[vf]
+			]
+			[doc
+				[latex
+					[package1]
+				]
+			]
+			[tex
+				[latex
+					[package1]
+				]
+			]
+			[bibtex
+				[bst]
+			]
+			[scripts
+				[package1]
+			]
+		]
+	\end{forest}
+	\caption{Aufbau eines Tex-Directory-Structure-Verzeichnisbaumes}
+	\label{fig:TDS}
+\end{figure}
+
+\section{Editor}
+Für \LaTeX{} gibt es eine Vielzahl von freien und kommerziellen Texteditoren, wie \textsc{TexnicCenter} oder \textsc{TeXStudio}.
+Das \textsc{TeXStudio} und \textsc{TeXnicCenter} sind freie open-source Editoren, die sich bei uns am Institut bewährt haben.
+
+\subsection{Einrichten von \Texstudio}
+Es gibt prinzipiell zwei verschiedene Wege, um aus der \LaTeX-Quelldatei ein pdf zu erzeugen.
+\begin{itemize}
+	\item \LaTeX => PDF pdf\LaTeX wandelt die Quelldatei direkt in ein pdf.
+	Dabei können als Bilder im Format .jpg, .png und .pdf eingebunden werden.
+	\item \LaTeX => PS => PDF beim klassischen Weg wird zuerst eine dvi-Datei erzeugt, diese wird mittels DviPS in eine ps-Datei gewandelt und aus dieser ps-Datei erzeugt Ghostscript schließlich die pdf-Datei.
+	Hierbei können nur .eps Bilder eingebunden werden.
+	Außerdem kann es zu Problemen mit Hyperlinks in den erzeugten Dateien kommen.
+\end{itemize}
+In \Texstudio{} kann die Werkzeugkette im Reiter \zitat{Erzeugen} in den Einstellungen angepasst werden.
+Um das direkte Kompilieren mit pdf\LaTeX{} zu verwenden ist bei Kompiler \texttt{txs:///pdflatex} einzutragen, während für den Weg über Postscript \texttt{txs:///latex} einzutragen ist.
+\Texstudio{} verwendet eine Hauptdatei für die Kompilierung, die entweder automatisch ermittelt wird, oder vom Benutzer festgelegt wird.
+
+\subsubsection{Autovervollständigung}
+Damit die Makros in den Paketen, die mit der Vorlage mitgeliefert werden, von \Texstudio{} beim Eintippen automatisch ergänzt werden, müssen die in den Ordnern der jeweiligen Pakete befindlichen cwl-Dateien in den Ordner \verb|%APPDATA%/TeXstudio/completion/user| kopiert werden und \Texstudio{} neu gestartet werden.
+Durch Anlegen einer eigenen cwl-Datei können dort auch eigene Autovervollstädigungen definiert werden, wie in der Dokumentation unter \url{http://texstudio.sourceforge.net/manual/current/usermanual_en.html#CWLDESCRIPTION} nachzulesen ist.
+Sollen die Vervollständigungen dauerhaft aktiviert werden und nicht nur, wenn \Texstudio{} das Laden der entsprechenden Pakete erkannt hat, ist unter \Texstudio{} konfigurieren->Vervollständigung ein Haken bei der gewünschten cwl-Datei zu setzen.
+
+\subsubsection{Makros}
+Da das Öffnen von Dateien, die mit dem Makro \texttt{\textbackslash{}inputtikz} geladen werden, in \Texstudio{} nicht mehr über die eingebaute Funktionalität möglich ist, kann das das Javascriptmakro \texttt{open\_includetikz.js} über \zitat{Makros->Makros bearbeiten} durch Kopieren in das sich öffnende Fenster hinzugefügt werden und ein beliebiges Tastenkürzel mit diesem assoziiert werden, damit sich die eingebundenen Bilddateien bei Eingabe des Tastenkürzels öffnen, wenn der Curser in einer Zeile mit dem Makronamen steht.
+
+\subsection{Einrichten von \Texniccenter}
+Nach dem erstmaligen Starten des \Texniccenter{} sollte \Miktex{} automatisch erkannt werden.
+Als .ps-Viewer sollte \Sumatra{} angegeben werden.
+Die Standardschrift des Editors ist nicht gut lesbar.
+Am besten über Extras->Optionen->Textformat die Schrift \zitat{Courier New} wählen.
+Damit die Synchronisation zwischen \Sumatra{} und \Texniccenter{} funktioniert, müssen die Ausgabeprofile definiert werden.
+Es gibt prinzipiell zwei verschiedene Wege, um aus der \LaTeX-Quelldatei ein pdf zu erzeugen.
+\begin{itemize}
+	\item \LaTeX => PDF pdf\LaTeX wandelt die Quelldatei direkt in ein pdf.
+	Dabei können als Bilder im Format .jpg, .png und .pdf eingebunden werden.
+	\item \LaTeX => PS => PDF beim klassischen Weg wird zuerst eine dvi-Datei erzeugt, diese wird mittels DviPS in eine ps-Datei gewandelt und aus dieser ps-Datei erzeugt Ghostscript schließlich die pdf-Datei.
+	Hierbei können nur .eps Bilder eingebunden werden.
+	Außerdem kann es zu Problemen mit Hyperlinks in den erzeugten Dateien kommen.
+\end{itemize}
+Beide Verfahren haben neben den unterschiedlichen Bildformaten die sie akzeptieren weitere Vor- und Nachteile.
+In \Texniccenter{} sind im Gegensatz zu \Texstudio{} mehrere Instanzen mit unterschiedlichen Hauptdateien möglich, da die Hauptdatei in einer Projektdatei gespeichert wird.
+
+\subsubsection{Ausgabeprofile}
+In den Ausgabeprofilen im \Texniccenter{} werden die Parameter für die verschiedenen Compiler hinterlegt, so dass beim Kompilieren des Dokuments die jeweiligen Programme korrekt aufgerufen werden.
+Hier werden die Einstellungen für die Verwendung des pdf-Viewers vorgenommen.
+Damit die Einstellungen nicht mühevoll von Hand vorgenommen werden müssen, wurden die Ausgabeprofile LaTeX=>PDF und LaTeX=>PS=>PDF als tco-Datei gespeichert, welche im \Texniccenter{} über Ausgabe->Ausgabeprofile definieren->Importieren importiert werden kann.
+Hier sind \ggf die Pfadangaben zu \Miktex{} und \Sumatra{} anzupassen.
+
+
+\section{Rechtschreibung}
+
+Studentische Abschlussarbeiten am IAT sind nach \emph{neuer} deutscher Rechtschreibung zu verfassen.
+Die wesentlichen Änderungen betreffen die Groß- und Kleinschreibung sowie die Getrennt- und Zusammenschreibung, siehe~\cite{Duden}.
+Das offensichtlichste Merkmal ist die neue \glqq ß\grqq-Regel: Nach kurzem Vokal steht jetzt \emph{immer} \glqq ss\grqq\ (wie in Abschluss), nach langem Vokal \glqq ß\grqq\ (wie in Fuß). Die neue deutsche Rechtschreibung wird in \LaTeX\ mit dem Paket \verb|babel| über die Option \verb|ngerman| aktiviert.
+
+Im Internet findet man unter \url{http://www.duden.de/} einen Crashkurs zur neuen deutschen Rechtschreibung.
+
+Eine Überprüfung der Rechtschreibung über die in die Editoren eingebaute Rechtschreibprüfung hinaus, lässt sich in \Texstudio{} mit dem Languagetool erreichen.
+Dieses kann unter \Texstudio{} im Reiter \zitat{Sprache prüfen} konfiguriert werden.
+Dort ist unter \zitat{LT-Pfad} der Pfad zur jar-Datei \texttt{languagetool.jar} anzugeben und unter \zitat{LT-Argumente} \zitat{\texttt{org.languagetool.server.HTTPServer -p 8081}} und bei \zitat{Server-Adresse} \zitat{\texttt{http://local\-host:8081}} einzugeben.
+Zum Einschalten der Überprüfung kann dann vor dem Starten von \Texstudio{} das Languagetool von Hand gestartet werden, oder über \zitat{Starte das Languagetool falls es nicht läuft} automatisch gestartet werden.
+
+
+\section{Zitate und korrekte Zitierweise}
+\label{sec:Latex-Zitieren}
+Zitate sind wörtliche oder sinngemäße Wiedergaben von Gedanken, Ideen oder Meinungen anderer Autoren.
+Werden Ideen oder Inhalte aus Quellen wörtlich oder sinngemäß in die eigene Arbeit übernommen, besteht die \textbf{Pflicht}, diese zu kennzeichnen.
+Wird dies unterlassen, liegt ein \textbf{Täuschungsversuch} (Plagiat) vor und die Arbeit kann als \textbf{nicht bestanden} bewertet werden.
+
+Laut § 38 Abs. 2 der \emph{Allgemeinen Prüfungsbestimmungen} liegt \glqq\ [...] ein Täuschungsversuch [...] vor, wenn eine falsche Erklärung nach §§ 22 Abs. 7, 23 Abs. 7 abgegeben worden ist oder ein anderes Werk, eine Bearbeitung eines anderen Werkes, eine Umgestaltung eines anderen Werkes ganz oder teilweise in der Prüfungsarbeit wiedergeben werden, ohne dieses zu zitieren (Plagiat).\grqq~\cite{APB}
+
+\subsection*{Zitierfähigkeit}
+Zitierfähig sind nur veröffentlichte Werke aus allgemein zugänglichen Quellen (Bücher, Artikel, \etc).
+Quellen, bei denen die Verfügbarkeit nicht garantiert werden kann (Internetquellen) oder der Urheber nicht klar nachvollziehbar ist (Wikipedia, \oAe), sind problematisch und sollten möglichst vermieden werden.
+Wird doch solch eine Quelle zitiert, ist die aktuelle Version zum Zeitpunkt des Zitates beizulegen.
+
+\subsection*{Wörtliche Zitate}
+Wörtliche Zitate in ingenieurwissenschaftlichen Arbeiten sind unüblich.
+Sollte doch ein wörtliches Zitat in die Arbeit übernommen werden, muss dieses buchstaben- und zeichengetreu, inklusive eventueller Rechtschreibfehler übernommen werden.
+Das wörtliche Zitat wird in Anführungszeichen eingefasst.
+
+\subsection*{Sinngemäße Zitate}
+Weit häufiger werden in wissenschaftlichen Arbeiten Ideen oder Meinungen anderer Autoren sinngemäß übernommen.
+Diese müssen durch einen Verweis auf die Quelle gekennzeichnet werden.
+Durch die Position des Verweises muss der Umfang der sinngemäßen Übernahme klar hervorgehen.
+
+\subsection*{Quellenangaben im Literaturverzeichnis}
+Für die Darstellung der Verweise, als auch für die Darstellung der Quellen im Literaturverzeichnis gibt es verschiedene Zitierweisen.
+Üblich sind die Harvard-Variante mit Autor und Veröffentlichungsjahr in runden Klammern, wie zum Beispiel (Isermann, 2001) oder eine fortlaufende Nummerierung in eckigen Klammern, wie in dieser Vorlage.
+Das \texttt{biblatex} Paket ermöglicht verschiedene (im Deutschen übliche) Zitierweisen.
+Die Sortierung des Literaturverzeichnisses kann alphabetisch (voreingestellt, oder \bspw durch die Paketoption \texttt{sorting=nyt}) oder nach dem Erscheinen der Verweise erfolgen (durch die Paketoption \texttt{sorting=none}).
+Das Paket \texttt{iatsada} definiert einen Zitierstil basierend auf dem \texttt{numeric} Stil von \texttt{biblatex}, kann aber bei Bedarf angepasst werden, falls \bspw ein alphabetischer Stil (\texttt{alphabetic}) vorgezogen wird.
+
+Ein Verweis wird mit \texttt{\textbackslash{}cite\{$\left\langle\text{label}\right\rangle$\}} eingefügt und mit einem festen Leerzeichen \verb|~| mit dem vorherigen Wort getrennt.
+Schließt der Verweis einen Satz ab, folgt der Punkt \emph{hinter} dem Verweis.
+Neben dem \texttt{\textbackslash{}cite} Befehl stehen im Paket \texttt{iatsada} weitere Makros zur Zitierung von Seitenzahlen wie \texttt{\textbackslash{}citep\{$\left\langle\text{label}\right\rangle$\}\{$\left\langle\text{page}\right\rangle$\}} oder \texttt{\textbackslash{}citerange\{$\left\langle\text{label}\right\rangle$\}\{$\left\langle\text{pageu}\right\rangle$\}\{$\left\langle\text{pageo}\right\rangle$\}} zur Verfügung, die vorgezogen werden sollte, da der Leser so, vor allem bei umfangreicheren Werken, schneller den zitierten Sachverhalt nachlesen kann.
+
+Die Literaturliste wird \LaTeX{} über eine Datei im \textsc{Bib}\TeX{}-Format mit der Endung \texttt{bib} bekannt gemacht.
+Für die Erstellung des Literaturverzeichnisses (Datei mit der Endung \texttt{bbl}) aus der Literaturliste bietet sich die Erweiterung \textsc{Biber} an, die mit der Paketoption \texttt{backend=biber}\footnote{\label{ftn:Fussnote1}Alternativ kann auch \texttt{backend=bibtex} verwendet werden, wobei dann die Werkzeugkette des verwendeten Editors entsprechend eingestellt werden muss.} in \texttt{biblatex} geladen werden kann und im Editor in die entsprechende Werkzeugkette integriert werden muss, damit \textsc{Biber} ausgeführt wird.
+Alternativ kann das Literaturverzeichnis auch per Hand erstellt werden.
+Viele Literaturverwaltungsprogramme, wie zum Beispiel \textsc{JabRef}, ermöglichen den direkten Export der Datenbank in das \textsc{Bib}\TeX{}-Format.
+
+
+\section{Gliederung des Dokuments}
+\label{sec:Latex-Gliederung}
+Im Inhaltsverzeichnis wird die Gliederung der Arbeit dargestellt. Die Überschriften und Seitenangaben der Kapitel, Unterkapitel und Abschnitte müssen mit den Elementen im Inhaltsverzeichnis übereinstimmen. Überschriften sind kurz und prägnant zu formulieren und dürfen keine vollständigen Sätze sein. Gibt es Unterpunkte in der Gliederung, so müssen immer mindestens zwei davon existieren und inhaltlich auf der gleichen Ebene sein. Die einzelnen Punkte des Inhaltsverzeichnis müssen nummeriert werden. Die Übersichtlichkeit des Inhaltsverzeichnisses kann durch Einrücken der Unterpunkte erhöht werden.
+
+Das Inhaltsverzeichnis wird in \LaTeX\ automatisch erstellt.
+Innerhalb der einzelnen Kapitel \verb|\chapter{...}| werden weitere Unterteilungen mit den Befehlen \verb|\section{...}|, \verb|\subsection{...}| \usw vorgenommen.
+Werden diese mit einem \verb|*| versehen, dann erhält der jeweilige Abschnitt keine Nummer und erscheint nicht im Inhaltsverzeichnis.
+Dies kann in manchen Fällen nützlich sein.
+
+Um eine korrekte Darstellung des Inhaltsverzeichnisses zu erhalten, muss \ggf mehrmals hintereinander kompiliert werden, da sich aufgrund von
+Gleitobjekten Seitenzahlen ändern können.
+Dreimaliges Kompilieren reicht in der Regel.
+
+Bei Bildern und Tabellen, die in eine \verb|figure|- bzw.\ \verb|table|-Umgebung eingeschlossen sind, handelt es sich um sog.\ \emph{Gleitobjekte}, \dah sie erscheinen nicht an der Stelle, an der sie eingebunden werden, sondern oben oder unten auf einer Seite, siehe \zB \tabvref{tab:Sonderzeichen}.
+Optional können in \verb|[]| noch Positionierungswünsche angegeben werden.
+Mit dem Befehl \verb|\caption{...}| erhalten Bilder eine \emph{Unterschrift} und Tabellen eine \emph{Überschrift}.
+
+Kapitel, Abschnitte, Bilder, Tabellen und Gleichungen können mittels \verb|\label{...}| benannt werden.
+Dadurch ist es möglich, sie später mit \verb|\ref{...}| oder \verb|\pageref{...}| zu referenzieren.
+Es empfiehlt sich, den Namen (Labels) eine Markierung voranzustellen, aus der hervorgeht, um welches Objekt es sich handelt.
+Üblich sind \verb|cha:| für \glqq Chapter\grqq, \verb|sec:| für \glqq Section\grqq, \verb|fig:| für \glqq Figure\grqq, \verb|tab:| für \glqq Table\grqq\ und \verb|eq:| für \glqq Equation\grqq.
+Ein Bild benennt man also \zB\ mit \verb|\label{fig:Ausgangssignal}|.
+Für die verschiedenen Arten von Objekten bietet das Paket \texttt{iatsada} die in \tabref{tab:Referenzen} angegebenen speziellen Referenzierungsmakros.
+\begin{table}
+	\centering
+	\begin{tabular}{llll}
+		Typ			&	Prefix				&	Referenz			&	resultierender Text\\\hline
+		Chapter		&	\texttt{cha}		&	\verb|\charef|		&	\charef{cha:Hinweise-Latex}\\
+		Section		&	\texttt{sec}		&	\verb|\secref|		&	\secref{sec:Latex-Gliederung}\\
+		Anhang		&	\texttt{cha/sec}	&	\verb|\appendixref|	&	\appendixref{cha:Checkliste}\\
+		Table		&	\texttt{tab}		&	\verb|\tabref|		&	\tabref{tab:Referenzen}\\
+		Figure		&	\texttt{fig}		&	\verb|\figref|		&	\figref{fig:Standardregelkreis}\\
+		Equation	&	\texttt{eq/equ}		&	\verb|\equref|		&	\equref{eq:Allgemein-Approx}\\
+		Listing		&	\texttt{lst}		&	\verb|\lstref|		&	\lstref{lst:Listing1}\\
+		Algorithm	&	\texttt{alg}		&	\verb|\algoref|		&	\algoref{lst:Listing1}\\
+		Footnote	&	\texttt{ftn}		&	\verb|\ftnref|		&	\ftnref{ftn:Fussnote1}\\\hline
+		Table		&	\texttt{tab}		&	\verb|\tabvref|		&	\tabvref{tab:Systemparameter}\\
+		Figure		&	\texttt{fig}		&	\verb|\fivgref|		&	\figvref{fig:Standardregelkreis}\\
+	\end{tabular}
+	\caption{Labels und zugehörige Referenzen}
+	\label{tab:Referenzen}
+\end{table}
+
+\section{Bilder}
+\label{sec:Latex-Bilder}
+
+Wenn möglich, sollten Bilder als Vektorgrafik eingebunden werden, damit sichergestellt werden, dass alle Details beim Ausdrucken erhalten bleiben.
+Es ist dabei auf eine ausreichende Strichstärke zu achten.
+Ebenfalls sollten die im Bild verwendete Schrift die gleiche sein, wie im übrigen Dokument.
+
+Werden doch Pixelgrafiken verwendet, so ist die richtige Wahl der Auflösung von besonderer Bedeutung.
+Einerseits sollten die Bilder auf dem ausgedruckten Dokument gut aussehen, andererseits aber auch eine zügige Bildschirmdarstellung und kleine Dateigröße ermöglichen.
+
+
+Für die Erstellung von Plots eignet sich das \LaTeX-Paket \texttt{pgfplots} sehr gut.
+In \appendixref{cha:Anhang-Grafiken} sind weitere geeignete Programme zur Erstellung von Bildern und Plots mit ihren Eigenschaften aufgelistet.
+
+Eine Grafik lässt sich am einfachsten mit dem Befehl \verb|\includegraphics{}| aus dem \verb|graphicx|-Paket einbinden.
+Eine vollständige Beschreibung des Befehls und weiterer nützlicher Grafikbefehle findet man in der Dokumentation des \verb|graphicx|-Pakets.
+Diese liegt -- wie die Beschreibung aller anderen \LaTeX-Pakete -- im \verb|doc|-Verzeichnis des \TeX-Systems und kann mit \texttt{texdoc $\left\langle\text{paketname}\right\rangle$} aufgerufen werden.
+In welchem Format \verb|graphicx| die Grafiken benötigt, hängt davon ab, ob man \TeX\ in Verbindung mit \textsc{Dvips} verwendet oder stattdessen pdf\TeX, siehe \appendixref{cha:TexSystem}.
+
+\textbf{pdf\TeX} (empfohlen) verarbeitet dagegen Grafiken im \emph{Portable-Document-Format} (\verb|*.pdf|) sowie die Pixelformate \texttt{jpeg} und \texttt{png}.
+Den direkten Export von PDF-Grafiken bieten derzeit zwar nur wenige Programme an, sie lassen sich aber einfach aus dem EPS-Format mit Hilfe des Acrobat Distiller oder Ghostscript erzeugen.
+Zum Einbinden von EPS-Dateien muss das Paket \texttt{epsfig} geladen sein.
+
+Für \textbf{\TeX/Dvips} müssen alle Grafiken im \emph{Encapsulated-PostScript}-Format (\verb|*.eps|) vorliegen.
+EPS-Dateien lassen sich aus praktisch jeder Software erzeugen und können sowohl Vektor- als auch Pixelgrafiken enthalten -- zusätzlich sind auch Preview-Grafiken möglich, was aber in der \TeX-Welt im Allgemeinen nicht erforderlich ist.
+
+Bilder müssen zentriert sein (\verb|\centering|) und eine Bild\emph{unterschrift} (\verb|\caption{...}|) besitzen.
+Um auf eine Abbildung zu referenzieren, kann auch sie mit einem \verb|\label{fig:...}| versehen werden.
+Nur in besonderen Ausnahmefällen sollten Bilder mit Text umflossen werden.
+Wurden Abbildungen einer Quelle entnommen, muss dies entsprechend mit einem Verweis auf die Quelle im Literaturverzeichnis gekennzeichnet werden.
+Wenn dazu das Makro \verb|\cite| verwendet wird, so ist zusätzlich das optionale Argument von \verb|\caption| ohne den Literaturverweis zu verwenden, damit die Verlinkungen im Abbildungsverzeichnis nicht zerstört werden.
+Werden Abbildungen eine Quelle nachempfunden, angepasst oder abgeändert, ist dies mit dem Zusatz \glqq in Anlehnung an...\grqq\ oder ähnlich anzugeben.
+
+\begin{figure}[htp]
+	\centering
+	\inputtikz[path=./Bilder/]{BSB_Beispiel}
+	\caption{Standard-Regelkreis; Bild erstellt mit \texttt{TikZ}}
+	\label{fig:Standardregelkreis}
+\end{figure}
+
+Generell ist die Arbeit (und insbesondere die Grafiken) so zu gestalten, dass sie auch schwarzweiß gedruckt werden kann.
+Farbige Fotos und Screenshots verursachen dabei \iA keine zusätzlichen Probleme.
+Werden jedoch \zB farbige Kurven in einem Diagramm dargestellt, hat dies folgende Konsequenzen:
+\begin{itemize}
+	\item Keine zu hellen Farben für die Linien verwenden, da diese sonst beim Drucken nicht zu erkennen sind.
+	RGB-Grün $(0,1,0)$ ist tabu!
+	\item Bei mehreren Kurvenverläufen darf deren Farbe nicht das einzige Unterscheidungsmerkmal sein: Entweder sind unterschiedliche Linienformen zu verwenden oder die Kurven im Diagramm beschriften.
+\end{itemize}
+
+Bei der Erstellung von Plots ist unbedingt die \href{http://de.wikipedia.org/wiki/DIN_461}{\texttt{DIN 461 Grafische Darstellung in Koordi}}\texttt{-} \href{http://de.wikipedia.org/wiki/DIN_461}{\texttt{natensystemen}} zu beachten.
+Hilfreich in diesem Zusammenhang und überhaupt für die korrekte Schreibweise von Zahlen und Einheiten im Fließtext und in Formeln sind die Hinweise der TU-Chemnitz: \url{www.tu-chemnitz.de/physik/FPRAK/Grundsatz/Literatur/si_v1.pdf}.
+
+\section{\textsc{tikz}-Externalisierung}
+\label{sec:External}
+Zum Erstellen von Bilder bietet es sich an, \texttt{tikz} und \texttt{pgfplots} zu verwenden.
+Der große Vorteil davon liegt darin, dass die Grafiken direkt in \LaTeX{} kompiliert werden und somit die gleiche Schriftart- und -größe besitzen und die Liniendicke definiert ist.
+Dadurch ergibt sich ein schönes Gesamtbild des Dokuments, das wirkt als wäre es aus einem Guss.
+Durch das Kompilieren des Bildes direkt in \LaTeX{} kann sich jedoch auch ein Problem ergeben, nämlich dann, wenn die Datenmenge zu groß ist.
+Der Kompiler beschwert sich dann mit einem\\
+\texttt{[...] ! TeX capacity exceeded, sorry [main memory size=3000000]}\\
+oder ähnlich.
+Dies wird sehr schnell erreicht, wenn zum Beispiel viele Plots in einem Dokument vorhanden sind.
+Abhilfe dagegen schafft das separate Kompilieren der Bilder und anschließende Einbilden derselben als pdf-Dateien.
+Dabei ist es einerseits möglich, den in \LaTeX{} eingebauten Mechanismus des Paketes \texttt{tikz} zu verwenden, indem die \texttt{external} Bibliothek durch \verb|\usetikzlibrary{external}| eingebunden wird, die sich um alles Weitere kümmert.
+Alternativ kann auch eine eigene Methode verwendet werden, die im Folgenden vorgestellt wird.
+
+\subsection{\texttt{tikzexternal}-Externalisierung}
+Damit die in \texttt{tikz} eingebaute Externalisierung funktioniert, muss das Aufrufen von Systembefehlen durch \LaTeX{} erlaubt sein, was sich je nach verwendeter Distribution durch das hinzufügen der Kommandozeilenparameter \zitat\texttt{{-shell-escape}} oder \zitat{\texttt{-enable-write18}} zum Kompilierbefehl erreichen lässt.
+Unter \Texstudio{} kann dazu unter \zitat{Befehle} bei pdf\LaTeX{} und \LaTeX{} die entsprechende Zeile geändert werden.
+Für \Texniccenter{} ist unter \zitat{Ausgabe->Ausgabeprofile definieren->Argumente, die an den Compiler übergeben werden} der entsprechende Befehl einzutragen.
+
+\subsection{\texttt{iatsada}-Externalisierung}
+Stefan Kopf und Matthias Singer haben einige Batch-Skripte erstellt, mit denen man bequem die einzelnen Grafiken externalisieren kann.
+Es wird von jeder einzelnen Grafik eine eigene .eps- oder .pdf-Datei erstellt, die anschließend im Dokument wieder eingebunden wird.
+Auf diese Weise ist es nicht nur möglich, viele umfangreiche Plots in einem Dokument zu haben, es wird – und das ist bei langen Dokumenten wichtig – auch die Kompilierzeit drastisch verringert, da die Grafiken nicht mehr jedesmal neu kompiliert, sondern nur noch eingebunden werden müssen.
+Diese Skripte können in \Texstudio{} und \Texniccenter{} integriert werden, so dass man damit sehr einfach und bequem arbeiten kann.
+Wird das Paket \texttt{currfile} verwendet, mit dem Dateien relativ zum Dokument, in dem sie referenziert werden, referenziert werden können, so ist zu jedem Aufruf von \texttt{maketikz.bat} das Argument \texttt{-abspath} hinzuzufügen und über das Argument \texttt{-texarg} die Option \texttt{recorder} als \texttt{-texarg "{}-{}-recorder"{}} hinzuzufügen, da das Paket die referenzierten Dateien sonst nicht finden kann und die Kompilierung abbricht.
+
+\subsubsection{Einrichtung unter \Texstudio}
+\label{sec:External:Texstudio}
+In den Einstellungen von \Texstudio{} unter \zitat{Befehle} sind die in \tabref{tab:External:BefehleTexstudio} angegebenen Befehle in der Gruppe \zitat{Benutzerbefehle} hinzuzufügen.
+Die Benennung ist dabei grundsätzlich dem Benutzer überlassen, es sollte jedoch ein aussagekräftiger Name, wie \zB \zitat{user0:maketikz} und \zitat{user1:viewtikz} verwendet werden.
+Zum graphischen Aufrufen der Befehle können diese zur Werkzeugleiste hinzugefügt werden, indem über \zitat{Sysbolleisten->Alle Menüs->Tools->Benutzer} der name der gewünschten Funktion nach links verschoben wird.
+Durch einen Rechtsklick auf den Namen des Befehls kann über \zitat{Anderes Icon laden} ein eigenes Bild festgelegt werden, wofür sich \bspw die Bilder im Ordner \verb|iat_sada_common/texmf/scripts/iatsada| eignen.
+
+\begin{table}
+	\begin{tabular}{ll}
+		Name			&	TikZ erstellen\\
+		Befehl			&	\texttt{/iat\textunderscore{}sada\textunderscore{}common/texmf/scripts/iatsada/maketikz2arg.bat}\\
+		Argumente		&	\texttt{?c:ame"{}~?ame"{}~-q}\\
+		Tastaturkürzel	&	F8\\\hline
+		Name			&	TikZ-Liste erstellen\\
+		Befehl			&	\texttt{/iat\textunderscore{}sada\textunderscore{}common/texmf/scripts/iatsada/makealltikzlist.bat}\\
+		Argumente		&	\texttt{"{}?am).list"{}}\\
+		Tastaturkürzel	&	F7\\\hline
+		Name			&	TikZ anzeigen\\
+		Befehl			&	\texttt{\%PROGRAMFILES\%/SumatraPDF/SumatraPDF.exe}\\
+		Argumente		&	\texttt{"{}?c:am)-ext.pdf"{}}\\
+		Tastaturkürzel	&	F6
+	\end{tabular}
+	\caption{Definition der Befehle in \Texniccenter}
+	\label{tab:External:BefehleTexstudio}
+\end{table}
+
+\subsubsection{Einrichtung unter \Texniccenter}
+\label{sec:External:Texniccenter}
+\begin{itemize}
+	\item Ersetze die Datei \zitat{UserImages.bmp} im Ordner \verb|%PROGRAMFILES%/TeXnicCenter| durch die entsprechende Datei aus \verb|iat_sada_common/texmf/scripts/iatsada|
+	\item Im \Texniccenter{} über Extras->Anpassen->Tools die folgenden Befehle wie in \tabref{tab:External:BefehleTexniccenter} definieren.
+	Danach das Fenster schließen, damit die Befehle gespeichert werden.
+	\item Unter Extras->Anpassen->Tastatur können den neu definierten Befehlen Tastaturkürzel zugewiesen werden.
+	Die neuen Befehle befinden sich unter der Kategorie \zitat{Extras}.
+	\item Über Extras->Anpassen->Befehle->Symbolleisten kann eine neue Symbolleiste erstellt werden.
+	Wechselt man in den Reiter Befehle kann man per Drag \& Drop die Befehle auf die neue Symbolleiste ziehen.
+	Mit einem Rechtsklick (bei noch geöffnetem Dialogfeld) kann man das Symbol der Schaltfläche ändern.
+	Wurde die \zitat{UserImages.bmp} durch die neue Datei ersetzt, stehen entsprechende Symbole zur Verfügung.
+\end{itemize}
+
+\begin{table}
+	\begin{tabular}{ll}
+		Name			&	TikZ erstellen\\
+		Befehl			&	\texttt{/iat\textunderscore{}sada\textunderscore{}common/texmf/scripts/iatsada/maketikzTC.bat}\\
+		Argumente		&	\texttt{"{}\%dc"{}~"{}\%tc"{}~"{}\%dm"{}~"{}\%bm"{}~-pause}\\
+		Tastaturkürzel	&	F8\\\hline
+		Name			&	TikZ anzeigen\\
+		Befehl			&	\texttt{\%PROGRAMFILES\%/SumatraPDF/SumatraPDF.exe}\\
+		Argumente		&	\texttt{"{}\%bc-ext.eps"{}}\\
+		Tastaturkürzel	&	F6\\\hline
+		Name			&	TikZ-Quelltext anzeigen\\
+		Befehl			&	\texttt{\%PROGRAMFILES\%/TeXnicCenter/TeXnicCenter.exe}\\
+		Argumente		&	\texttt{/ddecmd~"{}{}[goto('\%dm\%s.tikz','1')]"{}}\\
+		Tastaturkürzel	&	F12
+	\end{tabular}
+	\caption{Definition der Befehle in \Texniccenter}
+	\label{tab:External:BefehleTexniccenter}
+\end{table}
+
+\section{Tabellen}
+Tabellen müssen ebenfalls zentriert sein und besitzen eine zentrierte Tabellen\emph{überschrift} (\verb|\caption{...}|).
+Hier gelten die gleichen Regeln zur Quellenangabe wie bei den Bildern.
+Ein Referenzieren wird auch hier mit \verb|\label{tab:...}| ermöglicht.
+
+Damit Tabellen \glqq schön\grqq\ aussehen, empfiehlt es sich, einige Grundregeln zu beachten.
+Es gilt das Prinzip: \emph{weniger ist mehr}.
+So sollte auf die Verwendung von senkrechten Linien verzichtet werden und nur wichtige Zeilen, wie zum Beispiel Überschriften, Sinnabschnitte, Unterpunkte, \etc mit horizontalen Linien getrennt werden.
+Das Paket \verb|booktabs| stellt Linientypen für den Kopf und Fuß einer Tabelle zur Verfügung.
+
+
+\begin{table}[htb]
+	\begin{center}
+		\caption{Parameter}
+		\label{tab:Systemparameter}
+		\begin{tabular}{cd{3}d{3}lp{3mm}cd{3}d{3}l}
+			\toprule
+					&	\multicolumn{1}{c}{Ref.}	&	\multicolumn{1}{c}{Mod.}	&	Einheit					&	&					&	\multicolumn{1}{c}{Ref.}	&	\multicolumn{1}{c}{Mod.}	&	Einheit\\\cmidrule(r){1-4}\cmidrule(l){6-9}
+			$m_1$	&	4.0		&	4.63	&	\unit{kg}				&	&	$d_1$			&	0		&	0		&	\unit{\frac{N\,m\,s}{rad}}\\[1mm]
+			$m_2$	&	10.1	&	11.15	&	\unit{kg}				&	&	$d_2$			&	0		&	0		&	\unit{\frac{N\,m\,s}{rad}}\\[1mm]
+			$m_3$	&	45.7	&	42.5	&	\unit{kg}				&	&	$l_1$			&	0.5		&	0.45	&	\unit{m}\\[1mm]
+			$J_1$	&	0.967	&	0.993	&	\unit{kg\,m^2}			&	&	$l_2$			&	1.5		&	1.59	&	\unit{m}\\[1mm]
+			$J_2$	&	0.571	&	0.599	&	\unit{kg\,m^2}			&	&	$\varphi_{1,0}$	&	100		&	98.5	&	\unit{\degree}\\[1mm]
+			$g$		&	9.81	&	9.81	&	\unit{\frac{m}{s^2}}	&	&	$\varphi_{2,0}$	&	5		&	4.66	&	\unit{\degree}\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\section{Mathematische Formeln}
+
+Mathematische Formeln, wie 
+\begin{equation}
+	\label{eq:Allgemein-Approx}
+	\int\limits_0^\infty g(x)\ud{}x \approx \sum_{i=1}^n w_i\eexp{x_i} g(x_i)\;,
+\end{equation}
+werden eingerückt linksbündig dargestellt und nur dann nummeriert, wenn auf sie im Text verwiesen wird.
+Für eine bessere Lesbarkeit ist es sinnvoll Gleichungen als Bestandteil des Satzes zu verwenden, so wie mit \equref{eq:Allgemein-Approx}, wobei die nötigen Satzzeichen mit \texttt{\textbackslash{}eqp\{$\left\langle\text{punctuation}\right\rangle$\}} gesetzt werden können.
+Die Referenzierung einer erst später aufgeführten Gleichung sollte vermieden werden.
+
+\emph{Alle} mathematischen Ausdrücke (auch wenn es nur einzelne Zeichen sind) werden im mathematischen Modus \verb|$...$| geschrieben, damit sie in der
+richtigen Schrift erscheinen.
+Hier gilt die Faustregel, dass gewöhnliche mathematische Größen \emph{kursiv} geschrieben werden, Ausdrücke mit konventioneller (feststehender) Bedeutung dagegen in normaler (steiler, aufrechter) Schrift, siehe~\cite{DIN1338}.
+Es sind insbesondere Einheiten, Standardfunktionen und -operatoren sowie mathematische Konstanten steil zu schreiben,
+\begin{equation*}
+	\eexp{ax}\;,\qquad a+\iu{}b\;,\qquad
+	\int\limits_{t=0}^{t=1\,\unit{s}} f(t)\cdot\sin(\omega t)\ud{}t\;.
+\end{equation*}
+Da der mathematische Modus zunächst alle Größen \emph{kursiv} setzt, müssen Ausdrücke, die in aufrechter Schrift erscheinen sollen, mit dem Befehl
+\verb|\mathrm{...}| gekennzeichnet werden; bei Textteilen innerhalb einer Formel verwendet man besser \verb|\mbox{...}| oder \verb|\text{...}| (aus dem
+\verb|amsmath|-Paket).
+Für Standardfunktionen werden von \LaTeX\ die entsprechenden Befehle \verb|\sin|, \verb|\log|, \verb|\max| usw.\ zur Verfügung gestellt.
+Konsequenter Weise muss dieses Prinzip auch auf Indizes angewendet werden, also \zB
+\begin{equation*}
+	\sum_{i,\,j}a_{ij}\,\sin(ijx)\;,\qquad\text{aber:}\qquad
+	K_\mathrm{Regler} = 0,5\;.
+\end{equation*}
+Als Ausnahme von der \og Faustregel werden große griechische Buchstaben meist \emph{nicht} kursiv geschrieben, so auch im mathematischen Modus von
+\LaTeX.
+Matrizen und Vektoren werden in \textbf{fetten} Buchstaben gesetzt.
+Damit sie sich besser von den übrigen Symbolen abheben, werden auch sie nicht \textbf{\emph{fett-kursiv}} sondern \textbf{fett-steil} geschrieben.
+Dazu definiert die Datei \texttt{commonmacros.tex} die Befehle
+\begin{center}
+	\verb|\newcommand*{\mat}[1]{{\ensuremath{\boldsymbol{\mathrm{#1}}}}}|\\
+	und\\
+	\verb|\newcommand*{\ve}[1]{\ensuremath{\boldsymbol{#1}}}|\,,
+\end{center}
+die man dann sowohl für Matrizen (Großbuchstaben, \zB\ \verb|\mat{A}|) als auch für Vektoren (Kleinbuchstaben, \zB\ \verb|\ve{x}|) verwenden kann.
+\begin{equation*}
+	\mat{A} = \begin{bmatrix}
+		a_{11} & \ldots & a_{1n}\\
+		\vdots & \ddots & \vdots\\
+		a_{n1} & \ldots & a_{nn}
+	\end{bmatrix}\;,\qquad
+	\ve{x} = \begin{bmatrix}
+		x_1\\
+		x_2
+	\end{bmatrix}\;,\qquad
+	\ve{\beta}^\transp = \begin{bmatrix}\beta_1	&	\ldots	&	\beta_m\end{bmatrix}
+\end{equation*}
+
+Chemische Formelzeichen schreibt man grundsätzlich in aufrechter Schrift.
+Variable Größen sind aber auch hier kursiv:
+\begin{equation*}
+	\mathrm{H_2 O}\;,\qquad
+	\mathrm{NO}_x\;,\qquad
+	\mathrm{Fe_2^{2+}Cr_2^{\vphantom{2+}}O_4^{\vphantom{2+}}}
+\end{equation*}
+
+
+Beim Referenzieren von Gleichungen muss diese nummeriert werden.
+Ist die Gleichung
+\begin{equation}
+	\label{eq:Approx}
+	\int\limits_0^\infty g(x)\ud{}x \approx \sum_{i=1}^n w_i\eexp{x_i} g(x_i)
+\end{equation}
+mit \verb|\label{eq:Approx}| bezeichnet, erzeugt die Referenz \verb|\equref{eq:Approx}| den Ausdruck \glqq \equref{eq:Approx}\grqq.
+Kapitel, Abschnitte, Bilder und Tabellen bekommen keine Klammern, also \zB \verb|\charef{cha:Intro}| für \glqq \charef{cha:Intro}\grqq.
+Es ist darauf zu achten, ob es sich um \emph{Kapitel} oder \emph{Abschnitte} handelt.
+Vor \verb|\ref{...}| steht ein \emph{festes} Leerzeichen~\verb|~|, damit dort kein Umbruch erfolgen kann, was von den in \tabref{tab:Referenzen} beschriebenen Referenzen befolgt wird.
+Literaturangaben werden mit \verb|\cite{...}| anstelle von \verb|\ref{...}| referenziert.
+
+Werden Gleichungen oder Listen in den laufenden Text eingefügt, darf dazwischen kein Absatz (\dah eine Leerzeile im Quelltext) sein.
+Um den Quelltext besser zu gliedern, kann an dieser Stelle eine Zeile mit einem \verb|%|-Zeichen eingefügt werden.
+Eine Leerzeile darf nur dann im Quelltext stehen, wenn auch wirklich ein Absatz erwünscht ist.
+Der Zeilentrenner \verb|\\| erzeugt übrigens keinen Absatz und darf im laufenden Text überhaupt nicht vorkommen.
+Der Übersichtlichkeit halber empfiehlt es sich, spätestens nach jedem Satzende eine neue Zeile im Quelltext zu beginnen.
+
+
+\section{Auszeichnungen und Hervorhebungen}
+Wichtige Begriffe werden durch eine andere Schrift hervorgehoben (ausgezeichnet).
+Man unterscheidet dabei integrierte und aktive Auszeichnungen.
+Integrierte Auszeichnungen sollen erst beim Lesen wahrgenommen werden, sich aber ansonsten in den Text eingliedern.
+Die typische Form einer integrierten Auszeichung ist die \emph{kursive} Schrift, die mit \verb|\textit{...}| oder \verb|\emph{...}| erzeugt wird.
+Aktive Auszeichnungen sollen dagegen sofort beim Betrachten der Seite auffallen.
+Der wichtigste Vertreter ist hier die \textbf{fette} Schrift, die man durch Verwendung von \verb|\textbf{...}| erhält.
+In wissenschaftlichen Arbeiten werden vorwiegend integrierte Auszeichnungen benutzt.
+
+Grundsätzlich sollte bei Auszeichnungen immer nur \emph{ein} Attribut geändert werden, also \emph{nicht} gleichzeitig \emph{\underline{\textbf{fett, kursiv und
+unterstrichen}}}.
+Programmcode und Befehle setzt man üblicherweise mit \verb|\texttt{...}| oder \verb+\verb|...|+ in \texttt{Schreibmaschinenschrift}, Namen gelegentlich mit \verb|\textsc{...}| in \textsc{Kapitälchen}.
+Für manche Bezeichnungen kommt eine \textsf{\textbf{fette serifenlose}} Schrift \verb|\textsf{\textbf{...}}| in Frage.
+Hier müssen ausnahmsweise \emph{zwei} Attribute geändert werden, da sich die \textsf{serifenlose} Schrift zu wenig vom übrigen Text abhebt.
+
+\glqq Anführungszeichen\grqq\ (siehe \secref{sec:Sonderzeichen}) sind sparsam zu verwenden, \zB bei umgangssprachlichen Begriffen oder wörtlichen Zitaten.
+\underline{Unterstreichen} und \mbox{S\,p\,e\,r\,r\,e\,n} sollen überhaupt nicht benutzt werden.
+Es ist wichtig, sich zu Beginn der Arbeit zu überlegen, welche Begriffe in welcher Schrift gesetzt werden, und dies konsequent einzuhalten.
+So können \bspw die Namen von Autoren mit \texttt{\textbackslash{}name\{$\left\langle\text{Name}\right\rangle$\}}, wie in \name{Dirac}'sche Deltafunktion, einheitlich in Kapitälchen gesetzt werden.
+
+
+\section{Einbinden von Quellcode}
+Wird Quellcode (\Matlab{}, C, \ldots) in der Arbeit angegeben, ist grundsätzlich eine Monospace-Schriftart zu verwenden, da nur so die Lesbarkeit des Codes
+gewährleistet werden kann.
+
+Quellcode (\Matlab{}, C, \ldots) kann auf verschiedene Arten eingebunden werden.
+Allgemein sollte mittels \verb|\linespread{1}| der ursprüngliche \LaTeX-Zeilenabstand benutzt werden.
+Manchmal kann es auch erforderlich sein, die Schrift zu verkleinern oder notfalls sogar die Seiten im Querformat zu beschreiben.
+Im laufenden Text sollten nur kleinere Code-Fragmente abgedruckt sein, längere Programme gehören grundsätzlich in den Anhang oder in einen separaten Ordner.
+
+Die einfachste Möglichkeit zum Einbinden von Quellcode ist die \verb|verbatim|-\bzw die \verb|verbatim*|-Umgebung.
+Der Code wird in Schreibmaschinenschrift \emph{exakt} (\inkl aller Leer- und Sonderzeichen) so wiedergegeben, wie er im \LaTeX-Quelltext steht.
+
+Komfortablere Möglichkeiten bietet das \verb|listings|-Paket, \zB Syntax-Highlighting mit verschiedenen Schriften oder das Einbinden externer Dateien.
+Die Umschaltung auf den einfachen Zeilenabstand muss aber von Hand erfolgen, \zB mittels\\[\parskip]
+\hspace*{2em}\verb|\lstset{\basicstyle=\linespread{1}\selectfont}|
+
+
+\section{Abstände und Sonderzeichen}
+\label{sec:Sonderzeichen}
+\LaTeX\ interpretiert ein Leerzeichen \verb*| | im Quelltext als normalen Wortzwischenraum.
+Nach Befehlen wird es jedoch ignoriert, da es dort nur das Ende des Befehls kennzeichnet.
+Soll \zB in dem Satz \glqq\TeX\ ist toll!\grqq\ nach \glqq\TeX\grqq\ ein Leerzeichen erscheinen, dann muss im Quelltext entweder \verb*|\TeX\ | oder \verb|\TeX{}| geschrieben werden.
+Im ersten Fall wird durch \verb*|\ | ein Leerzeichen erzwungen, im zweiten Fall wird die leere Umgebung \verb|{}| benutzt, um den Befehl \verb|\TeX| zu beenden.
+
+Manchmal führt ein normales Leerzeichen zu unerwünschten Ergebnissen.
+Bei fest verbundenen Begriffen benutzt man ein \emph{festes} Leerzeichens, \zB bei \verb|Dr.~Müller| oder \verb|3~Uhr|, das weder umgebrochen noch gedehnt werden
+kann, s.\,a.\ \secref{sec:Latex-Gliederung}.
+Bei zusammengesetzten Abkürzungen, beispielsweise \glqq\dah\grqq, \glqq\ua\grqq\ oder \glqq\zB\grqq, wird ein \emph{kleiner} Zwischenraum \verb|\,| verwendet.
+Hinter dem zweiten Punkt sollte wieder ein \verb*|\ | stehen, damit dieser nicht als Satzende interpretiert wird.
+Der kleine Zwischenraum \verb|\,| steht auch zwischen Zahl und Einheit bei physikalischen Größen, siehe \tabref{tab:Sonderzeichen}.
+
+Im \emph{mathematischen} Modus wird das Komma als Aufzählungszeichen interpretiert und dahinter ein kleiner Abstand eingefügt.
+Dies ist jedoch problematisch, da das Komma im Deutschen auch als \emph{Dezimal}komma verwendet wird.
+Um den zusätzlichen Abstand zu unterdrücken schreibt man \zB \verb|$2{,}5x$| für \glqq $2{,}5x$\grqq.
+
+Unterschiede sind auch bei den \glqq Strichen\grqq\ zu beachten.
+Der \emph{Bindestrich} \verb|-| steht bei zusammengesetzten Wörtern oder Trennungen und wird ohne zusätzlichen Zwischenraum benutzt.
+Der \emph{Gedankenstrich} \verb|--| steht bei eingeschobenen Satzteilen und als \glqq Bis-Strich\grqq.
+Als Gedankenstrich wird er immer mit einem Leerzeichen davor und dahinter benutzt, als \glqq Bis-Strich\grqq\ ohne Leerzeichen.
+Das \emph{Minuszeichen} \verb|$-$| gibt es nur im mathematischen Modus.
+\tabref{tab:Sonderzeichen} zeigt Beispiele für die drei Fälle.
+
+Die deutschen Anführungszeichen werden mit \verb|\glqq| und \verb|\grqq{}| \bzw \verb*|\grqq\ | gesetzt.
+Keinesfalls dürfen stattdessen englische Anführungszeichen \verb|``...''| oder gar das Zoll-Zeichen \verb|"..."| benutzt werden.
+Wie oben erläutert, muss der Befehl \verb|\grqq| mit \verb*|\ | oder mit \verb|{}| abgeschlossen werden, falls danach ein Leerzeichen folgen soll.
+
+\begin{table}
+  \caption{Die wichtigsten Abstände und Sonderzeichen.}
+  \label{tab:Sonderzeichen}
+  \setlength{\tabcolsep}{1em}\centering
+  \begin{tabular}{lll}\hline
+    Bezeichnung			&	Beispiel				&	Eingabe\\\hline
+    Leerzeichen			&	\TeX\ ist toll!			&	\verb*|\TeX\ ist toll!|\\
+					    &							&	\verb*|\TeX{} ist toll!|\\
+    festes Leerzeichen	&	Dr.~Müller				&	\verb|Dr.~Müller|\\
+    kleines Leerzeichen	&	d.\,h.\ 3,5\,km			&	\verb*|d.\,h.\ 3,5\,km|\\
+    Bindestrich			&	\TeX-Datei				&	\verb|\TeX-Datei|\\
+    Gedankenstrich		&	S.~153--165				&	\verb|S.~153--165|\\
+    Minuszeichen		&	$y=5x-2$				&	\verb|$y=5x-2$|\\
+    Anführungszeichen	&	\glqq Beispiel\grqq\	&	\verb*|\glqq Beispiel\grqq\ |\\
+						&							&	\verb*|\glqq Beispiel\grqq{}|\\\hline
+  \end{tabular}
+\end{table}
+
+
+
+\section{Definition eigener Befehle}
+Die Möglichkeit eigene Befehle in \LaTeX{} zu definieren und zu verwenden erleichtert das Erstellen einer wissenschaftlichen Arbeit deutlich.
+So dient ein eigener Befehl oft dazu, häufig verwendete Befehlsfolgen kürzer und schneller schreiben zu können.
+Von zentraler Bedeutung ist außerdem, dass man diesen Befehl einfach ändern kann.
+Hat man \zB alle Matrizen mit einem eigenen Befehl versehen, der diese fett formatiert, so lässt sich dies auch schnell für alle Matrizen wieder ändern.
+Entscheidet man sich Matrizen mit einem Unterstrich zu kennzeichnen, so ist lediglich die Anpassung des entsprechenden Befehls notwendig.
+
+Dies lässt sich auch auf Variablennamen übertragen.
+Definiert man \zB für $\tilde{\hat{\mat{x}}}_{b2}$ einen neuen Befehl \verb|\xb2|, so verkürzt sich zum einen der Schreibaufwand.
+Zum anderen lässt sich selbst in der Endphase der Arbeit die Variable umbenennen, \zB in $\mat{z}_2$, indem lediglich der Befehl verändert wird.
+Die sinnvolle Verwendung eines Befehls setzt damit voraus, dass er auch immer verwendet wird.
+
+Beispielhafte selbst definierte Befehle, die teilweise hier am Institut verwendet werden, sind in \charef{cha:commonmacros} zu finden.
+
+\section{Sonstiges}
+\subsection*{PDF-Ausgabe}
+Das \verb|hyperref|-Paket wird benutzt, um  die Ausgabe für das \emph{Portable Document Format} (PDF) zu optimieren.
+Dies funktioniert sowohl mit \TeX/Dvips als auch mit pdf\TeX, jedoch kann es bei mehrzeiligen oder umgebrochenen Verlinkungen zu Problemen mit der Positionierung des Links bei \TeX/Dvips kommen.
+Besondere Einstellungen sind dafür nicht erforderlich.
+
+Im PDF-Dokument können dann alle Verweise auf Kapitel, Gleichungen, Bilder, Literatur \usw angeklickt werden.
+Um eine gute Druckqualität zu gewährleisten, sind diese Links allerdings \emph{nicht} farblich hervorgehoben.
+
+Außerdem werden mit dem Paket \texttt{bookmark} in das PDF-Dokument \emph{Bookmarks} (Lesezeichen) eingebettet, die später als Baumstruktur erscheinen und die Navigation erleichtern.
+In den Bookmarks erscheint die Titelseite sowie alle Einträge des Inhaltsverzeichnisses.
+Schließlich werden auch noch \emph{Pagelabels} (also \glqq wahre\grqq\ Seitenzahlen) erzeugt, die ebenfalls die Navigation erleichtern und von Vorteil sind, wenn nur Teile des Dokuments gedruckt werden.
+
+
+\subsection*{Verwenden von \LaTeX-Paketen}
+Durch das Einbinden von Zusatzpaketen kann \LaTeX\ angepasst und erweitert werden.
+Die Pakete werden mit dem Befehl \verb|\usepackage{...}| eingebunden, \ggf können auch noch Optionen in \verb|[...]| angegeben werden.
+Folgende Pakete sollten auf jeden Fall benutzt werden:
+\begin{tabular}{*{2}{@{\qquad}l}}
+	\verb|inputenc|	&	Ermöglicht mit der Option \verb|utf8| Umlaute im Quelltext.\\
+	\verb|babel|	&	Mit Option \verb|ngerman| für neue deutsche Rechtschreibung.\\
+	\verb|graphicx|	&	Standard-Grafikpaket, \zB\ zum Einbinden von EPS-Bildern.\\
+\end{tabular}
+
+Zu sämtlichen Paketen findet man im Verzeichnis \verb|TEXMF/doc/latex| eine ausführliche Dokumentation.
+Zum Erstellen von Verzeichnissen, wie dem Symbol- oder Abkürzungsverzeichnis, kann das Paket \texttt{glossaries} verwendet werden.
+Dazu muss es entweder mit der Option \texttt{automake} aufgerufen werden, oder die \LaTeX-Werkzeugkette muss um einen Aufruf von \texttt{makeglossaries} erweitert werden, sofern dieses installiert ist, oder falls nicht um die Aufrufe von
+\begin{verbatim}
+	makeindex -s %.ist -t %.glg -o %.gls %.glo
+	makeindex -s %.ist -t %.alg -o %.acr %.acn
+	makeindex -s %.ist -t %.slg -o %.sls %.slo
+\end{verbatim}
+erweitert werden.
+
+Welche Pakete sonst noch zum Einsatz kommen, hängt vom Einzelfall ab -- allerdings sollten nicht mehr als nötig verwendet werden.
+Insbesondere sollte man auf Pakete verzichten, die das Layout verändern oder zu stark in das Font-System eingreifen.
+Im Folgenden sind in alphabetischer Reihenfolge einige Pakete aufgelistet, die für Abschlussarbeiten interessant sein könnten:
+\begin{list}{}{\setlength{\leftmargin}{2em}\item[]}
+  \verb|amsmath    dcolumn    lscape      longtable    subcaption|\\
+  \verb|amssymb    europs     latexsym    natbib       textcomp |\\
+  \verb|array      flafter    listings    siunitx      verbatim |
+\end{list}

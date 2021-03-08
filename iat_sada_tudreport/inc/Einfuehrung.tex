@@ -1,0 +1,90 @@
+\chapter{Struktur}\label{cha:struktur}
+\section{Variablenverzeichnis}
+- Aufpassen bei vergabe von variablennamen --> nicht mehrfach verwenden
+\section{Abkürzungsverzeichnis}
+\section{Aufgabenstellung}
+\section{Einleitung} 
+--> Lorcas\\
+- 1-2 Seiten\\
+\section{State of the Art und Allgemeines} 
+- 5 Seiten\\
+--> Jacky\\
+- Trajektorien im Betankungsvorgang\\
+- flugzeuglage relativ zueinander erklären (Abstand, winkel und länge des tankschlauchs)\\
+- tanker fliegt hinten und unten damit er besser auf störungen reagieren kann\\
+\section{Parameter, Notation, Modellbildung, Arbeitspunkt, Linearisierung, Zweiflugzeug-Modell, Störmodelle (Masse, evtl. Wind)}
+- 10-15 Seiten\\
+--> Matheus\\
+- koordinatensysteme\\
+- AP erklären\\
+- bezeichnung nominelles system wegen masse\\
+- bezeichnung flugzeug 1 und 2 \\
+- erklären, welches Flugzeug führungsflugzeug ist\\
+- Wahl der zustände und Ausgänge\\
+- massenmodell erklären\\
+- kurz Windmodell erklären (mit Referenz)\\
+- Definition von allg systemparametern wie A,B,C,n,p,q etc.\\
+- Dabei dann auch erklären warum die sehr kleinen Werte nicht entfernt wurden \\
+\section{Anforderungen an die Regelung}
+--> Markus\\
+- 2 Seiten\\
+\section{Theorie der verwendeten Regelungsverfahren}
+--> Lorcas\\
+- 5 Seiten\\
+\subsection{Polbereichsplatzierung}
+\subsection{Robuste Verkopplungsregelung mit geregelt invariantem Unterraum}
+- allgemeine Erklärung zu Verkopplungsregelung\\
+- Erklärung der berechnung des modifizierten Vorfilters
+- Theorie zu geregelt invariantem Unterraum \\
+- Erklärung was das für die Regelgrößen bedeutet (nur w1 nutzbar)\\
+\subsection{gammasyn}
+- gammasyn --> warum? vorteile (gleichzeitig entkopplung, verkopplung, polbereichsplatzierung)\\
+- Herleitung der tf\_structure (Verkoopplung deswegen SW Teil gleich null, Eingänge w2 nicht benutzt deswegen O Teil gleich NaN, Entkopplung bei F1 deswegen NW Teil NaN und 0 Struktur)\\
+
+\section{Entwurf eines robusten Verkopplungsreglers für das nominelle Zwei-Flugzeug-Modell (gleiche Masse)}
+--> Markus\\
+- 10-12 Seiten \\
+- Eigenwerte des Systems\\
+- Wahl des Polgebiets\\
+- Welcher REgler kommt raus?\\
+- Wie sehen die Ergebnisse aus?\\
+- Plots pzmap und step von nominellem Modell (linear)\\
+- Ergebnisse von nominellem Modell (nichtlinear) --> Sprünge Sollwerte, Stellgrößen, Verkopplung der Ausgänge, Verkopplung der Positionen\\
+- Robustheitsanalyse Parameterschwankung --> pzmap und step bei Änderung der Masse --> Regler ist nicht robust\\
+- Demonstration der "Nicht-Robustheit" am nichtlinearen Modell (was passiert, wen man die Modellmasse ändert)\\
+- Strukturelle Erweiterungen (PID-Regelung) für nominelles Modell zur Regelung von sprungförmigen Störungen für stationäre Genauigkeit \\
+--> Ergebnisse der PID-Regelung bei Wind, Zustandsänderungen (Luftloch) und Massenfluss\\
+\section{Zusammenfassung und Ausblick}
+--> Lorcas\\
+- 1-2 Seiten\\
+\subsection{Fazit}
+- Verkopplung für lineares und nichtlineares Modell erfolgreich \\
+- sobald Stellgrößenbeschr. dann wird System bei Anregung von $\Theta$ instabil \\
+- ansonsten stationär genau, in den anderen Fällen stellgrößenbeschr eingehalten etc... \\
+- in den anderen Fällen (also alles was nicht $\Theta$ ist) ist im Fall für Führungsverhalten, also keine Störung, auch die Positionsverkopplung gegeben  \\
+- Multi-Modell-Ansatz failt auch schon für extrem kleine Schwankungen (\valunit{1.167}{\%}) --> Verkopplung nicht mehr möglich, system wird instabil wegen EW in rechter s-halbebene, also nicht robust \\
+- zeigt sich auch wenn man die Modelle mit Massenschwankung mit unseren Regler regelt, der für das nominelle system ohne multi-modell-ansatz entworfen wurde (dann bleibt halt ne abweichung, verkopplung nicht erfüllt, auch die positionen weichen ab)\\
+--> keine robustheit gegnüber parameterschwankung in masse\\
+
+- mit unterlagerung können sprungförmige störungen ausgeregelt werden \\
+- bei luftloch bleibt verkopplung erhalten auch in den positionen \\
+- bei wind bleibt verkopplung in den ausgängen erhalten, aber nicht in den positionen (flugzeuge entfernen sich in y-richtung)\\
+--> robustheit gegenüber störeingängen, die die zustände direkt anregen \\
+--> aber es zeigt sich, dass die positionsverkopplung nur über euler winkel nicht erreicht werden kann
+
+\subsection{Ausblick}
+- Unterschieldiche Flugzeuge modellieren --> andere Dynamik\\
+- Erweiterung der Regelung um eine Positionsregelung (Verkopplung von x,y)\\
+- Modellierung der Sensorik\\
+- Verbesserung der Robustheit gegnüber massenschwankung (Abhängigkeit vom AP, Abhängigkeit von Masse)\\
+- evtl(\textit{Verbesserung der Robustheit --> krasse Abhängigkeit von Theta --> Verkopplung ohne theta})\\
+- evtl(\textit{warum ist gammasyn so kacke})
+\section{Anhang}
+\subsection{Simulink Modell}
+\subsection{Visualisierung}
+- innerhalb von Matlab/ Simulink\\
+- Flight Gear \\
+\section{Literaturverzeichnis}
+- was referenzieren wir für allgemeines? Föllinger oder Mehrgrößenreglerentwurf?
+%Im Anschluss daran finden sich in zwei Kapiteln Hinweise zur Erstellung der schriftlichen Arbeit. Kapitel~\ref{cha:Hinweise-Allgemein} gibt allgemeine Hinweise, wohingegen in Kapitel~\ref{cha:Hinweise-Latex} zusätzlich \LaTeX-spezifische Befehle vorgestellt werden. Je nach verwendetem Programm, kann das eine oder andere Kapitel übersprungen werden.
+

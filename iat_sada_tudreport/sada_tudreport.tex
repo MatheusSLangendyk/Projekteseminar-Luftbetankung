@@ -1,0 +1,49 @@
+% Ggf. Option "numbers=noenddot" einfügen, damit "Abbildung 3.1: _" statt "Abbildung 3.1.: _" verwendet wird.
+%\documentclass[11pt, twoside, colorback, accentcolor=tud2c, nopartpage, bigchapter, fleqn, ngerman, longdoc]{tudreport}
+
+\input{./inc/Header.tex}
+% =================================================================================
+\begin{document}
+	\input{./common/preface.tex}% Titelseite, Aufgabenstellung, Erklärung, Abstract, Inhaltsverzeichnis, etc.
+	\input{./inc/Einleitung.tex}
+	\input{./inc/Stand_der_Technik.tex}
+	\input{./inc/Parameter_und_Notationen.tex}
+	\input{./inc/Modellbildung_eines_Flugzeugs.tex}
+	\input{./inc/Arbeitspunkt_und_Linearisierung.tex}
+	\input{./inc/Gesamtmodell.tex}
+	\input{./inc/GrundlagenReg.tex}
+	\input{./inc/Anforderungen.tex}
+	\input{./inc/Verkopplungsregelung.tex}
+	\input{./inc/Robustheitsanalyse_um_AP.tex}
+	\input{./inc/Fazit.tex}
+
+
+	% =================================================================================
+	% Anhang
+	% =================================================================================
+	\appendix % Damit wird der Anhang begonnen. Die Kapitel werden ab jetzt mit Buchstaben nummeriert
+	
+	\input{./inc/Anhang.tex}
+	
+%	\input{./inc/commonmacros_desc.tex}
+	
+%	\ifSADAfinal
+%		\SADApostfacelof  % Abbildungsverzeichnis
+%		\SADApostfacelot  % Liste der Tabellen
+%		\SADApostfaceloa  % Liste der Algorithmenür Paket algorithm
+%		\SADApostfacelol  % Liste der Listings
+%		\SADApostfacebib{}{} % Literaturverzeichnis Argumente nur für BibTex notwendig. 1. Argument: Stil   2. Argument .bib Datei
+	
+%		\SADApostface[
+%			lof=false,
+%			lot=false,
+%			loa=false,
+%			lol=false,
+%			bib=true,
+%			order={lof,lot,bib},
+%			bibstyle=bababbrv,
+%			bibfile=./bib/literature
+%		]
+%	\fi
+	\printbibliography
+\end{document}

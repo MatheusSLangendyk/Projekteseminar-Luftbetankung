@@ -1,0 +1,71 @@
+\chapter{Fazit und Ausblick}\label{chap:Fazit}
+Nachdem die Ergebnisse ausführlich diskutiert wurden, sollen die Erkenntnisse der Arbeit im folgenden Abschnitt noch einmal zusammengefasst werden. Außerdem werden anhand der gewonnenen Ergebnisse einige Vorschläge für zukünftige Forschungsarbeiten gemacht.
+
+\section{Zusammenfassung der Ergebnisse}
+Zunächst lässt sich sagen, dass eine erfolgreiche Verkopplung am nominellen System durchgeführt werden kann. Hierbei zeigt sich jedoch, dass die Regelung bezogen auf den Nickwinkel $\Theta$ sehr empfindlich reagiert.
+Diese Sensibilität äußert sich sowohl in den Stellgrößenverläufen als auch bei der Störgrößenrobustheit.
+
+Bei der Untersuchung der Robustheit bezüglich Parameterschwankungen, zeigt sich, dass mithilfe des Multi-Modell-Ansatzes kein robuster Verkopplungsregler ausgelegt werden kann. Selbst bei Modellen mit nur geringen Massenunterschieden kommt es entweder zu numerischen Problemen oder die Optimierung führt zu instabilen Reglern - selbst wenn durch das Polgebiet lediglich Stabilität gefordert wird. 
+Bei Verwendung des Reglers, welcher für das nominelle Modell ausgelegt wurde, führen Masseschwankungen zu bleibenden Regelabweichungen. Zudem werden die Verkopplungsbedingungen nicht mehr erfüllt und es kommt zu unerwünschten Abweichungen bei den relativen Positionen der Flugzeuge.
+Die Robustheit gegenüber Masseschwankungen kann mit dem entworfenen Regler nicht erzielt werden.
+
+Bezogen auf sprungförmige Störungen hingegen, lassen sich mit Hilfe der unterlagerten Regelung, bessere Ergebnisse erzielen. Es zeigt sich, dass es möglich ist, Störungen, welche direkt auf die Zustände wirken, auszuregeln. Bei der Störung durch Luftlöcher bleibt auch der Abstand zwischen den Flugzeugen konstant.
+Beaufschlagt man jedoch Wind als Störung, so bleibt zwar die Verkopplung erhalten, bei den relative Flugzeugpositionen kommt es allerdings wieder zu unerwünschten Abweichungen, da die Positionsdifferenz nicht explizit geregelt wird.
+
+\section{Ausblick für zukünftige Forschungsprojekte}
+Für die Zukunft gilt es zunächst die aufgetretenen Probleme zu beheben. Hierfür sollte auf jeden Fall eine Erweiterung der Regelung um die Positionen der beiden Flugzeuge in $x$- und $y$-Richtung implementiert werden. Des Weiteren kann eine Trajektorien-Folge-Regelung dabei helfen vorgegebene Kurse abzufliegen.
+Auch eine Verbesserung der Robustheit gilt es zu ermöglichen. Bezogen auf die Masse, könnte diese als zusätzlicher Zustand im Modell integriert werden, um Schwankungen beim Betankungsvorgang besser berücksichtigen zu können. Eine Überarbeitung des Modells oder eine Anpassung des Optimierungsalgorithmus könnten zu einer Verbesserung der numerischen Stabilität führen.
+
+Zudem wird in dieser Arbeit davon ausgegangen, dass alle Zustandsgrößen exakt zur Verfügung stehen. Da dies in der Realität nicht der Fall sein wird, sollte eine Modellierung der Sensorik implementiert werden. Hierbei müssten Rauscheinflüsse und Dynamiken der Sensoren berücksichtigt werden. Des Weiteren sind Recherchen nötig, um zu klären welche Sensorsignale zur Verfügung stehen und welche eventuell geschätzt werden müssten. Diese Schätzungen könnten beispielsweise mit einem Beobachterentwurf geschehen. Außerdem wurde die Dynamik der Aktorik vernachlässigt. Um ein noch realitätsgetreueres Modell zu erhalten, kann die Dynamik der Stellglieder zusätzlich modelliert werden.
+
+In vorliegender Arbeit wird der Einfachheit halber zunächst davon ausgegangen, dass es sich bei beiden Flugzeugen um das gleiche Modell handelt. Ein weiteres Forschungsgebiet stellt die explizite Gestaltung des Tankflugzeugs dar. Dieses muss speziell auf die Problematiken bei der Luftbetankung angepasst werden. Das heißt, es sollte zum Beispiel eine gewisse Dynamik aufweisen oder robuster auf Turbulenzen und Windböen reagieren. Mit einem für diesen Vorgang entsprechend angepassten Flugzeug, wäre es wahrscheinlich möglich, bessere Ergebnisse zu erzielen. Zudem kann der Detaillierungsgrad erhöht werden, indem der Einfluss der beiden Flugzeuge aufeinander berücksichtigt wird. 
+
+Global betrachtet ist noch einiges an Forschung nötig bis erste Prototypen getestet werden können. Nichtsdestotrotz handelt es sich bei der zivilen Luftbetankung um einen vielversprechenden Ansatz, welcher bei einer zukünftigen, serienmäßigen Umsetzung enorme Mengen an Kraftstoff einsparen wird. Dies wäre ein weiterer Schritt hin zu einer klimaneutralen Gesellschaft.
+
+%- Modell vallidiert\\
+%- Verkopplung für Nominelles System gelungen\\
+%- Leider numerische Probleme evt. behebar durch weiter forschung\\
+%
+%
+%
+%-Verkopplung für lin un NL Modell erfolgreich\\
+%
+%-Sobald stellgr.beschr. dann mit Theta instab\\
+%-restl. Stellgr. eingehalten\\
+%- für alle ausser Theta auch pos. verkopplung bei führungsgr. sprüngen \\
+%- Multi Modell failt auch schon für extrem klein schwankungen\\
+%	-> Verkoppll nichtmerh möglich, system instabil weil EW rechts also lnicht robust\\
+%zeigt sich auch wenn man die Modell mit Massenschwankungen mit unserem regeler regelt (der fürs nominelle ohne Multi) dann regelabweichung, verkopplun gnihct ewrfüllt und pos. weicht ab\\
+%
+%-> Keine robustheit gegenüber Masseschwankungen\\
+%
+%- unterlagerung kann sprungförmige strörungen ausregeln\\
+%-luftloch bleibt verkopplung erhalten(auch in Pos.)\\
+%- bei Wind bleibt verkopplung der ausgänge erhalten aber nicht bei POs.\\
+%
+%-> robust gegen störungen die direkt auf Zustände wirken\\
+%-> Pos. verkopplung kann nicht erreicht werden.\\
+
+
+
+
+
+
+
+
+
+%Ausblick \\
+%
+%-Modellierung der parameterschwankung Masse\\
+%- Modellierung von Sensoren\\
+%- Evtl. implementierung einer Trajektorienfolgeregelung \\
+%
+%Weitere Forschung dann erste Prototypen zur praktischen erprobung -> wird noch dauern bis Serienmäßig 
+%Dennoch vielversprechender Ansatz welcher bei Umsetzung enorme Menge Kraftstoff einsparen wird und damit einen Schritt weiter \\
+%
+%-Unterschiedliche Flugzeuge Modellieren -> andere Dynamik\\
+%-Erweiterung der Regulung um Pos. regelung (Verkopplung von xyz)\\
+%-Modellierung der Sensorik\\
+%-Verbesserung der Robustheit (gegenüber masseschw., Abhängigkeit AP, Abh. Nummerik)\\
+%-evtl.(verbesserung Rob -> krasse Theta Abh. -> Verk ohne Theta)\\
+%- evtl. (warum ist gammasyn so kacke)\\

@@ -1,0 +1,71 @@
+\chapter{Entwurf eines Verkopplungsreglers}\label{cha:Regler}
+In diesem Kapitel wird mithilfe der in Kapitel \ref{cha:GrundlagenReg} vorgestellten Methoden ein Verkopplungsregler für das Gesamtmodell, welches aus den beiden zu verkoppelnden Flugzeugen besteht, entworfen. Dazu werden zunächst die Eigenwerte und Nullstellen des Systems analysiert und davon ausgehend das Polgebiet sowie der Startwert für die Optimierung gewählt. Schließlich werden die Ergebnisse, die sich mit dem entworfenen Regler erzielen lassen, hinsichtlich der in Kapitel \ref{cha:Anforderungen} hergeleiteten Anforderungen evaluiert und strukturelle Erweiterungen zur zusätzlichen Robustheit für das nominelle Modell entworfen.
+
+\section{Systemeigenwerte und -nullstellen}
+Zunächst sollen die Pol- und Nullstellen des nominellen Zwei-Flugzeug-Systems betrachtet werden. Diese sind in Tabelle \ref{tab:pz_uncontrolled} dargestellt.
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{||c c c c c c c||} 
+	\hline
+	 & & Flugzeug 1& & & &\\ [0.5ex] 
+	\hline\hline
+	 Polstellen & \makecell{-0.9446 + 1.9706i \\ -0.9446 - 1.9706i} & \makecell{-0.0153 + 0.0792i \\ -0.0153 - 0.0792i} & \makecell{-1.0311 + 1.7936i \\ -1.0311 - 1.7936i} & 0 & -5.0659 & -0.0567\\ [1ex]
+	 Nullstellen & -37.9002 & -90.6262 & & & &\\ [1ex]
+	\hline\hline
+\end{tabular}
+\begin{tabular}{||c c c c c c c||} 
+	& & Flugzeug 2& & & &\\ [0.5ex] 
+	\hline\hline
+	Polstellen & \makecell{-0.9435 + 1.9696i\\-0.9435 - 1.9696i} & \makecell{-0.0153 + 0.0793i\\-0.0153 - 0.0793i} & \makecell{-1.0301 + 1.7925i\\-1.0301 - 1.7925i} & 0 & -5.0600 & -0.0568\\ [1ex]
+	Nullstellen & -39.1047 & -90.6228 & & & &\\ [1ex]
+	\hline
+\end{tabular}
+\caption{\label{tab:pz_uncontrolled} Lage der Pol- und Nullstellen des ungeregelten Zwei-Flugzeug-Modells.}
+\end{center}
+\end{table}
+Da beiden Flugzeugen bis auf den unterschiedlichen Arbeitspunkt das gleiche Modell zugrunde liegt, besitzen sie auch entsprechend fast identische Pol- bzw. Nullstellen. Aus den komplex konjugierten Polpaaren ist außerdem erkennbar, dass die Flugzeuge stark schwingungsfähige Eigenmoden besitzen. Diese sollten entsprechend der Regelungsanforderungen möglichst gedämpft werden. Zudem besitzt das System aufgrund der Polstellen in $s=0$ integrierendes Verhalten, wodurch es grenzstabil wird. Da die Nullstellen alle in der linken s-Halbebene liegen, handelt es sich um ein minimalphasiges System. Diese Eigenschaft lässt sich für den Reglerentwurf dahingehend ausnutzen, die Nullstellen durch Platzierung der Eigenwerte zu kompensieren und damit die Forderung nach teilweiser Entkopplung zu erfüllen. 
+
+\section{Initialisierung}
+Bevor die Ergebnisse der Regelung diskutiert werden können, werden nachfolgend noch einige Parameter der Optimierung erläutert. Da sich für das Optimierungsproblem keine exakte Lösung finden lässt, wird der approximative Ansatz mit dem Solver \texttt{fmincon} verwendet \cite{Schaub}. 
+
+\subsection{Struktur der Übertragungsmatrix}
+Für die Auslegung eines Verkopplungsreglers mittels \texttt{gammasyn} ist es notwendig die Struktur der gewünschten Übertragungsmatrix des geregelten Systems zu bestimmen. Diese kann unter dem Parameter \texttt{tf\_structure} vorgegeben werden \cite{gammaDoku}. Wie bereits in Kapitel \ref{cha:GrundlagenReg} erklärt, werden die Führungseingänge $\Delta\underline{w}_2$ nicht mehr verwendet. Daher können die entsprechenden Einträge der Übertragungsmatrix beliebig sein, was durch den Eintrag \texttt{NaN} dargestellt wird. Zudem sollen die Einträge der süd-westlichen $4\times4$-Quadratmatrix der Übertragungsmatrix null sein, um die Forderung nach Verkopplung der Ausgänge der beiden Flugzeuge zu erfüllen. Die nord-westliche $4\times4$-Quadratmatrix wird so gewählt, dass die Ausgänge von Flugzeug 1 weitestgehend von einander entkoppelt sind. Lediglich der Nickwinkel $\theta_1$ und die Höhe $h_1$ sollen sich gegenseitig beeinflussen dürfen, da die Nickbewegung nötig ist, um die Höhe des Flugzeugs zu verändern. Damit ergibt sich die folgende Gesamtstruktur der gewünschten Übertragungsmatrix:
+\begin{align*}
+	\texttt{tf\_structure} = \begin{bmatrix}[cccc|cccc]
+	\texttt{NaN} & 0 & 0 & 0 & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} \\
+	0 & \texttt{NaN} & 0 & 0 & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} \\
+	0 & 0 & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} \\
+	0 & 0 & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} \\
+	\hline
+	0 & 0 & 0 & 0 & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} \\
+	0 & 0 & 0 & 0 & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} \\
+	0 & 0 & 0 & 0 & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} \\
+	0 & 0 & 0 & 0 & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} 
+	\end{bmatrix}
+	 \begin{array}{l}
+	\\
+	\MyLBrace{7ex}{$\underline{y}_1$}
+	\\ 
+	\MyLBrace{7ex}{$\underline{y}_2 = \Delta\underline{y}$}
+	\\
+	\\
+	\end{array}
+\end{align*}
+
+\subsection{Polgebiet}
+Das Polgebiet, welches zur Reglerauslegung verwendet wird, setzt sich aus einer nach links geöffneten Hyperbel sowie einem Kreis zusammen. Dadurch lässt sich das in Kapitel \ref{cha:GrundlagenReg} beschriebene Polgebiet $\Gamma$ mathematisch beschreiben. Durch die Hyperbel kann eine Grenze bezüglich der Minimalgeschwindigkeit der Pole festgelegt werden. Außerdem kann über die Öffnung der Hyperbel die maximale Überschwingweite der Sprungantworten beeinflusst werden. Der Kreis dient dabei der Begrenzung der Maximalgeschwindigkeit der Systempole. Der Radius des Kreises wird so gewählt, dass die invarianten Nullstellen des Systems durch Platzierung der Eigenwerte kompensiert werden können. Die Öffnungsweite der Hyperbel definiert man so, dass starkes Schwingen vermieden wird. Der rechte Rand der Hyperbel wird so gewählt, dass die Pole nicht zu weit nach links verschoben werden, um hohe Stellgrößen zu vermeiden. Die Wahl von $a = 0.3$, $b=0.2$ und $R=100$ hat sich dabei experimentell als ausreichend herausgestellt. $a$ gibt den Abstand der Hyperbel zum Ursprung an, während über das Verhältnis $\frac{b}{a}$ der Öffnungswinkel der Hyperbel definiert wird. $R$ gibt den Radius des Kreises mit Mittelpunkt im Urspung an. Für detailiertere Ausführungen und weitere Polgebiete sei auf \cite{gammaDoku} verwiesen. Durch diese Parameterwahl können alle Anforderungen bezüglich der Eigenwertplatzierung erreicht werden.
+\subsection{Startwert}
+Als Startwert für die Optimierung wird ein Ricattiregler $\mat{K}_\tn{init}$ ausgelegt, der beide Flugzeuge in ihrem jeweiligen Arbeitspunkt stabilisiert. Zudem wird davon ausgehend ein entsprechendes Vorfilter unter Anwendung der Gleichung
+\begin{align}
+	\mat{F}_\tn{init} = [\mat{C}(\mat{B}\mat{K}_\tn{init}-\mat{A})^{-1}\mat{B}]^{-1}
+\end{align}
+ausgelegt  \cite{Mehrgr}. Dafür werden die folgenden Gütematrizen
+\begin{align*}
+	\mat{Q} = 1\eexp{-05}\cdot\mat{I}^{18\times18}\qquad \tn{und} \qquad & 	\mat{R} = \tn{diag}\begin{bmatrix}
+	1 & 1 & 1\eexp{-05} &  1\eexp{-03} & 1 & 1 & 1\eexp{-05} &  1\eexp{-03}
+	\end{bmatrix}
+\end{align*}
+verwendet. Der daraus entstehende Regler wird an dieser Stelle lediglich aus Gründen der Vollständigkeit erwähnt und soll nicht weiter betrachtet werden, da er nur als Initialisierung dient. Allerdings sei ebenso erwähnt, dass bei den Matrizen $\mat{K}_\tn{init}$ und $\mat{F}_\tn{init}$ Werte der Größenordnung $1\eexp{-11}$ respektive $1\eexp{-09}$ entfernt wurden, da das Ergebnis der Optimierung vom jeweiligen Startwert abzuhängen scheint und mit diesen Initialwerten die besten Ergebnisse erzielt werden konnten.
+
+\textbf{Hinweis:} \\
+Der unter Verwendung des zuvor beschriebenen Polgebiets und der angegebenen Wunschstruktur für die Übertragungsmatrix ausgelegte Verkopplungsregler $\mat{K}_\tn{koppel}$ für das nominelle Zwei-Flugzeug-System sowie die Matrix des nach Gleichung \ref{eq:f_mod} berechneten modifizierten Vorfilters sind in Anhang \ref{app:matrizen} vollständig dargestellt.

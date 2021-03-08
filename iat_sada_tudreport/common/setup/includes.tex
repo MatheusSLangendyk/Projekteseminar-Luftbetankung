@@ -1,0 +1,132 @@
+% Dieses File dient zum Einbinden wichtiger und nützlicher Pakete.
+% Nicht alle Pakete müssen verwendet werden.
+%
+\usepackage[T1]{fontenc}	% Für Silbentrennung bei Wörten mit Sonderzeichen (z.B. Umlaute)
+\usepackage[utf8]{inputenc}	% Um Sonderzeichen (ä, ß, é, ...) direkt eingeben zu können
+\usepackage[english,main=ngerman]{babel}
+							% Für Sprachenspezifisches
+							% ngerman ist schon als globale Option definiert
+\usepackage{ifclass}
+\usepackage{iflang}			% für sprachabhängige Einstellungen
+\usepackage{xkvltxp}		% für Macros in key-value Paketoptionen
+
+%\usepackage{helvet}		% Helvetica als Standard-Sans-Schriftart
+\usepackage[stable]{footmisc}
+\usepackage{booktabs}
+
+
+\usepackage{graphicx}		% zum Einbinden von Postscript
+\usepackage{psfrag}			% Beschriftung der Bilder
+\ifbeamer
+	\usepackage{amsmath}% Mehr mathematischer Formelsatz
+\else
+	\usepackage[tbtags]{amsmath}% Mehr mathematischer Formelsatz
+\fi
+%\usepackage{amssymb}		% Mehr mathematische Symbole
+%\usepackage{amsthm}
+
+\usepackage{float}			% Für Parameter [H] bei Fließobjekten
+
+\usepackage{epsfig}			% Um eps-Bilder einzubinden
+\usepackage{scrhack}		% Um Warnung "float@addtolists detected" zu unterdrücken 
+\usepackage{subcaption}		% Für Unterabbildungen
+\usepackage{ltxtable} 		% Vereinigt TabularX und Longtable
+\usepackage{upgreek}		% Für nicht-kursive kleine griechischen Buchstaben
+\usepackage{uniinput}		% Diverse Makros zum Ersetzen von UTF8 Zeichen durch Latex äquivalente					
+\usepackage{multirow}		% Für mehrzeilige Felder in Tabellen
+\usepackage{rotating}		% Zum Drehen von Objekten
+\usepackage{icomma}			% Damit nach Dezimalkommas kein Abstand eingefügt wird
+\usepackage{dcolumn}		% Zum Ausrichten von Tabellenspalten am Dezimaltrennzeichen
+
+%\usepackage{wrapfig}		% Für kleine Bilder am Rand
+%\usepackage{floatflt}		% Alternative zu wrapfig
+%\usepackage[hang]{caption}	% Damit mehrzeilige Bildunterschriften gut aussehen
+\usepackage{textcomp}		% Für Sonderzeichen im normalen Text
+							% (offensichtlich in tudreport schon eingebunden)
+\usepackage[ngerman]{varioref}		% Für vref
+\usepackage{color}			% Für farbigen Text
+\usepackage{placeins}		% Für \FloatBarrier
+\usepackage{xspace}
+\usepackage{cancel}			% Zum Wegstreichen von Gleichungstermen \cancel{a} oder \cancelto{0}{a}
+\usepackage{listings}		% Um formatierten Quellcode einzubinden
+
+
+\usepackage{array}			% Für Zellentyp "m{}" in tabular-Umgebungen (Vertikal zentriert)
+\usepackage{moreverb}		% Für Umgebung "`verbatimtab"' (Verbatim mit Tabs)
+\renewcommand{\verbatimtabsize}{4\relax}	% Standardtabweite in "`verbatimtab"'
+											% ist 4 Zeichen
+
+\usepackage{abk}
+
+\usepackage{siunitx}		% Um Zahlen mit Einheiten korrekt darzustellen \SI{12}{\meter\per\second} 
+\sisetup{
+	range-units=single,
+	range-phrase={\,\textnormal{\textendash}\,},
+	output-decimal-marker={,},
+	%per-mode=fraction,
+	per-mode=reciprocal,
+	per-mode=symbol,
+	math-micro=\muup,% Im TU-Design passt das µ sonst nicht
+	math-ohm  =\Omegaup,
+	text-micro={\fontfamily{mdbch}\textmu},
+	text-ohm  ={\fontfamily{mdbch}\textohm}
+}
+
+% ======== Glossar =========
+\newif\ifSADAuseglossaries
+\SADAuseglossariestrue
+\SADAuseglossariesfalse
+\ifSADAuseglossaries
+	\usepackage[automake, acronym, symbols, toc, translate=babel]{glossaries}
+	\addto\captionsngerman{%
+		\renewcommand*{\acronymname}{Abkürzungsverzeichnis}
+		\renewcommand*{\glssymbolsgroupname}{Symbolverzeichnis}
+	}
+\fi
+
+% ======== Anfang Literaturverwaltung =====
+%\usepackage[datename]{babelbib}	% Für deutsche Literaturverwaltung
+%\setbtxfallbacklanguage{ngerman}
+%\btxprintISSN{false}
+%\setbibliographyfont{lastname}{\textsc}%
+\usepackage[babel]{csquotes}
+\ifbeamer
+	\usepackage[
+		backend=biber,
+		style=iatsada-numeric,
+		backref=false
+	]{biblatex}					% Für deutsche Literaturverwaltung
+\else
+	\usepackage[
+		backend=biber,
+		style=iatsada-numeric,
+		backref=true
+	]{biblatex}					% Für deutsche Literaturverwaltung
+	% ==========================================
+\fi
+
+\ifbeamer
+	% Hier Pakete die nur für Präsentationen benötigt werden
+	\usepackage{animate}
+	\usepackage{multimedia}
+\fi
+
+\ifbeamer
+	\usepackage{todonotes}		% Für Anmerkungen \todo{Bitte ändern} bzw. \todo[inline]{Bitte ändern}
+\else
+	\usepackage[textwidth=1.8cm, textsize=tiny]{todonotes}		% Für Anmerkungen \todo{Bitte ändern} bzw. \todo[inline]{Bitte ändern}	
+	%muss eigentlich hinter begin{document} stehen, macht dann aber die Fusszeile kaputt
+	%\setlength{\marginparwidth}{1.8cm} % notwendig damit todos am Rand korrekt dargestellt werden (siehe Doku todonotes Paket)
+\fi
+
+% Das Packet hyperref immer als letztes einbinden (nur bookmark darf danach kommen)!
+% Für Verlinkungen im erzeugten pdf
+\ifbeamer
+	\usepackage[colorlinks=false]{hyperref}
+\else
+	\usepackage[unicode=true, colorlinks=false, breaklinks=true]{hyperref}
+	\ifSADATUbama
+		\usepackage[a-1b]{pdfx}
+	\fi
+\fi
+\usepackage{bookmark}

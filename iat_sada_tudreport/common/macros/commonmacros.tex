@@ -1,0 +1,348 @@
+% Diese Datei dient zum definieren nützlicher Befehle.
+% Sie soll lediglich als Beispiel dienen, wie Befehle definiert werden, und welche Befehle nützlich sein können.
+\newcommand{\eqp}{\ensuremath{\, \, \, .}}
+\newcommand{\M}[1]{\textbf{#1}} %Matrix  M
+\newcommand{\Mr}[1]{\textbf{#1}_\rho} %Matrix mit tiefgestelltem rho, M_rho
+\newcommand{\Mtil}[1]{\tilde{\textbf{#1}}} %Matrix mit Tilde
+\newcommand{\Mtilt}[2]{\tilde{\textbf{#1}}_{#2}} %Matrix mit Tilde mit tiefgestelltem arg2
+\DeclareRobustCommand{\Mt}[2]{\textbf{#1}_{#2}} %Matrix M mit tiefgestelltem arg2
+
+
+\DeclareRobustCommand{\w}[1]{\underline{#1}} %Vektor arg1 unterstrichen 
+\DeclareRobustCommand{\wt}[2]{\underline{#1}_{#2}} %Vektor unterstrichen w mit tiefgestelltem arg2
+\DeclareRobustCommand{\wr}[1]{\underline{#1}_{\rho}} %Vektor unterstrichen mit rho, w_rho
+
+% Inhalt
+% ======
+%	Makros für Referenzen (Abbildungen, Zitate, ...)
+%	Makros für Abbildungen
+%	Makros für Einheiten, Exponenten
+%	Makros für Formeln
+%	Makros für Entwurf
+%   Definitionen für Umgebungen
+
+% Makros für Abbildungen
+% ======================
+	% zum Skalieren nach Ersetzen durch psfrag
+	\newcommand*{\incgraphicsw}[2]{\resizebox{#1}{!}{\includegraphics{#2}}}
+
+
+% Textbausteine
+% =============
+	% Produktnamen
+	\newcommand*{\Matlab}{\textsc{Matlab}}
+	\newcommand*{\Matlabreg}{\textsc{Matlab}\textsuperscript{\tiny \textregistered}}
+	\newcommand*{\MatSim}{\textsc{Matlab/Simulink}}
+	\newcommand*{\Simulink}{\textsc{Simulink}}
+	\newcommand*{\Simulinkreg}{\textsc{Simulink}\textsuperscript{\tiny \textregistered}}
+	
+	% Das Makro |\name|\marg{person} formatiert einen Personennamen bspw. eines Erfinders oder Entdeckers gemäß |\name{Euler}| \arrow\ \name{Euler}.
+	\newcommand*{\name}[1]{\textsc{#1}}
+
+
+
+% Makros für Einheiten, Exponenten
+% ================================
+
+	\newcommand*{\unit}[1]{\ensuremath{\mathrm{#1}}}
+	
+	% Wert mit Einheit (mit kleinem Leerzeichen dazwischen), aus Text- UND Math-Modus
+	\newcommand*{\valunit}[2]{\ensuremath{#1\,\mrm{#2}}}
+
+
+	% "°C", im Text- oder Mathe-Modus
+	\newcommand*{\degC}{
+		\ifmmode
+			^\circ \mrm{C}%
+		\else
+			\textdegree C%
+		\fi}
+
+	\newcommand*{\degree}{
+		\ifmmode
+			^\circ%
+		\else
+			\textdegree%
+		\fi}
+	
+	% Für Exponentenschreibweise ( Anwendung: 123\E{3} )
+	\newcommand*{\E}[1]{\ensuremath{\cdot 10^{#1}}}
+	
+	\newcommand*{\eexp}[1]{\ensuremath{\mathrm{e}^{#1}}}
+	\newcommand*{\iu}{\ensuremath{\mathrm{j}}}
+
+	\newcommand*{\todots}{\ensuremath{,\,\hdots,\,}}
+
+
+% Makros für Formeln
+% ==================
+
+	% Definition für Vektor und Matizen
+    \newcommand*{\mat}[1]{{\ensuremath{\boldsymbol{\mathrm{#1}}}}}
+    \newcommand*{\ma}[1]{{\ensuremath{\boldsymbol{\mathrm{#1}}}}}
+    \newcommand*{\mas}[1]{\ensuremath{\boldsymbol{#1}}}
+    \newcommand*{\ve}[1]{\ensuremath{\boldsymbol{#1}}}
+    \newcommand*{\ves}[1]{\ensuremath{\boldsymbol{\mathrm{#1}}}}
+
+	\newcommand*{\AP}{\ensuremath{\mathrm{AP}}}
+	\newcommand*{\doti}{\ensuremath{(i)^\cdot}}
+	
+	\newcommand*{\inprod}[2]{\ensuremath{\langle #1,\,#2 \rangle}}
+	
+	\newcommand*{\ul}[1]{\underline{#1}}
+
+	% gerades "d" (z.B. für Integral)
+	\newcommand*{\ud}{\ensuremath{\mathrm{d}}}
+	
+	% normaler Text in Formeln
+	\newcommand*{\tn}[1]{\textnormal{#1}}
+	
+	% nicht-kursive Schrift in Formeln
+	\newcommand*{\mrm}[1]{\ensuremath{\mathrm{#1}}}
+	
+	% gerades "T" für Transponiert
+	\newcommand*{\transp}{\ensuremath{\mathrm{T}}}
+	
+	% gerades "rg"
+	\newcommand*{\rang}{\ensuremath{\operatorname{rg}}}
+
+	% Für geklammerte Ausdrücke mit Index (Subscript)
+	% (einmal mit kursiven Index, einmal mit geradem Index)
+	\newcommand*{\grpsb}[2]{\ensuremath{\left(#1\right)_{#2}}}
+	\newcommand*{\grprsb}[2]{\ensuremath{\left(#1\right)_{\mathrm{#2}}}}
+
+	% Ableitungen und Integrale
+		% "normale" Ableitung (mit geraden "d"s)
+		\newcommand*{\normd}[2]{\ensuremath{\frac{\mathrm{d}#1}{\mathrm{d}#2}}}
+		\newcommand*{\normdat}[3]{\ensuremath{\left.\frac{\mathrm{d} #1}{\mathrm{d} #2}\right|_{#3}}}
+	
+		% Materielle Ableitung
+		\newcommand*{\matd}[2]{\ensuremath{\frac{\mathrm{D} #1}{\mathrm{D} #2}}}
+		\newcommand*{\matdat}[3]{\ensuremath{\left.\frac{\mathrm{D} #1}{\mathrm{D} #2}\right|_{#3}}}
+	
+		% Partielle Ableitung
+		\newcommand*{\partiald}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+		\newcommand*{\partialdat}[3]{\ensuremath{\left.\frac{\partial #1}{\partial #2}\right|_{#3}}}
+	
+	
+	% Transformationen
+	\newcommand*{\FT}[1]{\ensuremath{\mathfrak{F}\left\{#1\right\}}}
+	\newcommand*{\FTabs}[1]{\ensuremath{\left|\mathfrak{F}\left\{#1\right\}\right|}}
+	\newcommand*{\IFT}[1]{\ensuremath{\mathfrak{F}^{-1}\left\{#1\right\}}}
+	\newcommand*{\DFT}[1]{\ensuremath{\mathrm{DFT}\left\{#1\right\}}}
+	\newcommand*{\DFTabs}[1]{\ensuremath{\left|\mathrm{DFT}\left\{#1\right\}\right|}}
+	\newcommand*{\Laplace}[1]{\ensuremath{\mathfrak{L}\left(#1\right)}}
+	\newcommand*{\InvLaplace}[1]{\ensuremath{\mathfrak{L^{-1}}\left(#1\right)}}
+	\newcommand*{\invtrans}{\ensuremath{\quad\bullet\!\!-\!\!\!-\!\!\circ\quad}}
+	\newcommand*{\trans}{\ensuremath{\quad\circ\!\!-\!\!\!-\!\!\bullet\quad}}
+
+
+	\newcommand*{\mlfct}[1]{\texttt{#1}}
+	\newcommand*{\mlvar}[1]{\texttt{#1}}
+
+
+	% Manche textcomp-Zeichen funktionieren mit dem TU-Design nicht, diese können dann mit diesem
+	% Befehl gesetzt werden.
+	\newcommand*{\textcompstdfont}[1]{{\fontfamily{cmr} \fontseries{m} \fontshape{n} \selectfont #1}}
+	
+
+
+% =================================================================================
+% Defintionen für Mathe-Umgebungen
+% =================================================================================
+	
+\ifcsmacro{theorem}{}{
+	\newtheorem{theorem}{Satz}
+}
+\ifcsmacro{lemma}{}{
+	\newtheorem{lemma}[theorem]{Lemma}	% Selber Zähler wie theorem
+}
+\ifcsmacro{definition}{}{
+	\newtheorem{definition}{Definition}
+}
+% =================================================================================
+
+
+% =================================================================================
+% Defintionen für Beispiel-Umgebung
+% =================================================================================
+\makeatletter
+\ifx\c@chapter\undefined
+	\newcounter{chapter}
+\fi
+\ifx\c@examplenumber\undefined
+	\newcounter{examplenumber}[chapter]% Neuer Counter bspnummer nummeriert nach Kapitel
+\fi
+\makeatother
+\def\theexamplenumber{\thechapter.\arabic{examplenumber}}
+
+\ifcsmacro{example}{}{
+	\newenvironment{example}[1][]
+	{\vskip 3\parskip plus 1pt minus 1pt \refstepcounter{examplenumber}
+	\vspace{.3cm} \begin{addmargin}[1cm]{0cm} \noindent \textbf{Beispiel \theexamplenumber}: \textbf{#1}\par}
+	{\end{addmargin} \par \vspace{.3cm}}
+}
+
+% Alternative, einfachere Beispielumgebung:
+% \newtheorem{example}{Beispiel}
+% =================================================================================
+
+% =================================================================================
+% Definitionen für Tabellen
+% =================================================================================
+% Spaltenstil zum Ausrichten von Zahlen am Dezimaltrennzeichen
+\newcolumntype{d}[1]{D{.}{,}{#1}}
+
+
+% =================================================================================
+% Definitionen für Listingsumgebung
+% =================================================================================
+
+\lstloadlanguages{Matlab}
+
+\lstdefinestyle{Matlab_colored_smallfont}{
+	language = Matlab,
+	keywords = {break,case,catch,continue,class,else,elseif,end,enumeration,for,function,global,if,methods,otherwise,persistent,properties,return,switch,try,while},
+	tabsize = 4,
+	framesep = 3mm,
+	frame=tb,
+	classoffset = 0,	
+	basicstyle = \footnotesize\ttfamily,
+	keywordstyle = \bfseries\color[rgb]{0,0,1},
+	commentstyle = \itshape\color[rgb]{0.133,0.545,0.133},
+	stringstyle = \color[rgb]{0.627,0.126,0.941},
+	extendedchars = true,
+	breaklines = true,
+	prebreak = \textrightarrow,
+	postbreak = \textleftarrow,
+	%escapeinside = {(*@}{@*)},
+	%moredelim = [s][\itshape\color[rgb]{0.5,0.5,0.5}]{[.}{.]},
+	numbers = left,
+	numberstyle = \tiny,
+	stepnumber = 5
+}
+
+\lstdefinestyle{Matlab_colored}{
+	language = Matlab,
+	keywords = {break,case,catch,continue,class,else,elseif,end,enumeration,for,function,global,if,methods,otherwise,persistent,properties,return,switch,try,while},
+	tabsize = 4,
+	framesep = 3mm,
+	frame=tb,
+	classoffset = 0,	
+	basicstyle = \ttfamily,
+	keywordstyle = \bfseries\color[rgb]{0,0,1},
+	commentstyle = \itshape\color[rgb]{0.133,0.545,0.133},
+	stringstyle = \color[rgb]{0.627,0.126,0.941},
+	extendedchars = true,
+	breaklines = true,
+	prebreak = \textrightarrow,
+	postbreak = \textleftarrow,
+	%escapeinside = {(*@}{@*)},
+	%moredelim = [s][\itshape\color[rgb]{0.5,0.5,0.5}]{[.}{.]},
+	numbers = left,
+	numberstyle = \tiny,
+	stepnumber = 5
+}
+
+
+\lstdefinestyle{C_colored_smallfont}{
+	language=C,
+	tabsize = 4,
+	framesep = 3mm,
+	frame=tb,	
+	classoffset = 0,	
+	basicstyle = \footnotesize\ttfamily,
+	keywordstyle = \bfseries\color[rgb]{0,0,1},
+	commentstyle = \itshape\color[rgb]{0.133,0.545,0.133},
+	stringstyle = \color[rgb]{0.627,0.126,0.941},
+	extendedchars = true,
+	breaklines = true,
+	prebreak = \textrightarrow,
+	postbreak = \textleftarrow,
+	%escapeinside = {(*@}{@*)},
+	%moredelim = [s][\itshape\color[rgb]{0.5,0.5,0.5}]{[.}{.]},
+	numbers = left,
+	numberstyle = \tiny,
+	stepnumber = 5
+}
+
+\lstdefinestyle{C_colored}{
+	language=C,
+	tabsize = 4,
+	framesep = 3mm,
+	frame=tb,
+	classoffset = 0,	
+	basicstyle = \ttfamily,
+	keywordstyle = \bfseries\color[rgb]{0,0,1},
+	commentstyle = \itshape\color[rgb]{0.133,0.545,0.133},
+	stringstyle = \color[rgb]{0.627,0.126,0.941},
+	extendedchars = true,
+	breaklines = true,
+	prebreak = \textrightarrow,
+	postbreak = \textleftarrow,
+	%escapeinside = {(*@}{@*)},
+	%moredelim = [s][\itshape\color[rgb]{0.5,0.5,0.5}]{[.}{.]},
+	numbers = left,
+	numberstyle = \tiny,
+	stepnumber = 5
+}
+
+% Unterstützung von Umlauten in listings und tcblistings (tcolorbox Paket)
+\lstset{
+	inputencoding=utf8,
+	extendedchars=true,
+	literate=%
+		{á}{{\'a}}1
+		{é}{{\'e}}1
+		{í}{{\'i}}1
+		{ó}{{\'o}}1
+		{ú}{{\'u}}1
+		{Á}{{\'A}}1
+		{É}{{\'E}}1
+		{Í}{{\'I}}1
+		{Ó}{{\'O}}1
+		{Ú}{{\'U}}1
+		{à}{{\`a}}1
+		{è}{{\`e}}1
+		{ì}{{\`i}}1
+		{ò}{{\`o}}1
+		{ù}{{\`u}}1
+		{À}{{\`A}}1
+		{È}{{\'E}}1
+		{Ì}{{\`I}}1
+		{Ò}{{\`O}}1
+		{Ù}{{\`U}}1
+		{ä}{{\"a}}1
+		{ë}{{\"e}}1
+		{ï}{{\"i}}1
+		{ö}{{\"o}}1
+		{ü}{{\"u}}1
+		{Ä}{{\"A}}1
+		{Ë}{{\"E}}1
+		{Ï}{{\"I}}1
+		{Ö}{{\"O}}1
+		{Ü}{{\"U}}1
+		{â}{{\^a}}1
+		{ê}{{\^e}}1
+		{î}{{\^i}}1
+		{ô}{{\^o}}1
+		{û}{{\^u}}1
+		{Â}{{\^A}}1
+		{Ê}{{\^E}}1
+		{Î}{{\^I}}1
+		{Ô}{{\^O}}1
+		{Û}{{\^U}}1
+		{œ}{{\oe}}1
+		{Œ}{{\OE}}1
+		{æ}{{\ae}}1
+		{Æ}{{\AE}}1
+		{ß}{{\ss}}2
+		{ç}{{\c c}}1
+		{Ç}{{\c C}}1
+		{ø}{{\o}}1
+		{å}{{\r a}}1
+		{Å}{{\r A}}1
+		{€}{{\EUR}}1
+		{£}{{\pounds}}1
+}
+

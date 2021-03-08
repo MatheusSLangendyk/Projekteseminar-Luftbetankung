@@ -1,0 +1,14 @@
+*.acn
+*.dpth
+*.glo
+*.idx
+*.ist
+*.log
+*.md5
+*.run.xml
+*.slo
+*-ext.pdf
+*-extpv.png
+*-ext.eps
+/*.tmp
+/tikz-ext/*

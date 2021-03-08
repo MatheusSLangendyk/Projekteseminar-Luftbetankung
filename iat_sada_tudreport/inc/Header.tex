@@ -1,0 +1,167 @@
+% Das Verzeichnis iatsada zum Pfad hinzufügen, so dass \usepackage{iatsada} und die Bib-Stile funktionieren
+% Sofern dies nicht vorhanden ist, wird auf das gemeinsame iat_sada_common/texmf/tex/latex/iatsada/ zurückgegriffen
+% https://tex.stackexchange.com/questions/79058/can-a-default-path-be-set-globally-for-input-akin-to-graphicspath
+\makeatletter
+\providecommand*{\input@path}{}
+\edef\input@path{{iatsada/}{../iat_sada_common/texmf/tex/latex/iatsada/}{../iat_sada_common/texmf/tex/latex/iatsada/common/logos/}{../iat_sada_common/texmf/tex/latex/biblatex-iatsada/}{../iat_sada_common/texmf/tex/latex/biblatex-iatsada/bbx/}{../iat_sada_common/texmf/tex/latex/biblatex-iatsada/cbx/}{../iat_sada_common/texmf/tex/latex/abk/}{../iat_sada_common/texmf/tex/latex/ifclass/}{../iat_sada_common/texmf/tex/latex/uniinput/}\input@path}% prepend
+\makeatother
+
+% =================================================================================
+% Hier auswählen, ob Abgabeversion für TUbama oder nicht
+% =================================================================================
+\newif\ifSADATUbama
+\SADATUbamatrue					% Abgabeversion für TUbama (PDF/A)
+\SADATUbamafalse				% keine Abgabeversion
+
+\newcommand{\selectMainLanguage}{\selectlanguage{ngerman}} % Wenn die Arbeit auf deutsch geschrieben wird
+%\newcommand{\selectMainLanguage}{\selectlanguage{english}} % Wenn die Arbeit auf englisch geschrieben wird
+
+% =================================================================================
+% Ausnahmen von der automatischen Silbentrennung
+% =================================================================================
+\hyphenation{Aktu-ali-sie-rung Screen-shots Pa-rallel-ro-bo-ter Zu-stands-raum-mo-del-le nach-voll-zieh-bar Pro-jekt-se-mi-nar}
+% =================================================================================
+
+% =================================================================================
+% Hier auswählen, ob TUD-Design oder nicht
+% =================================================================================
+\newif\ifTUDdesign
+\TUDdesigntrue					% TUD-Design
+%\TUDdesignfalse				% Für Rechner ohne installierte TUDdesign-Pakete
+% =================================================================================
+
+% =================================================================================
+% Hier NICHTS ändern!
+% =================================================================================
+\ifSADATUbama
+	\input{./common/metadata.tex}
+\fi
+\ifTUDdesign
+	% Ggf. Option "numbers=noenddot" einfügen, damit "Abbildung 3.1: _" statt "Abbildung 3.1.: _" verwendet wird.
+	\documentclass[11pt, twoside, colorback, accentcolor=tud2c, nopartpage, bigchapter, fleqn, ngerman, longdoc]{tudreport}
+\else
+	\documentclass[11pt, a4paper, twoside, fleqn, ngerman]{scrreprt}% Für Entwurf auf Rechnern ohne installierte TUDdesign-Pakete
+	\usepackage{exscale}% Korrektur math-Zeichen
+	\usepackage{eurosym}
+\fi
+\input{./common/header_includes.tex}% verwendete Pakete einbinden
+\addbibresource{./bib/literature.bib}% Bibliographie einbinden
+\ifSADAuseglossaries
+	\makeglossaries
+	\loadglsentries{./Glossar/Verzeichnisse.tex}%Glossar einbinden
+\fi
+\usepackage{placeins}
+\usepackage[stable]{footmisc}
+\usepackage{mathtools}
+\usepackage{mathptmx}
+\usepackage[percent]{overpic} 
+\usepackage{rotating}
+\usepackage{todonotes}
+\usepackage{ifthen}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{subcaption}
+\usepackage{transparent}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{makecell}
+\usetikzlibrary{external}
+\tikzexternalize[prefix={cache/}]
+\usetikzlibrary{shapes, arrows, patterns}
+\usetikzlibrary{decorations.pathreplacing, decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\makeatletter
+\newcommand{\myunderbrace}[2]{\settowidth{\bracewidth}{$#1$}#1\hspace*{-1\bracewidth}\smash{\underbrace{\makebox{\phantom{$#1$}}}_{#2}}}
+\newcommand\MyLBrace[2]{%
+	\left.\rule{0pt}{#1}\right\}\text{#2}}
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\pgfdeclarepatternformonly[\LineSpace]{my north east lines}{\pgfqpoint{-1pt}{-1pt}}{\pgfqpoint{\LineSpace}{\LineSpace}}{\pgfqpoint{\LineSpace}{\LineSpace}}%
+{
+	\pgfsetcolor{\tikz@pattern@color}
+	\pgfsetlinewidth{0.4pt}
+	\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+	\pgfpathlineto{\pgfqpoint{\LineSpace + 0.1pt}{\LineSpace + 0.1pt}}
+	\pgfusepath{stroke}
+}
+\makeatother
+
+\newdimen\LineSpace
+\tikzset{
+	line space/.code={\LineSpace=#1},
+	line space=10pt
+}
+
+% =================================================================================
+% Hier Daten für studentische Arbeit eingeben
+% =================================================================================
+%\newcommand*{\SADATyp}{Masterarbeit}
+\newcommand*{\SADATitel}{Automatisierte Luftbetankung von Passagierflugzeugen}
+%\newcommand*{\SADASubTitel}{Untertitel, der bei Abschlussarbeiten ignoriert wird}
+%\newcommand*{\SADASubSubTitel}{Untertitel der ebenfalls ignoriert wird}
+\newcommand*{\SADAStadt}{Darmstadt}
+\newcommand*{\SADAAutor}{Markus Amann, Lukas Nevermann, Matheus Schelp Langendyk, Jinyuan Zhang} % Kommagetrennte Liste der Autoren
+\newcommand*{\SADABetreuerI}{Philipp Schaub, M.Sc.}
+%\newcommand*{\SADABetreuerII}{\DiplIng{} Hans Hilflos}
+\newcommand*{\SADABetreuerIII}{}
+\newcommand*{\SADABegin}{01. November 2020}
+\newcommand*{\SADAAbgabe}{15. März 2021}
+\newcommand*{\SADASeminar}{09. April 2021}
+
+
+\usepackage[
+  % TUDmargin=true,    % Wenn ein Breiter Rand für Korrekturen gewünscht ist
+	onlycolorfront=true, % Wenn nur die erste Seite einen farbigen Balken erhalten soll
+	fachgebiet=RTM,      % RTM / RTP
+	fachbereich=18,      % 18 / 16
+	typ=PS,              % MA=Masterarbeit  BA=Bachelorarbeit PS=Projektseminar PR=Proseminar SA=Studienarbeit DA=Diplomarbeit  
+	                     % script=Skript exercise=Übung report=Bericht internship=Praktikumsbericht  user=Eigener Typ, der mit \newcommand*{\SADATyp}{MeinTyp} gesetzt werden kann
+	accentcolor=tud2c,   % Wird bei der automatischen Farbumschaltung verwendet.
+	tikzexternal=none	 % none=keine Externalisierung, make=IAT Externalisierung, tikz=tikzexternalize
+]{iatsada}
+
+\ifcsname setcooperationlogo\endcsname
+	\setcooperationlogo[height]{./Bilder/Firmenlogo}% Bei Bedarf kann ein Firmenlogo gesetzt werden, wenn tudthesis entsprechend gepatcht wurde
+\fi
+\setkeysinputtikz{path=./Bilder/, errorlevel=warning}
+\iatsadatikzexternalmode{tikz}{
+	\tikzexternalize[shell escape=-enable-write18]%tikzexternal aktivieren
+}{}
+
+
+% =================================================================================
+% Texte für die Rückseite des Titelblatts vorgeben
+% =================================================================================
+\uppertitleback{}
+\lowertitleback{}
+\dedication{}
+% =================================================================================
+% Hier beginnt das eigentliche Dokument
+% =================================================================================
+
+
+% =================================================================================
+% kann nach Ersetzung der Hilfetexte gelöscht werden
+% =================================================================================
+\usepackage{forest}
+\definecolor{folderbg}{RGB}{124,166,198}
+\tikzset{
+	folder/.pic={
+		\filldraw[draw={rgb:red,110;green,144;blue,169},top color=folderbg!50,bottom color=folderbg]
+		(-4.2pt,5.8pt) rectangle ++(3pt,-5.8pt);
+		\filldraw[draw={rgb:red,110;green,144;blue,169},top color=folderbg!50,bottom color=folderbg]
+		(-4.6pt,-4pt) rectangle (4.6pt,4pt);
+	}
+}
+\newcommand*{\Miktex}{\textsc{MiKTeX}\xspace}
+\newcommand*{\texlive}{\textsc{texlive}\xspace}
+\newcommand{\Texstudio}{\textsc{TeXStudio}\xspace}
+\newcommand{\Texniccenter}{\textsc{TeXnicCenter}\xspace}
+\newcommand{\Sumatra}{\textsc{Sumatra}\xspace}
+\newcommand*{\zitat}[1]{\glqq{}#1\grqq{}}

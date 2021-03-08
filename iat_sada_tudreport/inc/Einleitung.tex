@@ -1,0 +1,37 @@
+\chapter{Einleitung}\label{chap:Einführung}
+
+Der Klimawandel beschreibt eine zentrale Krise unserer und kommender Generationen. Dabei steht der globalisierte Lebensstil häufig im Gegensatz zu definierten Klimazielen. Wie zum Beispiel der Ausbau von globalen Transportsystemen und Netzwerken gegenüber dem Einsparen von Treibhausgasen. Durch technologische Innovationen ist es jedoch möglich, diese beiden Punkte besser zu vereinen. Hierfür ist es nötig ressourcensparende Technologien neu zu entwerfen oder Konzepte aus Spezial- und Nischen-Bereichen so zu designen, dass sie für die breite Masse nutzbar sind. Nur so können nennenswerte Effekte erzielt werden.
+
+Momentan wird beispielsweise im Zivilflug geforscht, ob und wie es möglich wäre, Luftbetankungen bei Linienflügen zu realisieren. Eine Technik, welche im Militärbereich schon seit Jahrzehnten etabliert ist, im Zivilflug hingegen noch keine verbreitete Anwendung findet.
+% im Zivilflug hingegen nur theoretisch diskutiert wird.
+
+Wesentlicher Vorteil der Luftbetankung wären beträchtliche Kraftstoffeinsparungen.
+Dies liegt einerseits daran, dass Zwischenstopps bei Langstreckenflügen wegfallen. Damit wird der erhöhte Kraftstoffverbrauch zum erneuten Starten und Erreichen von Reisegeschwindigkeit und -höhe eingespart.  
+Andererseits sinkt der Verbrauch auch durch das bis zu 30\% reduzierte Startgewicht des Flugzeugs \cite{CEAS2015}. Hier ist es zudem denkbar, dass weitere Einsparungen folgen. Beispielsweise durch effizientere Antriebstechnik, welche nur für geringere Gesamtmassen nutzbar sind. 
+Nach momentanen Einschätzungen könnte somit der Kraftstoffverbrauch bei Langstreckenflügen um etwa 15\% reduziert werden \cite{RefuelingTime}.
+
+Eine weitreichende Etablierung dieser Technik wäre demnach Ressourcen schonend und würde die Reduktion der Treibhausgasemissionen fördern. Die praktische Umsetzung einer Luftbetankung ist jedoch weitaus komplizierter.
+%Zunächst müssen sich die beiden Flugzeuge bis auf wenige Meter Entfernung annähern. Danach wird durch Andocken eine Tankverbindung hergestellt. Anschließend muss die relative Position der beiden Flugzeuge zueinander für etwa eine halbe Stunde stabil gehalten werden. Ist der Tankvorgang abgeschlossen so wird die Verbindung gelöst und der normale Flug kann fortgesetzt werden.
+ 
+Der gesamte Vorgang stellt ein wesentliches Sicherheitsrisiko dar und erfordert höchste Konzentration der beteiligten Piloten. Denn für den Tankvorgang müssen sich die Flugzeuge bis auf wenige Meter Entfernung annähern und dann muss die  relative Position zueinander für etwa eine halbe Stunde stabil gehalten werden.
+Durch (Teil-)automatisierung des Prozesses könnte man die Piloten unterstützen und das Sicherheitsrisiko verringern.
+  Wesentlich für den Erfolg der Technik ist also eine zuverlässige Regelung, welche robust auf Parameterschwankungen und Störungen reagiert.
+Denn nur eine Technik, die aktuelle Sicherheitsstandards erfüllt, kann in Serie produziert werden und gesellschaftliche Akzeptanz erreichen.
+ 
+Das übliche Vorgehen bei der Automatisierung ist zunächst die Modellierung des zu regelnden Systems.
+Mit Hilfe von Simulationen können daraufhin die entworfenen Regelungen getestet werden, um sie anschließend zu evaluieren und anzupassen.
+
+In dieser Arbeit sollen die regelungstechnischen Möglichkeiten bei der Luftbetankung von Zivilflugzeugen näher betrachtet werden. Ziel ist die Implementierung einer robusten Verkopplungsregelung, welche das Halten der relativen Position zweier Flugzeuge während des Tankvorgangs sicherstellt.
+Hierfür wird zunächst der Stand der Technik im Bereich Luftbetankung beschrieben.
+Darauf folgt die schrittweise Implementierung eines Flugzeugmodells in \MatSim, welches später zur Simulation und beim Reglerentwurf genutzt wird.
+Anschließend werden regelungstechnische Grundlagen zur Verkopplungsregelung erläutert, um dann die Möglichkeiten der Verkopplungsregelung auf Basis von erzielten Ergebnissen ausführlich zu diskutieren. Dabei wird auch die Robustheit der entworfenen Regelung gegenüber Störungen und Parameterunsicherheiten betrachtet.
+Abschließend werden die Erkenntnisse in einem Fazit zusammengefasst.
+
+%Diese werden, unter Berücksichtigung des Tankflugzeugverbrauchs, auf Größenordnugnen von etwa 15 Prozent geschätzt
+%Regelungstechnische Systeme könnten die Piloten unterstützen indem der Prozess (Teil-)automatisiert wird.
+%
+%Die Größenordnungen wird dabei auf etwa 15 Prozent geschätzt. Und das unter Berücksichtigung des Tankflugzeugverbrauchs. 
+%
+%Die zentrale Problematik liegt beim Sicheren Andocken der Tankverbindung und dem Halten der relativen Position während des Tankvorgangs. Die Flugzeuge müssen sich bis auf wenige Meter entfernung annä
+
+

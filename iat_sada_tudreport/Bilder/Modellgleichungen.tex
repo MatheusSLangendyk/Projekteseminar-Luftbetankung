@@ -1,0 +1,215 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage{ngerman}
+\usepackage[ngerman]{hyperref}
+\usepackage{caption}
+\usepackage{mathtools}
+\usepackage{mathptmx}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage{amsmath}
+\usepackage{apacite}
+\usepackage[stable]{footmisc}
+\begin{document}
+\section{Modellgleichungen}
+
+\begin{center}
+ \begin{tabular}{||c c c c ||} 
+ \hline
+ Zustand & Symbol & Einheit & Koordinatensystem \\ [0.5ex] 
+ \hline\hline
+ Körpergeschwindigkeit $x$-Richtung& $u$ & $[m/s]$& Körperfest\\ 
+ \hline
+ Körpergeschwindigkeit $y$-Richtung& $v$ & $[m/s]$& Körperfest\\ 
+ \hline
+ Körpergeschwindigkeit $z$-Richtung& $w$ & $[m/s]$& Körperfest\\ 
+ \hline
+ Körperdrehgeschwindigkeit  $x$-Achse& $p$ & $[rad/s]$& Körperfest\\ 
+ \hline
+ Körperdrehgeschwindigkeit $y$-Achse& $q$ & $[rad/s]$& Körperfest\\ 
+ \hline
+ Körperdrehgeschwindigkeit  $z$-Achse& $r$ & $[rad/s]$& Körperfest\\ 
+ \hline
+ Rollwinkel & $\phi$ & $[rad]$& Körperfest\\ 
+ \hline
+ Nickwinkel & $\theta$ & $[rad]$& Körperfest\\ 
+ \hline
+ Gierwinkel & $\psi$ & $[rad]$& Körperfest\\ 
+ \hline
+ Anstellwinkel & $\alpha$ & $[rad]$& Körperfest\\ 
+ \hline
+ Schiebewinkel & $\beta$ & $[rad]$& Körperfest\\ 
+ \hline
+ Position Nord & $x$ & $[m]$& Erdkoordinaten (Flache Erde)\\ 
+ \hline
+ Position Ost & $y$ & $[m]$& Erdkoordinaten (Flache Erde)\\ 
+ \hline
+ Position Unten & $z$ & $[m]$& Erdkoordinaten (Flache Erde)\\ 
+ \hline
+ Höhenruderwinkel & $\eta$ & $[rad]$& Körperfest\\ 
+ \hline
+ Normierte Schubkraft  & $\delta$ & -& -\\ 
+ \hline
+ Querruderwinkel & $\xi$ & $[rad]$& Körperfest\\ 
+ \hline
+ Seitenruderwinkel & $\zeta$ & $[rad]$& Körperfest\\ [1ex] 
+ \hline
+\end{tabular}
+\end{center}
+\subsection{Zustände und Stellgröße}
+\begin{itemize}
+\item Körpergeschwindigkeit $\underline{v} = [u, v, w]^T$
+\item Körperdrehgeschwindigkeit $\underline{\omega} = [p, q, r]^T$
+\item Eulerwinkel (ohne den Gierwinkel) $\underline{\varphi} = [\phi, \theta]^T$
+\item Höhe $h = -z$.
+
+\end{itemize}
+Der gesamte Zustand lässt sich als 
+\begin{equation}
+\underline{x} = \begin{bmatrix} 
+\underline{v} \\
+\underline{\omega} \\
+\underline{\varphi}\\
+h
+\end{bmatrix} = \begin{bmatrix} 
+u\\v\\w\\p\\q\\r\\ \phi\\ \theta\\ h
+\end{bmatrix},
+\end{equation}
+darstellen.\\
+Die Stellgrößen werden als 
+\begin{equation}
+\underline{u} = \begin{bmatrix} 
+\eta \\ \delta \\ \xi \\ \zeta
+\end{bmatrix},
+\end{equation} 
+definiert, wo die Schubkraft anhand der Gewichtskraft des Flugzeugs normiert wird: $\delta = \dfrac{F_\mathrm{schub}}{mg}$
+\subsection{Sekundäre Gleichungen}
+\label{sec:Anströmung}
+\begin{itemize}
+\item Fluggeschwindigkeitsvektor $\underline{v}_\mathrm{A} = \underline{v}- \textbf{T}_\mathrm{fg}\underline{v}^\mathcal{G}_\mathrm{w}  = [u_\mathrm{A},v_\mathrm{A},w_\mathrm{A}]^T $, wo $\underline{v}^\mathcal{G}_\mathrm{w}$ der Windgeschwindigkeitsvektor in geodätischem Koordinatensystem und $\textbf{T}_\mathrm{fg}$ die Körperfestetransformationsmatrix sind. Die Windgeschwindigkeit wird ,im Rahmen des Projekts, als externe Störung betrachtet (Kapitel \ref{chap:ZweiFlieger}) und wird daher nicht als Teil des Modells weiter berücksichtigt.  
+\item Betrag der Anströmungsgeschwindigkeit $V_\mathrm{A} = |\underline{v}_\mathrm{A}| $.
+\item Anstellwinkel $\alpha = \tan^{-1}(\dfrac{w_\mathrm{A}}{u_\mathrm{A}})$
+\item Schiebewinkel $\beta = \sin^{-1}(\dfrac{v_\mathrm{A}}{V_\mathrm{A}})$
+\item Staudruck $q = \dfrac{1}{2}\rho V_\mathrm{A}^2$
+
+\end{itemize}
+\subsection{Aerodynamische Beiwerte}
+obs: Alle nicht-definierte Parameter sind Geometriekonstanten.\\
+
+\subsubsection{Translatorische Beiwerte}
+\textbf{Antriebsbeiwert}\\
+
+\begin{itemize}
+\item Antrieb an der Flügelfläche: $C_\mathrm{A_F}^\mathcal{A} = K_\alpha\alpha + \alpha_0$
+\item Abwind an dem Höhenruder $\epsilon = K_{\epsilon}(\alpha-\alpha_\mathrm{0})$
+\item Anstellwinkel an dem Höhenruder $\alpha_\mathrm{h} = \alpha - \epsilon-\eta + q\dfrac{l_\mathrm{t}}{V_\mathrm{A}}$
+\item Antrieb an dem Höhenruder: $C_\mathrm{A_H}^\mathcal{A} = 3.1 \alpha_\mathrm{h}\dfrac{S_\mathrm{H}}{S}$
+\item Gesamtauftrieb $C_\mathrm{A}^\mathcal{A} = C_\mathrm{A_F}+C_\mathrm{A_H} $
+\end{itemize}
+\textbf{Widerstandsbeiwert}\\
+$C_\mathrm{W}^\mathcal{A} = 0.13 + \kappa(5.5+0.654)^2$\\
+\textbf{Querkraftbeiwert}\\
+$C_\mathrm{Q}^\mathcal{A} = -1.6\beta + 0.24\zeta$
+
+\subsubsection{Rotatorische Beiwerte }
+\begin{itemize}
+\item Vektor des statischen Verhaltens : $\underline{n} = \begin{bmatrix} 
+-1.4\beta \\
+-0.59 -3.1(\alpha-\epsilon)\dfrac{S_\mathrm{H}l_\mathrm{H}}{Sc} \\
+(1 - \alpha\dfrac{180}{15\pi})\beta
+\end{bmatrix} $ 
+\\
+\item Jakobimatrix des dynamischen Drehverhaltens $\dfrac{\partial  \underline{c}_\mathrm{m}}{\partial  \underline{c}_x} = \dfrac{c}{V_\mathrm{A}}\begin{bmatrix} 
+-11 & 0 & 5 \\
+0 &-4.03\dfrac{S_\mathrm{H}l_\mathrm{H}^2}{Sc}&0 \\
+1.7 & 0 & -11.5
+\end{bmatrix} $  
+\\
+\item Jakobimatrix des Steuerverhaltens $\dfrac{\partial  \underline{c}_\mathrm{m}}{\partial  \underline{c}_u} = \begin{bmatrix} 
+-0.6 & 0 & 0.22 \\
+0 &-3.1\dfrac{S_\mathrm{H}l_\mathrm{H}}{Sc}&0 \\
+0 & 0 & -0.63
+\end{bmatrix} $  
+\item Winkelsteuervektor $\tilde{\underline{u}} = \begin{bmatrix} 
+\xi\\
+\eta\\
+\zeta
+\end{bmatrix} $  
+\item Moment Beiwertvektor $ \underline{c}_\mathrm{m}  = \begin{bmatrix} 
+C_\mathrm{l}\\
+C_\mathrm{m}\\
+C_\mathrm{n}
+\end{bmatrix}=\underline{n} + \dfrac{\partial  \underline{c}_\mathrm{m}}{\partial  \underline{c}_x} \underline{\omega} + \dfrac{\partial  \underline{c}_\mathrm{m}}{\partial  \underline{c}_u} \tilde{\underline{u}}  $
+\end{itemize}
+\subsection{Kräfte und Momente}
+\subsubsection{Triebwerk}
+\begin{itemize}
+\item $F_\mathrm{res} = \delta mg$
+\item $\underline{r}^\mathcal{F}_\mathrm{schub} = \begin{bmatrix} 
+F_\mathrm{res}\\
+0\\
+0
+\end{bmatrix}$ 
+\end{itemize}
+\subsubsection{Aerodynamische Kräfte}
+\begin{itemize}
+\item Auftriebskraft: $A = qSC_\mathrm{A}$
+\item Widerstandskraft: $W = qSC_\mathrm{W}$
+\item Querkraft: $Q = qSC_\mathrm{Q}$
+\item $\underline{r}^\mathcal{A}_\mathrm{a} = \begin{bmatrix} 
+-W\\
+Q\\
+-A
+\end{bmatrix}$  
+\item $\underline{r}^\mathcal{F}_\mathrm{a} = \textbf{T}_\mathrm{fa}\underline{r}^\mathcal{A}_\mathrm{a}$
+\item Gesamtkraft: $\underline{r}^\mathcal{F}_\mathrm{g} = \underline{r}^\mathcal{F}_\mathrm{a} + \underline{r}^\mathcal{F}_\mathrm{schub}$
+\end{itemize}
+\subsubsection{Moment Triebwerk}
+\begin{itemize}
+\item Triebwerkmoment: $\underline{q}^\mathcal{F}_\mathrm{schub} = (\underline{p}_\mathrm{schub}-\underline{p}_\mathrm{sp})\times\underline{r}^\mathcal{F}_\mathrm{schub}$
+\end{itemize}
+\subsubsection{Aerodynamisches Moment}
+\begin{itemize}
+\item Rollmoment: $L_A = qSbC_\mathrm{l}$
+\item Nickmoment: $M_A = qScC_\mathrm{m}$
+\item Giermoment: $N_A = qSbC_\mathrm{n}$
+\item Gesamtes aerodynamisches Moment::\\ $\underline{q}^\mathcal{F}_\mathrm{a} = \begin{bmatrix} 
+L_\mathrm{A}\\
+M_\mathrm{A}\\
+N_\mathrm{A}
+\end{bmatrix} + (\underline{p}_\mathrm{aero}-\underline{p}_\mathrm{sp})\times\underline{r}^\mathcal{F}_\mathrm{a}$
+\item Gesamtmoment $\underline{q}^\mathcal{F}_\mathrm{g} = \underline{q}^\mathcal{F}_\mathrm{a} + \underline{q}^\mathcal{F}_\mathrm{schub} $
+\end{itemize}
+
+\subsection{Dynamische Gleichungen}
+\begin{itemize}
+\item Translatorische Beschleunigung $\underline{\dot{v}} = \dfrac{1}{m}\underline{r}^\mathcal{F}_\mathrm{g} + \textbf{T}_\mathrm{fg}\begin{bmatrix} 
+0\\
+0\\
+g
+\end{bmatrix} - \underline{\omega}\times\underline{v}$
+\item Rotatorische Beschleunigung $\underline{\dot{\omega}} = -\textbf{I}^{-1}\underline{\omega}\times\textbf{I}\underline{\omega} + \textbf{I}^{-1}\underline{q}^\mathcal{F}_\mathrm{g}$.
+\end{itemize}
+Da man nur die Winkel $\theta$ und $\phi$ als Teil des Zustands betrachtet, wird eine Transformationsmatrix erforderlich, die die Entfernung des Winkel $\psi$ gewährleistet.
+\begin{itemize}
+\item Transformationsmatrix $\textbf{T}_\mathrm{winkel} = \begin{bmatrix} 
+1 & 0&0\\
+0&1&0\\
+\end{bmatrix}$
+\item Drehrate des geodätischen Koordinatensystems $\textbf{J} = \dfrac{1}{\cos(\theta)}\begin{bmatrix} 
+\cos(\theta) & \sin(\theta)\sin(\phi)&\cos(\phi)\sin(\theta)\\
+0&\cos(\phi)\cos(\theta)&-\sin(\phi)\cos(\theta)\\
+0&\sin(\phi)& \cos(\phi)
+\end{bmatrix} $
+\item Winkelgeschwindigkeit $\underline{\dot{\varphi}} = \textbf{T}_\mathrm{\phi}\textbf{J}\underline{\omega}$ 
+\end{itemize}
+Da nur die z-Komponente von dem Positionsvektor gebraucht wird, nutzt man wieder eine Transformationsmatrix, die nur den gewünschten Zustand abliefert.
+\begin{itemize}
+\item $\textbf{T}_\mathrm{lage} = [1, 0, 0]$
+\item Höhenänderung $\dot{h}^\mathcal{G} = -\textbf{T}_\mathrm{lage}\textbf{T}_\mathrm{gf}\underline{v}$
+\end{itemize}
+Ref:\cite{FlugmechanikBuch}, \cite{RAMPaper}
+\bibliographystyle{apacite}
+\bibliography{Quellen}
+\end{document}\\

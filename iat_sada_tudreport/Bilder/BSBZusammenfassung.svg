@@ -1,0 +1,3403 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg10285"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
+   sodipodi:docname="BSBZusammenfassung.svg"
+   inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png"
+   inkscape:export-xdpi="95"
+   inkscape:export-ydpi="95">
+  <defs
+     id="defs10279">
+    <linearGradient
+       id="linearGradient17693"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop17691" />
+    </linearGradient>
+    <marker
+       style="overflow:visible"
+       id="marker14742"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path14740" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14568"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path14566" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14394"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path14392" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14232"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path14230" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14076"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path14074" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13894"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path13892" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13750"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path13748" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13606"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path13604" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13454"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path13452" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13274"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:none;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path13272" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13156"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path13154" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13034"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path13036" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12693"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path12691" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12273"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path12271" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12051"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path12049" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11859"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path11857" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11775"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path11773" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11697"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path11695" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11331"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path11329" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11289"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path11287" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11253"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path11251" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path10941" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path10941-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11253-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11251-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11289-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11287-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11331-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11329-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-85" />
+    </marker>
+    <pattern
+       id="EMFhbasepattern"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path10941-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11289-32"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11287-25" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11331-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11329-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11331-5-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11329-6-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11697-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11695-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11775-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11773-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11859-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.484615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.484615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11857-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12051-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.3;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.3"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12049-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12273-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.334615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.334615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12271-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12693-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.484615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.484615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12691-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13156-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.484615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.484615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13154-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13454-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.484615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.484615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13452-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13606-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.484615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.484615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13604-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13750-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.307692;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.307692"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13748-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13894-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.307692;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.307692"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13892-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14394-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.307692;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.307692"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14392-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14568-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.307692;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.307692"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14566-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-6-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-8-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-4-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-5-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-3-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-85-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart-1-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path10941-4-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11289-32-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11287-25-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11331-3-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11329-2-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11697-0-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11695-0-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11775-7-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11773-2-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11859-6-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11857-2-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12051-5-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12049-6-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12273-1-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12271-6-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12693-9-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12691-8-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13156-4-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13154-7-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13454-3-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13452-9-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13606-5-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13604-8-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13750-5-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13748-9-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13894-7-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13892-4-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14394-2-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14392-4-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14568-7-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14566-5-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-1-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-2-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-6-7-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-8-9-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-4-2-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-5-1-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-3-6-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-85-9-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart-1-97"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path10941-4-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11289-32-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11287-25-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11331-3-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11329-2-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11697-0-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11695-0-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11775-7-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11773-2-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11859-6-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11857-2-15" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12051-5-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12049-6-27" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12273-1-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12271-6-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12693-9-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12691-8-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13156-4-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13154-7-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13454-3-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13452-9-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13606-5-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13604-8-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13750-5-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13748-9-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13894-7-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13892-4-92" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14394-2-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14392-4-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14568-7-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14566-5-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-1-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-2-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-6-7-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-8-9-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-4-2-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-5-1-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-3-6-30"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-85-9-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart-1-92"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path10941-4-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11289-32-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11287-25-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11331-3-30"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11329-2-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11697-0-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11695-0-92" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11775-7-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11773-2-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11859-6-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11857-2-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12051-5-00"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12049-6-26" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12273-1-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12271-6-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12693-9-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12691-8-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13156-4-99"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13154-7-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13454-3-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13452-9-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13606-5-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13604-8-56" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13750-5-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13748-9-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13894-7-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13892-4-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14394-2-20"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14392-4-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14568-7-33"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14566-5-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-1-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-2-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-6-7-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-8-9-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-4-2-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-5-1-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-3-6-32"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-85-9-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart-1-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path10941-4-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11289-32-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11287-25-26" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11331-3-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11329-2-72" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11697-0-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11695-0-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11775-7-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11773-2-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker11859-6-11"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path11857-2-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12051-5-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.3;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.3"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12049-6-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12273-1-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.334615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.334615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12271-6-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker12693-9-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.484615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.484615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path12691-8-57" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13156-4-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.484615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.484615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13154-7-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13454-3-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.484615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.484615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13452-9-56" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13606-5-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.484615;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.484615"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13604-8-31" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13750-5-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.307692;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.307692"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13748-9-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker13894-7-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.307692;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.307692"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13892-4-36" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14394-2-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.307692;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.307692"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14392-4-50" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14568-7-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.307692;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.307692"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14566-5-40" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-1-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-2-95" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-6-7-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-8-9-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-4-2-20"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-5-1-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker14742-3-6-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:0.31;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:0.31"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path14740-85-9-97" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.51166079"
+     inkscape:cx="-1154.5625"
+     inkscape:cy="244.61787"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     inkscape:window-width="1254"
+     inkscape:window-height="1040"
+     inkscape:window-x="234"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid10848" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata10282">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850"
+       width="44.75"
+       height="44.75"
+       x="13.458344"
+       y="76.958336"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-8"
+       width="44.75"
+       height="44.75"
+       x="82.250008"
+       y="76.958336"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0"
+       width="44.75"
+       height="44.75"
+       x="145.75002"
+       y="76.958336"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0-7"
+       width="44.75"
+       height="44.75"
+       x="145.75"
+       y="8.1666718"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0-3"
+       width="44.75"
+       height="44.75"
+       x="145.75"
+       y="145.75"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart)"
+       d="m 152.13542,145.75001 v -23.8125"
+       id="path11229"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11253)"
+       d="m 185.20833,145.75001 v -23.8125"
+       id="path11243"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11289)"
+       d="m 162.71875,145.75001 v -23.8125"
+       id="path11279"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11331)"
+       d="m 174.625,145.75001 v -23.8125"
+       id="path11321"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart-3)"
+       d="m 185.20833,53.145839 v 23.8125"
+       id="path11229-7"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11253-1)"
+       d="m 152.13542,53.145839 v 23.8125"
+       id="path11243-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11289-3)"
+       d="m 174.625,53.145839 v 23.8125"
+       id="path11279-7"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11331-5)"
+       d="m 162.71875,53.145839 v 23.8125"
+       id="path11321-5"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11697)"
+       d="M 145.52083,82.250004 H 127"
+       id="path11687"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11775)"
+       d="M 145.52083,117.96876 H 127"
+       id="path11765"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11859)"
+       d="m 120.38542,121.93751 v 27.78125 h 25.13541"
+       id="path11849"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12051)"
+       d="m 87.312499,121.93751 v 50.27083 l 58.208331,1e-5"
+       id="path12041"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12273)"
+       d="m 103.1875,121.93751 v 39.6875 h 42.33333"
+       id="path12263"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:0.264999, 0.794997;stroke-dashoffset:0"
+       id="rect12521"
+       width="201.08334"
+       height="140.22917"
+       x="2.6458333"
+       y="63.5"
+       rx="2.052534e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12693)"
+       d="m 18.520833,121.70833 v 66.14583 l 126.999997,1e-5"
+       id="path12683"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path13038"
+       cx="87.259987"
+       cy="172.19339"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 145.52083,179.91666 H 30.427083"
+       id="path13042"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13156)"
+       d="m 30.427083,121.70833 v 58.20834"
+       id="path13422"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13454)"
+       d="m 52.916666,121.97292 v 39.6875 H 103.1875"
+       id="path13444"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path13038-4"
+       cx="103.15816"
+       cy="161.50476"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13606)"
+       d="m 41.010416,121.97291 v 50.27083 l 46.302084,1e-5"
+       id="path13596"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13750)"
+       d="M 82.020832,119.0625 H 58.208333"
+       id="path13740"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13894)"
+       d="M 82.020832,97.895833 H 58.208333"
+       id="path13884"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0-7-4"
+       width="44.75"
+       height="44.75"
+       x="80.697914"
+       y="7.9375"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14076)"
+       d="m 125.67708,13.229167 h 19.84375"
+       id="path14066"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14232)"
+       d="m 125.67708,47.624999 h 19.84375"
+       id="path14222"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14394)"
+       d="M 13.229167,99.218749 H 1.3229166"
+       id="path14384"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14568)"
+       d="M 82.020832,82.020832 H 67.468749 L 67.46875,71.4375 H 6.6145833 l 0,27.78125"
+       id="path14558"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742)"
+       d="M 207.69791,82.020833 H 190.5"
+       id="path14732"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-6)"
+       d="M 207.69791,116.41667 H 190.5"
+       id="path14732-5"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-4)"
+       d="M 207.69791,93.927083 H 190.5"
+       id="path14732-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-3)"
+       d="M 207.69791,105.83333 H 190.5"
+       id="path14732-6"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:0.264999, 0.794994;stroke-dashoffset:0"
+       id="rect12521-9"
+       width="201.08333"
+       height="60.85416"
+       x="2.6458333"
+       y="2.6458333"
+       rx="2.0525338e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <image
+       y="21.166666"
+       x="82.020836"
+       xlink:href="data:image/png;base64,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"
+       height="26.458334"
+       width="42.33334"
+       preserveAspectRatio="none"
+       id="image17904"
+       style="stroke-width:1.65781"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999;stroke-opacity:0.30769232"
+       id="rect10850-87"
+       width="44.75"
+       height="44.75"
+       x="-282.875"
+       y="-23.58333"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999;stroke-opacity:0.30769232"
+       id="rect10850-8-8"
+       width="44.75"
+       height="44.75"
+       x="-214.08333"
+       y="-23.58333"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0-37"
+       width="44.75"
+       height="44.75"
+       x="-150.5833"
+       y="-23.58333"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999;stroke-opacity:0.30769232"
+       id="rect10850-0-3-9"
+       width="44.75"
+       height="44.75"
+       x="-150.58333"
+       y="45.208332"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart-1)"
+       d="m -144.1979,45.208344 v -23.8125"
+       id="path11229-1"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11289-32)"
+       d="m -126.99999,44.979169 v -23.8125"
+       id="path11279-5"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11331-3)"
+       d="m -111.12499,44.979169 v -23.8125"
+       id="path11321-57"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11697-0)"
+       d="m -150.81249,-18.291663 h -18.52083"
+       id="path11687-8"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11775-7)"
+       d="m -150.81249,17.427094 h -18.52083"
+       id="path11765-7"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.48461542;marker-start:url(#marker11859-6)"
+       d="m -175.9479,21.395844 v 27.78125 h 25.13541"
+       id="path11849-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.30000001;marker-start:url(#marker12051-5)"
+       d="m -209.02082,21.395844 v 50.270828 l 58.20833,10e-6"
+       id="path12041-6"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.33461535;marker-start:url(#marker12273-1)"
+       d="m -193.14582,21.395844 v 39.687498 h 42.33333"
+       id="path12263-1"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:0.264999, 0.794997;stroke-dashoffset:0"
+       id="rect12521-4"
+       width="201.08334"
+       height="140.22917"
+       x="-293.6875"
+       y="-37.04166"
+       rx="2.052534e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.48461542;marker-start:url(#marker12693-9)"
+       d="m -277.81249,21.166664 v 66.145828 l 127,10e-6"
+       id="path12683-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.48461542"
+       id="path13038-3"
+       cx="-209.07335"
+       cy="71.651718"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.48461542"
+       d="M -150.81249,79.374992 H -265.90624"
+       id="path13042-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.48461542;marker-start:url(#marker13156-4)"
+       d="M -265.90624,21.166664 V 79.375002"
+       id="path13422-1"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.48461542;marker-start:url(#marker13454-3)"
+       d="m -243.41665,21.431254 v 39.687498 h 50.27083"
+       id="path13444-1"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.48461542"
+       id="path13038-4-0"
+       cx="-193.17516"
+       cy="60.963089"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.48461542;marker-start:url(#marker13606-5)"
+       d="m -255.3229,21.431244 v 50.270828 l 46.30208,1e-5"
+       id="path13596-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.30769232;marker-start:url(#marker13750-5)"
+       d="m -214.31249,18.520834 h -23.8125"
+       id="path13740-9"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.30769232;marker-start:url(#marker13894-7)"
+       d="m -214.31249,-2.6458325 h -23.8125"
+       id="path13884-9"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.30769232;marker-start:url(#marker14394-2)"
+       d="M -283.10415,-1.3229125 H -295.0104"
+       id="path14384-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.30769232;marker-start:url(#marker14568-7)"
+       d="m -214.31249,-18.520833 h -14.55208 v -10.58333 h -60.85417 v 27.7812505"
+       id="path14558-9"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-1)"
+       d="m -88.63541,-18.520833 h -17.19791"
+       id="path14732-2"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-6-7)"
+       d="m -88.63541,15.875004 h -17.19791"
+       id="path14732-5-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-4-2)"
+       d="m -88.63541,-6.6145825 h -17.19791"
+       id="path14732-0-7"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-3-6)"
+       d="m -88.63541,5.2916675 h -17.19791"
+       id="path14732-6-5"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBDynamik.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999;stroke-opacity:0.31"
+       id="rect10850-87-6"
+       width="44.75"
+       height="44.75"
+       x="-284.19794"
+       y="137.8125"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999;stroke-opacity:0.31"
+       id="rect10850-8-8-6"
+       width="44.75"
+       height="44.75"
+       x="-215.40625"
+       y="137.8125"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0-37-7"
+       width="44.75"
+       height="44.75"
+       x="-151.90622"
+       y="137.8125"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0-3-9-9"
+       width="44.75"
+       height="44.75"
+       x="-151.90625"
+       y="206.60416"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart-1-9)"
+       d="m -145.52083,206.60417 v -23.8125"
+       id="path11229-1-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11289-32-1)"
+       d="M -128.32292,206.375 V 182.5625"
+       id="path11279-5-8"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11331-3-3)"
+       d="M -112.44792,206.375 V 182.5625"
+       id="path11321-57-7"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11697-0-6)"
+       d="m -152.13542,143.10417 h -18.52083"
+       id="path11687-8-1"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11775-7-6)"
+       d="m -152.13542,178.82292 h -18.52083"
+       id="path11765-7-8"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11859-6-5)"
+       d="m -177.27083,182.79167 v 27.78125 h 25.13541"
+       id="path11849-4-6"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12051-5-2)"
+       d="m -210.34375,182.79167 v 50.27083 l 58.20833,1e-5"
+       id="path12041-6-6"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12273-1-8)"
+       d="m -194.46875,182.79167 v 39.6875 h 42.33333"
+       id="path12263-1-2"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:0.264999, 0.794997;stroke-dashoffset:0"
+       id="rect12521-4-6"
+       width="201.08334"
+       height="140.22917"
+       x="-295.01044"
+       y="124.35417"
+       rx="2.052534e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12693-9-3)"
+       d="m -279.13542,182.56249 v 66.14583 l 127,1e-5"
+       id="path12683-0-7"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path13038-3-5"
+       cx="-210.39627"
+       cy="233.04755"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M -152.13542,240.77082 H -267.22917"
+       id="path13042-4-5"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13156-4-5)"
+       d="m -267.22917,182.56249 v 58.20834"
+       id="path13422-1-3"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13454-3-1)"
+       d="m -244.73958,182.82708 v 39.6875 h 50.27083"
+       id="path13444-1-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path13038-4-0-9"
+       cx="-194.49808"
+       cy="222.35892"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13606-5-3)"
+       d="m -256.64583,182.82707 v 50.27083 l 46.30208,1e-5"
+       id="path13596-0-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker13750-5-7)"
+       d="m -215.63542,179.91666 h -23.8125"
+       id="path13740-9-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker13894-7-4)"
+       d="m -215.63542,158.75 h -23.8125"
+       id="path13884-9-9"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker14394-2-8)"
+       d="m -284.42708,160.07292 h -11.90625"
+       id="path14384-0-9"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker14568-7-3)"
+       d="m -215.63542,142.875 h -14.55208 v -10.58333 h -60.85417 v 27.78125"
+       id="path14558-9-3"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-1-3)"
+       d="M -89.958337,142.875 H -107.15625"
+       id="path14732-2-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-6-7-8)"
+       d="M -89.958337,177.27083 H -107.15625"
+       id="path14732-5-4-1"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-4-2-4)"
+       d="M -89.958337,154.78125 H -107.15625"
+       id="path14732-0-7-5"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-3-6-3)"
+       d="M -89.958337,166.6875 H -107.15625"
+       id="path14732-6-5-9"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBAtmosphaere.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-87-7"
+       width="44.75"
+       height="44.75"
+       x="-288.16666"
+       y="301.625"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999;stroke-opacity:0.31"
+       id="rect10850-8-8-8"
+       width="44.75"
+       height="44.75"
+       x="-219.37502"
+       y="301.625"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0-37-79"
+       width="44.75"
+       height="44.75"
+       x="-155.87498"
+       y="301.625"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0-3-9-7"
+       width="44.75"
+       height="44.75"
+       x="-155.87502"
+       y="370.41666"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart-1-97)"
+       d="m -149.48957,370.41667 v -23.8125"
+       id="path11229-1-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11289-32-9)"
+       d="M -132.29166,370.1875 V 346.375"
+       id="path11279-5-2"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11331-3-6)"
+       d="M -116.41666,370.1875 V 346.375"
+       id="path11321-57-1"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11697-0-9)"
+       d="m -156.10416,306.91667 h -18.52083"
+       id="path11687-8-2"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11775-7-1)"
+       d="m -156.10416,342.63542 h -18.52083"
+       id="path11765-7-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11859-6-7)"
+       d="m -181.23957,346.60417 v 27.78125 h 25.13541"
+       id="path11849-4-64"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12051-5-0)"
+       d="M -214.31249,346.60417 V 396.875 l 58.20833,10e-6"
+       id="path12041-6-5"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12273-1-9)"
+       d="m -198.43749,346.60417 v 39.6875 h 42.33333"
+       id="path12263-1-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:0.264999, 0.794997;stroke-dashoffset:0"
+       id="rect12521-4-2"
+       width="201.08334"
+       height="140.22917"
+       x="-298.97916"
+       y="288.16666"
+       rx="2.052534e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12693-9-9)"
+       d="m -283.10416,346.37499 v 66.14583 l 127,10e-6"
+       id="path12683-0-6"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path13038-3-6"
+       cx="-214.36504"
+       cy="396.86005"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M -156.10416,404.58332 H -271.19791"
+       id="path13042-4-1"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13156-4-9)"
+       d="m -271.19791,346.37499 v 58.20834"
+       id="path13422-1-7"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13454-3-4)"
+       d="m -248.70832,346.63958 v 39.6875 h 50.27083"
+       id="path13444-1-7"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path13038-4-0-2"
+       cx="-198.46684"
+       cy="386.17142"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13606-5-1)"
+       d="m -260.61457,346.63957 v 50.27083 l 46.30208,1e-5"
+       id="path13596-0-6"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13750-5-1)"
+       d="m -219.60416,343.72916 h -23.8125"
+       id="path13740-9-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13894-7-1)"
+       d="m -219.60416,322.5625 h -23.8125"
+       id="path13884-9-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14394-2-2)"
+       d="m -288.39582,323.88542 h -11.90625"
+       id="path14384-0-8"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14568-7-0)"
+       d="m -219.60416,306.6875 h -14.55208 v -10.58333 h -60.85417 v 27.78125"
+       id="path14558-9-6"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-1-4)"
+       d="M -93.927084,306.6875 H -111.12499"
+       id="path14732-2-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-6-7-9)"
+       d="M -93.927084,341.08333 H -111.12499"
+       id="path14732-5-4-5"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-4-2-5)"
+       d="M -93.927084,318.59375 H -111.12499"
+       id="path14732-0-7-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-3-6-30)"
+       d="M -93.927084,330.5 H -111.12499"
+       id="path14732-6-5-3"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBBeiwerte.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-87-8"
+       width="44.75"
+       height="44.75"
+       x="-555.625"
+       y="-21.166666"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-8-8-1"
+       width="44.75"
+       height="44.75"
+       x="-486.83334"
+       y="-21.166666"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0-37-3"
+       width="44.75"
+       height="44.75"
+       x="-423.33331"
+       y="-21.166666"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999"
+       id="rect10850-0-3-9-4"
+       width="44.75"
+       height="44.75"
+       x="-423.33334"
+       y="47.624996"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart-1-92)"
+       d="m -416.94791,47.625007 v -23.8125"
+       id="path11229-1-1"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11289-32-0)"
+       d="m -399.75,47.395832 v -23.8125"
+       id="path11279-5-9"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11331-3-30)"
+       d="m -383.875,47.395832 v -23.8125"
+       id="path11321-57-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11697-0-7)"
+       d="m -423.5625,-15.875 h -18.52083"
+       id="path11687-8-17"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11775-7-4)"
+       d="m -423.5625,19.843757 h -18.52083"
+       id="path11765-7-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11859-6-1)"
+       d="m -448.69791,23.812507 v 27.78125 h 25.13541"
+       id="path11849-4-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12051-5-00)"
+       d="m -481.77083,23.812507 v 50.270828 l 58.20833,10e-6"
+       id="path12041-6-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12273-1-7)"
+       d="m -465.89583,23.812507 v 39.687498 h 42.33333"
+       id="path12263-1-1"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:0.264999, 0.794997;stroke-dashoffset:0"
+       id="rect12521-4-8"
+       width="201.08334"
+       height="140.22917"
+       x="-566.4375"
+       y="-34.624996"
+       rx="2.052534e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker12693-9-5)"
+       d="m -550.5625,23.583327 v 66.145828 l 127,10e-6"
+       id="path12683-0-8"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path13038-3-8"
+       cx="-481.82339"
+       cy="74.068382"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13156-4-99)"
+       d="M -538.65625,23.583327 V 81.791665"
+       id="path13422-1-72"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13454-3-8)"
+       d="m -516.16666,23.847917 v 39.687498 h 50.27083"
+       id="path13444-1-2"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path13038-4-0-0"
+       cx="-465.9252"
+       cy="63.379753"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13606-5-5)"
+       d="m -528.07291,23.847907 v 50.270828 l 46.30208,1e-5"
+       id="path13596-0-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13750-5-2)"
+       d="M -487.0625,20.937497 H -510.875"
+       id="path13740-9-6"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13894-7-2)"
+       d="M -487.0625,-0.22916901 H -510.875"
+       id="path13884-9-8"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14394-2-20)"
+       d="m -555.85416,1.093751 h -11.90625"
+       id="path14384-0-6"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14568-7-33)"
+       d="m -487.0625,-16.10417 h -14.55208 V -26.6875 h -60.85417 V 1.093751"
+       id="path14558-9-2"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-1-7)"
+       d="m -361.38542,-16.10417 h -17.19791"
+       id="path14732-2-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-6-7-1)"
+       d="m -361.38542,18.291667 h -17.19791"
+       id="path14732-5-4-9"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-4-2-2)"
+       d="m -361.38542,-4.197919 h -17.19791"
+       id="path14732-0-7-55"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker14742-3-6-32)"
+       d="m -361.38542,7.708331 h -17.19791"
+       id="path14732-6-5-5"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBKraft.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999;stroke-opacity:0.307692"
+       id="rect10850-87-0"
+       width="44.75"
+       height="44.75"
+       x="-553.84375"
+       y="132.75002"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999;stroke-opacity:0.307692"
+       id="rect10850-8-8-9"
+       width="44.75"
+       height="44.75"
+       x="-485.05206"
+       y="132.75002"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999;stroke-opacity:0.31"
+       id="rect10850-0-37-8"
+       width="44.75"
+       height="44.75"
+       x="-421.55203"
+       y="132.75002"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.249999;stroke-opacity:0.307692"
+       id="rect10850-0-3-9-78"
+       width="44.75"
+       height="44.75"
+       x="-421.55206"
+       y="201.54167"
+       rx="2.0525342e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#Arrow1Lstart-1-8)"
+       d="m -415.16664,201.54168 v -23.8125"
+       id="path11229-1-2"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker11289-32-2)"
+       d="m -397.96873,201.31251 v -23.8125"
+       id="path11279-5-7"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker11331-3-1)"
+       d="m -382.09373,201.31251 v -23.8125"
+       id="path11321-57-3"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker11697-0-5)"
+       d="m -421.78123,138.04168 h -18.52083"
+       id="path11687-8-14"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker11775-7-5)"
+       d="m -421.78123,173.76043 h -18.52083"
+       id="path11765-7-86"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker11859-6-11)"
+       d="m -446.91664,177.72918 v 27.78125 h 25.13541"
+       id="path11849-4-69"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.3;marker-start:url(#marker12051-5-7)"
+       d="m -479.98956,177.72918 v 50.27083 l 58.20833,1e-5"
+       id="path12041-6-53"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.334615;marker-start:url(#marker12273-1-0)"
+       d="m -464.11456,177.72918 v 39.6875 h 42.33333"
+       id="path12263-1-25"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:0.264999, 0.794997;stroke-dashoffset:0"
+       id="rect12521-4-4"
+       width="201.08334"
+       height="140.22917"
+       x="-564.65625"
+       y="119.29169"
+       rx="2.052534e-06"
+       ry="2.0525342e-06"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.484615;marker-start:url(#marker12693-9-4)"
+       d="m -548.78123,177.5 v 66.14583 l 127,1e-5"
+       id="path12683-0-82"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.484615"
+       id="path13038-3-1"
+       cx="-480.04208"
+       cy="227.98506"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.484615"
+       d="M -421.78123,235.70833 H -536.87498"
+       id="path13042-4-0"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.484615;marker-start:url(#marker13156-4-3)"
+       d="m -536.87498,177.5 v 58.20834"
+       id="path13422-1-9"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.484615;marker-start:url(#marker13454-3-0)"
+       d="m -514.38539,177.76459 v 39.6875 h 50.27083"
+       id="path13444-1-9"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.484615"
+       id="path13038-4-0-5"
+       cx="-464.14389"
+       cy="217.29643"
+       r="0.36750048"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.484615;marker-start:url(#marker13606-5-0)"
+       d="m -526.29164,177.76458 v 50.27083 l 46.30208,10e-6"
+       id="path13596-0-8"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.307692;marker-start:url(#marker13750-5-3)"
+       d="m -485.28123,174.85417 h -23.8125"
+       id="path13740-9-7"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.307692;marker-start:url(#marker13894-7-9)"
+       d="m -485.28123,153.68751 h -23.8125"
+       id="path13884-9-3"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.307692;marker-start:url(#marker14394-2-9)"
+       d="m -554.07289,155.01043 h -11.90625"
+       id="path14384-0-3"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.307692;marker-start:url(#marker14568-7-5)"
+       d="m -485.28123,137.81251 h -14.55208 v -10.58333 h -60.85417 v 27.78125"
+       id="path14558-9-64"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker14742-1-5)"
+       d="m -359.60415,137.81251 h -17.19791"
+       id="path14732-2-2"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker14742-6-7-2)"
+       d="m -359.60415,172.20834 h -17.19791"
+       id="path14732-5-4-2"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker14742-4-2-20)"
+       d="m -359.60415,149.71876 h -17.19791"
+       id="path14732-0-7-4"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.31;marker-start:url(#marker14742-3-6-1)"
+       d="m -359.60415,161.62501 h -17.19791"
+       id="path14732-6-5-8"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95"
+       inkscape:export-filename="D:\TU-DARMSTADT\Master\4- Semester\Projektseminar\Vortrag\BSBNix.png" />
+  </g>
+</svg>
