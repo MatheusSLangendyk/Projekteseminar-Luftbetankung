@@ -1,0 +1,22 @@
+Koordinatensystem 
+   Anwendungen + Mittelpunkt ??
+   Erlärung winkel
+   Transformation
+
+Modellierung
+   Zustände + Grund zustände
+   Eingangsgröße + Bild
+   Eingliederung Bild
+   Block DynKin + Bild
+   Block Aero + Bild
+   Block Beiwerte + Bild
+   Block Kraft + Bild
+   Hauptannahmen + Einschränkunggen 
+
+Gesamtmodell
+  - Zustände
+  -Entkopplung des system + lineare Gl.
+  - Bild
+  - Massen + Bild
+  - Wind + Bild
+
