@@ -1,11 +1,11 @@
 \chapter{Arbeitspunkt und Linearisierung}\label{cha:Linearisierung}
 Der Entwurf eines linearen Reglers erfordert eine Modelllinearisierung um einen gewünschten Arbeitspunkt. Dieses Kapitel beschäftigt sich mit der Ermittlung des linearen Modells eines Flugzeug bezüglich der Gleichungen in Kapitel \ref{cha:Modellbildung}.
 \section{Arbeitspunkt eines geraden Fluges}
-Im Rahmen dieses Projektes setzt man voraus, dass die Flugzeuge während der Betankung geradeaus fliegen. Dafür sucht man nach einer Ruhelage des nichtlinearen Systems, die diese Bedingung erfüllen kann. Diese Ruhelage $(\underline{x}_\mathrm{f_{ap}},\underline{u}_\mathrm{f_{ap}})$ lässt sich mit
+Im Rahmen dieses Projektes setzt wird vorausgesetzt, dass die Flugzeuge während der Betankung geradeaus fliegen. Dafür sucht man nach einer Ruhelage des nichtlinearen Systems, die diese Bedingung erfüllen kann. Diese Ruhelage $(\underline{x}_\mathrm{f_{ap}},\underline{u}_\mathrm{f_{ap}})$ lässt sich mit
 \begin{equation}
 \underline{\dot{x}}_\mathrm{f} = \underline{f}(\underline{x}_\mathrm{f_{ap}},\underline{u}_\mathrm{f_{ap}}) = \underline{0}
 \end{equation}
-finden\footnote{Dabei ist der Unterschied zwischen $\underline{u}_\mathrm{f_{ap}}$ (Stellgrö{\ss}en des einem Flugzeug) und $u_\mathrm{ap}$ ($x_\mathrm{f}$ Geschwindigkeitskomponente) zu beachten.}. Sei $n_\mathrm{f}$ die Anzahl der Zustände und $m_\mathrm{f}$ die Anzahl der Steuergrö{\ss}en. Bei der Berechnung bekommt man daher $n_\mathrm{f}+m_\mathrm{f}$ Gleichungen und Unbekannte. Da $n_\mathrm{f}$ Gleichungen für die Voraussetzung $\underline{\dot{x}}_\mathrm{f} = \underline{0}$ genutzt werden müssen, bleiben noch $m_\mathrm{f}$ Freiheitsgrade übrig.\\
+finden\footnote{Dabei ist der Unterschied zwischen $\underline{u}_\mathrm{f_{ap}}$ (Stellgrö{\ss}en des einen Flugzeug) und $u_\mathrm{ap}$ ($x_\mathrm{f}$ Geschwindigkeitskomponente) zu beachten.}. Sei $n_\mathrm{f}$ die Anzahl der Zustände und $m_\mathrm{f}$ die Anzahl der Steuergrö{\ss}en. Bei der Berechnung bekommt man daher $n_\mathrm{f}$ Gleichungen und Unbekannte. Da $n_\mathrm{f}$ Gleichungen für die Voraussetzung $\underline{\dot{x}}_\mathrm{f} = \underline{0}$ genutzt werden müssen, bleiben noch $m_\mathrm{f}$ Freiheitsgrade übrig.\\
 
 Die Annahme des geraden Fluges führt dazu, dass man den genannten Freiheitsgrad folgenderma{\ss}en ausnutzt
 \begin{equation}
@@ -33,13 +33,13 @@ u_\mathrm{ap} - u_\mathrm{soll}\\
 h^\mathcal{G}_\mathrm{ap} -h^\mathcal{G}_\mathrm{soll}
 \end{bmatrix} = \underline{0} \in \Re^{(n_\mathrm{f}+m_\mathrm{f}+1)\times 1}.
 \end{equation}
-Dazu ist die Wahl der Kombination von $u_\mathrm{soll}$ und $h^\mathcal{G}_\mathrm{soll}$ noch notwendig. In Kapitel \ref{cha:Robustheit} wird argumentiert, dass die Kombination, die zu den besten Simulationsergebnissen führt $u_\mathrm{soll} = 150 \mathrm{m/s}$ und  $h^\mathcal{G}_\mathrm{soll} = 5000 \mathrm{m}$ lautet. Dies entspricht einer etwas höheren Reisenhöhe als der, die für den optimalen Kraftstoffverbrauch \cite{OptimalHeight} empfohlen wird und einer niedrigen durchschnittlichen Reisegeschwindigkeit der \textit{Boeing 757-200} \cite{B7572}. Die Lösung der Gleichung \ref{fun:GSap}, unter der genannten Wahl von Höhe und Geschwindigkeit, liefert folgende Ruhelage des nichtlinearen Systems \\
+Dazu ist die Wahl der Kombination von $u_\mathrm{soll}$ und $h^\mathcal{G}_\mathrm{soll}$ noch notwendig. Daher wählt man $u_\mathrm{soll} = 150 \mathrm{m/s}$ und  $h^\mathcal{G}_\mathrm{soll} = 5000 \mathrm{m}$, da diese Kombination zu den  besten Simulationsergebnissen für die Verkopplung führt(Kapitel \ref{cha:Robustheit}). Dies entspricht einer etwas höheren Reisenhöhe als der, die für den optimalen Kraftstoffverbrauch \cite{OptimalHeight} empfohlen wird und einer niedrigen durchschnittlichen Reisegeschwindigkeit der \textit{Boeing 757-200} \cite{B7572}. Die Lösung der Gleichung \eqref{fun:GSap}, unter der genannten Wahl von Höhe und Geschwindigkeit, liefert folgende Ruhelage des nichtlinearen Systems \\
 \begin{equation}
 \begin{bmatrix}
 \underline{x}_\mathrm{ap} \\ \underline{u}_\mathrm{ap} 
 \end{bmatrix} = 
 \begin{bmatrix} 
-u_\mathrm{ap}\\v_\mathrm{ap}\\w_\mathrm{ap}\\p_\mathrm{ap}\\q_\mathrm{ap}\\r_\mathrm{ap}\\\phi_\mathrm{ap}\\\theta_\mathrm{ap}\\h^\mathcal{G}_\mathrm{ap}\\ \eta_\mathrm{ap}\\\mathrm{sigma}_{f_\mathrm{ap}}\\ \xi_\mathrm{ap} \\ \zeta_\mathrm{ap}\\
+u_\mathrm{ap}\\v_\mathrm{ap}\\w_\mathrm{ap}\\p_\mathrm{ap}\\q_\mathrm{ap}\\r_\mathrm{ap}\\\phi_\mathrm{ap}\\\theta_\mathrm{ap}\\h^\mathcal{G}_\mathrm{ap}\\ \eta_\mathrm{ap}\\ \sigma_{\mathrm{f_{ap}}}\\ \xi_\mathrm{ap} \\ \zeta_\mathrm{ap}\\
 \end{bmatrix} =  \begin{bmatrix} 
 150 \mathrm{ [m/s]}\\0 \mathrm{[ m/s]}\\-11,1 \mathrm{[m/s]}\\0 \mathrm{[ rad/s]}\\0 \mathrm{ [rad/s]}\\0 \mathrm{ [rad/s]}\\0 \mathrm{ [rad]}\\-0.1 \mathrm{[ rad]}\\5000 \mathrm{[ m]}\\-0.087 \mathrm{[ rad]}\\0.247 \\0 \mathrm{[ rad]}\\0 \mathrm{[ rad]}\\
 \end{bmatrix}.
@@ -53,7 +53,7 @@ Eine lineare Differentialgleichung für das Modell eines Flugzeugs
 \end{equation}
 berechnet man, indem man eine Taylor-Reihe erster Ordnung anwendet. Daher berechnet man die Systemmatrix $\textbf{A}_\mathrm{f}$ und die Eingangsmatrix $\textbf{B}_\mathrm{f}$ mithilfe der Jakobimatrix, ausgewertet an der gerechneten Ruhelage. Die numerischen Werte der Systemmatrizen $\textbf{A}_\mathrm{f}$ und $\textbf{B}_\mathrm{f}$ sind im Anhang \ref{app:matrizen} dargestellt.
 \begin{equation}
-\textbf{A}_\mathrm{f} = \dfrac{\partial \underline{f}(\underline{x}_\mathrm{f},\underline{x}_\mathrm{f})}{\partial \underline{x}_\mathrm{f}}_{|\underline{x}_\mathrm{f_{ap}},\underline{u}_\mathrm{f_{ap}}} 
+\textbf{A}_\mathrm{f} = \dfrac{\partial \underline{f}(\underline{x}_\mathrm{f},\underline{u}_\mathrm{f})}{\partial \underline{x}_\mathrm{f}}_{|\underline{x}_\mathrm{f_{ap}},\underline{u}_\mathrm{f_{ap}}} 
 \end{equation}
 
 

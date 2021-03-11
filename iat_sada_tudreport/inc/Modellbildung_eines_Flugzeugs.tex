@@ -20,11 +20,11 @@ Tabelle \ref{tab:zeitVariab} dokumentiert die wichtigste zeitabhängigen Variabl
  \hline
  Körperrotationsgeschwindigkeit  $z$-Achse& $r$ & $\mathrm{[rad/s]}$& Körperfest\\ 
  \hline
- Rollwinkel & $\phi$ & $\mathrm{[rad]}$& Körperfest\\ 
+ Rollwinkel & $\phi$ & $\mathrm{[rad]}$& -\\ 
  \hline
- Nickwinkel & $\theta$ & $\mathrm{[rad]}$& Körperfest\\ 
+ Nickwinkel & $\theta$ & $\mathrm{[rad]}$& -\\ 
  \hline
- Gierwinkel & $\psi$ & $\mathrm{[rad]}$& Körperfest\\ 
+ Gierwinkel & $\psi$ & $\mathrm{[rad]}$& -\\ 
  \hline
  Anstellwinkel & $\alpha$ & $\mathrm{[rad]}$& Körperfest\\ 
  \hline
@@ -38,7 +38,7 @@ Tabelle \ref{tab:zeitVariab} dokumentiert die wichtigste zeitabhängigen Variabl
  \hline
  Höhenruderwinkel & $\eta$ & $\mathrm{[rad]}$& Körperfest\\ 
  \hline
- Normierte Schubkraft  & $\mathrm{sigma}_f$ & -& -\\ 
+ Normierte Schubkraft  & $\sigma_\mathrm{f}$ & -& -\\ 
  \hline
  Querruderwinkel & $\xi$ & $\mathrm{[rad]}$& Körperfest\\ 
  \hline
@@ -51,13 +51,12 @@ Tabelle \ref{tab:zeitVariab} dokumentiert die wichtigste zeitabhängigen Variabl
 
 Die Wahl der Zustandsvariablen muss folgende Anforderungen erfüllen, damit das System den Zweck des Projekts bewältigen kann.
 \begin{itemize}
-\item Zustände müssen genügen, um ein sinnvolles Modell darzustellen. 
+\item Zustände müssen genügen, um die wichtige dynamischen Zusammenhänge abzubilden. 
 \item Zustände müssen sinnvolle Verkopplungsbedingungen zur Verfügung stellen.
 \item Das Gesamtsystem linearisiert um einen sinnvollen Arbeitspunkt (Kapitel \ref{cha:Linearisierung}) muss vollständig steuerbar und beobachtbar sein.
-\item Die Linearisierung um einen konstanten Arbeitspunkt muss möglich sein.
 \item Um ein zu hochdimensionales System zu vermeiden, soll die Anzahl der Zustände auf ein Minimum gehalten werden (unter der Einhaltung der vorherigen Anforderungen). 
 \end{itemize}
-Aus dem Grund wählt man folgende Variablen als Zustände, um ein geeignetes Flugzeugmodell zu beschreiben.
+Die Zustände, die sich während der Arbeit, als fähig für die Erfüllung der genannte Voraussetzungen gezeigt haben, werden folgendermaßen aufgelistet.
 \begin{itemize}
 \item Körpergeschwindigkeit $\underline{v} = [u, v, w]^T$
 \item Eulerwinkel (ohne den Gierwinkel) $\underline{\varphi} = [\phi, \theta]^T$ (siehe Bild \ref{fig:KoordSyst})
@@ -81,10 +80,10 @@ Der Gierwinkel $\psi$ wird nicht als Teil des Zustands beschrieben, da ansonsten
 Die Stellgrößen eines Flugzeugs werden als 
 \begin{equation}
 \underline{u}_\mathrm{f} = \begin{bmatrix} 
-\eta \\ \mathrm{sigma}_f \\ \xi \\ \zeta
+\eta \\ \sigma_\mathrm{f} \\ \xi \\ \zeta
 \end{bmatrix},
 \end{equation} 
-definiert, wobei die Schubkraft anhand der Gewichtskraft des Flugzeugs normiert wird: $\mathrm{sigma}_f = \dfrac{F_\mathrm{schub}}{mg}$. Bild \ref{fig:Ruder} demonstriert welche Ruder aufgeschlagen werden können, um das dynamische Verhalten des Fliegers zu beeinflussen. Das betrachtete Modell geht davon aus, dass sich das Triebwerk im Zentrum der Maschine befindet, und dass dieses zentrale Triebwerk für die gesamte Lieferung der Schubkraft verantwortlich ist.
+definiert, wobei die Schubkraft anhand der Gewichtskraft des Flugzeugs normiert wird: $\sigma_\mathrm{f} = \dfrac{F_\mathrm{schub}}{mg}$. Bild \ref{fig:Ruder} demonstriert welche Ruder aufgeschlagen werden können, um das dynamische Verhalten des Fliegers zu beeinflussen. Das betrachtete Modell geht davon aus, dass sich das Triebwerk im Zentrum der Maschine befindet, und dass dieses zentrale Triebwerk für die gesamte Lieferung der Schubkraft verantwortlich ist.
 \begin{figure}[h]
   \centering
   \begin{overpic}[width=0.5\linewidth]{./Bilder/Ruder.png}
@@ -111,7 +110,7 @@ Die Stellgrößen müssen für eine realitätsgetreue Analyse beschränkt werden
   Höhenruderwinkel & $-25\dfrac{\pi}{180}[\mathrm{rad}]\leq\eta\leq 10\dfrac{\pi}{180}[\mathrm{rad}]$\\
   Seitenruderwinkel & $-30 \dfrac{\pi}{180}[\mathrm{rad}]\leq\zeta\leq 30\dfrac{\pi}{180}[\mathrm{rad}]$\\
   Querruderwinkel & $-25 \dfrac{\pi}{180}[\mathrm{rad}]\leq\xi\leq 25\dfrac{\pi}{180}[\mathrm{rad}]$\\
-  Normierte Schubkraft & $\dfrac{\pi}{360}\leq\mathrm{sigma}_f\leq \dfrac{F_\mathrm{schub_{max}}}{mg} = \dfrac{\pi}{9}$\\ 
+  Normierte Schubkraft & $\dfrac{\pi}{360}\leq\sigma_\mathrm{f}\leq \dfrac{F_\mathrm{schub_{max}}}{mg} = \dfrac{\pi}{9}$\\ 
 \hline
 \end{tabular}
 \caption{Stellgrößenbeschränkung}
@@ -126,32 +125,42 @@ Relevant für die Herleitung der Modellgleichung auf den folgenden Seiten ist di
 \label{fun:Tfe}
 \textbf{T}_\mathrm{fe}\underline{\dot{v}}^\mathcal{E} = \underline{\dot{v}}^\mathcal{F} + (\underline{\omega}^\mathcal{F}-\underline{\omega}^\mathcal{F}_\mathrm{e})\times\underline{v}^\mathcal{F}
 \end{equation}
-Der Erdrotationsgeschwindigkeitsvektor wird in der Regel als $\underline{\omega}^\mathcal{E}_\mathrm{e} = \begin{bmatrix} 
+Der Erdrotationsgeschwindigkeitsvektor wird als $\underline{\omega}^\mathcal{E}_\mathrm{e} = \begin{bmatrix} 
 0 \\ 0 \\ 7.3\times 10^{-5} 
-\end{bmatrix}\mathrm{[rad/s]}$ dargestellt, allerdings kann für erdnahe Flüge die Annahme $\underline{\omega}^\mathcal{E}_\mathrm{e} = \underline{0}$ getroffen werden.
+\end{bmatrix}\mathrm{[rad/s]}$ dargestellt \cite{FlugmechanikBuch}, allerdings kann für erdnahe Flüge die Annahme $\underline{\omega}^\mathcal{E}_\mathrm{e} = \underline{0}$ getroffen werden.
 \subsection{Dynamik}
 \textbf{Translation}\\
-Laut \cite{FlugmechanikBuch} ist die absolute Beschleunigung im erdfesten System  als Summe der Körperbeschleunigung  und der relativen Beschleunigung bezüglich der Erde definiert, wenn die Annahme $(\underline{\omega}_\mathrm{e}^\mathcal{E})^2 <<1$ getroffen wird
+Laut \cite{FlugmechanikBuch} ergibt sich die Beschleunigung in erdfesten KS  aus der Summe der inertialen und zentrifugalen Beschleunigung
+\begin{equation}
+\label{fun:BeschlErd}
+\underline{a}^\mathcal{E} = \underline{\dot{v}}^\mathcal{E}_\mathrm{p} + \underline{\omega}^\mathcal{E}_\mathrm{e}\times \underline{v}^\mathcal{E}_\mathrm{p},
+\end{equation}
+wobei die inertiale Geschwindigkeit sich aus der Summe der relativ Geschwindigkeit (Erde-Körper) und der Körpergeschwindigkeit ausrechnen lässt
+\begin{equation}
+\label{fun:GeschwInert}
+\underline{v}^\mathcal{E}_\mathrm{p} = \underline{\omega}^\mathcal{E}_\mathrm{e}\times \int \underline{v}^\mathcal{E} dt + \underline{v}^\mathcal{E}.
+\end{equation}
+Die absolute Beschleunigung im erdfesten System wird als Summe der Körperbeschleunigung  und der relativen Beschleunigung bezüglich der Erde definiert. Unter der Anwendung der Gleichung \eqref{fun:BeschlErd}, der Ableitung von \eqref{fun:GeschwInert} und der Annahme, dass $||\underline{\omega}_\mathrm{e}^\mathcal{E}||^2 <<1$, wird sie folgendermaßen ermittelt 
 \begin{equation}
 \label{fun:a}
 \underline{a}^\mathcal{E} = \underline{\dot{v}}^\mathcal{E} + 2\underline{\omega}_\mathrm{e}^\mathcal{E} \times \underline{v}^\mathcal{E}.
 \end{equation}
-Bei der Transformation zu körperfesten Koordinaten und unter der Verwendung von Gleichung \ref{fun:Tfe}, erhält man.
+Bei der Transformation zu körperfesten Koordinaten und unter der Verwendung von Gleichung \eqref{fun:Tfe}, erhält man
 \begin{align}
 \textbf{T}_\mathrm{fe}\underline{a}^\mathcal{E} = \textbf{T}_\mathrm{fe}(\underline{\dot{v}}^\mathcal{E} + 2\underline{\omega}_\mathrm{e}^\mathcal{E} \times \underline{v}^\mathcal{E}),\\
 \underline{a}^\mathcal{F} = \textbf{T}_\mathrm{fe}\underline{\dot{v}}^\mathcal{E} +  2\underline{\omega}_\mathrm{e}^\mathcal{F} \times \underline{v}^\mathcal{F},\\
 \label{fun:a}
-\Rightarrow \underline{a}^\mathcal{F} = \underline{\dot{v}}^\mathcal{F} + (\underline{\omega}^\mathcal{F}+\underline{\omega}_\mathrm{e}^\mathcal{F})\times \underline{v}^\mathcal{F}
+\Rightarrow \underline{a}^\mathcal{F} = \underline{\dot{v}}^\mathcal{F} + (\underline{\omega}^\mathcal{F}+\underline{\omega}_\mathrm{e}^\mathcal{F})\times \underline{v}^\mathcal{F}.
 \end{align}
 Des Weiteren wird die Vereinfachung vorgenommen, dass die Erdrotationsgeschwindigkeit $\underline{\omega}_\mathrm{e}^\mathcal{F}$ vernachlässigbar ist. Die Körperbeschleunigung im körperfesten System ist, laut dem zweiten Satz von Newton, gleich der Summe aller eingreifenden Kräfte. 
 \begin{equation}
 \label{fun:SummeKräfte}
-\underline{a}^\mathcal{F} = \dfrac{1}{m}\underline{r}^\mathcal{F}_\mathrm{g} + \textbf{T}_\mathrm{gf}\begin{bmatrix} 
+\underline{a}^\mathcal{F} = \dfrac{1}{m}\underline{r}^\mathcal{F}_\mathrm{g} + \textbf{T}_\mathrm{fg}\begin{bmatrix} 
 0 \\ 0 \\ g 
 \end{bmatrix},
 \end{equation}
-wobei $\underline{r}^\mathcal{F}_\mathrm{g}$ die Summe der aerodynamischen Kräfte und Schubkraft darstellt, welche in Kapitel \ref{sec:Kräfte} im Detail eingegangen wird. Die Schwerkraft lässt sich einfach im geodätischen KS darstellen. Dazu wird noch die Transformation zu körperfesten Koordinaten benötigt.\\
-Mithilfe der Gleichungen \ref{fun:a} und \ref{fun:SummeKräfte} lässt sich die allgemeine translatorische Bewegungsgleichung berechnen.
+wobei $\underline{r}^\mathcal{F}_\mathrm{g}$ die Summe der aerodynamischen Kräfte und Schubkraft darstellt, auf welche in Kapitel \ref{sec:Kräfte} im Detail eingegangen wird. Die Schwerkraft lässt sich einfach im geodätischen KS darstellen. Dazu wird noch die Transformation zu körperfesten Koordinaten benötigt.\\
+Mithilfe der Gleichungen \eqref{fun:a} und \eqref{fun:SummeKräfte} lässt sich die allgemeine translatorische Bewegungsgleichung berechnen.
 \begin{equation}
 \label{fund:TranslatGL}
 \underline{\dot{v}} = \dfrac{1}{m}\underline{r}_\mathrm{g} + \textbf{T}_\mathrm{fg}\begin{bmatrix} 
@@ -160,13 +169,14 @@ Mithilfe der Gleichungen \ref{fun:a} und \ref{fun:SummeKräfte} lässt sich die 
 g
 \end{bmatrix} - \underline{\omega}\times\underline{v}.
 \end{equation}
+
 \textbf{Rotation}\\
-Unter der Annahme, dass sich weder die Massenverteilung noch die Trägheitsmatrix $\textbf{I}$  zeitlich ändern, kann man eine vereinfachte Variante des Drallsatzes anwenden.
+Unter der Annahme, dass sich weder die Massenverteilung noch die Trägheitsmatrix $\textbf{I}$  zeitlich ändern, kann man eine vereinfachte Variante des Drallsatzes anwenden
 \begin{equation}
 \label{fun:Drallsatz}
 \underline{q}^\mathcal{F}_\mathrm{g} =  \underline{\omega}^\mathcal{F}\times\textbf{I}\underline{\omega}^\mathcal{F} + \textbf{I}\underline{\dot{\omega}}^\mathcal{F},
 \end{equation} 
-wobei $ \underline{\omega}^\mathcal{F}\times\textbf{I}\underline{\omega}^\mathcal{F}$ den \textit{Stein'scher Anteil} repräsentiert. Kapitel \ref{sec:Kräfte} beschäftigt sich mit der Herleitung der Summe des aerodynamischen und Schubmoment $\underline{q}^\mathcal{F}_\mathrm{g}$. Durch eine einfache Umformung der Gleichung \ref{fun:Drallsatz} enthält man die allgemeine rotatorische Bewegungsgleichung
+wobei der Corioulis-Term $ \underline{\omega}^\mathcal{F}\times\textbf{I}\underline{\omega}^\mathcal{F}$ aus der Ableitung des Drehimpulses in einem rotierenden KS kommt. Kapitel \ref{sec:Kräfte} beschäftigt sich mit der Herleitung der Summe des aerodynamischen Schubmomente und dem Schubmoment $\underline{q}^\mathcal{F}_\mathrm{g}$. Durch eine einfache Umformung der Gleichung \eqref{fun:Drallsatz} enthält man die allgemeine rotatorische Bewegungsgleichung
 \begin{equation}
 \label{fund:RotGL}
 \underline{\dot{\omega}} = -\textbf{I}^{-1}\underline{\omega}\times\textbf{I}\underline{\omega} + \textbf{I}^{-1}\underline{q}^\mathcal{F}_\mathrm{g}.
@@ -175,9 +185,10 @@ wobei $ \underline{\omega}^\mathcal{F}\times\textbf{I}\underline{\omega}^\mathca
 \subsection{Kinematik}
 Die Berechnung des Zustands $h^\mathcal{G}$ erfolgt über die Differentialgleichung 
 \begin{equation}
-\dot{h}^\mathcal{G} = -\textbf{T}_\mathrm{l}\textbf{T}_\mathrm{gf}(\underline{\varphi}_g)\underline{v}.
+\label{fun:hoehe}
+\dot{h}^\mathcal{G} = -\textbf{T}_\mathrm{l}\textbf{T}_\mathrm{gf}(\underline{\varphi}_\mathrm{g})\underline{v}.
 \end{equation}
-Der Vektor $\underline{\varphi}_\mathrm{g} = [\underline{\varphi},\psi]^T $ ermöglicht die Transformation der Geschwindigkeit von körperfesten zu geodätischen Koordinaten. Die Matrix $\textbf{T}_\mathrm{l} = [0, 0, 1]$ extrahiert nur die z-Komponente des berechneten Ortsvektors.\\
+Der Vektor $\underline{\varphi}_\mathrm{g} = [\underline{\varphi},\psi]^T \in \mathbb{R}^{3\times 1}$ ermöglicht die Transformation der Geschwindigkeit von körperfesten zu geodätischen Koordinaten. Die Matrix $\textbf{T}_\mathrm{l} = [0, 0, 1]$ extrahiert nur die $z$-Komponente des berechneten Ortsvektors.\\
 Die kinematische Differentialgleichung des Eulerwinkels ist durch die Aufintegrierung der Drehgeschwindigkeit der körperfesten bezüglich der geodätischen Koordinaten erhältlich
 \begin{equation}
 \label{fun:KinEuler}
@@ -192,7 +203,7 @@ Da das Modell für kurze Flugdistanzen ausgelegt ist, kann man annehmen, dass di
 \end{bmatrix}
 \end{equation}
 \subsection{Blockschaltbild der Bewegungsgleichung}
-Bild \ref{fig:BSB} zeigt die vorgestellten dynamischen Zusammenhänge mithilfe eines Blockschaltbildes.
+Die Zusammensetzung der Gleichungen \eqref{fund:TranslatGL}, \eqref{fund:RotGL}, \eqref{fun:hoehe} und \eqref{fun:KinEuler} wird mithilfe eines Blockschaltbildes auf der Abbildung \ref{fig:BSB} veranschaulicht. 
 \begin{figure}[h]
   \centering
   \begin{overpic}[width=1.05\linewidth]{./Bilder/BSBDynKin.png}
@@ -213,7 +224,7 @@ Bild \ref{fig:BSB} zeigt die vorgestellten dynamischen Zusammenhänge mithilfe e
 	     \put(34,35.5){$\underline{\omega}\times\textbf{I}\underline{\omega}$}
 	     \put(19,20){-}
 	     \put(16.5,40){-}
-	     \put(54,47){Dynamik}
+	     \put(52,47){Dynamik}
 	     \put(63,47){Kinematik}
 	      \put(18,1){$[0,0,g]^T$}
 	      \put(58,18.5){$\underline{v}$}
@@ -230,18 +241,18 @@ Nach der Ermittlung der dynamischen Zusammenhänge ist es an dieser Stelle mögl
 \begin{itemize}
 \item Anströmungsgeschwindigkeitsvektor $\underline{v}_\mathrm{A} = \underline{v}- \underline{v}_\mathrm{w}  = [u_\mathrm{A},v_\mathrm{A},w_\mathrm{A}]^T $, wobei $\underline{v}_\mathrm{w}$ den Windgeschwindigkeitsvektor darstellt. Die Windgeschwindigkeit wird im Rahmen des Projekts als externe Störung (Kapitel \ref{cha:ZweiFlieger}) betrachtet  und wird daher nicht weiter als Teil des Modells berücksichtigt.  
 \item Betrag der Anströmungsgeschwindigkeit $V_\mathrm{A} = |\underline{v}_\mathrm{A}| $.
-\item Anstellwinkel $\alpha = \tan^{-1}(\dfrac{w_\mathrm{A}}{u_\mathrm{A}})$
-\item Schiebewinkel $\beta = \sin^{-1}(\dfrac{v_\mathrm{A}}{V_\mathrm{A}})$
+\item Anstellwinkel $\alpha = \tan^{-1}\left(\dfrac{w_\mathrm{A}}{u_\mathrm{A}}\right)$
+\item Schiebewinkel $\beta = \sin^{-1}\left(\dfrac{v_\mathrm{A}}{V_\mathrm{A}}\right)$
 \item Schwerkraft $g = 9.81 \mathrm{m/s^2} = konst.$
-\item Lufttemperatur $ T = 288.15 \mathrm{K} - 0.0065h^\mathcal{G}\mathrm{K/m}$ (siehe Autor \cite{AircraftCS})
-\item Statischer Luftdruck $p_\mathrm{s} = 101325\mathrm{N/m^2}(\dfrac{T}{288.15  \mathrm{K}})^{\dfrac{g}{1.86584 \mathrm{m/s^2}}}$
+\item Lufttemperatur $ T = 288.15 \mathrm{K} - 0.0065h^\mathcal{G}\mathrm{K/m}$ (siehe \cite{AircraftCS})
+\item Statischer Luftdruck $p_\mathrm{s} = 101325\mathrm{N/m^2}\left(\dfrac{T}{288.15  \mathrm{K}}\right)^{\dfrac{g}{1.86584 \mathrm{m/s^2}}}$
 \item Luftdichte $\rho = \dfrac{p_\mathrm{s}}{287.053T/\mathrm{K}} \mathrm{Kg/Nm}$
 \item Staudruck $q_\mathrm{s} = \dfrac{1}{2}\rho V_\mathrm{A}^2$
 
 \end{itemize}
 \section{Geometrische Beiwerte}
 \label{sec:Beiwerte}
-Die aerodynamischen Beiwerte sind dimensionslose Grö{\ss}en, die dafür verantwortlich sind die aerodynamische Kräfte und Momente zu bestimmen. Sie hängen von der geometrischen Anordnung des Fliegers (bspw. Ruderwinkel), den Anströmungsgrö{\ss}en und dem aerodynamischen Verhalten eines Körpers in einem Windtunnel ab. Die in diesem Kapitel vorgestellten Koeffizienten spiegeln die aerodynamische Eigenschaft des \textit{Boeing 757-200} wider. Für weitere Details dieser Konstanten sei auf \cite{AircraftCS}, \cite{RAMPaper} und \cite{RAMYoutube_Playlist} verwiesen. Die Gleichungen zur Bestimmung der Koeffizienten sind von den Werken von \cite{FlugmechanikBuch} und \cite{FM1Skrypt} abgeleitet worden. 
+Die aerodynamischen Beiwerte sind dimensionslose Grö{\ss}en, die dafür verantwortlich sind, die aerodynamische Kräfte und Momente zu bestimmen. Sie hängen von der geometrischen Anordnung des Fliegers (bspw. Ruderwinkel), den Anströmungsgrö{\ss}en und dem aerodynamischen Verhalten des Körpers in einem Windkanal ab. Die in diesem Kapitel vorgestellten Koeffizienten spiegeln die aerodynamische Eigenschaft des \textit{Boeing 757-200} wider. Für weitere Details dieser Konstanten sei auf \cite{AircraftCS,RAMPaper,RAMYoutube_Playlist} verwiesen. Die Gleichungen zur Bestimmung der Koeffizienten sind von den Werken von \cite{FlugmechanikBuch,FM1Skrypt} abgeleitet worden. 
 
 \subsection{Translatorische Koeffizienten}
 Die aerodynamischen Kräfte werden sinnvollerweise im aerodynamischen Koordinatensystem definiert. Daher werden die folgenden Koeffizienten auch in diesem Bezugssystem vorgestellt. Die relevanten Beiwerte beeinflussen den Auftrieb, den Luftwiderstand und die Querkraft. Die Werte der aerodynamischen Konstanten sind mithilfe der Tabelle \ref{tab:KonstBeiw} definiert. 
@@ -279,12 +290,12 @@ Abbildung \ref{fig:CA} zeigt den generellen Verlauf zur Bestimmung des Flügelau
 \begin{equation}
 C_\mathrm{A_F}^\mathcal{A} = K_\alpha(\alpha - \alpha_0).
 \end{equation} 
-Dies verursacht, dass für $|\alpha|> \alpha_\mathrm{max}$ das System etwas von der Realität abweicht. Die linearen Winkelbeziehungen führen dazu, dass eine Drehung über $90^{\circ}$  ausgeschlossen werden muss. Diese Annahme sollte für Passagierflugzeuge selbstverständlich erhalten werden.\\
+Dies verursacht, dass für $|\alpha|> \alpha_\mathrm{max}$ das System von der Realität abweicht. Die linearen Winkelbeziehungen führen dazu, dass eine Drehung über $90^{\circ}$  ausgeschlossen werden muss. Diese Annahme sollte für Passagierflugzeuge selbstverständlich erfüllt werden.\\
 Das Höhenruder verursacht ebenfalls eine Auftriebskraft. Dabei muss man den Abwind $\epsilon$ berücksichtigen, der von der Flügeldurchströmung verursacht wird
 \begin{equation}
 \epsilon = K_{\epsilon}(\alpha-\alpha_\mathrm{0}).
 \end{equation}
-Damit wird es möglich den Anstellwinkel $\alpha_\mathrm{h}$ an dem Höhenruder in Abhängigkeit des Anstellwinkels, Höhenruderwinkels und Anströmungsgeschwindigkeit auszurechnen. Dabei ist der Auftriebskoeffizient am Höhenruder auch berechenbar.
+Damit wird es möglich den Anstellwinkel $\alpha_\mathrm{h}$ an dem Höhenruder in Abhängigkeit des Anstellwinkels, Höhenruderwinkels und Anströmungsgeschwindigkeit auszurechnen. Dabei ist der Auftriebskoeffizient am Höhenruder auch berechenbar \cite{RAMYoutube_Playlist}.
 \begin{align}
 \alpha_\mathrm{h} = \alpha - \epsilon-\eta + q\dfrac{l_\mathrm{t}}{V_\mathrm{A}}\\
 \Rightarrow C_\mathrm{A_H}^\mathcal{A} = 3.1 \alpha_\mathrm{h}\dfrac{S_\mathrm{H}}{S}.
@@ -299,7 +310,7 @@ Bild \ref{fig:CW} veranschaulicht die Beziehung zwischen $C_\mathrm{W}^\mathcal{
 \begin{equation}
 C_\mathrm{W}^\mathcal{A} = C_\mathrm{W_0} + \kappa(C_\mathrm{A_F}^\mathcal{A}-C_\mathrm{A_0})^2.
 \end{equation}
-$C_\mathrm{W}^\mathcal{A}$ scheint an der ersten Stelle von dem Schiebewinkel unabhängig zu sein. Allerdings ist durch die Transformation zu körperfesten Koordinaten  die Abhängigkeit dieses Winkels gegeben. Dies wird dazu führen, dass eine Vergrö{\ss}erung von $\beta$ ($|\beta| \leq 90^{\circ}$) eine höhere Widerstandskraft verursachen würde.\\
+$C_\mathrm{W}^\mathcal{A}$ scheint in erster Linie von dem Schiebewinkel unabhängig zu sein. Allerdings ist durch die Transformation zu körperfesten Koordinaten  die Abhängigkeit dieses Winkels gegeben. Dies wird dazu führen, dass eine Vergrö{\ss}erung von $\beta$ ($|\beta| \leq 90^{\circ}$) eine höhere Widerstandskraft verursachen würde.\\
 \textbf{Querkraftkoeffizient}\\
 Letztlich hängt der Querkraftkoeffizient linear von dem Schiebewinkel und dem Seitenruderwinkel ab.
 \begin{equation}
@@ -340,7 +351,8 @@ C_\mathrm{Q}^\mathcal{A} = K_\beta\beta + K_\zeta\zeta
 \label{fig:CW}
 \end{figure}
 \subsection{Rotatorische Koeffizienten}
-Laut \cite{RAMYoutube_Playlist} und \cite{RAMPaper} erfolgt die Berechnung der Momente in körperfesten Koordinaten. Die Roll-, Nick- und Gierbeiwerte lassen sich durch folgende Gleichung ermitteln
+Laut \cite{RAMYoutube_Playlist,RAMPaper} erfolgt die Berechnung der Momente in körperfesten Koordinaten. Die Roll-, Nick- und Gierbeiwerte lassen sich durch folgende Gleichung ermitteln. Dabei berücksichtigt man wie sich diese geometrischen Koeffizienten in Abhängigkeit von der Körperrotationsgeschwindigkeit und der Ruderauslenkung $\tilde{\underline{u}} = [\xi,\eta,
+\zeta]^T$ verändern.
 \begin{equation}
 \underline{c}_\mathrm{m}  = \begin{bmatrix} 
 C_\mathrm{l}\\
@@ -379,9 +391,9 @@ Die meisten Einträge von $\dfrac{\partial  \underline{c}_\mathrm{m}}{\partial  
 \label{sec:Kräfte}
 Nachdem die geometrischen Beiwerte ermittelt worden sind, ist die Berechnung aller Kräfte und Momente möglich.
 \subsection{Triebwerk}
-Die resultierende Schubkraft wird mit $\mathrm{sigma}_f$ gesteuert
+Die resultierende Schubkraft wird mit $\sigma_\mathrm{f}$ gesteuert
 \begin{equation}
-F_\mathrm{res} = \mathrm{sigma}_f mg.
+F_\mathrm{res} = \sigma_\mathrm{f} mg.
 \end{equation}
 Daher ist der gesamte Schubkraftsvektor folgenderma{\ss}en festgelegt
 \begin{equation}
@@ -397,7 +409,7 @@ Daher ist der gesamte Schubkraftsvektor folgenderma{\ss}en festgelegt
 \end{equation}
 Da man annimmt, dass der Drall des Propellers vernachlässigbar ist, kann das Schubmoment einfach aus der Schubkraft und dem Abstand zwischen dem Schwerpunkt und der Lage des Triebwerks ermittelt werden.
 \begin{equation}
-\underline{q}^\mathcal{F}_\mathrm{schub} = (\underline{p}_\mathrm{schub}-\underline{p}_\mathrm{sp})\times\underline{r}^\mathcal{F}_\mathrm{schub}
+\underline{q}^\mathcal{F}_\mathrm{schub} = (\underline{p}_\mathrm{schub}-\underline{p}_\mathrm{sp})^\mathcal{F}\times\underline{r}^\mathcal{F}_\mathrm{schub}
 \end{equation} 
 \subsection{Aerodynamik}
 Die aerodynamischen Zusammenhänge von Kräften und Momenten in Abhängigkeit der geometrischen Beiwerten sind wie folgt festgelegt.
@@ -439,7 +451,7 @@ Die Kraft $\underline{r}^\mathcal{A}_\mathrm{a}$ muss allerdings in das körperf
 \begin{equation}
 \underline{r}^\mathcal{F}_\mathrm{a} = \textbf{T}_\mathrm{fa}(\alpha,\beta)\underline{r}^\mathcal{A}_\mathrm{a}
 \end{equation}
-Das gesamte aerodynamische Moment lässt sich mithilfe des Roll-, Nick- und Giermomentes, der aerodynamischen Kraft und der Verschiebung des aerodynamischen Schwerpunktes vom Massenschwerpunkt ausrechnen
+Das gesamte aerodynamische Moment lässt sich mithilfe des Roll-, Nick- und Giermomentes, der aerodynamischen Kraft und der Verschiebung des aerodynamischen Schwerpunktes vom Massenschwerpunkt ausrechnen \cite{RAMYoutube_Playlist}
 \begin{equation}
 \underline{q}^\mathcal{F}_\mathrm{a} = \begin{bmatrix} 
 L_\mathrm{A}\\
@@ -459,7 +471,7 @@ Schlie{\ss}lich kann man die Gesamtkraft und das Gesamtmoment für die Dynamik d
 
 \section{Fehlende Größen zur ausführlichen Visualisierung des Modells}
 \label{sec:Visialisis}
-Für die vollständige Visualisierung des Modells, werden noch die Positionen $[x^\mathcal{E},y^\mathcal{E},z^\mathcal{E}]^T$ und der Gierwinkel $\psi$ benötigt. Die erdfesten Koordinaten (Index $\mathcal{E}$) unterscheiden sich von den geodätischen nur am Mittelpunkt, der in den erdfesten Koordinaten auf der Erdoberfläche liegt. Die Transformation erwartet den Bahnazimutwinkel $\lambda$ und den Bahnneigungswinkel $\gamma$.
+Für die vollständige Visualisierung des Modells, werden noch die Positionen $[x^\mathcal{E},y^\mathcal{E},z^\mathcal{E}]^T$ und der Gierwinkel $\psi$ benötigt.  Die Transformation zu erdfesten KS erwartet, wie im Kapitel \ref{cha:PN} erwähnt, den Bahnazimutwinkel $\lambda$ und den Bahnneigungswinkel $\gamma$. Die folgenden Formel zeigen wie diese Winkel und die restlichen  Größen zur Visualisierung ermittelt werden.
 \begin{align}
 \underline{v}^\mathcal{G} = \textbf{T}(\underline{\varphi})_\mathrm{gf}\underline{v} = [u^\mathcal{G},v^\mathcal{G},w^\mathcal{G}]^T\\
 V_\mathrm{k} = |\underline{v}^\mathcal{G}|\\
@@ -467,28 +479,29 @@ V_\mathrm{k} = |\underline{v}^\mathcal{G}|\\
 \lambda = \tan^{-1}(\dfrac{v^\mathcal{G}}{u^\mathcal{G}})\\
 \dot{x}^\mathcal{E} = V_\mathrm{k}\cos(\gamma)\cos(\lambda)\\
 \dot{y}^\mathcal{E} = V_\mathrm{k}\cos(\gamma)\sin(\lambda)\\
-\dot{z}^\mathcal{E} = -V_\mathrm{k}\sin(\gamma)\\
+\dot{z}^\mathcal{E} = -V_\mathrm{k}\sin(\gamma)
 \end{align}
 Die DGL für $\psi$ wird ermittelt, indem man zunächst den Gierwinkel als Teil des Zustands betrachtet. Daher kann die Differentialgleichung ausgelesen werden. In Folge entfernt man wieder den Gierwinkel aus dem gesamten Zustand. Dies ist unproblematisch, da keine andere Variable von $\psi$ abhängt. Seine DGL lautet:
 \begin{equation}
 \dot{\psi} = r(\cos(\phi)\cos(\theta)) + q(\sin(\phi)\sin(\theta)).
 \end{equation}
 
-\section{Fazit der Modellannahmen}
+\section{Zusammenfassung der Modellannahmen}
 Die Hauptannahmen, die während der Modellbildung getroffen worden sind, werden folgenderma{\ss}en zusammengefasst.
 \begin{itemize}
 \item Die betrachtete Erde sei flach: $\omega_\mathrm{g} = 0$.
 \item Erdnaher Weltraum: $\omega_\mathrm{e} = 0$.
 \item Konstante Schwerkraft.
+\item Vereinfachtes Modell der Atmosphäre. 
 \item Konstante Masse. Allerdings wird die Masse sich während der Betankung verändern (Kapitel \ref{cha:ZweiFlieger}).
 \item Keine Änderung der Massenverteilung am Flugzeug: $\dot{\textbf{I}} = 0$.
 \item Starres Flugzeug ohne bewegte Teile.
 \item Drall der Turbine sei vernachlässigbar.
 \item Turbine sei im Zentrum des Flugzeugs zusammengefasst und die Modellierung der Schubkraft sei vereinfacht.
-\item Direkte Vorgabe der Stellgrö{\ss}en ohne Zeitverzögerung: Dynamik der Rudermotoren sei Optimal.
+\item Direkte Vorgabe der Stellgrö{\ss}en ohne Zeitverzögerung: Unmittelbare Reaktion der Stellglieder.
 \item Aerodynamischer Schwerpunkt sei gleich dem Massenschwerpunkt: $P_\mathrm{sp} = P_\mathrm{ac}$.
 \item Keine kubische Beziehung von $C_\mathrm{A_F}(\alpha)$: Abweichung von Sollwerten bei $|\alpha|\geq 14.5^{\circ}$.
-\item Die meisten Beziehungen von Winkeln und Beiwerten seien linear: Das Modell verliert die komplette physikalische Gültigkeit bei Drehungen über $90^{\circ}$, was für Passagierflugzeug schon vorausgesetzt wird.
+\item Die meisten Beziehungen von Winkeln und Beiwerten seien linear: Das Modell verliert die komplette physikalische Gültigkeit bei Drehungen über $90^{\circ}$, was für Passagierflugzeug vorausgesetzt wird.
 
 \end{itemize}
 
