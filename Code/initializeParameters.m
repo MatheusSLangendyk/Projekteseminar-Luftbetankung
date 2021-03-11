@@ -1,14 +1,22 @@
-function [globalParameters,m,g,he,I_inv] = initializeParameters()
+function [globalParameters,m,g,he,I_inv] = initializeParameters(add_mass)
+if nargin < 1
+    add_mass = false;
+end
 %Function initializes all Constants of the Model
 %Parameters from a Boeing 757 dash 200
 g = 9.81; %Gravity [m/s^2]
 m = 120000; %Mass [kg]
 
 %Refuel
-m_fuel = 28000; %Mass of the fuel
+m_fuel = 14000; %Mass of the fuel
 time_refuel = 20*60; % Time to refuel in sec
 start_time_refuel = 10; 
 refuel = 0; %Without refuel = 1, with refuel = 0
+if add_mass == 1
+    m = m+m_fuel*1;
+elseif add_mass == -1
+    m = m-m_fuel*1;
+end
 
 % Modelling the atmosphere 
 rho_const = 1.225; %Airdensity (simplification)

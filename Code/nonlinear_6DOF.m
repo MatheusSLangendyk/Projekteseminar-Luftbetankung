@@ -4,7 +4,7 @@ phi_init =  evalin('base','phi_init');
 psi_init =  evalin('base','psi_init');
 h_init =  evalin('base','h_init');
 plane_selector =  evalin('base','plane_selector');
-
+add_mass = evalin('base','add_mass');
 %--------------States------------%
 u = X(1);
 v = X(2);
@@ -24,7 +24,7 @@ xi = X(13);
 zita = X(14);
 
 %--------------Constants------------%
-[globalParameters,m,g,~,I_inv] = initializeParameters();
+[globalParameters,m,g,~,I_inv] = initializeParameters(add_mass);
 T   = 288.15 - 0.0065*h;                    % Temperatur bei H
 ps  = 101325*(T/288.15)^(g/1.86584);        % Statischer Luftdruck
 rho = ps/(287.053*T);                       % Luftdichte = ps/(R*T)

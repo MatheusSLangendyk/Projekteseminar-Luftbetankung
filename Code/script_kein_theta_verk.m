@@ -2,15 +2,8 @@ clear; close all;
 addpath('gammasyn');  
 startup;
 
-% [systems, AP, X_init] = create_multi_model('multi');
-% A = systems(1,1).A;
-% B = systems(1,1).B;
-% X_ap_simulink = AP(1,1).X_ap_simulink;
-% U_ap = AP(1,1).U_ap;
-% X_init = X_ap_simulink;
-% deltaX_init = X_init-X_ap_simulink;
-% 
-% 
+% [systems, AP, X_init] = create_multi_model();
+
 %Saturations
 % eta_max = 10*pi/180; %Elevator
 % eta_min = - 25*pi/180; 
@@ -31,13 +24,11 @@ startup;
 % X_ap = AP(1,1).X_ap;
 % X_ap_simulink = AP(1,1).X_ap_simulink;
 % U_ap = AP(1,1).U_ap;
-% 
+
 % Get Model Parameters for Simulink
 [globalParameters,m,g,he,I_inv] = initializeParameters();
 
 SixDOFModel;
-X_init = X_ap_simulink;
-deltaX_init = X_init-X_ap_simulink;
 
 % [A,B,C] = normieren(A,B,C,eta_max,sigmaf_max,xi_max,zita_max);
 % W_ap = (C*X_ap_simulink)';
@@ -45,10 +36,13 @@ deltaX_init = X_init-X_ap_simulink;
 % TODO: - unterlagerung mit entkopplungsregelung??
 % TODO: - test mit Matheus regler als startwert
 % %% Settings
-% C_tilde = zeros(size(C,1), size(A,1));
-% C_tilde(1:4,:) = C(1:4,:);
-% C_tilde(5:8,:) = C(1:4,:) - C(5:8,:);
-% 
+C_tilde = zeros(size(C,1), size(A,1));
+C_tilde(1:4,:) = C(1:4,:);
+C_tilde(5,:) = [0 0 0 0 0 0 0 0 0, 0 0 0 0 0 0 0 1 0];
+C_tilde(6,:) = C(1,:) - C(5,:);
+C_tilde(7,:) = C(2,:) - C(6,:);
+C_tilde(8,:) = C(4,:) - C(8,:);
+
 % X_init = [150 0 0 0 0 0 0 0 5000 150 0 0 0 0 0 0 0 5010]';
 
 %% Riccatti als Startwert
@@ -105,11 +99,8 @@ sys_ricatti = ss(Ak, B*F, C, 0);
 %% Werte für gammasyn 
 K_0 = [];
 RKF_0 = {K, K_0, F};
-bounds = {[] [] []};
-fix = zeros(size(K));
-fix_val = NaN*ones(size(fix));
-R_fixed = {fix, fix_val};
-fixed = {R_fixed, [], []};
+bounds = {[] [] [] []};
+fixed = {[] [] [] []};
 number_references = size(C_tilde, 1);
 systems = struct('E', eye(n, n), 'A', A, 'B', B, 'C', eye(size(A,1)), 'C_ref', C_tilde);
 system_properties = struct(...
@@ -117,10 +108,10 @@ system_properties = struct(...
 		'number_controls',				size(B,2),...
 		'number_references',			number_references,...
 		'number_models',				length(systems),...
-        'tf_structure',                 [[[[NaN 0; 0 NaN] zeros(2,2); zeros(2,2) NaN*ones(2,2)] NaN*ones(4,4)];[zeros(4,4) NaN*ones(4,4)]],...        
+        'tf_structure',                 [[[NaN 0; 0 NaN] zeros(2,3); zeros(3,2) [NaN NaN 0; NaN NaN 0; 0 0 NaN]] NaN*ones(5,3); zeros(3,5) NaN*ones(3,3)],...        
         'RKF_0',						{RKF_0},...
         'R_bounds',                     {bounds},...
-        'R_fixed',                      []...
+        'R_fixed',                      {fixed}...
 	);
 %         'tf_structure',                 [[[[NaN 0; 0 NaN] zeros(2,2); zeros(2,2) NaN*ones(2,2)] NaN*ones(4,4)];[zeros(4,4) NaN*ones(4,4)]],...        
 
@@ -146,11 +137,11 @@ r = 100;
 weight = [1];
 % polearea = control.design.gamma.area.Hyperbola(a, b);
 % polearea = [control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)];
-polearea = {repmat([
-	control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)],...
-    system_properties.number_models, 1)};
-% polearea = {repmat([control.design.gamma.area.Imag(1,0)],...
+% polearea = {repmat([
+% 	control.design.gamma.area.Circle(r), control.design.gamma.area.Hyperbola(a, b)],...
 %     system_properties.number_models, 1)};
+polearea = {repmat([control.design.gamma.area.Imag(1,0)],...
+    system_properties.number_models, 1)};
 polearea = polearea{1};
 % polearea = control.design.gamma.area.Imag(1,a);
 % polearea = [control.design.gamma.area.Hyperbola(a, b), control.design.gamma.area.Imag(1,a)];
@@ -204,12 +195,10 @@ end
 
 K_coupling = Kopt{1} %#ok<*NOPTS>
 F_coupling = Kopt{end}
-% K_coupling((abs(K_coupling)<1e-12)) = 0;
-% F_coupling((abs(F_coupling)<1e-12)) = 0;
 % modifiziertes Vorfilter
 Ak_coupling = A-B*K_coupling;
-F1 = F_coupling(:,1:4);
-C_tilde_1 = C_tilde(1:4,:);
+F1 = F_coupling(:,1:5);
+C_tilde_1 = C_tilde(1:5,:);
 Q_mod = -inv(C_tilde_1*(Ak_coupling\(B*F1)));
 F_mod = F1*Q_mod;
 for i = 1:length(systems)
@@ -221,21 +210,20 @@ f1 = figure;
 f2 = figure;
 for i = 1:length(systems)
     Ak_coupling = systems(i,1).A-systems(i,1).B*K_coupling;
-    F1 = F_coupling(:,1:4);
-    C_tilde_1 = systems(i,1).C_ref(1:4,:);
+    F1 = F_coupling(:,1:5);
+    C_tilde_1 = systems(i,1).C_ref(1:5,:);
     Q_mod = -inv(C_tilde_1*(Ak_coupling\(systems(i,1).B*F1)));
     F_mod = F1*Q_mod;
     F_mod_all(i,1).F_mod = F_mod;
     sys_coupling = ss(systems(i,1).A-systems(i,1).B*K_coupling, systems(i,1).B*F_mod, systems(i,1).C_ref, 0, ...
-          'StateName',{'u1';'v1';'w1';'p1';'q1';'r1';'phi1';'theta1';'h1';...
+         'StateName',{'u1';'v1';'w1';'p1';'q1';'r1';'phi1';'theta1';'h1';...
           'u2';'v2';'w2';'p2';'q2';'r2';'phi2';'theta2';'h2'}, ...
-          'InputName',{'w_{v1}';'w_{\Phi1}';'w_{\Theta1}';'w_{h1}'}, ...
-          'OutputName',{'v1','\Phi1','\Theta1','h1',...
-          '\Deltav','\Delta\Phi','\Delta\Theta','\Deltah'}, ...
+          'InputName',{'w_{v1}';'w_{\Phi1}';'w_{\Theta1}';'w_{h1}';'w{irgendwas_2}'}, ...
+          'OutputName',{'v1','\Phi_1','\Theta_1','h1','irgendwas_2',...
+          'deltav','deltaphi','deltah'}, ...
           'Name','VERKOPPELTES SYSTEM');
      figure(f1);
-     opt = stepDataOptions('StepAmplitude',[1 0.2 0.2 1]);
-     step(sys_coupling, opt);
+     step(sys_coupling);
      hold on;
      figure(f2);
      pzmap(sys_coupling);
@@ -245,9 +233,9 @@ information
 sys_coupling = ss(A-B*K_coupling, B*F_mod, C_tilde, 0, ...
           'StateName',{'u1';'v1';'w1';'p1';'q1';'r1';'phi1';'theta1';'h1';...
           'u2';'v2';'w2';'p2';'q2';'r2';'phi2';'theta2';'h2'}, ...
-          'InputName',{'w_{v1}';'w_{\Phi1}';'w_{\Theta1}';'w_{h1}'}, ...
-          'OutputName',{'v1','\Phi_1','\Theta_1','h1',...
-          'deltav','deltaphi','deltatheta','deltah'}, ...
+          'InputName',{'w_{v1}';'w_{\Phi1}';'w_{\Theta1}';'w_{h1}';'w{irgendwas_2}'}, ...
+          'OutputName',{'v1','\Phi_1','\Theta_1','h1','irgendwas_2',...
+          'deltav','deltaphi','deltah'}, ...
           'Name','VERKOPPELTES SYSTEM');
 sys_uncontrolled = ss(A,B,C_tilde,0);
 % pzmap(sys_uncontrolled);

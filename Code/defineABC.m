@@ -4,8 +4,8 @@ m = size(B_1,2) + size(B_2,2);
 A = [A_1 zeros(n/2,n/2);zeros(n/2,n/2) A_2];
 B = [B_1, zeros(n/2,m/2);zeros(n/2,m/2), B_2];
 
-% A((abs(A)<1e-12)) = 0;
-% B((abs(B)<1e-12)) = 0;
+% A((abs(A)<1e-09)) = 0;
+% B((abs(B)<1e-09)) = 0;
 
 C = zeros(m,n);
 C(1:4,1:(n/2)) = C_1;

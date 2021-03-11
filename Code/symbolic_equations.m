@@ -1,4 +1,19 @@
-syms u v w p q r phi theta psi h eta sigmaf xi zita 
+% syms u v w p q r phi theta psi h eta sigmaf xi zita 
+u = sym('u');
+v = sym('v');
+w = sym('w');
+p = sym('p');
+q = sym('q');
+r = sym('r');
+phi = sym('phi');
+theta = sym('theta');
+psi = sym('psi');
+h = sym('h');
+eta = sym('eta');
+sigmaf = sym('sigmaf');
+xi = sym('xi');
+zita = sym('zita');
+
 
 % ab hier ist alles gleich wie in nonlinear_6DOF
 plane_selector = evalin('base','plane_selector');
