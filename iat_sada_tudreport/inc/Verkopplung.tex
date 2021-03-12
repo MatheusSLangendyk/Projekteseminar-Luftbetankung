@@ -1,5 +1,6 @@
 
-Die Erläuterungen in diesem Abschnitt sind an den Erklärungen in der Arbeit "Robuster Verkopplungsreglerentwurf mittels Polbereichsvorgabe" von Schaub \cite{Schaub} angelehnt. Dabei wird hier bewusst auf die Darstellung von Beweisen verzichtet, um die Erklärungen möglichst knapp und übersichtlich zu gestalten.
+Die Erläuterungen in diesem Abschnitt sind an den Erklärungen in \cite{Schaub} angelehnt. Dabei wird hier bewusst auf die Darstellung von Beweisen verzichtet, um die Erklärungen möglichst knapp und übersichtlich zu gestalten.
+%der Arbeit "Robuster Verkopplungsreglerentwurf mittels Polbereichsvorgabe" von Schaub
 
 Für den Reglerentwurf muss zunächst das robuste Verkopplungsproblem definiert werden.
 Hierfür lassen sich die aus dem Multi-Modell-Ansatz resultierenden dynamischen Systeme wie folgt umformulieren
@@ -25,11 +26,12 @@ Dafür ist $\M{R}$ und $\M{F}$ in Gleichung (\ref{eq:uINV}) so zu wählen, dass 
 Die Variable $m_\rho \in \mathbb{N}$ bezeichnet hier die Dimension des größten geregelten invarianten Unterraums $\mathcal{Q}_\rho$ innerhalb des Kerns von $\Mt{C}{2\rho}$.
 
 Vereinfacht gesagt, muss die Regelung dafür sorgen, dass der Zustand $\w{x}$ den Unterraum $\mathcal{C} = \textnormal{ker}(\Mt{C}{2\rho})$ nicht mehr verlässt sobald er ihn betritt.
-Denn die Verkopplungsbedingung (vgl. Gl. (\ref{eq:Koppl})) ist genau dann erfüllt wenn $\w{x} \in \mathcal{C} $.\\
+Denn die Verkopplungsbedingung (\ref{eq:Koppl}) ist genau dann erfüllt wenn $\w{x} \in \mathcal{C} $.
+
 Dieser Zusammenhang soll kurz an einem Beispiel veranschaulicht werden.
-Gegeben sei ein dynamische System 3ter Ordnung mit dem Zustandsvektor $x = \begin{bmatrix}
-\wt{x}{1} &\wt{x}{2} &\wt{x}{3} \end{bmatrix}^{\textnormal{T}}$.
-Zudem gelte die Verkopplungsbedingung $x1 \stackrel{!}{=} x2$. Diese lässt sich analog zu Gleichung (\ref{eq:Koppl}) durch 
+Gegeben sei ein dynamische System dritter Ordnung mit dem Zustandsvektor $\w{x} = \begin{bmatrix}
+x_{1} &x_{2} &x_{3} \end{bmatrix}^{\textnormal{T}}$.
+Zudem gelte die Verkopplungsbedingung $x_1 \stackrel{!}{=} x_2$. Diese lässt sich analog zu Gleichung (\ref{eq:Koppl}) durch 
 \begin{equation}\label{eq:KopplBsp}
 	\wt{y}{2} = \begin{bmatrix}
 		1 &-1 &0
@@ -58,7 +60,7 @@ die Freiheitsgrade des Reglers $\M{R}$, welche benötigt werden, um das Verkoppl
 	\w{x} = \M{V}\w{\tilde{x}}
 \end{equation}
 transformiert.
-Dabei sollen die ersten $m$ Koordinatenachsen an der Basis von $\mathcal{Q}$ ausgerichtet werden.
+Dabei sollen die ersten $m$ Koordinatenachsen an $\mathcal{Q}$ ausgerichtet werden.
 Dies geschieht mit Hilfe der Transformationsmatrix 
 \begin{equation}
 \M{V} =\begin{bmatrix} \M{Q}	&\M{Q}_{\bot} \end{bmatrix}
@@ -176,7 +178,7 @@ Existiert keine Lösung, so kann ähnlich wie beim Regler keine konstante Zustan
 Existiert eine nichttriviale Lösung des Gleichungssystems (\ref{eq:GlSysF}), so definiert der Lösungsraum von $\w{f}$ die Strukturbeschränkungen des Vorfilters $\M{F}_1$.\\
 
 
-Mit den präsentierten Gleichungen (\ref{eq:GesGlSysM}) und (\ref{eq:GlSysF}) lassen sich Regler und Vorfilter jeweils durch Struktrubeschränkungen definieren, sodass sowohl die ausgangs- als auch die eingangseitige Verkopplungsbedingungen erfüllt sind. Die verbleibenden Freiheitsgrade können nun für die Wahl der Lage der Eigenwerte genutzt werden, um die gewünschte Systemdynamik festzulegen. Im Anschluss an die Polbereichsplatzierung kann das Filter noch so modifiziert werden, dass z.B. stationär Genauigkeit bezüglich sprungförmiger Führungsgrößen gegeben ist.
+Mit den präsentierten Gleichungen (\ref{eq:GesGlSysM}) und (\ref{eq:GlSysF}) lassen sich Regler und Vorfilter jeweils durch Struktrubeschränkungen definieren, sodass sowohl die ausgangs- als auch die eingangseitige Ver\-kopp\-lungs\-be\-ding\-ung\-en erfüllt sind. Die verbleibenden Freiheitsgrade können nun für die Wahl der Lage der Eigenwerte genutzt werden, um die gewünschte Systemdynamik festzulegen. Im Anschluss an die Polbereichsplatzierung kann das Filter noch so modifiziert werden, dass z.B. stationär Genauigkeit bezüglich sprungförmiger Führungsgrößen gegeben ist.
 Hierfür muss die Übertragungsgleichung 
 \begin{equation}
 	\wt{y}{1}(s) = \M{C}_1(s\Mt{I}{n}-\M{A}+\M{B}\M{R})^{-1}\M{B}\Mt{F}{1}\wt{w}{1}(s) = \M{G}_{w11}(s) \wt{w}{1}(s) 
@@ -199,7 +201,7 @@ umformuliert \cite{Mehrgr}.
 
 
 Die Toolbox \texttt{gammasyn} vereinigt die vorgestellten Verfahren der Polbereichsplatzierung mit der robusten Verkopplungsregelung über Invarianzbetrachtungen. Da die Existenz von exakten Lösungen in der Regel selten ist, wird hier das robuste Verkopplungsproblem approximativ über numerische Verfahren gelöst \cite{Schaub}. 
-Mit Hilfe der Systemmatrizen und weiteren Sturkturbeschränkungen definiert man Ver- und Endkopplungsbedingungen. In Kombination mit einem gewünschten Polbereich für die geregelte Strecke, berechnet \texttt{gammasyn} dann einen optimalen Regler und ein Vorfilter. Wie Eingangs schon erwähnt, sei der interessierte Leser für detailliertere Beschreibungen der Toolbox auf deren Dokumentation verwiesen.\\
+Mit Hilfe der Systemmatrizen und weiteren Sturkturbeschränkungen definiert man Ver- und Entkopplungsbedingungen. In Kombination mit einem gewünschten Polbereich für die geregelte Strecke, berechnet \texttt{gammasyn} dann einen optimalen Regler und ein Vorfilter. Wie Eingangs schon erwähnt, sei der interessierte Leser für detailliertere Beschreibungen der Toolbox auf deren Dokumentation verwiesen.\\
 
 
 %

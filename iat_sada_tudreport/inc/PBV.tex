@@ -1,6 +1,7 @@
 In realen System kommt es immer zu Unsicherheiten oder Veränderungen welche das System- und Regelverhalten beeinflussen.
 Die Methode der Polbereichsplatzierung, basierend auf dem  Multi-Modell-Ansatz, versucht die lineare Zustandsregelung von Systemen mit schwankenden oder unsicheren Parametern zu ermöglichen.
-Die Erklärungen im nachfolgenden Abschnitt basieren auf den Ausführungen in \cite{RobReg} und \cite{Schaub}.\\
+Die Erklärungen im nachfolgenden Abschnitt basieren auf den Ausführungen in \cite{RobReg} und \cite{Schaub}.
+
 Zunächst wird das System in Abhängigkeit eines Parametervektors $\Theta$ wie folgt definiert
 \begin{align}
 	\dot{\w{x}} &= \M{A}(\Theta)\w{x} + \M{B}(\Theta)\w{u}\, , \qquad \w{x}(0) = \w{x}_0\\
@@ -22,9 +23,9 @@ Die Lage der Eigenwerte des geschlossenen Regelkreises bestimmen dessen Dynamik,
 \end{figure}
 Die Achsen beschreiben mit $\delta$ und $\omega$ den Real- bzw. Imaginärteil eines Poles $\lambda = \delta +\textnormal{j}\omega$.
 Ziel ist nun einen Regler $\M{R}$ zu finden, welcher mit einer konstanten Zustandsrückführung alle Eigenwerte der verschiedenen Systeme in den vorher definierten Bereich $\Gamma$ platziert.
-Über die Gebietsgrenzen von $\Gamma$ werden Anforderungen an Regel- bzw. Systemdynamiken entsprechend obiger Grafik (vgl. \ref{fig:BedPolgebGrenzen}) vorgegeben.
+Über die Gebietsgrenzen von $\Gamma$ werden Anforderungen an Regel- bzw. Systemdynamiken entsprechend obiger Grafik \ref{fig:BedPolgebGrenzen} vorgegeben.
 %, wie z.B. Schnelligkeit oder Schwingverhalten, vorgegeben werden.
-Dabei kann es auch sinnvoll sein, unterschiedliche Polgebiete für die einzelnen Modelle zu definieren. Genauere Erklärungen zur mathematischen Beschreibung der Polgebietsgrenzen findet sich in entsprechender Literatur \cite{RobReg}.\\
+Dabei kann es auch sinnvoll sein, unterschiedliche Polgebiete für die einzelnen Modelle zu definieren. Genauere Erklärungen zur mathematischen Beschreibung der Polgebietsgrenzen findet sich in entsprechender Literatur \cite{RobReg}.
 
 Für das Verfahren ist es also nötig zu bewerten, wie gut die Fähigkeit eines bestimmten Reglers $\M{R}$ ist, die Eigenwerte des geregelten Systems im definierten Gebiet $\Gamma$ zu platzieren.
 Hierfür soll eine Gütefunktion $J$ definiert werden. 
@@ -33,7 +34,7 @@ Seien die Eigenwerte des geregelten Systems gegeben durch
 $\lambda_{\rho i}(\M{R}) = \delta_{\rho i} (\M{R}) + \textnormal{j} \omega_{\rho i}(\M{R}) $ 
 mit $\rho = 1,...,\Omega$ und $i = 1, ..., n$.
 So soll gelten $\lambda_{\rho i}(\M{R}) \in \Gamma$. Liegen die Eigenwerte außerhalb des Bereichs, so soll $J(\M{R})$ große Werte annehmen.
-Daraus lässt sich folgende Funktion \\
+Daraus lässt sich folgende Funktion 
 \begin{equation}
 	f\left(\delta_{\rho i}(\M{R}) ,\omega_{\rho i}(\M{R})\right) 
 	\begin{cases}
@@ -52,7 +53,7 @@ Zur Lösung des Optimierungsproblems muss ein Regler $\M{R}^*$ gefunden werden, 
 \begin{equation}
 	\M{R}^* = \textnormal{arg} \min_{\M{R}} J(\M{R})
 \end{equation}
-Da es sich dabei um ein nicht konvexes Optimierungsproblem handelt, ist ein numerisches Lösungsverfahren nötig.
+Für dieses nichtkonvexe Optimierungsproblem, ist ein numerisches Lösungsverfahren nötig.
 Hier werden in der Regel Gradientenverfahren verwendet. Diese nutzen den Gradienten $\frac{\partial J(\M{R})}{\partial \M{R}}$ von $J$, um schrittweise das Minimum der Gütefunktion zu berechnen.\\
 Der Gradient ergibt sich elementweise zu
 \begin{equation}
@@ -92,8 +93,9 @@ nach einem Regelparameter $r_{jh}$. Bei vollständiger Zustandsrückführung erg
 \end{equation}
 Hier handelt es sich bei $\wt{w}{R i}$ um den $i-$ten Linkseigenvektor und bei $ \wt{v}{R i}$ um den entsprechenden Rechtseigenvektor. Die Vektoren $\wt{e}{j}$ und $\wt{e}{k}$ bezeichnen Einheitsvektoren in die $j-$te bzw. $k-$te Koordinatenrichtung.
 
-Mit den Gleichungen (\ref{eq:GueteMExp}) und (\ref{eq:AblLambdaR}) kann nun ein optimaler Regler entworfen werden. Insgesamt können durch diese Methode alle $p\cdot n$ Koeffizienten in $\M{R}$ berechnet werden. Es ist jedoch auch möglich das Verfahren in Kombination mit strukturbeschränkten Reglern zu verwenden. Hierfür muss lediglich die Anzahl an Optimierungsvariablen  reduziert werden. Damit verändert man nicht mehr alle Reglerkoeffizienten in der Optimierung und es ist möglich, bestimmte Parameter fest oder von anderen abhängig zu wählen. \\
-Nach dem Reglerentwurf ist eine Überprüfung der exakten Lage der Pole nötig. Dies soll sicherzustellen, dass alle Pole wie in Abbildung \ref{fig:PolgebKorrekt} dargestellt innerhalb des gewünschten Gebiets $\Gamma$ liegen. Tritt der in Abbildung \ref{fig:PolgebFalsch} beschriebene Fall auf, so muss der Reglerentwurf optimiert werden bis man zufriedenstellende Ergebnisse erzielt. In der Regel geschieht dies durch Änderung der Startwerte oder Gewichtungsfaktoren oder Polbereichsanpassungen.\\
+Mit den Gleichungen (\ref{eq:GueteMExp}) und (\ref{eq:AblLambdaR}) kann nun ein optimaler Regler entworfen werden. Insgesamt können durch diese Methode alle $p\cdot n$ Koeffizienten in $\M{R}$ berechnet werden. Es ist jedoch auch möglich das Verfahren in Kombination mit strukturbeschränkten Reglern zu verwenden. Hierfür muss lediglich die Anzahl an Optimierungsvariablen  reduziert werden. Damit verändert man nicht mehr alle Reglerkoeffizienten in der Optimierung und es ist möglich, bestimmte Parameter fest oder von anderen abhängig zu wählen.
+
+Nach dem Reglerentwurf ist eine Überprüfung der exakten Lage der Pole nötig. Dies soll sicherzustellen, dass alle Pole wie in Abbildung \ref{fig:PolgebKorrekt} dargestellt innerhalb des gewünschten Gebiets $\Gamma$ liegen. Tritt der in Abbildung \ref{fig:PolgebFalsch} beschriebene Fall auf, so muss der Reglerentwurf optimiert werden bis man zufriedenstellende Ergebnisse erzielt. In der Regel geschieht dies durch Änderung der Startwerte oder Gewichtungsfaktoren oder Polbereichsanpassungen.
 
 \begin{figure}[h]
 	\centering
