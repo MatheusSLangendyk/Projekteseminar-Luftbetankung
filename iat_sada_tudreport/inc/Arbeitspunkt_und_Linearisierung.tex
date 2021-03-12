@@ -1,11 +1,11 @@
 \chapter{Arbeitspunkt und Linearisierung}\label{cha:Linearisierung}
 Der Entwurf eines linearen Reglers erfordert eine Modelllinearisierung um einen gewünschten Arbeitspunkt. Dieses Kapitel beschäftigt sich mit der Ermittlung des linearen Modells eines Flugzeug bezüglich der Gleichungen in Kapitel \ref{cha:Modellbildung}.
 \section{Arbeitspunkt eines geraden Fluges}
-Im Rahmen dieses Projektes setzt wird vorausgesetzt, dass die Flugzeuge während der Betankung geradeaus fliegen. Dafür sucht man nach einer Ruhelage des nichtlinearen Systems, die diese Bedingung erfüllen kann. Diese Ruhelage $(\underline{x}_\mathrm{f_{ap}},\underline{u}_\mathrm{f_{ap}})$ lässt sich mit
+Im Rahmen dieses Projektes wird vorausgesetzt, dass die Flugzeuge während der Betankung geradeaus fliegen. Dafür sucht man nach einer Ruhelage des nichtlinearen Systems, die diese Bedingung erfüllen kann. Diese Ruhelage $(\underline{x}_\mathrm{f_{ap}},\underline{u}_\mathrm{f_{ap}})$ lässt sich mit
 \begin{equation}
 \underline{\dot{x}}_\mathrm{f} = \underline{f}(\underline{x}_\mathrm{f_{ap}},\underline{u}_\mathrm{f_{ap}}) = \underline{0}
 \end{equation}
-finden\footnote{Dabei ist der Unterschied zwischen $\underline{u}_\mathrm{f_{ap}}$ (Stellgrö{\ss}en des einen Flugzeug) und $u_\mathrm{ap}$ ($x_\mathrm{f}$ Geschwindigkeitskomponente) zu beachten.}. Sei $n_\mathrm{f}$ die Anzahl der Zustände und $m_\mathrm{f}$ die Anzahl der Steuergrö{\ss}en. Bei der Berechnung bekommt man daher $n_\mathrm{f}$ Gleichungen und Unbekannte. Da $n_\mathrm{f}$ Gleichungen für die Voraussetzung $\underline{\dot{x}}_\mathrm{f} = \underline{0}$ genutzt werden müssen, bleiben noch $m_\mathrm{f}$ Freiheitsgrade übrig.\\
+finden\footnote{Dabei ist der Unterschied zwischen $\underline{u}_\mathrm{f_{ap}}$ (Stellgrö{\ss}en des einen Flugzeug) und $u_\mathrm{ap}$ ($x_\mathrm{f}$ Geschwindigkeitskomponente) zu beachten.}. Sei $n_\mathrm{f}$ die Anzahl der Zustände und $p_\mathrm{f}$ die Anzahl der Steuergrö{\ss}en. Bei der Berechnung bekommt man daher $n_\mathrm{f}$ Gleichungen und Unbekannte. Da $n_\mathrm{f}$ Gleichungen für die Voraussetzung $\underline{\dot{x}}_\mathrm{f} = \underline{0}$ genutzt werden müssen, bleiben noch $p_\mathrm{f}$ Freiheitsgrade übrig.\\
 
 Die Annahme des geraden Fluges führt dazu, dass man den genannten Freiheitsgrad folgenderma{\ss}en ausnutzt
 \begin{equation}
@@ -21,7 +21,7 @@ u_\mathrm{soll} \\
 h^\mathcal{G}_\mathrm{soll}
 \end{bmatrix}.
 \end{equation} 
-Die gewünschte Ruhelage findet man, indem man folgendes Gleichungssystem löst.
+Die gewünschte Ruhelage findet man, indem man folgendes Gleichungssystem löst
 \begin{equation}
 \label{fun:GSap}
 \begin{bmatrix} 
@@ -33,7 +33,7 @@ u_\mathrm{ap} - u_\mathrm{soll}\\
 h^\mathcal{G}_\mathrm{ap} -h^\mathcal{G}_\mathrm{soll}
 \end{bmatrix} = \underline{0} \in \Re^{(n_\mathrm{f}+m_\mathrm{f}+1)\times 1}.
 \end{equation}
-Dazu ist die Wahl der Kombination von $u_\mathrm{soll}$ und $h^\mathcal{G}_\mathrm{soll}$ noch notwendig. Daher wählt man $u_\mathrm{soll} = 150 \mathrm{m/s}$ und  $h^\mathcal{G}_\mathrm{soll} = 5000 \mathrm{m}$, da diese Kombination zu den  besten Simulationsergebnissen für die Verkopplung führt(Kapitel \ref{cha:Robustheit}). Dies entspricht einer etwas höheren Reisenhöhe als der, die für den optimalen Kraftstoffverbrauch \cite{OptimalHeight} empfohlen wird und einer niedrigen durchschnittlichen Reisegeschwindigkeit der \textit{Boeing 757-200} \cite{B7572}. Die Lösung der Gleichung \eqref{fun:GSap}, unter der genannten Wahl von Höhe und Geschwindigkeit, liefert folgende Ruhelage des nichtlinearen Systems \\
+Dazu ist die Wahl der Kombination von $u_\mathrm{soll}$ und $h^\mathcal{G}_\mathrm{soll}$ noch notwendig. Dafür wählt man $u_\mathrm{soll} = 150 \mathrm{m/s}$ und  $h^\mathcal{G}_\mathrm{soll} = 5000 \mathrm{m}$, da diese Kombination zu den  besten Simulationsergebnissen für die Verkopplung führt(Kapitel \ref{cha:Robustheit}). Dies entspricht einer etwas höheren Reisenhöhe als der, die für den optimalen Kraftstoffverbrauch \cite{OptimalHeight} empfohlen wird und einer niedrigen durchschnittlichen Reisegeschwindigkeit der \textit{Boeing 757-200} \cite{B7572}. Die Lösung der Gleichung \eqref{fun:GSap}, unter der genannten Wahl von Höhe und Geschwindigkeit, liefert folgende Ruhelage des nichtlinearen Systems \\
 \begin{equation}
 \begin{bmatrix}
 \underline{x}_\mathrm{ap} \\ \underline{u}_\mathrm{ap} 
@@ -61,4 +61,4 @@ berechnet man, indem man eine Taylor-Reihe erster Ordnung anwendet. Daher berech
 \textbf{B}_\mathrm{f} = \dfrac{\partial \underline{f}(\underline{x}_\mathrm{f},\underline{u}_\mathrm{f})}{\partial \underline{u}_\mathrm{f}}_{|\underline{x}_\mathrm{f_{ap}},\underline{u}_\mathrm{f_{ap}}} 
 \end{equation}
 
-Die Wahl der Ausgänge wird im Kapitel \ref{cha:ZweiFlieger} im Detail erläutert, hierfür muss man das Gesamtsystem mit den zwei Flugzeugen in Betracht ziehen.
+Die Wahl der Ausgänge wird im nächsten Kapitel im Detail erläutert, hierfür muss man das Gesamtsystem mit den zwei Flugzeugen in Betracht ziehen.

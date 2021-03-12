@@ -1,5 +1,5 @@
 \chapter{Gesamtmodell Tanker-Passagierflugzeug Modell}\label{cha:ZweiFlieger}
-Nachdem alle dynamischen Zusammenhänge sowie die Linearisierung vorgestellt worden sind, kann jetzt das gesamte System, bestehend aus Passagierflugzeug und Tanker vorgestellt werden. Wie in Kapitel \ref{cha:SdT} diskutiert wurde, fliegt das Passagierflugzeug (Zustände $\underline{x}_\mathrm{f_2}$) höher als der Betanker (Zustände $\underline{x}_\mathrm{f_1}$). Das Model basiert auf der Verknüpfung der Zustände der einzelnen Flugzeuge. Somit lassen sich der nominale Zustandsvektor $\underline{x}$ und der nominale Eingangsvektor $\underline{u}$ wie folgend darstellen
+Nachdem alle dynamischen Zusammenhänge sowie die Linearisierung vorgestellt worden sind, kann jetzt das gesamte System, bestehend aus Passagierflugzeug und Tanker vorgestellt werden. Wie in Kapitel \ref{cha:SdT} diskutiert wurde, fliegt das Passagierflugzeug (Zustände $\underline{x}_\mathrm{f_2}$) höher als der Betanker (Zustände $\underline{x}_\mathrm{f_1}$). Das Model basiert auf der Verknüpfung der Zustände der einzelnen Flugzeuge. Somit lassen sich der Zustandsvektor $\underline{x}$ und der Eingangsvektor $\underline{u}$ wie folgend darstellen
 \begin{equation}
 \underline{x} = [
 \underline{v}_\mathrm{f_1},\underline{\omega}_\mathrm{f_1},\underline{\varphi}_\mathrm{f_1},h^\mathcal{G}_\mathrm{f_1},
@@ -9,7 +9,7 @@ Nachdem alle dynamischen Zusammenhänge sowie die Linearisierung vorgestellt wor
 \underline{u} = [ \eta_\mathrm{f_1},\sigma_{\mathrm{f_{f_1}}}, \xi_\mathrm{f_1} , \zeta_\mathrm{f_1}, \eta_\mathrm{f_2},\sigma_{\mathrm{f_{f_2}}}, \xi_\mathrm{f_2} , \zeta_\mathrm{f_2}]^T
 \end{equation}
 
-Im Weiteren wird das Modell mit der vorgestellten Zusammensetzung der Zustände als \textit{nominelles Modell} gennant .Dabei beträgt die Zahl der Zustände $n = 2n_\mathrm{f} = 18$ und die Zahl der Eingänge $m = 2m_\mathrm{f} = 8$. Weiterhin wird es angenommen, dass es sich bei beiden Maschinen um eine \textit{Boeing 757-200} handelt. Au{\ss}erdem vereinfacht man die allgemeine Betrachtung des Modells, indem angenommen wird, dass die beiden Maschinen voneinander entkoppelt sind. Abwind und Turbulenzen, die von dem vorderen Flugzeug verursacht werden, werden daher vernachlässigt. Abbildung \ref{fig:BSBNominell} zeigt die Zusammensetzung der nicht-linearen Strecke. Die Diskussion über die Erzeugung eines durch den Wind verursachten Störsignals, findet im Kapitel \ref{sec:Wind} statt.
+Im Weiteren wird das Modell mit der vorgestellten Zusammensetzung der Zustände als \textit{nominelles Modell} genannt. Dabei beträgt die Zahl der Zustände $n = 2n_\mathrm{f} = 18$ und die Zahl der Eingänge $p = 2p_\mathrm{f} = 8$. Weiterhin wird es angenommen, dass es sich bei beiden Maschinen um eine \textit{Boeing 757-200} handelt. Au{\ss}erdem vereinfacht man die allgemeine Betrachtung des Modells, indem angenommen wird, dass die beiden Maschinen voneinander entkoppelt sind. Abwind und Turbulenzen, die von dem vorderen Flugzeug verursacht werden, werden daher vernachlässigt. Abbildung \ref{fig:BSBNominell} zeigt die Zusammensetzung der nicht-linearen Strecke. Die Diskussion über die Erzeugung eines durch den Wind verursachten Störsignals, findet im Kapitel \ref{sec:Wind} statt.
 
 \begin{figure}[h]
   \centering
@@ -54,7 +54,7 @@ wobei
  \Tilde{\textbf{C}} =  \left[\begin{array}{cccccccccccccccccc} 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & 0 & 0\\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & 0\\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -1 \end{array}\right].
 \end{equation}
 \newline
-Daher ist man in der Lage die $x$-Körpergeschwindigkeit und die Höhe vorzugeben. Außerdem ermöglicht der Luftwiderstand, dass eine Vorgabe von $\phi$ die Richtung des Fluges beeinflusst.  Die Vorgabe $\underline{y}_\mathrm{1}$ und die Verkopplungsbedingugngen $\underline{y}_\mathrm{2}$ erfüllen somit folgenden Voraussetzungen
+Daher ist man in der Lage die $x$-Körpergeschwindigkeit und die Höhe vorzugeben. Außerdem ermöglicht der Luftwiderstand, dass eine Vorgabe von $\phi$ die Richtung des Fluges beeinflusst.  Die Vorgabe $\underline{y}_\mathrm{1}$ und die Verkopplungsbedingugngen $\underline{y}_\mathrm{2}$ erfüllen somit folgende Voraussetzungen
 \begin{itemize}
 \item Stationärer Geradeausflug für beide Flugzeuge wird erreicht.
 \item Offener Regelkreis ist vollständig steuerbar und beobachtbar.
@@ -76,12 +76,12 @@ wobei die Systemmatrix und Eingangsmatrix aus der Zusammensetzung der linearen M
 \textbf{B} = \begin{bmatrix} 
 \textbf{B}_\mathrm{f_1}& \textbf{0}_{n_f\times m_f}\\
 \textbf{0}_{n_f\times m_f} & \textbf{B}_\mathrm{f_2}
-\end{bmatrix}\\
+\end{bmatrix}.\\
 \end{align}
 Sowohl $\textbf{A}_\mathrm{f_1}$ wie $\textbf{A}_\mathrm{f_2}$ lassen sich sich mithilfe der Werte $u_\mathrm{soll}$ und $h^\mathcal{G}_\mathrm{soll}$ aus Kapitel \ref{cha:Linearisierung} bestimmen. Da das Passagierflugzeug etwas höher fliegt, wählt man $h^\mathcal{G}_\mathrm{soll_1} = h^\mathcal{G}_\mathrm{soll} + h_\mathrm{offset}$, wobei $h_\mathrm{offset}$ den Höhenunterschied repräsentiert. Dies wird in  \cite{LengthBoom} auf ungefähr $10 \mathrm{m}$ beziffert. Die vollständigen Systemmatrizen sind in Anhang \ref{app:matrizen} dargestellt.
 \section{Parameteränderung und Störung des Systems}
 \subsection{Massenänderung}
-Obwohl man annimmt, dass während des Flugs die Massen der Flugzeuge konstant bleiben, findet bei der Betankung ein Austausch der Kraftstoffsmasse statt. Diese Parameteränderung eignet sich, um die Robustheit der Verkopplungsregelung zu überprüfen (Kapitel \ref{cha:Robustheit}). Im Rahmen dieses Projekt vereinfacht man das Betankungsverfahren, indem man annimmt dass der Massenaustausch linear verläuft, wie in Abbildung \ref{fig:MassDist} deutlich zu erkennen ist. Die Parameter der Betankung sind von \cite{RefuelingTime} ermittelt und sind auf Tabelle \ref{tab:Betankung} abzulesen.
+Obwohl man annimmt, dass während des Fluges die Massen der Flugzeuge konstant bleiben, findet bei der Betankung ein Austausch der Kraftstoffsmasse statt. Diese Parameteränderung eignet sich, um die Robustheit der Verkopplungsregelung zu überprüfen (Kapitel \ref{cha:Robustheit}). Im Rahmen dieses Projekt vereinfacht man das Betankungsverfahren, indem man annimmt, dass der Massenaustausch linear verläuft, wie in Abbildung \ref{fig:MassDist} deutlich zu erkennen ist. Die Parameter der Betankung sind von \cite{RefuelingTime} ermittelt und sind auf Tabelle \ref{tab:Betankung} abzulesen.
 \begin{table}[h]
 \centering
  \begin{tabular}{||c c c||} 
@@ -121,7 +121,7 @@ Obwohl man annimmt, dass während des Flugs die Massen der Flugzeuge konstant bl
 \end{figure}
 \subsection{Wind und Turbulenz}
 \label{sec:Wind}
-Die Aerospace Toolbox von MATLAB/Simulink \cite{MatlabBild} bietet die Möglichkeit ein Wind und Turbulenz Modell zu implementieren. Die Ausgänge dieses Modells sind die Geschwindigkeit $\underline{v}$ und die Drehgeschwindigkeit $\underline{\omega}$ (Veränderungsrate der Eulerwinkel). Die Eingänge sind die Körpergeschwindigkeit $\underline{v}$, die Eulerwinkel $[\underline{\varphi},\psi]^T$ und die Höhe $h^\mathcal{G}$, wie auf Abbildung \ref{fig:Wind} erfasst wird. Die Windgeschwindigkeit beeinflusst die Berechnung der Anströmungsgeschwindigkeit $V_\mathrm{A}$ (Kapitel \ref{cha:Modellbildung}), au{\ss}erdem werden die Drehgeschwindigkeit und die Körpergeschwindigkeit folgenderma{\ss}en gestört.
+Die Aerospace Toolbox von MATLAB/Simulink \cite{MatlabBild} bietet die Möglichkeit ein \textit{Wind-Turbulenz} Modell zu implementieren. Die Ausgänge dieses Modells sind die Windgeschwindigkeit $\underline{v}_\mathrm{w}$ und die Windrotationsgeschwindigkeit $\underline{\omega}_\mathrm{w}$ (Veränderungsrate der Eulerwinkel). Die Eingänge sind die Körpergeschwindigkeit $\underline{v}$, die Eulerwinkel $[\underline{\varphi},\psi]^T$ und die Höhe $h^\mathcal{G}$, wie auf Abbildung \ref{fig:Wind} erfasst wird. Die Windgeschwindigkeit beeinflusst die Berechnung der Anströmungsgeschwindigkeit $V_\mathrm{A}$ (Kapitel \ref{cha:Modellbildung}), au{\ss}erdem werden die Drehgeschwindigkeit und die Körpergeschwindigkeit folgenderma{\ss}en gestört
 \begin{align}
 \underline{\Tilde{v}} = \underline{v} +\underline{v}_\mathrm{w},\\
 \underline{\Tilde{\omega}} = \underline{\omega} + \underline{\omega}_\mathrm{w}.
@@ -146,7 +146,7 @@ Die Aerospace Toolbox von MATLAB/Simulink \cite{MatlabBild} bietet die Möglichk
 	\caption{Wind und Turbulenzmodell mithilfe de Aerospace Toolbox }
 	\label{fig:Wind}
 \end{figure}
-Zu einer genauen Beschreibung der Funktionsweise des Windmodells, wird auf \cite{MatlabBild} verwiesen. Der Einfluss der Turbulenz und des Windes auf die Performance des geschlossenen Regelkreises wird im Detail in Kapitel \ref{cha:Robustheit} untersucht.
+Zu einer genauen Beschreibung der Funktionsweise des Windmodells, wird auf \cite{MatlabBild} verwiesen. Der Einfluss des Windes auf die Performance des geschlossenen Regelkreises wird im Detail in Kapitel \ref{cha:Robustheit} untersucht.
 \section{Annahmen der Zusammensetzung der beiden Flugzeugen und Wahl der Ausgänge} 
 \begin{itemize}
 \item Die Grö{\ss}en der Flugzeugen seien voneinander entkoppelt.

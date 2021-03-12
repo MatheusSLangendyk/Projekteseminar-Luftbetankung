@@ -7,14 +7,14 @@ Dieses Kapitel beschäftigt sich mit der Festlegung aller Notationen, die im Lau
 \item \textbf{Matrizen}: Als Matrizen werden Elemente von $\mathbb{R}^{a\times b}$ bezeichnet, $\forall a,b \in \mathbb{N}$ und $b>1$. Die Variablen werden groß und fett geschrieben, zum Beispiel $\textbf{M} = \begin{bmatrix} 
 1 & 0\\
 0 & 1
-\end{bmatrix}$
+\end{bmatrix}$.
 \item \textbf{Vektoren}: Vektoren sind Elemente von $\mathbb{R}^{a\times 1}$ (stehender Vektor), wobei $a \in \mathbb{N}$ und $a>1$. Die Variablen werden klein und unterstrichen gekennzeichnet. Beispiel dafür wäre: $\underline{v} = [1,0]^T = \begin{bmatrix} 
 1 \\
 0 
-\end{bmatrix}$
-\item \textbf{Skalare}: Skalare können sowohl klein als auch groß geschrieben werden. Zum Beispiel $S_\mathrm{a} = 1$ oder auch $s_\mathrm{b} = 2$
+\end{bmatrix}$.
+\item \textbf{Skalare}: Skalare können sowohl klein als auch groß geschrieben werden. Zum Beispiel $S_\mathrm{a} = 1$ oder auch $s_\mathrm{b} = 2$.
 \item \textbf{Koordinaten}: Im Rahmen dieses Projektseminars werden unterschiedliche Koordinatenbezugssysteme verwendet. Die Unterscheidung erfolgt über einen kaligraphischen Index. Der Vektor $\underline{v}_\mathrm{a}^\mathcal{F}$ würde zum Beispiel dem körperfesten Koordinatensystem $\mathcal{F}$ gehören. Die Beschreibung aller relevanten Bezugssysteme wird am Ende dieses Kapitel vorgestellt.
-\item \textbf{Transformationsmatrizen}: Die Transformationsmatrizen, die die Koordinatensysteme transformieren, werden beispielsweise als $\textbf{T}_\mathrm{xy}$  dargestellt. Dabei transformiert wandelt man das Koordinatensystem y in das Koordinatensystem x um.
+\item \textbf{Transformationsmatrizen}: Die Transformationsmatrizen, die die Koordinatensysteme transformieren, werden beispielsweise als $\textbf{T}_\mathrm{xy}$  dargestellt. Dabei transformiert wandelt man das Koordinatensystem $y$ in das Koordinatensystem $x$ um.
 \end{itemize}
 \section{Zeitlich konstante Parameter}
 Die Modellierung des Flugzeugs bezieht sich auf die Eigenschaften eines \textit{Boeing 757-200}. Die im Modell verwendeten konstanten Parameter sind von \cite{B7571, B7572,RAMPaper} hergeleitet worden. Tabelle \ref{tab:Parameter} stellt die zeitlich invarianten Konstanten bezüglich der Geometrie der Maschine dar. Die Schwerkraft wird ebenso als konstant mit dem Wert $g = 9,81 \mathrm{m/s}$ angenommen.
@@ -180,7 +180,7 @@ Im Weiteren wird angenommen, dass das körperfeste KS das \textit{Hauptbezugssys
 \end{figure}
  
 \subsection{Koordinatentransformationen}
-Damit die Modellbildung einheitlich über ein bestimmtes Koordinatensystem erfolgt, muss man über die Werkzeuge verfügen, die das Bezugssystem transformieren können. Dabei nutz man die aerodynamischen Winkel ($\alpha$, $\beta$) und die Eulerwinkel ($\phi$,$\theta$,$\psi$), die auf Abbildung \ref{fig:KoordSyst} definiert sind. Die Autoren von \cite{FlugmechanikBuch} und \cite{Fichter2020} empfehlen folgende Darstellung.\\
+Damit die Modellbildung einheitlich über ein bestimmtes Koordinatensystem erfolgt, muss man über die Werkzeuge verfügen, die das Bezugssystem transformieren können. Dabei nutz man die aerodynamischen Winkel ($\alpha$, $\beta$) und die Eulerwinkel ($\phi$,$\theta$,$\psi$), die auf Abbildung \ref{fig:KoordSyst} definiert sind. Die Autoren von \cite{FlugmechanikBuch,Fichter2020} empfehlen folgende Darstellung.\\
 
 \begin{itemize}
 \item Transformation von aerodynamischem zu körperfestem Bezugssystem. 
@@ -221,8 +221,8 @@ Damit die Modellbildung einheitlich über ein bestimmtes Koordinatensystem erfol
 \end{equation}
 \end{itemize}
 
-Folgendes Beispiel zeigt wie einer Geschwindigkeitsvektor in körperfestem Koordinatensystem auf ein geodätisches Bezugssystem gebracht werden kann.\\
+Folgendes Beispiel zeigt wie ein Geschwindigkeitsvektor in körperfestem Koordinatensystem auf ein geodätisches Bezugssystem gebracht werden kann\\
 \begin{equation*}
-\underline{v}^\mathcal{G} = \textbf{T}_\mathrm{gf}\underline{v}^\mathcal{F} = \textbf{T}_\mathrm{gf}\underline{v}
+\underline{v}^\mathcal{G} = \textbf{T}_\mathrm{gf}\underline{v}^\mathcal{F} = \textbf{T}_\mathrm{gf}\underline{v}.
 \end{equation*}
 Für die Herleitung der Bewegungsgleichungen wird noch das \textit{erdfeste} Bezugssystem (Index $\mathcal{E}$) angewandt. Der Unterschied zwischen dem erdfesten und geodätischen KS liegt an dem Mittelpunkt, welcher sich bei dem erdfesten KS  auf der Erdoberfläche befindet. Das erdfeste KS wird außerdem für die Berechnung der Flugzeugposition bezüglich der Erdoberfläche verwendet. Die Matrix $\textbf{T}_\mathrm{fe}(\lambda,\gamma) $ repräsentiert die Transformation von erdfesten zu körperfesten Koordinaten, wobei $\lambda$ den Bahnazimutwinkel und $\gamma$ den Bahnneigungswinkel darstellen. Deren Berechnung wird im Kapitel \ref{cha:Modellbildung} vorgestellt.
