@@ -1,5 +1,5 @@
 %% load störungen
-load('C:\Users\Markus\Documents\Uni\WISE2021\Projektseminar\PS_Luftbetankung\PS_Luftbetankung_newRepo\Projekteseminar-Luftbetankung\Code\Messungen\luftloch_5m.mat')
+load('C:\Users\Markus\Documents\Uni\WISE2021\Projektseminar\PS_Luftbetankung\PS_Luftbetankung_newRepo\Projekteseminar-Luftbetankung\Code\Messungen\luftloch_1ms.mat')
 luftloch = out;
 clear out;
 load('C:\Users\Markus\Documents\Uni\WISE2021\Projektseminar\PS_Luftbetankung\PS_Luftbetankung_newRepo\Projekteseminar-Luftbetankung\Code\Messungen\windboe.mat')
@@ -23,7 +23,7 @@ plot(luftloch.luftloch.Time, luftloch.luftloch.Data(:,1)+h_1_ap, 'k:', ...
     luftloch.states_nonlinear.Time, luftloch.states_nonlinear.Data(:,18), '--b')
 legend('Störung', 'h_1', 'h_2', 'Location', 'southeast')
 ylim([4990 5020]);
-ylabel('Height [m]');
+ylabel('Höhe [m], Störung [m/s]');
 xlabel('Time [s]');
 grid on;
 
