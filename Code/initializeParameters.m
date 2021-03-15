@@ -11,7 +11,7 @@ m = 120000; %Mass [kg]
 m_fuel = 14000; %Mass of the fuel
 time_refuel = 20*60; % Time to refuel in sec
 start_time_refuel = 10; 
-refuel = 0; %Without refuel = 1, with refuel = 0
+refuel = 1; %Without refuel = 1, with refuel = 0
 if add_mass == 1
     m = m+m_fuel*1;
 elseif add_mass == -1
@@ -21,7 +21,6 @@ end
 % Modelling the atmosphere 
 rho_const = 1.225; %Airdensity (simplification)
 omega_e = 7.29211510*10^(-5); %Rotation Speed of earth [rad/s]
-%omega_e = 0;
 he = 6356752; %Earth radius [m]
 Omega_e_tilde = vecToMat([0;0;omega_e]);
 
@@ -31,12 +30,6 @@ St = 64; %Aerea of the Tail [m^2]
 lt = 24.8; %Length to tail [m] (estimation)
 l = 6.6; % generalized length [m]
 
-%Moments of Inertia of Boeing 757-200 [kg(m^2]
-% Ix = 10710000; % 
-% Ixz = 0; 
-% Iy = 14883800; 
-% Iz = 25283271; 
-% I = [Ix 0 Ixz;0 Iy 0;Ixz 0 Iz]; %Trägheitstensor
 I = m*[40.07 0 2.09;0 64 0;2.09 0 99.92];
 I_inv = inv(I);
 
@@ -44,15 +37,11 @@ b = 44.8; %Span [m]
 c = 6.6; % Wing Chord [m]
 
 %Aerodynamical Positions
-% P_centerGravity = [0.23*c;0;0];
-% P_aerodynCenter = [0.12*c;0;0];
 P_centerGravity = [0;0;0];
 P_aerodynCenter = P_centerGravity;
 
 %Motor and Thrust
-%P_thrust = [0.23*c;0;0.1*c+1.9]; %Position of the motor [m] 
 P_thrust = [0;0;1.9]; %Position of the motor [m] 
-% P_thrust = P_centerGravity;
 i_f = 0 ; %Direction of Thrus [rad];
 F_max = m*g; %Warning - This is obviusly not the max thrust produced by the turbines. The max Turbine Force is considered on the maximum value of sigmaf
 

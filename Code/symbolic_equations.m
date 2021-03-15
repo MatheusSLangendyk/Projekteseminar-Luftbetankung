@@ -1,4 +1,3 @@
-% syms u v w p q r phi theta psi h eta sigmaf xi zita 
 u = sym('u');
 v = sym('v');
 w = sym('w');
@@ -14,8 +13,6 @@ sigmaf = sym('sigmaf');
 xi = sym('xi');
 zita = sym('zita');
 
-
-% ab hier ist alles gleich wie in nonlinear_6DOF
 plane_selector = evalin('base','plane_selector');
 [globalParameters,m,g,~,I_inv] = initializeParameters();
 T   = 288.15 - 0.0065*h;                    % Temperatur bei H
@@ -52,7 +49,6 @@ elseif plane_selector == 2
 end
     
 % Airdynamical Coefficients
-%CA0 = 1.104;
 grad_alpha = 5.5;
 alpha_L0 = -11.5*pi/180;
 gradient_alpha_epsolon = 0.25;
@@ -62,9 +58,6 @@ CW0 = 0.13;
 kappa = 0.07;
 
 %--------------Variables------------%
-% u = sqrt(vA^2*(1-sin(beta)^2)/(1+tan(alpha)^2));
-% v = sin(beta)*vA;
-% w = u*tan(alpha);
 V = [u;v;w];
 vA = sqrt(u^2+v^2+w^2);
 alpha = atan(w/u);
@@ -107,14 +100,12 @@ A = q_d*S*CA; %Lift Force [N]
 W = q_d*S*CW; %Air Resistance [N]
 Q = q_d*S*CQ; %Transverse Force [N]
 
-% EVTL VORZEICHEN VON BETA ÄNDERN
 Tfa = coordTransfMatrix(alpha,2)*coordTransfMatrix(-beta,3); %Transformation Matrix Aerodynamics -> Körperfest
 
 RA_a =[-W;Q;-A]; %Aerodynamical Force in Aerdodynamical Reference Frame
 RA = Tfa*RA_a; %Aerodynamical Force in Body Reference Frame
 QA_aerodynCenter = q_d*S*[b*CL*0.5;c*CM;b*CN*0.5]; %Torque on the aerodynamical Center
 QA = QA_aerodynCenter + vecToMat(P_centerGravity- P_aerodynCenter)*RA; %Aerodynamical Force in Body Reference Frame
-
 
 %Thrust
 F_res = F_max*sigmaf; %Thrust Force Absolute Value
@@ -131,22 +122,13 @@ Tgf = Tfg.';%Transformation to North East Down
 Omega_tilde = vecToMat(Omega);
 dOmega = I_inv*(Q_total - Omega_tilde*I*Omega); %Derivative of Rotation Rate (body Reference Frame)
 
-% ACHTUNG: Omega_e_tilde wurde in DGL für dV entfernt, da flache ERde
 dV = R_total/m + Tfg*[0;0;g] - (Omega_tilde)*V; %Derivatitive of the Speed (body Reference Frame)
-% dvA = (u*dV(1) + v*dV(2) + w*dV(3))/sqrt(u^2 + v^2 + w^2); %Derivative of the Approach Speed
-% dalpha = (dV(3)*u - dV(1)*w)/(u^2 + u*w); %Derivative of Angle of Attack
-% dbeta = (dV(2)*vA - dvA*V(2))/(vA*sqrt(vA^2 - V(2)^2)); %Derivative of Sideslip Angle
 
 %Kinematics
 dP_e = Tgf*V; % gilt nur für z-Komponente
 
-% ACHTUNG: dh anders als im Buch ... Teg fehlt, sollte für dh keinen
-% Unterschied machen
-% dh = - dP_e(3); %Derivative of z-position (earth Reference Frame)
-
 J = 1/cos(theta)*[cos(theta) sin(phi)*sin(theta) cos(phi)*sin(theta) ;0 cos(phi)*cos(theta) -sin(phi)*cos(theta);0 sin(phi) cos(phi)]; %Rotation rate matrix
 dPhi = J*Omega; %Derivative of Euler Angles
-% bis hier ist alles gleich wie in nonlinear_6DOF
 
 du = dV(1);
 dv = dV(2);

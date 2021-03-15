@@ -22,7 +22,6 @@ Omega_init_1 = [0;0;0];
 Phi_init_1 = [0;0;0];
 h_init_1 = 5000;
 P_e_init_1 = [0;0;-h_init_1];
-%latlon_init = [40.712776;-74.005974]; %New York
 latlon_init = [0;0];
 X_init_1 = [V_init_1;Omega_init_1;Phi_init_1;h_init_1];
 
@@ -38,9 +37,11 @@ P_e_init_2 = [0;0;-h_init_2];
 X_init_2 = [V_init_2;Omega_init_2;Phi_init_2;h_init_2];
 
 X_init = [X_init_1; X_init_2];
+
 switch multi
     case 'multi'
-        %% calculate trim points own mass
+        %% trim points nur eigene Flugzeugmasse
+        
         assignin('base','add_mass',0)
         % AP mit fsolve
         [X_ap_1, U_ap_1] = fsolve_trim([X_init_1;zeros(4,1)], 1); % mit [vA, phi, psi, h] = [150, 0, 0, 5000]
@@ -118,7 +119,7 @@ switch multi
         systems(1,1).C = eye(n);
         systems(1,1).C_ref = C_tilde;
 
-        %% FLugzeug 1 mit fuel_mass F2 mit eigener Masse
+        %% Flugzeug 1 mit fuel_mass F2 nur mit eigener Masse
         % calculate trim points 
         assignin('base','add_mass',1)
         % AP mit fsolve
@@ -275,8 +276,9 @@ switch multi
         systems(3,1).B = B;
         systems(3,1).C = eye(n);
         systems(3,1).C_ref = C_tilde;
+        
     case 'one'
-        %% calculate trim points own mass
+        %% trim points nur eigene Flugzeugmasse
         assignin('base','add_mass',0)
         % AP mit fsolve
         [X_ap_1, U_ap_1] = fsolve_trim([X_init_1;zeros(4,1)], 1); % mit [vA, phi, psi, h] = [150, 0, 0, 5000]
